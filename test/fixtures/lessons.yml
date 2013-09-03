@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  course_id: 1
+  parent_lesson_id: 1
+  held_on: 2013-08-30 22:16:48
+  name: MyString
+  description: MyText
+
+two:
+  course_id: 1
+  parent_lesson_id: 1
+  held_on: 2013-08-30 22:16:48
+  name: MyString
+  description: MyText

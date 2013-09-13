@@ -38,8 +38,12 @@ ActiveRecord::Schema.define(version: 20130831022017) do
   create_table "courses", force: true do |t|
     t.integer  "term_id"
     t.string   "name"
-    t.text     "description"
     t.string   "course_code"
+    t.string   "period"
+    t.string   "prerequisites"
+    t.text     "description"
+    t.text     "materials"
+    t.text     "objectives"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,6 +54,9 @@ ActiveRecord::Schema.define(version: 20130831022017) do
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "email"
+    t.string   "phone"
+    t.string   "office"
+    t.string   "office_hours"
     t.string   "photo_url"
     t.text     "description"
     t.datetime "created_at"
@@ -59,8 +66,10 @@ ActiveRecord::Schema.define(version: 20130831022017) do
   create_table "lessons", force: true do |t|
     t.integer  "course_id"
     t.integer  "parent_lesson_id"
-    t.datetime "held_at"
     t.string   "name"
+    t.datetime "held_at"
+    t.text     "lead_in_reading"
+    t.text     "lead_in_question"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -69,6 +78,7 @@ ActiveRecord::Schema.define(version: 20130831022017) do
   create_table "policies", force: true do |t|
     t.integer  "course_id"
     t.string   "name"
+    t.integer  "order_number"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

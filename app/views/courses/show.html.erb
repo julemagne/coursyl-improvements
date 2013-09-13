@@ -1,0 +1,48 @@
+<h1><%= @course.name %></h1>
+<p><%= @course.instructor_name %></p>
+
+<ul>
+	<li>Description</li>
+	<li>Assignments</li>
+	<li>Lessons</li>
+	<li>Policies</li>
+</ul>
+
+<h2>Description</h2>
+<p><%= @course.description %></p>
+
+<h2>Assignments</h2>
+<table>
+	<tr>
+		<th>Due</th>
+		<th>Name</th>
+		<th>Fraction of Grade</th>
+	</tr>
+	<% @course.assignments.each do |a| %>
+	<tr>
+		<td><%= a.due_at %></td>
+		<td><%= a.name %></td>
+		<td><%= a.fraction_of_grade %></td>
+	</tr>
+	<% end %>
+</table>
+
+<h2>Lessons</h2>
+<table>
+	<tr>
+		<th>When</th>
+		<th>Name</th>
+	</tr>
+	<% @course.lessons.each do |a| %>
+	<tr>
+		<td><%= a.held_at %></td>
+		<td><%= a.name %></td>
+	</tr>
+	<% end %>
+</table>
+
+<h2>Policies</h2>
+<% @course.policies.each do |p| %>
+<h3><%= p.name %></h3>
+<p><%= p.description %></p>
+<% end %>

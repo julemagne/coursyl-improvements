@@ -3,7 +3,16 @@ class Instructor < ActiveRecord::Base
   has_many :courses, through: :course_instructors
 
   def full_name
-    #TODO find a clever way to make the . only appear if there is a middle_name
-    return "#{title} #{first_name} #{middle_name.first}. #{last_name}"
+    "#{title} #{first_name} #{padded_middle_initial}#{last_name}"
+  end
+
+  def middle_initial
+    middle_name ? middle_name.first : nil
+  end
+
+  private
+
+  def padded_middle_initial
+    middle_initial ? "#{middle_initial}. " : ""
   end
 end

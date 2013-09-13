@@ -1,14 +1,19 @@
 class Course < ActiveRecord::Base
-  has_many :assignments, order: :due_at
-  has_many :course_instructors
+  has_many :assignments, -> {order :due_at}
+  has_many :lessons, -> {order :held_at}
+  has_many :policies, -> {order :order_number}
+  has_many :course_instructors, -> {order :primary}
   has_many :instructors, through: :course_instructors
-  has_many :lessons, order: :held_at
-  has_many :policies, order: :order_number
 
-  def instructor_name
-    return instructors.map{|i| i.full_name}.join(', ')
+  has_one :primary_course_instructor, -> {where primary: true},
+    class_name: "CourseInstructor"
+  has_one :primary_instructor, through: :primary_course_instructor, source: :instructor
 
-    #TODO: figure out how to do a where like this, but with a field from the through
-    #return instructors.where(primary: true).map{&:full_name}.join(', ')
+  def instructor_names
+    instructors.map{|i| i.full_name}.join(', ')
+  end
+
+  def primary_instructor_name
+    primary_instructor ? primary_instructor.full_name : nil
   end
 end

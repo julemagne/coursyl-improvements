@@ -1,19 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+adam:
+  title: "Mr."
+  first_name: "Adam"
+  last_name: "Adams"
 
-one:
-  title: MyString
-  first_name: MyString
-  middle_name: MyString
-  last_name: MyString
-  email: MyString
-  description: MyText
-  photo_url: MyString
+bill:
+  title: "Mrs."
+  first_name: "Barb"
+  middle_name: "Bob"
+  last_name: "Barker"
 
-two:
-  title: MyString
-  first_name: MyString
-  middle_name: MyString
-  last_name: MyString
-  email: MyString
-  description: MyText
-  photo_url: MyString
+carl:
+  title: "Dr."
+  first_name: "Carl"
+  last_name: "Carlson"

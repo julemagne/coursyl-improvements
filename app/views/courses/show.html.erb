@@ -8,8 +8,14 @@
 	<li>Policies</li>
 </ul>
 
-<h2>Description</h2>
+<h2>Course Description</h2>
 <p><%= markdown(@course.description) %></p>
+
+<h3>Materials</h3>
+<p><%= markdown(@course.materials) %></p>
+
+<h3>Objectives</h3>
+<p><%= markdown(@course.objectives) %></p>
 
 <h2>Assignments</h2>
 <table>
@@ -44,5 +50,5 @@
 <h2>Policies</h2>
 <% @course.policies.each do |p| %>
 <h3><%= p.name %></h3>
-<p><%= p.description %></p>
+<p><%= markdown(p.description) %></p>
 <% end %>

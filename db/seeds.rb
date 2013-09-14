@@ -33,16 +33,16 @@ will be weighted towards the first three items on this list, but our
 discussions will be in the context of the entire ecosystem from day one.},
   materials:
     %{* Laptop capable of running an Ubuntu Virtual Box.
-      * Lots and lots of Internet.
-      * No textbook is required for this course, although if you are interested in
-        having a good reference to keep around after the class, I'd suggest the
-        Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
-        by Eric Redmond and Jim R. Wilson.},
+* Lots and lots of Internet.
+* No textbook is required for this course, although if you are interested in
+having a good reference to keep around after the class, I'd suggest the
+Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
+by Eric Redmond and Jim R. Wilson.},
   objectives:
     %{* TODO
-      *	Goals: the broad statements about what the students will gain from the course—knowledge, skills, attitudes, etc.
-      *	Objectives: more specific statements (each related to a particular goal) about something assessable and measureable that students should be able to do by the end of the course (use specific verbs, such as describe, define, identify, explain, compare, contrast, evaluate, list, write, apply, solve, argue, support, construct, synthesize, articulate, differentiate, design, build, publish, post, integrate, interpret, relate, locate, map, trace, assess, etc.)
-      *	Goals and Objectives should be written in terms of what students will do and how they will demonstrate what they have learned.}
+*	Goals: the broad statements about what the students will gain from the course—knowledge, skills, attitudes, etc.
+*	Objectives: more specific statements (each related to a particular goal) about something assessable and measureable that students should be able to do by the end of the course (use specific verbs, such as describe, define, identify, explain, compare, contrast, evaluate, list, write, apply, solve, argue, support, construct, synthesize, articulate, differentiate, design, build, publish, post, integrate, interpret, relate, locate, map, trace, assess, etc.)
+*	Goals and Objectives should be written in terms of what students will do and how they will demonstrate what they have learned.}
 )
 
 db_instructor = Instructor.create!(title: 'Mr.',
@@ -56,21 +56,21 @@ db_instructor = Instructor.create!(title: 'Mr.',
   photo_url: nil,
   description:
     %{Mr. Matthews started coding at thirteen, but now he spends most of his
-      time working with clients, enabling developers to do their best work,
-      and volunteer teaching.  He hopes to one day prove that anyone can code,
-      and he believes that if you don't learn something new every day, you're
-      not paying attention.
+time working with clients, enabling developers to do their best work,
+and volunteer teaching.  He hopes to one day prove that anyone can code,
+and he believes that if you don't learn something new every day, you're
+not paying attention.
 
-      He is a firm believer in autonomy, mastery, purpose, and the Oxford comma.
+He is a firm believer in autonomy, mastery, purpose, and the Oxford comma.
 
-      So-called "expertise:"
+So-called "expertise:"
 
-      * Algorithms and machine learning
-      * Using SQL for more things than you'd expect
-      * Minimizing user surprise
-      * Process improvement
-      * Genetics and immunology
-      * Predicting the future}
+* Algorithms and machine learning
+* Using SQL for more things than you'd expect
+* Minimizing user surprise
+* Process improvement
+* Genetics and immunology
+* Predicting the future}
 )
 
 CourseInstructor.create!(course_id: db_course.id,
@@ -528,9 +528,9 @@ Policy.create!(course_id: db_course.id,
   order_number: 0,
   description:
     %{* A: [90-100]
-      * B: [80-90)
-      * C: [70-80)
-      * D: Below 70}
+* B: [80-90)
+* C: [70-80)
+* D: Below 70}
 )
 
 Policy.create!(course_id: db_course.id,
@@ -538,107 +538,107 @@ Policy.create!(course_id: db_course.id,
   order_number: 1,
   description:
     %{Class meets four times a week.  You are expected to attend every class, and
-      you are expected to be on time.  As is the case with the outside world, if
-      you arrive after the start time of the class (at all), you will be considered
-      tardy. If you are more than 15 minutes late, you will be considered
-      absent.
+you are expected to be on time.  As is the case with the outside world, if
+you arrive after the start time of the class (at all), you will be considered
+tardy. If you are more than 15 minutes late, you will be considered
+absent.
 
-      On the flip side, classes will not run late.  If I do keep talking beyond the
-      end of the period, you are encouraged to yell at me and/or stand up and walk
-      out.}
+On the flip side, classes will not run late.  If I do keep talking beyond the
+end of the period, you are encouraged to yell at me and/or stand up and walk
+out.}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Daily Readings, Questions, and Evaluations',
   order_number: 2,
   description:
     %{Every lesson will be accompanied by an article from the web, and it should be
-      read **before** the we meet to discuss the topic.  To ensure that you read the
-      article (and to get you thinking along the right lines), one question will be
-      posted in advance of the lesson, and must be answered at least one hour before
-      the class begins. The question will be removed at that time, so no partial
-      credit will be given for late submissions.
+read **before** the we meet to discuss the topic.  To ensure that you read the
+article (and to get you thinking along the right lines), one question will be
+posted in advance of the lesson, and must be answered at least one hour before
+the class begins. The question will be removed at that time, so no partial
+credit will be given for late submissions.
 
-      You will also be asked to "grade" each lesson. I will give out slips of paper
-      during each class (unless you all consistently bring your laptops, then we'll
-      do it online), and you will (a) consider how well you understood the material,
-      (b) rate it between 0 and 10 (10 being perfect clarity), and (c) turn it in at
-      the end of class.
+You will also be asked to "grade" each lesson. I will give out slips of paper
+during each class (unless you all consistently bring your laptops, then we'll
+do it online), and you will (a) consider how well you understood the material,
+(b) rate it between 0 and 10 (10 being perfect clarity), and (c) turn it in at
+the end of class.
 
-      Note that this is only meant to judge how well the lesson conveyed the
-      material. If you have other issues with the course, please do let me know by
-      other means!}
+Note that this is only meant to judge how well the lesson conveyed the
+material. If you have other issues with the course, please do let me know by
+other means!}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Weekly Assignments',
   order_number: 3,
   description:
     %{Each week (except for the midterm week and the project week), a set of
-      exercises will be due at the beginning of class on the last class day of the
-      week. For these assignments, discussion among students is permitted, but
-      students MUST write up solutions independently and list those with whom
-      they worked.
+exercises will be due at the beginning of class on the last class day of the
+week. For these assignments, discussion among students is permitted, but
+students MUST write up solutions independently and list those with whom
+they worked.
 
-      The Internet is a welcome (and obvious) resource for assisting you with your
-      assignments, although for a few problems, I may explicitly ask you not to
-      look.  Somtimes beating your head against a problem has learning value.
-      However should you happen to find an exact solution to one of the questions
-      while surfing the webz, then don't copy it. Hopefully I've gotten creative
-      enough to avoid that, and I know I shouldn't have to say it.  See the
-      "Academic Honesty" policy.
+The Internet is a welcome (and obvious) resource for assisting you with your
+assignments, although for a few problems, I may explicitly ask you not to
+look.  Somtimes beating your head against a problem has learning value.
+However should you happen to find an exact solution to one of the questions
+while surfing the webz, then don't copy it. Hopefully I've gotten creative
+enough to avoid that, and I know I shouldn't have to say it.  See the
+"Academic Honesty" policy.
 
-      If you have an excused absence on the day an assignment is due, you will
-      be allowed to turn in your assignment 24 hours after your return without
-      penalty.  Unexcused absences will not extend the due date.  For every day
-      or part of a day that an assignment is overdue, 10 points (out of 100)
-      will be deducted from your grade on that assignment.}
+If you have an excused absence on the day an assignment is due, you will
+be allowed to turn in your assignment 24 hours after your return without
+penalty.  Unexcused absences will not extend the due date.  For every day
+or part of a day that an assignment is overdue, 10 points (out of 100)
+will be deducted from your grade on that assignment.}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Projects and Tests (i.e. "Major Assignments")',
   order_number: 4,
   description:
     %{If you have an excused absence on the day an project is due, you will
-      be allowed to turn in your assignment 24 hours after your return without
-      penalty.  Unexcused absences will not extend the due date.  For every day
-      or part of a day that an assignment is overdue, 10 points (out of 100)
-      will be deducted from your grade on that assignment.
+be allowed to turn in your assignment 24 hours after your return without
+penalty.  Unexcused absences will not extend the due date.  For every day
+or part of a day that an assignment is overdue, 10 points (out of 100)
+will be deducted from your grade on that assignment.
 
-      If you know that you will have an excused absence on the day of a
-      scheduled test, please make arrangements to take the test
-      prior to your absence.  If you miss a test due to an unexcused
-      absence, you will receive a zero on that test.
+If you know that you will have an excused absence on the day of a
+scheduled test, please make arrangements to take the test
+prior to your absence.  If you miss a test due to an unexcused
+absence, you will receive a zero on that test.
 
-      If, across all of your classes, you have more than 2 major assignments due
-      on the same day (and one of them is in this class), please let me know and
-      contact Academic Programs at least 48 hours in advance.}
+If, across all of your classes, you have more than 2 major assignments due
+on the same day (and one of them is in this class), please let me know and
+contact Academic Programs at least 48 hours in advance.}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Laptop Usage Policy',
   order_number: 5,
   description:
     %{Laptops are an integral part of this course, and you should bring them to
-      every class.  Some days, however, will be spent discussing fundamentals and
-      concepts, so using them for anything other than note-taking on those days
-      will be in poor taste.}
+every class.  Some days, however, will be spent discussing fundamentals and
+concepts, so using them for anything other than note-taking on those days
+will be in poor taste.}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Academic Honesty',
   order_number: 6,
   description:
     %{You are responsible for reading the academic honesty policy in the NCSSM
-      handbook.  If you violate the academic honesty policy on an assignment,
-      you will receive a zero on that assignment and will also be subject to
-      disciplinary action as outlined in the NCSSM handbook.}
+handbook.  If you violate the academic honesty policy on an assignment,
+you will receive a zero on that assignment and will also be subject to
+disciplinary action as outlined in the NCSSM handbook.}
 )
 Policy.create!(course_id: db_course.id,
   name: 'Other Policies',
   order_number: 7,
   description:
     %{**The policies described here for this course are superseded by NCSSM
-      school-wide policies.** In the case of any disagreement, NCSSM
-      school-wide policies are correct, and these course policies are wrong.
+school-wide policies.** In the case of any disagreement, NCSSM
+school-wide policies are correct, and these course policies are wrong.
 
-      For information on school-wide policies, please refer to the current
-      version of the “Student Handbook” available in the “NCSSM” folder under the
-      “Documents & Forms” section of https://my.ncssm.edu.  It is your
-      responsibility to be familiar with these policies.}
+For information on school-wide policies, please refer to the current
+version of the “Student Handbook” available in the “NCSSM” folder under the
+“Documents & Forms” section of [My NCSSM](https://my.ncssm.edu).  It is your
+responsibility to be familiar with these policies.}
 )

@@ -12,25 +12,25 @@ db_course = Course.create!(name: 'Databases',
   prerequisites: 'None',
   description:
     %{Even if you don't realize it, databases are everywhere, and they come in many
-      flavors.  They're not just in the obvious places like Facebook and Twitter;
-      you also have hundreds installed on the phone in your hand, and chances are
-      that your life would be easier if you'd built a few for yourself.  This course
-      will introduce you to basic database concepts, give you experience using them
-      for real-world applications, and demonstrate how one size most certainly does
-      not fit all.
+flavors.  They're not just in the obvious places like Facebook and Twitter;
+you also have hundreds installed on the phone in your hand, and chances are
+that your life would be easier if you'd built a few for yourself.  This course
+will introduce you to basic database concepts, give you experience using them
+for real-world applications, and demonstrate how one size most certainly does
+not fit all.
 
-      Topics will include:
+Topics will include:
 
-      * Relational databases
-      * SQL wizardry
-      * Database design
-      * Object-relational mappings (specifically, ActiveRecord in Ruby on Rails)
-      * Scalability and concurrency concerns
-      * NoSQL systems such as MongoDB and HBase
+* Relational databases
+* SQL wizardry
+* Database design
+* Object-relational mappings (specifically, ActiveRecord in Ruby on Rails)
+* Scalability and concurrency concerns
+* NoSQL systems such as MongoDB and HBase
 
-      Given that relational databases currently rule the roost, the course
-      will be weighted towards the first three items on this list, but our
-      discussions will be in the context of the entire ecosystem from day one.},
+Given that relational databases currently rule the roost, the course
+will be weighted towards the first three items on this list, but our
+discussions will be in the context of the entire ecosystem from day one.},
   materials:
     %{* Laptop capable of running an Ubuntu Virtual Box.
       * Lots and lots of Internet.

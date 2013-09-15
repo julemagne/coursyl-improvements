@@ -1,38 +1,44 @@
-<header>
-	<h1><%= @course.name %></h1>
-	<p><%= @course.primary_instructor_name %></p>
+<header class="well well-small">
+	<h2>
+		<%= @course.course_code %>: <%= @course.name %><br/>
+		<small><%= @course.primary_instructor_name %></small>
+	</h2>
 </header>
 
-<nav>
-	Description
-	Assignments
-	Lessons
-	Policies
+<nav class="navbar">
+	<div class="navbar-inner">
+		<ul class="nav">
+			<li><%= link_to "Description" %></li>
+			<li class="divider-vertical"></li>
+			<li><%= link_to "Assignments" %></li>
+			<li class="divider-vertical"></li>
+			<li><%= link_to "Lessons" %></li>
+			<li class="divider-vertical"></li>
+			<li><%= link_to "Policies" %></li>
+		</ul>
+	</div>
 </nav>
 
 <section>
-	<h2>Course Description</h2>
-	<p><%= markdown(@course.description) %></p>
-
-	<h3>Materials</h3>
-	<p><%= markdown(@course.materials) %></p>
-
-	<h3>Objectives</h3>
-	<p><%= markdown(@course.objectives) %></p>
+	<h3>Course Description</h3>
+	<p class="muted">Meeting Times: <%= @course.period %></p>
+	<%= markdown(@course.description) %>
 </section>
 
 <section>
-	<h2>Assignments</h2>
-	<table class="table table-striped">
+	<h3>Assignments</h3>
+	<table class="table table-striped table-hover table-condensed">
 		<tr>
 			<th>Due</th>
 			<th>Name</th>
+			<th>Status</th>
 			<th>Fraction of Grade</th>
 		</tr>
 		<% @course.assignments.each do |a| %>
 		<tr>
 			<td><%= a.due_at %></td>
 			<td><%= a.name %></td>
+			<td><span class="label <%= status_label_class(a.status)%>"><%= a.status %></span></td>
 			<td><%= a.fraction_of_grade %></td>
 		</tr>
 		<% end %>
@@ -40,7 +46,7 @@
 </section>
 
 <section>
-	<h2>Lessons</h2>
+	<h3>Lessons</h3>
 	<table class="table table-striped">
 		<tr>
 			<th>When</th>
@@ -56,9 +62,11 @@
 </section>
 
 <section>
-	<h2>Policies</h2>
-	<% @course.policies.each do |p| %>
-	<h3><%= p.name %></h3>
-	<p><%= markdown(p.description) %></p>
-	<% end %>
+	<h3>Course Details and Policies</h3>
+	<dl class="dl-horizontal">
+		<% @course.policies.each do |p| %>
+		<dt><%= p.name %></dt>
+		<dd><%= markdown(p.description) %></dd>
+		<% end %>
+	</dl>
 </section>

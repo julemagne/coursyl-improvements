@@ -40,10 +40,7 @@ ActiveRecord::Schema.define(version: 20130831022017) do
     t.string   "name"
     t.string   "course_code"
     t.string   "period"
-    t.string   "prerequisites"
     t.text     "description"
-    t.text     "materials"
-    t.text     "objectives"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

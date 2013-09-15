@@ -5,10 +5,7 @@ class CreateCourses < ActiveRecord::Migration
       t.string :name
       t.string :course_code
       t.string :period
-      t.string :prerequisites
       t.text :description
-      t.text :materials
-      t.text :objectives
 
       t.timestamps
     end

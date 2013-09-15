@@ -9,40 +9,17 @@
 db_course = Course.create!(name: 'Databases',
   course_code: 'CS310',
   period: 'F Block, M T W F',
-  prerequisites: 'None',
   description:
-    %{Even if you don't realize it, databases are everywhere, and they come in many
-flavors.  They're not just in the obvious places like Facebook and Twitter;
+    %{Even if you don't realize it, databases are everywhere, and they come in
+many flavors.  They're not just in the obvious places like Facebook and Twitter;
 you also have hundreds installed on the phone in your hand, and chances are
 that your life would be easier if you'd built a few for yourself.  This course
-will introduce you to basic database concepts, give you experience using them
+will introduce you to database concepts, give you experience using them
 for real-world applications, and demonstrate how one size most certainly does
 not fit all.
 
-Topics will include:
-
-* Relational databases
-* SQL wizardry
-* Database design
-* Object-relational mappings (specifically, ActiveRecord in Ruby on Rails)
-* Scalability and concurrency concerns
-* NoSQL systems such as MongoDB and HBase
-
-Given that relational databases currently rule the roost, the course
-will be weighted towards the first three items on this list, but our
-discussions will be in the context of the entire ecosystem from day one.},
-  materials:
-    %{* Laptop capable of running an Ubuntu Virtual Box.
-* Lots and lots of Internet.
-* No textbook is required for this course, although if you are interested in
-having a good reference to keep around after the class, I'd suggest the
-Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
-by Eric Redmond and Jim R. Wilson.},
-  objectives:
-    %{* TODO
-*	Goals: the broad statements about what the students will gain from the course—knowledge, skills, attitudes, etc.
-*	Objectives: more specific statements (each related to a particular goal) about something assessable and measureable that students should be able to do by the end of the course (use specific verbs, such as describe, define, identify, explain, compare, contrast, evaluate, list, write, apply, solve, argue, support, construct, synthesize, articulate, differentiate, design, build, publish, post, integrate, interpret, relate, locate, map, trace, assess, etc.)
-*	Goals and Objectives should be written in terms of what students will do and how they will demonstrate what they have learned.}
+Approximately 60% of the course will be devoted to relational databases and DB
+design.  The remaining 40% will cover NoSQL options such as MongoDB and Riak.}
 )
 
 db_instructor = Instructor.create!(title: 'Mr.',
@@ -524,6 +501,35 @@ Assignment.create!(course_id: db_course.id,
 
 
 Policy.create!(course_id: db_course.id,
+  name: 'Prerequisites',
+  order_number: -3,
+  description:
+    %{* None.}
+)
+
+Policy.create!(course_id: db_course.id,
+  name: 'Course Objectives',
+  order_number: -2,
+  description:
+    %{* TODO
+*	Goals: the broad statements about what the students will gain from the course—knowledge, skills, attitudes, etc.
+*	Objectives: more specific statements (each related to a particular goal) about something assessable and measureable that students should be able to do by the end of the course (use specific verbs, such as describe, define, identify, explain, compare, contrast, evaluate, list, write, apply, solve, argue, support, construct, synthesize, articulate, differentiate, design, build, publish, post, integrate, interpret, relate, locate, map, trace, assess, etc.)
+*	Goals and Objectives should be written in terms of what students will do and how they will demonstrate what they have learned.}
+)
+
+Policy.create!(course_id: db_course.id,
+  name: 'Course Materials',
+  order_number: -1,
+  description:
+    %{* Laptop capable of running an Ubuntu Virtual Box.
+* Lots and lots of Internet.
+* No textbook is required for this course, although if you are interested in
+having a good reference to keep around after the class, I'd suggest the
+Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
+by Eric Redmond and Jim R. Wilson.}
+)
+
+Policy.create!(course_id: db_course.id,
   name: 'Grading Scale',
   order_number: 0,
   description:
@@ -548,7 +554,7 @@ end of the period, you are encouraged to yell at me and/or stand up and walk
 out.}
 )
 Policy.create!(course_id: db_course.id,
-  name: 'Daily Readings, Questions, and Evaluations',
+  name: 'Daily Activities',
   order_number: 2,
   description:
     %{Every lesson will be accompanied by an article from the web, and it should be
@@ -593,7 +599,7 @@ or part of a day that an assignment is overdue, 10 points (out of 100)
 will be deducted from your grade on that assignment.}
 )
 Policy.create!(course_id: db_course.id,
-  name: 'Projects and Tests (i.e. "Major Assignments")',
+  name: 'Projects and Tests',
   order_number: 4,
   description:
     %{If you have an excused absence on the day an project is due, you will

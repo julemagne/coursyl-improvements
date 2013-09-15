@@ -1,54 +1,64 @@
-<h1><%= @course.name %></h1>
-<p><%= @course.primary_instructor_name %></p>
+<header>
+	<h1><%= @course.name %></h1>
+	<p><%= @course.primary_instructor_name %></p>
+</header>
 
-<ul>
-	<li>Description</li>
-	<li>Assignments</li>
-	<li>Lessons</li>
-	<li>Policies</li>
-</ul>
+<nav>
+	Description
+	Assignments
+	Lessons
+	Policies
+</nav>
 
-<h2>Course Description</h2>
-<p><%= markdown(@course.description) %></p>
+<section>
+	<h2>Course Description</h2>
+	<p><%= markdown(@course.description) %></p>
 
-<h3>Materials</h3>
-<p><%= markdown(@course.materials) %></p>
+	<h3>Materials</h3>
+	<p><%= markdown(@course.materials) %></p>
 
-<h3>Objectives</h3>
-<p><%= markdown(@course.objectives) %></p>
+	<h3>Objectives</h3>
+	<p><%= markdown(@course.objectives) %></p>
+</section>
 
-<h2>Assignments</h2>
-<table>
-	<tr>
-		<th>Due</th>
-		<th>Name</th>
-		<th>Fraction of Grade</th>
-	</tr>
-	<% @course.assignments.each do |a| %>
-	<tr>
-		<td><%= a.due_at %></td>
-		<td><%= a.name %></td>
-		<td><%= a.fraction_of_grade %></td>
-	</tr>
+<section>
+	<h2>Assignments</h2>
+	<table>
+		<tr>
+			<th>Due</th>
+			<th>Name</th>
+			<th>Fraction of Grade</th>
+		</tr>
+		<% @course.assignments.each do |a| %>
+		<tr>
+			<td><%= a.due_at %></td>
+			<td><%= a.name %></td>
+			<td><%= a.fraction_of_grade %></td>
+		</tr>
+		<% end %>
+	</table>
+</section>
+
+<section>
+	<h2>Lessons</h2>
+	<table>
+		<tr>
+			<th>When</th>
+			<th>Name</th>
+		</tr>
+		<% @course.lessons.each do |a| %>
+		<tr>
+			<td><%= a.held_at %></td>
+			<td><%= a.name %></td>
+		</tr>
+		<% end %>
+	</table>
+</section>
+
+<section>
+	<h2>Policies</h2>
+	<% @course.policies.each do |p| %>
+	<h3><%= p.name %></h3>
+	<p><%= markdown(p.description) %></p>
 	<% end %>
-</table>
-
-<h2>Lessons</h2>
-<table>
-	<tr>
-		<th>When</th>
-		<th>Name</th>
-	</tr>
-	<% @course.lessons.each do |a| %>
-	<tr>
-		<td><%= a.held_at %></td>
-		<td><%= a.name %></td>
-	</tr>
-	<% end %>
-</table>
-
-<h2>Policies</h2>
-<% @course.policies.each do |p| %>
-<h3><%= p.name %></h3>
-<p><%= markdown(p.description) %></p>
-<% end %>
+</section>

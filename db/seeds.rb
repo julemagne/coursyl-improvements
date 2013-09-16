@@ -419,11 +419,11 @@ Assignment.create!(course_id: db_course.id,
   active_at: '2013-11-05 4:15PM',
   due_at: '2014-02-07 2:25PM',
   students_can_submit: false,
-  fraction_of_grade: 0.12
+  fraction_of_grade: 0.1
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Class Project',
-  active_at: '2013-11-06 12:00AM',
+  active_at: '2013-12-06 12:00AM',
   due_at: '2014-02-07 2:25PM',
   students_can_submit: false,
   fraction_of_grade: 0.2

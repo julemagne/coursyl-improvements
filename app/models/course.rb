@@ -18,4 +18,15 @@ class Course < ActiveRecord::Base
   def primary_instructor_name
     primary_instructor ? primary_instructor.full_name : nil
   end
+
+  def completion_fractions(user=nil)
+    percentages = {"Complete" => 0,
+      "In Progress" => 0,
+      "Overdue" => 0,
+      "Future" => 0}
+    assignments.each do |a|
+      percentages[a.status(user)] += a.fraction_of_grade
+    end
+    percentages
+  end
 end

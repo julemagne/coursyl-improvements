@@ -1,16 +1,14 @@
 class Assignment < ActiveRecord::Base
   belongs_to :course
 
-  def status
+  def status(user = nil)
     if active_at > Time.now
       "Future"
     elsif due_at > Time.now
       "In Progress"
     else
-      "Completed"
+      "Complete"
     end
   end
 
-  def status_for_student(student)
-  end
 end

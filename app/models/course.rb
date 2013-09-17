@@ -29,4 +29,16 @@ class Course < ActiveRecord::Base
     end
     percentages
   end
+
+  def root_lesson
+    lessons.first
+  end
+
+  def lesson_tree
+    if root_lesson
+      root_lesson.descendant_tree
+    else
+      nil
+    end
+  end
 end

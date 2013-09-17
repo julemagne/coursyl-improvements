@@ -60,7 +60,7 @@ lessons = Hash.new
 
 #Intro Week (2 days, T-W)
 lessons[:what_is_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: "What is Data?",
   held_at: '2013-11-05 3:25PM',
   lead_in_reading: nil,
@@ -69,7 +69,7 @@ lessons[:what_is_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:what_are_databases] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_is_data],
+  parent_lesson: lessons[:what_is_data],
   name: "What are Databases?",
   held_at: '2013-11-06 2:30PM',
   lead_in_reading: nil,
@@ -80,7 +80,7 @@ lessons[:what_are_databases] = Lesson.create!(course_id: db_course.id,
 
 #DB Types, Intro to Relational
 lessons[:types] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_are_databases],
+  parent_lesson: lessons[:what_are_databases],
   name: "Types of Database Systems",
   held_at: '2013-11-08 1:35PM',
   lead_in_reading: nil,
@@ -89,8 +89,8 @@ lessons[:types] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:relational] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_are_databases],
-  name: nil,
+  parent_lesson: lessons[:what_are_databases],
+  name: "nil",
   held_at: '2013-11-11 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -98,7 +98,7 @@ lessons[:relational] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-12 3:25PM',
   lead_in_reading: nil,
@@ -107,7 +107,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-13 2:30PM',
   lead_in_reading: nil,
@@ -116,7 +116,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-15 1:35PM',
   lead_in_reading: nil,
@@ -125,7 +125,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-18 2:20PM',
   lead_in_reading: nil,
@@ -134,7 +134,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-19 3:25PM',
   lead_in_reading: nil,
@@ -143,7 +143,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-20 2:30PM',
   lead_in_reading: nil,
@@ -152,7 +152,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-11-22 1:35PM',
   lead_in_reading: nil,
@@ -161,7 +161,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-02 2:20PM',
   lead_in_reading: nil,
@@ -170,7 +170,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-03 3:25PM',
   lead_in_reading: nil,
@@ -179,7 +179,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-04 2:30PM',
   lead_in_reading: nil,
@@ -188,7 +188,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-06 1:35PM',
   lead_in_reading: nil,
@@ -197,7 +197,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-09 2:20PM',
   lead_in_reading: nil,
@@ -206,7 +206,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-10 3:25PM',
   lead_in_reading: nil,
@@ -215,13 +215,13 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_are_databases],
+  parent_lesson: lessons[:what_are_databases],
   name: '"Midterm" Exam',
   held_at: '2013-12-11 2:30PM',
   description: 'The "Midterm" exam will be held during class.'
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-13 1:35PM',
   lead_in_reading: nil,
@@ -230,7 +230,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-16 12:55PM',
   lead_in_reading: nil,
@@ -239,7 +239,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-17 3:25PM',
   lead_in_reading: nil,
@@ -248,7 +248,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2013-12-18 2:30PM',
   lead_in_reading: nil,
@@ -257,7 +257,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-06 2:20PM',
   lead_in_reading: nil,
@@ -266,7 +266,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-07 3:25PM',
   lead_in_reading: nil,
@@ -275,7 +275,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-08 2:30PM',
   lead_in_reading: nil,
@@ -284,7 +284,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-10 1:35PM',
   lead_in_reading: nil,
@@ -293,7 +293,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-13 2:20PM',
   lead_in_reading: nil,
@@ -302,7 +302,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-14 3:25PM',
   lead_in_reading: nil,
@@ -311,7 +311,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-15 2:30PM',
   lead_in_reading: nil,
@@ -320,7 +320,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-17 1:35PM',
   lead_in_reading: nil,
@@ -329,7 +329,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-21 3:25PM',
   lead_in_reading: nil,
@@ -338,7 +338,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-22 2:30PM',
   lead_in_reading: nil,
@@ -347,7 +347,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-27 2:20PM',
   lead_in_reading: nil,
@@ -356,7 +356,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-28 3:25PM',
   lead_in_reading: nil,
@@ -365,7 +365,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-01-29 2:30PM',
   lead_in_reading: nil,
@@ -374,13 +374,13 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_are_databases],
+  parent_lesson: lessons[:what_are_databases],
   name: 'Project Turn-in and Discussion',
   held_at: '2014-01-31 1:35PM',
   description: "Projects will be due, and we'll look back at the class so far."
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-02-03 2:20PM',
   lead_in_reading: nil,
@@ -389,7 +389,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-02-04 3:25PM',
   lead_in_reading: nil,
@@ -398,7 +398,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: nil,
+  parent_lesson: nil,
   name: nil,
   held_at: '2014-02-05 2:30PM',
   lead_in_reading: nil,
@@ -407,7 +407,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson_id: lessons[:what_are_databases],
+  parent_lesson: lessons[:what_are_databases],
   name: "Final Exam Prep",
   held_at: '2014-02-07 1:35PM',
   description: "Review of course material in preparation for final exam."

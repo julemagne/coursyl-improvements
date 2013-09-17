@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'redcarpet'
 
 gem 'twitter-bootstrap-rails'
+gem 'd3-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

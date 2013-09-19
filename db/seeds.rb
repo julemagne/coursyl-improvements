@@ -44,7 +44,7 @@ So-called "expertise:"
 
 * Algorithms and machine learning
 * Using SQL for more things than you'd expect
-* Minimizing user surprise
+* Minimizing user confusion
 * Process improvement
 * Genetics and immunology
 * Predicting the future}
@@ -58,15 +58,22 @@ CourseInstructor.create!(course_id: db_course.id,
 
 lessons = Hash.new
 
-#Intro Week (2 days, T-W)
+#Week: Intro (2 days, T-W)
 lessons[:what_is_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
+  parent_lesson: lessons[:relational],
   name: "What is Data?",
   held_at: '2013-11-05 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{* What is data?
+* Facebook stats
+* Binary Data (file storage)
+* Text Data
+* XML/JSON
+* Tabular Data
+* Graph Data
+}
 )
 lessons[:what_are_databases] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:what_is_data],
@@ -75,139 +82,156 @@ lessons[:what_are_databases] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{* Why not just use files?
+* Stories of massive real-world DBs
+* Speed
+* Multi-user
+}
 )
 
-#DB Types, Intro to Relational
-lessons[:types] = Lesson.create!(course_id: db_course.id,
+#Week: Relational (4 days, F-W)
+lessons[:relational] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:what_are_databases],
-  name: "Types of Database Systems",
+  name: "Relational: Tables, Rows, Columns",
   held_at: '2013-11-08 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{* Relational Algebra
+* Relations/Tables
+* Attributes/Columns
+* Domains
+* Tuples/Rows
+}
 )
-lessons[:relational] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "nil",
+lessons[:keys] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "Relational: Keys",
   held_at: '2013-11-11 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{* Unique
+* Primary
+* Foreign}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:relational3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:keys],
+  name: "Relational: TODO",
   held_at: '2013-11-12 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:relational4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational3],
+  name: "Relational: DBMS Ecosystem and PostgreSQL",
   held_at: '2013-11-13 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: DB Design (4 days, F-W)
+lessons[:design1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "Design",
   held_at: '2013-11-15 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:design2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design1],
+  name: "Design: Normal Forms",
   held_at: '2013-11-18 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:design3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design2],
+  name: "Design: Hierarchical Tables and Polymorphism",
   held_at: '2013-11-19 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:design4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design3],
+  name: "Design: TODO",
   held_at: '2013-11-20 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: SQL (4 days, F-W)
+lessons[:sql1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "SQL",
   held_at: '2013-11-22 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{* CREATE, INSERT, UPDATE}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:sql2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql1],
+  name: "SQL: SELECT, FROM, WHERE",
   held_at: '2013-12-02 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:sql3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql2],
+  name: "SQL: JOINs",
   held_at: '2013-12-03 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:sql4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql3],
+  name: "SQL: GROUP BY, HAVING",
   held_at: '2013-12-04 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: Indexing/Transactions (3 days, F-T)
+lessons[:transactions] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "Transactions",
   held_at: '2013-12-06 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:indexing1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "Indexing: The Basics",
   held_at: '2013-12-09 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:indexing2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:indexing],
+  name: "Indexing: TODO",
   held_at: '2013-12-10 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -215,158 +239,168 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
+  parent_lesson: nil,
   name: '"Midterm" Exam',
   held_at: '2013-12-11 2:30PM',
   description: 'The "Midterm" exam will be held during class.'
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: Key-Value (4 days, F-W)
+lessons[:kv1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Key-Value & Riak",
   held_at: '2013-12-13 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:kv2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Key-Value: CAP Theorem",
   held_at: '2013-12-16 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:kv3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:kv1],
+  name: "Key-Value: Mapreduce",
   held_at: '2013-12-17 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:kv4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:kv3],
+  name: "Key-Value: TODO",
   held_at: '2013-12-18 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: ActiveRecord (3 days, M-W)
+lessons[:orm1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational],
+  name: "ORMs",
   held_at: '2014-01-06 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:orm2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:orm1],
+  name: "ORMs: Active Record",
   held_at: '2014-01-07 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:orm3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:orm2],
+  name: "ORMs: TODO",
   held_at: '2014-01-08 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: Document DBs (4 days, F-W)
+lessons[:doc1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Document DBs & MongoDB",
   held_at: '2014-01-10 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:doc2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Document DBs: ACID Compliance",
   held_at: '2014-01-13 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:doc3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:doc1],
+  name: "Document DBs: TODO",
   held_at: '2014-01-14 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:doc4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:doc3],
+  name: "Document DBs: TODO",
   held_at: '2014-01-15 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: DBMS-Specific SQL (3 days, F-W)
+lessons[:sql5] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql1],
+  name: "Advanced SQL: Regex",
   held_at: '2014-01-17 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:sql6] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql1],
+  name: "Advanced SQL: Text Search",
   held_at: '2014-01-21 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:sql7] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql6],
+  name: "Advanced SQL: TODO",
   held_at: '2014-01-22 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: Columnar Databases (3 days, M-W)
+lessons[:col1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Columnar DBs & HBase",
   held_at: '2014-01-27 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:col2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:col1],
+  name: "Columnar DBs: TODO",
   held_at: '2014-01-28 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:col3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:col2],
+  name: "Columnar DBs: TODO",
   held_at: '2014-01-29 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -374,32 +408,34 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
+  parent_lesson: nil,
   name: 'Project Turn-in and Discussion',
   held_at: '2014-01-31 1:35PM',
   description: "Projects will be due, and we'll look back at the class so far."
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+
+#Week: Scalability/Case Studies (3 days, M-W)
+lessons[:scale1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:what_are_databases],
+  name: "Scalability: TODO",
   held_at: '2014-02-03 2:20PM',
-  lead_in_reading: nil,
+  lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:scale2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:scale1],
+  name: "Scalability: TODO",
   held_at: '2014-02-04 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TODO}
 )
-lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: nil,
+lessons[:scale3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:scale2],
+  name: "Scalability: TODO",
   held_at: '2014-02-05 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -407,7 +443,7 @@ lessons[:intro_to_data] = Lesson.create!(course_id: db_course.id,
     %{TODO}
 )
 Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
+  parent_lesson: nil,
   name: "Final Exam Prep",
   held_at: '2014-02-07 1:35PM',
   description: "Review of course material in preparation for final exam."
@@ -443,56 +479,56 @@ Assignment.create!(course_id: db_course.id,
   fraction_of_grade: 0.15
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 1: TODO',
+  name: 'Assignment 1: Relational Databases',
   active_at: '2013-11-08 2:25PM',
   due_at: '2013-11-15 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 2: TODO',
+  name: 'Assignment 2: Database Design',
   active_at: '2013-11-15 2:25PM',
   due_at: '2013-11-22 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 3: TODO',
+  name: 'Assignment 3: Basic SQL',
   active_at: '2013-11-22 2:25PM',
   due_at: '2013-12-06 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 4: TODO',
+  name: 'Assignment 4: Key-Value Databases (Riak)',
   active_at: '2013-12-13 2:25PM',
   due_at: '2013-12-18 2:30PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 5: TODO',
+  name: 'Assignment 5: ORMs (Active Record)',
   active_at: '2014-01-06 3:10PM',
   due_at: '2014-01-10 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 6: TODO',
+  name: 'Assignment 6: Document Databases (MongoDB)',
   active_at: '2014-01-10 2:25PM',
   due_at: '2014-01-17 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 7: TODO',
+  name: 'Assignment 7: Advanced SQL',
   active_at: '2014-01-17 2:25PM',
   due_at: '2014-01-24 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 8: TODO',
+  name: 'Assignment 8: Columnar Databases (HBase)',
   active_at: '2014-01-31 2:25PM',
   due_at: '2014-02-07 1:35PM',
   students_can_submit: false,

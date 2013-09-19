@@ -1,13 +1,28 @@
 <% completion_fractions = @course.completion_fractions -%>
 <% percent_complete = percentage(completion_fractions["Complete"]) -%>
-<header class="well well-large">
+<header class="well well-large fixed-header">
   <div class="container">
     <div class="row">
       <div class="span9">
         <h2>
-          <%= @course.course_code %>: <%= @course.name %><br/>
-          <small><%= @course.primary_instructor_name %></small>
+          <%= @course.course_code %>: <%= @course.name %>
         </h2>
+        <p class="lead">
+          <%= @course.primary_instructor_name %>
+        </p>
+        <nav class="navbar">
+          <div class="navbar-inner">
+            <ul class="nav">
+              <li><%= link_to "Description" %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Assignments" %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Lessons" %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Policies" %></li>
+            </ul>
+          </div>
+        </nav>
       </div>
       <div class="span2 text-center">
         <h2>
@@ -22,21 +37,7 @@
   </div>
 </header>
 
-<nav class="navbar">
-  <div class="navbar-inner">
-    <ul class="nav">
-      <li><%= link_to "Description" %></li>
-      <li class="divider-vertical"></li>
-      <li><%= link_to "Assignments" %></li>
-      <li class="divider-vertical"></li>
-      <li><%= link_to "Lessons" %></li>
-      <li class="divider-vertical"></li>
-      <li><%= link_to "Policies" %></li>
-    </ul>
-  </div>
-</nav>
-
-<section>
+<section id="first-section">
   <h3>Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>
   <%= markdown(@course.description) %>
@@ -81,8 +82,10 @@
 
 <section>
   <h3>Lessons</h3>
-  <div class="well">
-    <%= render "tree" %>
+  <%= render "tree" %>
+  <div id="lesson-tree-anchor"></div>
+  <div id="lesson-tree-wrapper">
+    <div id="lesson-tree" class="well"></div>
   </div>
   <table class="table table-hover table-condensed">
     <tr>
@@ -96,6 +99,7 @@
     </tr>
     <% end %>
   </table>
+  <div id="lesson-bottom-anchor"></div>
 </section>
 
 <section>

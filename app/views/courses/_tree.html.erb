@@ -1,21 +1,3 @@
-<style>
-    g.node {
-        font-family: Verdana, Helvetica;
-        font-size: 12px;
-        font-weight: bold;
-    }
-    circle.node-dot {
-        fill: lightsalmon;
-        stroke: red;
-        stroke-width: 1px;
-    }
-
-    path.link {
-        fill: none;
-        stroke: gray;
-    }
-</style>
-
 <script>
 
 var treeData = <%= @course.lesson_tree.to_json.html_safe %>;
@@ -43,7 +25,7 @@ function buildTree(containerName, customOptions)
     }, customOptions);
 
     // size of the diagram
-    var size = { width:$(containerName).outerWidth(), height:150};
+    var size = { width:$(containerName).width(), height:$(containerName).height()};
 
     var tree = d3.layout.tree()
         .sort(null)
@@ -109,9 +91,7 @@ function buildTree(containerName, customOptions)
 }
 
 $(function(){
-   buildTree("#tree-container");
+   buildTree("#lesson-tree");
 });
 
 </script>
-
-<div id="tree-container"></div>

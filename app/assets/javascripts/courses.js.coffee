@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+# --------------------------------
+# Sticky Tree
 $(window).scroll ->
   headeroffset = 190
   treewrapperheight = 190
@@ -26,8 +28,17 @@ $(window).scroll ->
           position: "relative"
           top: "#{bottomposition-topposition-treewrapperheight}px"
 
-$("a").click ->
+
+# --------------------------------
+# Smooth scrolling
+$(document).on "click", "a", ->
   $("html, body").animate
     scrollTop: $($.attr(this, "href")).offset().top
-  , 500
+  , 1000
   false
+
+
+# --------------------------------
+# Node popups
+$(document).on "click", "g.node", ->
+  console.log "Wahoo!"

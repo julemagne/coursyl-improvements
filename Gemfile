@@ -42,7 +42,6 @@ end
 
 group :production do
   gem 'rails_12factor' #for heroku logging/compiling
-  gem 'therubyracer'   #for compiling LESS to CSS for bootstrap
 end
 
 # Use ActiveModel has_secure_password

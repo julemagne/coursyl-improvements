@@ -1,5 +1,7 @@
 <script>
 
+// --------------------------------
+// Tree generation
 var treeData = <%= @course.lesson_tree.to_json.html_safe %>;
 
 function visit(parent, visitFn, childrenFn)

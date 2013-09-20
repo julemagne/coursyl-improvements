@@ -1,20 +1,25 @@
 development:
   adapter: postgresql
+  encoding: unicode
   database: courses_development
+  pool: 5
   username: masonfoxmatthews
   password:
   host: localhost
 
 test:
   adapter: postgresql
+  encoding: unicode
   database: courses_test
+  pool: 5
   username: masonfoxmatthews
   password:
   host: localhost
 
 production:
   adapter: postgresql
+  encoding: unicode
   database: courses_production
+  pool: 5
   username: masonfoxmatthews
   password:
-  host: localhost

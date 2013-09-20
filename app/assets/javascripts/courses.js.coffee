@@ -25,3 +25,9 @@ $(window).scroll ->
         tree.css
           position: "relative"
           top: "#{bottomposition-topposition-treewrapperheight}px"
+
+$("a").click ->
+  $("html, body").animate
+    scrollTop: $($.attr(this, "href")).offset().top
+  , 500
+  false

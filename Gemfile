@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.0.0"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
@@ -36,6 +38,11 @@ gem 'd3-rails'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :production do
+  gem 'rails_12factor' #for heroku logging/compiling
+  #gem 'therubyracer'   #for compiling LESS to CSS for bootstrap
 end
 
 # Use ActiveModel has_secure_password

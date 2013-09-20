@@ -13,13 +13,13 @@
         <nav class="navbar">
           <div class="navbar-inner">
             <ul class="nav">
-              <li><%= link_to "Description" %></li>
+              <li><%= link_to "Description", '#anchor-description' %></li>
               <li class="divider-vertical"></li>
-              <li><%= link_to "Assignments" %></li>
+              <li><%= link_to "Assignments", '#anchor-assignments' %></li>
               <li class="divider-vertical"></li>
-              <li><%= link_to "Lessons" %></li>
+              <li><%= link_to "Lessons", '#anchor-lessons' %></li>
               <li class="divider-vertical"></li>
-              <li><%= link_to "Policies" %></li>
+              <li><%= link_to "Policies", '#anchor-policies' %></li>
             </ul>
           </div>
         </nav>
@@ -38,12 +38,14 @@
 </header>
 
 <section id="first-section">
+  <a id="anchor-description" class="anchor-course"></a>
   <h3>Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>
   <%= markdown(@course.description) %>
 </section>
 
 <section>
+  <a id="anchor-assignments" class="anchor-course"></a>
   <h3>Assignments</h3>
   <div class="progress progress-striped">
     <% ["Complete", "In Progress", "Overdue", "Future"].each do |status| %>
@@ -89,6 +91,7 @@
 </section>
 
 <section>
+  <a id="anchor-lessons" class="anchor-course"></a>
   <h3>Lessons</h3>
   <%= render "tree" %>
   <div id="lesson-tree-anchor"></div>
@@ -121,6 +124,7 @@
 </section>
 
 <section>
+  <a id="anchor-policies" class="anchor-course"></a>
   <h3>Course Details and Policies</h3>
   <dl class="dl-horizontal">
     <% @course.policies.each do |p| %>

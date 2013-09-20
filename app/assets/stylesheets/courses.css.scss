@@ -26,9 +26,11 @@
   }
 }
 
-
-.fixed_header:after {
-  background: asset-url("pattern.png") repeat center center;
+.anchor-course {
+  display: block;
+  position: relative;
+  top: -190px;
+  visibility: hidden;
 }
 
 #first-section {

@@ -40,5 +40,28 @@ $(document).on "click", "a", ->
 
 # --------------------------------
 # Node popups
-$(document).on "click", "g.node", ->
-  console.log "Wahoo!"
+$(document).on "mouseenter", "g.node", ->
+  modalheight = 130
+  modalwidth = 300
+  treepadding = 40
+
+  treetop = $("#lesson-tree").offset().top
+  treeleft = $("#lesson-tree").offset().left
+  nodex = parseInt(this.getAttribute("nodex"))
+  nodey = parseInt(this.getAttribute("nodey"))
+
+  $('main').append('<div class="node-modal"></div>')
+  modal = $('.node-modal')
+  modal.append("<blockquote><p class='lead'>#{this.getAttribute("nodename")}</p></blockquote")
+  modal.append("<small>#{this.getAttribute("nodedesc")}</small>")
+  modal.css
+    height: modalheight
+    width: modalwidth
+    top: treetop + nodey - modalheight - 20
+    left: Math.max.apply(null, [10, treeleft + nodex - modalwidth*0.5 + treepadding])
+
+$(document).on "mouseleave", "g.node", ->
+  $('.node-modal').remove()
+
+$(document).scroll ->
+  $('.node-modal').remove()

@@ -7,6 +7,7 @@
   top: 40px;
   height: 150px;
   background: linear-gradient(45deg, #CCCCFF 0%,#FFFFFF 100%);
+  border-radius: 5px;
   margin: 0px;
   padding: 0px;
   z-index: 10;
@@ -46,17 +47,30 @@
 }
 
 g.node {
-    font-family: Verdana, Helvetica;
-    font-size: 12px;
-    font-weight: bold;
+  font-family: Verdana, Helvetica;
+  font-size: 12px;
+  font-weight: bold;
 }
 circle.node-dot {
-    fill: lightsalmon;
-    stroke: red;
-    stroke-width: 1px;
+  fill: lightsalmon;
+  stroke: red;
+  stroke-width: 1px;
 }
 
 path.link {
-    fill: none;
-    stroke: gray;
+  fill: none;
+  stroke: gray;
+}
+
+div.node-modal {
+  position: absolute;
+  background: #444444;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 20;
+  color: white;
+  blockquote {
+    color: grey;
+  }
 }

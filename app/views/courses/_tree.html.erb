@@ -64,32 +64,18 @@ function buildTree(containerName, customOptions)
         .enter()
         .append("svg:g")
         .attr("class", "node")
-        .attr("node-name", function(d){d.name;})
         .attr("transform", function(d)
         {
             return "translate(" + d.y + "," + d.x + ")";
-        });
+        })
+        .attr("nodex", function(d){return d.y;})
+        .attr("nodey", function(d){return d.x;})
+        .attr("nodename", function(d){return d.name;})
+        .attr("nodedesc", function(d){return d.description;});
 
     nodeGroup.append("svg:circle")
         .attr("class", "node-dot")
         .attr("r", options.nodeRadius);
-
-    nodeGroup.append("svg:text")
-        .attr("text-anchor", function(d)
-        {
-            return d.children ? "end" : "start";
-        })
-        .attr("dx", function(d)
-        {
-            var gap = 2 * options.nodeRadius;
-            return d.children ? -gap : gap;
-        })
-        .attr("dy", 3)
-        .text(function(d)
-        {
-            return ""; //Node label goes here
-        });
-
 }
 
 $(function(){

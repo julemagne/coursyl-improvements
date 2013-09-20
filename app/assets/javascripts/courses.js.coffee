@@ -3,9 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(window).scroll ->
-  headeroffset = 191
+  headeroffset = 190
   treewrapperheight = 190
-  scrolltop= $(this).scrollTop()
+  scrolltop = $(this).scrollTop()
   topposition = $("#lesson-tree-anchor").offset().top
   bottomposition = $("#lesson-bottom-anchor").offset().top
   tree = $("#lesson-tree")
@@ -13,9 +13,15 @@ $(window).scroll ->
   if (scrolltop > topposition - headeroffset) and (scrolltop < bottomposition - (headeroffset+treewrapperheight))
     tree.css
       position: "fixed"
-      top: "191px"
+      top: "#{headeroffset}px"
 
   else
-    tree.css
-      position: "relative"
-      top: ""
+    if tree.css('position') is "fixed"
+      if (scrolltop < topposition - headeroffset)
+        tree.css
+          position: "relative"
+          top: ""
+      else
+        tree.css
+          position: "relative"
+          top: "#{bottomposition-topposition-treewrapperheight}px"

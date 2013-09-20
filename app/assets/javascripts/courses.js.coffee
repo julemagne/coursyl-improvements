@@ -17,7 +17,7 @@ $(window).scroll ->
 
   else
     if tree.css('position') is "fixed"
-      if (scrolltop < topposition - headeroffset)
+      if (scrolltop <= topposition - headeroffset)
         tree.css
           position: "relative"
           top: ""

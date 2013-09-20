@@ -64,17 +64,25 @@
   <table class="table table-hover table-condensed">
     <tr>
       <th>Due</th>
+      <th>Time</th>
       <th>Name</th>
       <th>Status</th>
       <th>% of Grade</th>
+      <th></th>
     </tr>
     <% @course.assignments.each do |a| %>
     <tr>
-      <td><%= a.due_at %></td>
+      <td><%= a.due_at.strftime("%m/%d") %></td>
+      <td><%= a.due_at.strftime("%l:%M %p") %></td>
       <td><%= a.name %></td>
       <td><span class="label <%= status_label_class(a.status(@user))%>">
-        <%= a.status(@user) %></span></td>
+        <%= a.status(@user) %>
+      </span></td>
       <td><%= percentage(a.fraction_of_grade) %></td>
+      <td class="muted">
+        <i class="icon-pencil"></i>
+        <i class="icon-bar-chart"></i>
+      </td>
     </tr>
     <% end %>
   </table>
@@ -89,13 +97,23 @@
   </div>
   <table class="table table-hover table-condensed">
     <tr>
-      <th>When</th>
+      <th>Day</th>
+      <th>Date</th>
+      <th>Time</th>
       <th>Name</th>
+      <th></th>
     </tr>
-    <% @course.lessons.each do |a| %>
+    <% @course.lessons.each do |l| %>
     <tr>
-      <td><%= a.held_at %></td>
-      <td><%= a.name %></td>
+      <td><strong><%= weekday_abbreviation(l.held_at) %></strong></td>
+      <td><%= l.held_at.strftime("%m/%d") %></td>
+      <td><%= l.held_at.strftime("%l:%M %p") %></td>
+      <td><%= l.name %></td>
+      <td class="muted">
+        <i class="icon-eye-open"></i>
+        <i class="icon-edit"></i>
+        <i class="icon-facetime-video"></i>
+      </td>
     </tr>
     <% end %>
   </table>

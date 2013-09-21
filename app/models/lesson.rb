@@ -5,10 +5,17 @@ class Lesson < ActiveRecord::Base
   # validates :name, presence: true
 
   def descendant_tree
-    tree = {name: name, description: description, contents: []}
+    tree = {name: name,
+      description: description,
+      heldat: held_at_integer,
+      contents: []}
     child_lessons.each do |l|
       tree[:contents] << l.descendant_tree
     end
     tree
+  end
+
+  def held_at_integer
+    held_at.to_i
   end
 end

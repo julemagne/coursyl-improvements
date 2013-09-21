@@ -56,6 +56,11 @@ circle.node-dot {
   stroke: red;
   stroke-width: 1px;
 }
+circle.node-dot-empty {
+  fill: #EEEEEE;
+  stroke: grey;
+  stroke-width: 1px;
+}
 
 path.link {
   fill: none;
@@ -65,12 +70,23 @@ path.link {
 div.node-modal {
   position: absolute;
   background: #444444;
-  border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
   z-index: 20;
   color: white;
+  opacity: 0.85;
   blockquote {
-    color: grey;
+    color: #AAAAAA;
   }
+}
+
+div.node-pointer {
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  border-top: 12px solid #444444;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  z-index: 21;
+  opacity: 0.85;
 }

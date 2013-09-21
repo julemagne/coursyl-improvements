@@ -107,7 +107,7 @@
       <th></th>
     </tr>
     <% @course.lessons.each do |l| %>
-    <tr>
+    <tr heldat="<%= l.held_at_integer %>" class="node">
       <td><strong><%= weekday_abbreviation(l.held_at) %></strong></td>
       <td><%= l.held_at.strftime("%m/%d") %></td>
       <td><%= l.held_at.strftime("%l:%M %p") %></td>

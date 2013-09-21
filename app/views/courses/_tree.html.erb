@@ -71,10 +71,11 @@ function buildTree(containerName, customOptions)
         .attr("nodex", function(d){return d.y;})
         .attr("nodey", function(d){return d.x;})
         .attr("nodename", function(d){return d.name;})
-        .attr("nodedesc", function(d){return d.description;});
+        .attr("nodedesc", function(d){return d.description;})
+        .attr("id", function(d){return d.heldat;});
 
     nodeGroup.append("svg:circle")
-        .attr("class", "node-dot")
+        .attr("class", "node-dot-empty")
         .attr("r", options.nodeRadius);
 }
 

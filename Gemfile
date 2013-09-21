@@ -32,9 +32,6 @@ gem 'jbuilder', '~> 1.2'
 # Converts markdown text to HTML
 gem 'redcarpet'
 
-gem 'therubyracer'
-gem 'less-rails'
-gem 'twitter-bootstrap-rails'
 gem 'd3-rails'
 
 group :doc do

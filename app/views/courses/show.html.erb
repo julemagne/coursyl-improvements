@@ -96,11 +96,14 @@
 <section>
   <a id="anchor-lessons" class="anchor-course"></a>
   <h3>Lessons</h3>
-  <%= render "tree" %>
   <div id="lesson-tree-anchor"></div>
   <div id="lesson-tree-wrapper">
     <div id="lesson-tree" class="well"></div>
   </div>
+  <script>
+    var treeData = <%= @course.lesson_tree.to_json.html_safe %>;
+    TreeGenerator.buildTree(treeData, "#lesson-tree");
+  </script>
   <table class="table table-hover table-condensed">
     <tr>
       <th>Day</th>

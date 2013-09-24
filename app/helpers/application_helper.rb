@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def percentage(number)
-    number_to_percentage(number*100, precision: 1)
+    number_to_percentage(number*100, precision: 0)
   end
 
   def weekday_abbreviation(date)

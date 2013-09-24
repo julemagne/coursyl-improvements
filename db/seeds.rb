@@ -59,184 +59,175 @@ CourseInstructor.create!(course_id: db_course.id,
 lessons = Hash.new
 
 #Week: Intro (2 days, T-W)
-lessons[:what_is_data] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "What is Data?",
+lessons[:data] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: nil,
+  name: "Data",
   held_at: '2013-11-05 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{* What is data?
-* Facebook stats
-* Binary Data (file storage)
-* Text Data
-* XML/JSON
-* Tabular Data
-* Graph Data
-}
+    %{"What is data?"  Binary, Text, XML, JSON, Tabular, and Graph.}
 )
-lessons[:what_are_databases] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_is_data],
-  name: "What are Databases?",
+lessons[:real_world] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:data],
+  name: "Real-World Problems",
   held_at: '2013-11-06 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{* Why not just use files?
-* Stories of massive real-world DBs
-* Speed
-* Multi-user
-}
+    %{"What do you do in life that generates or uses a lot of data?"  Stories
+      of real-world problems, apps, and systems (including Facebook statistics).
+      Initial project discussions and planning.}
 )
 
-#Week: Relational (4 days, F-W)
-lessons[:relational] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Relational: Tables, Rows, Columns",
+#Week: DB Design/Relational (4 days, F-W)
+lessons[:design1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:real_world],
+  name: "Design",
   held_at: '2013-11-08 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{* Relational Algebra
-* Relations/Tables
-* Attributes/Columns
-* Domains
-* Tuples/Rows
-}
+    %{"The [Address Book] Problem." Modeling the real world as tabular data.}
 )
-lessons[:keys] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "Relational: Keys",
+lessons[:design2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design1],
+  name: "Design: Normal Forms I",
   held_at: '2013-11-11 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{* Unique
-* Primary
-* Foreign}
+    %{"Showing Excel who's boss."}
 )
-lessons[:relational3] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:keys],
-  name: "Relational: TODO",
+lessons[:design3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design2],
+  name: "Design: Normal Forms II",
   held_at: '2013-11-12 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"Very possibly taking it too far."}
 )
-lessons[:relational4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational3],
-  name: "Relational: DBMS Ecosystem and PostgreSQL",
+lessons[:relational1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:real_world],
+  name: "Relational Databases",
   held_at: '2013-11-13 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{Relational Algebra, Tables, Columns, Rows, Domains/Data Types, Keys.}
 )
 
-#Week: DB Design (4 days, F-W)
-lessons[:design1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "Design",
+#Week: PostgreSQL/SQL (4 days, F-W)
+lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational1],
+  name: "PostgreSQL",
   held_at: '2013-11-15 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"Finally, we touch our computers."}
 )
-lessons[:design2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:design1],
-  name: "Design: Normal Forms",
+lessons[:sql1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:relational1],
+  name: "SQL",
   held_at: '2013-11-18 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"How you would write a language to store, edit, and delete tabular data?"
+      CREATE, INSERT, DELETE.}
 )
-lessons[:design3] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:design2],
-  name: "Design: Hierarchical Tables and Polymorphism",
+lessons[:sql2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql1],
+  name: "SQL: Querying for Data",
   held_at: '2013-11-19 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"Now that we can put data in a database, how do we get it out?" SELECT,
+      FROM, WHERE}
 )
-lessons[:design4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:design3],
-  name: "Design: TODO",
+lessons[:sql3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql2],
+  name: "SQL: Merging Data",
   held_at: '2013-11-20 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"Sure, we can pull from one table, but how do we recreate our [address
+      list]?" JOINS}
 )
 
-#Week: SQL (4 days, F-W)
-lessons[:sql1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "SQL",
+#Week: Design/SQL (4 days, F-W)
+lessons[:sql4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql3],
+  name: "SQL: Grouping Data",
   held_at: '2013-11-22 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{* CREATE, INSERT, UPDATE}
+    %{"How do we use the tools in our toolbox to get rid of duplicates?"
+      GROUP BY, HAVING}
 )
-lessons[:sql2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql1],
-  name: "SQL: SELECT, FROM, WHERE",
+lessons[:design4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design3],
+  name: "Design: Hierarchies",
   held_at: '2013-12-02 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"How would you design a database to keep track of [your family tree]?"}
 )
-lessons[:sql3] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql2],
-  name: "SQL: JOINs",
+lessons[:design5] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design4],
+  name: "Design: Polymorphism",
   held_at: '2013-12-03 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"How would you design a database to keep track of [song/album/artist
+      ratings]?"}
 )
-lessons[:sql4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql3],
-  name: "SQL: GROUP BY, HAVING",
+lessons[:breather] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: nil,
+  name: "Breathing Room",
   held_at: '2013-12-04 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{Catch our breath and allow for extra questions on prior topics.
+      Intermediate project discussion.}
 )
 
 #Week: Indexing/Transactions (3 days, F-T)
-lessons[:transactions] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "Transactions",
+lessons[:postgres2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:postgres1],
+  name: "PostgreSQL: Transactions",
   held_at: '2013-12-06 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"How do you keep from losing money if your ATM is struck by lightning?"}
 )
-lessons[:indexing1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
-  name: "Indexing: The Basics",
+lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:postgres2],
+  name: "PostgreSQL: Indexing I",
   held_at: '2013-12-09 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{"How can you look up a row in a reasonable time when you have
+      billions of records?"}
 )
-lessons[:indexing2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:indexing],
-  name: "Indexing: TODO",
+lessons[:postgres4] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:postgres3],
+  name: "PostgreSQL: Indexing II",
   held_at: '2013-12-10 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{Must-have indexing, indexing across multiple columns.}
 )
 Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
@@ -246,52 +237,52 @@ Lesson.create!(course_id: db_course.id,
 )
 
 #Week: Key-Value (4 days, F-W)
-lessons[:kv1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Key-Value & Riak",
+lessons[:nosql] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:real_world],
+  name: "NoSQL",
   held_at: '2013-12-13 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:kv2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Key-Value: CAP Theorem",
+lessons[:kv1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:nosql],
+  name: "Key-Value DBs (Riak)",
   held_at: '2013-12-16 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:kv3] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:kv1],
-  name: "Key-Value: Mapreduce",
+lessons[:cap] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:real_world],
+  name: "CAP Theorem",
   held_at: '2013-12-17 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:kv4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:kv3],
-  name: "Key-Value: TODO",
+lessons[:kv2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:kv1],
+  name: "Key-Value: Mapreduce",
   held_at: '2013-12-18 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 
 #Week: ActiveRecord (3 days, M-W)
 lessons[:orm1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational],
+  parent_lesson: lessons[:postgres1],
   name: "ORMs",
   held_at: '2014-01-06 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 lessons[:orm2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:orm1],
@@ -300,112 +291,112 @@ lessons[:orm2] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 lessons[:orm3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:orm2],
-  name: "ORMs: TODO",
+  name: "ORMs: TBD",
   held_at: '2014-01-08 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 
 #Week: Document DBs (4 days, F-W)
 lessons[:doc1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Document DBs & MongoDB",
+  parent_lesson: lessons[:nosql],
+  name: "Document DBs (MongoDB)",
   held_at: '2014-01-10 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:doc2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Document DBs: ACID Compliance",
+lessons[:acid] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:real_world],
+  name: "ACID Compliance",
   held_at: '2014-01-13 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:doc3] = Lesson.create!(course_id: db_course.id,
+lessons[:doc2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:doc1],
-  name: "Document DBs: TODO",
+  name: "Document DBs: TDB",
   held_at: '2014-01-14 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:doc4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:doc3],
-  name: "Document DBs: TODO",
+lessons[:doc3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:doc2],
+  name: "Document DBs: TBD",
   held_at: '2014-01-15 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 
-#Week: DBMS-Specific SQL (3 days, F-W)
-lessons[:sql5] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql1],
-  name: "Advanced SQL: Regex",
+#Week: Columnar Databases (3 days, F-W)
+lessons[:col1] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:nosql],
+  name: "Columnar DBs (HBase)",
   held_at: '2014-01-17 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:sql6] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql1],
-  name: "Advanced SQL: Text Search",
+lessons[:col2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:col1],
+  name: "Columnar/Graph DBs: TBD",
   held_at: '2014-01-21 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:sql7] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql6],
-  name: "Advanced SQL: TODO",
+lessons[:col3] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:col2],
+  name: "Columnar/Graph DBs: TBD",
   held_at: '2014-01-22 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 
-#Week: Columnar Databases (3 days, M-W)
-lessons[:col1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Columnar DBs & HBase",
+#Week: DBMS-Specific SQL (3 days, M-W)
+lessons[:sql5] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql4],
+  name: "SQL: Regex",
   held_at: '2014-01-27 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:col2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:col1],
-  name: "Columnar DBs: TODO",
+lessons[:sql6] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql5],
+  name: "SQL: Text Search",
   held_at: '2014-01-28 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
-lessons[:col3] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:col2],
-  name: "Columnar DBs: TODO",
+lessons[:sql7] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql6],
+  name: "SQL: TBD",
   held_at: '2014-01-29 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
@@ -416,31 +407,31 @@ Lesson.create!(course_id: db_course.id,
 
 #Week: Scalability/Case Studies (3 days, M-W)
 lessons[:scale1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:what_are_databases],
-  name: "Scalability: TODO",
+  parent_lesson: lessons[:real_world],
+  name: "Scalability: TBD",
   held_at: '2014-02-03 2:20PM',
   lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 lessons[:scale2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale1],
-  name: "Scalability: TODO",
+  name: "Scalability: TBD",
   held_at: '2014-02-04 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 lessons[:scale3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale2],
-  name: "Scalability: TODO",
+  name: "Scalability: TBD",
   held_at: '2014-02-05 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TODO}
+    %{TBD}
 )
 Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
@@ -479,21 +470,21 @@ Assignment.create!(course_id: db_course.id,
   fraction_of_grade: 0.15
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 1: Relational Databases',
+  name: 'Assignment 1: Database Design',
   active_at: '2013-11-08 2:25PM',
   due_at: '2013-11-15 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 2: Database Design',
+  name: 'Assignment 2: Basic SQL',
   active_at: '2013-11-15 2:25PM',
   due_at: '2013-11-22 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 3: Basic SQL',
+  name: 'Assignment 3: Intermediate SQL',
   active_at: '2013-11-22 2:25PM',
   due_at: '2013-12-06 1:35PM',
   students_can_submit: false,
@@ -521,14 +512,14 @@ Assignment.create!(course_id: db_course.id,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 7: Advanced SQL',
+  name: 'Assignment 7: Columnar Databases (HBase)',
   active_at: '2014-01-17 2:25PM',
   due_at: '2014-01-24 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
-  name: 'Assignment 8: Columnar Databases (HBase)',
+  name: 'Assignment 8: Advanced SQL',
   active_at: '2014-01-31 2:25PM',
   due_at: '2014-02-07 1:35PM',
   students_can_submit: false,
@@ -540,29 +531,46 @@ Policy.create!(course_id: db_course.id,
   name: 'Prerequisites',
   order_number: -3,
   description:
-    %{* None.}
+    %{No course catalog prerequisites.  Just an interest in keeping track of and leveraging
+      what we know about the world around us.}
 )
 
 Policy.create!(course_id: db_course.id,
-  name: 'Course Objectives',
+  name: 'Goals and Objectives',
   order_number: -2,
   description:
-    %{* TODO
-*	Goals: the broad statements about what the students will gain from the course—knowledge, skills, attitudes, etc.
-*	Objectives: more specific statements (each related to a particular goal) about something assessable and measureable that students should be able to do by the end of the course (use specific verbs, such as describe, define, identify, explain, compare, contrast, evaluate, list, write, apply, solve, argue, support, construct, synthesize, articulate, differentiate, design, build, publish, post, integrate, interpret, relate, locate, map, trace, assess, etc.)
-*	Goals and Objectives should be written in terms of what students will do and how they will demonstrate what they have learned.}
+    %{Overall Goal:
+
+* To train students in database design and equip them with a series of tools which they
+can use in future endeavors to save time, retain what they discover, and think more
+critically about problems which they encounter in everyday life.
+
+Upon successful completion of this course, you will be able to:
+
+* Design a data structure to model real-world objects and information
+* Describe the differences between relational, document, key-value, columnar, and
+graph databases
+* Select the appropriate database paradigm for various real-world situations
+* Build SQL statements to create, modify, and read from relational databases
+* Configure databases responsibly through transactions and indexing
+* Control relational databases through the Ruby on Rails framework
+* Balance theoretical and practical tradeoffs such as consisitency, availability, and
+partition tolerance
+* Understand a few advanced techniques for allowing databases to scale to millions
+of users
+}
 )
 
 Policy.create!(course_id: db_course.id,
   name: 'Course Materials',
   order_number: -1,
   description:
-    %{* Laptop capable of running an Ubuntu Virtual Box.
-* Lots and lots of Internet.
+    %{* Laptop capable of running an Ubuntu Virtual Box
+* Lots and lots of Internet
 * No textbook is required for this course, although if you are interested in
 having a good reference to keep around after the class, I'd suggest the
 Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
-by Eric Redmond and Jim R. Wilson.}
+by Eric Redmond and Jim R. Wilson}
 )
 
 Policy.create!(course_id: db_course.id,
@@ -603,8 +611,8 @@ credit will be given for late submissions.
 You will also be asked to "grade" each lesson. I will give out slips of paper
 during each class (unless you all consistently bring your laptops, then we'll
 do it online), and you will (a) consider how well you understood the material,
-(b) rate it between 0 and 10 (10 being perfect clarity), and (c) turn it in at
-the end of class.
+(b) rate it between 0 and 10 (10 meaning perfect clarity, 0 meaning you would have
+learned more by sleeping), and (c) turn it in at the end of class.
 
 Note that this is only meant to judge how well the lesson conveyed the
 material. If you have other issues with the course, please do let me know by

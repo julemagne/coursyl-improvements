@@ -24,15 +24,18 @@
           </div>
         </nav>
       </div>
-      <div class="span2 text-center">
-        <h2>
-          A <small>(96)</small>
-        </h2>
-        <div class="progress">
-          <div class="bar bar-success" style="width: 40%<% percent_complete %>;"></div>
+      <% if @enrollment %>
+        <div class="span2 text-center">
+          <h2>
+            A <small>(96)</small>
+          </h2>
+          <small class="muted">Min: 38 - Max: 98</small>
+          <div class="progress">
+            <div class="bar bar-success" style="width: 40%<% percent_complete %>;"></div>
+          </div>
+          <small class="muted">40%<% percent_complete %> graded</small>
         </div>
-        <small class="muted">40%<% percent_complete %> graded<br/>Possible Grades: 38-98</small>
-      </div>
+      <% end %>
     </div>
   </div>
 </header>

@@ -1,20 +1,12 @@
-window.TreeGenerator =
-  visit: (parent, visitFn, childrenFn) ->
-    return if !parent
-    visitFn(parent)
-    children = childrenFn(parent)
-    if !!children
-      for child in children
-        visit(child, visitFn, childrenFn)
+class window.TreeGenerator
+  constructor: (@treeData) ->
 
-  buildTree: (treeData, containerName, customOptions) ->
-      # Build the options object
+  buildTree: (containerName, customOptions) ->
       options = $.extend
         nodeRadius: 5
         sidePadding: 30
       , customOptions
 
-      # Size of the diagram
       size =
         width: $(containerName).width()
         height: $(containerName).height()
@@ -28,7 +20,7 @@ window.TreeGenerator =
           else
             return d.contents
 
-      nodes = tree.nodes(treeData)
+      nodes = tree.nodes(@treeData)
       links = tree.links(nodes)
 
       layoutRoot = d3.select(containerName)

@@ -34,7 +34,7 @@ $(window).scroll ->
 $(document).on "click", "a", ->
   $("html, body").animate
     scrollTop: $($.attr(this, "href")).offset().top
-  , 1000
+  , 700
   false
 
 

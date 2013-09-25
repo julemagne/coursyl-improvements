@@ -35,10 +35,6 @@ class Course < ActiveRecord::Base
   end
 
   def lesson_tree
-    if root_lesson
-      root_lesson.descendant_tree
-    else
-      nil
-    end
+    root_lesson.descendant_tree if root_lesson
   end
 end

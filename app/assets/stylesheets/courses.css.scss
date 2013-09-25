@@ -6,7 +6,12 @@
   position: fixed;
   top: 40px;
   height: 150px;
-  background: linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+  background: #BECADF;
+  background-image: -webkit-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+  background-image: -moz-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+  background-image: -ms-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+  background-image: -o-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+  background-image: linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
   border-radius: 5px;
   margin: 0px;
   padding: 0px;

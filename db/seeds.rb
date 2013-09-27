@@ -144,7 +144,7 @@ lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   held_at: '2013-11-19 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
-  description
+  description:
     %{Now that we can put data in a database, how do we get it out? SELECT,
       FROM, WHERE}
 )

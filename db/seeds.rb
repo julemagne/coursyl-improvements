@@ -66,7 +66,7 @@ lessons[:data] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"What is data?"  Binary, Text, XML, JSON, Tabular, and Graph.}
+    %{What is data?  Binary, Text, XML, JSON, Tabular, and Graph.}
 )
 lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:data],
@@ -75,7 +75,7 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"What do you do in life that generates or uses a lot of data?"  Stories
+    %{What do you do in life that generates or uses a lot of data?  Stories
       of real-world problems, apps, and systems (including Facebook statistics).
       Initial project discussions and planning.}
 )
@@ -88,7 +88,7 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"The [Address Book] Problem." Modeling the real world as tabular data.}
+    %{The [Address Book] Problem. Modeling the real world as tabular data.}
 )
 lessons[:design2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design1],
@@ -97,7 +97,7 @@ lessons[:design2] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"Showing Excel who's boss."}
+    %{Showing Excel who's boss.}
 )
 lessons[:design3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design2],
@@ -106,7 +106,7 @@ lessons[:design3] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"Very possibly taking it too far."}
+    %{Very possibly taking it too far.}
 )
 lessons[:relational1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
@@ -126,7 +126,7 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"Finally, we touch our computers."}
+    %{Finally, we touch our computers.}
 )
 lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:relational1],
@@ -135,7 +135,7 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How you would write a language to store, edit, and delete tabular data?"
+    %{How you would write a language to store, edit, and delete tabular data?
       CREATE, INSERT, DELETE.}
 )
 lessons[:sql2] = Lesson.create!(course_id: db_course.id,
@@ -144,8 +144,8 @@ lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   held_at: '2013-11-19 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
-  description:
-    %{"Now that we can put data in a database, how do we get it out?" SELECT,
+  description
+    %{Now that we can put data in a database, how do we get it out? SELECT,
       FROM, WHERE}
 )
 lessons[:sql3] = Lesson.create!(course_id: db_course.id,
@@ -155,8 +155,8 @@ lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"Sure, we can pull from one table, but how do we recreate our [address
-      list]?" JOINS}
+    %{Sure, we can pull from one table, but how do we recreate [something
+      complex from more than one table]? JOINS}
 )
 
 #Week: Design/SQL (4 days, F-W)
@@ -167,7 +167,7 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How do we use the tools in our toolbox to get rid of duplicates?"
+    %{How do we use the tools in our toolbox to get rid of duplicates?
       GROUP BY, HAVING}
 )
 lessons[:design4] = Lesson.create!(course_id: db_course.id,
@@ -177,7 +177,7 @@ lessons[:design4] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How would you design a database to keep track of [your family tree]?"}
+    %{How would you design a database to keep track of [your family tree]?}
 )
 lessons[:design5] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design4],
@@ -186,8 +186,7 @@ lessons[:design5] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How would you design a database to keep track of [song/album/artist
-      ratings]?"}
+    %{How would you design a database to keep track of [ratings on songs AND albums AND artists]?}
 )
 lessons[:breather] = Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
@@ -208,7 +207,7 @@ lessons[:postgres2] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How do you keep from losing money if your ATM is struck by lightning?"}
+    %{How do you keep from losing money if your ATM is struck by lightning?}
 )
 lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres2],
@@ -217,8 +216,8 @@ lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{"How can you look up a row in a reasonable time when you have
-      billions of records?"}
+    %{How can you look up a row in a reasonable time when you have
+      billions of records?}
 )
 lessons[:postgres4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres3],
@@ -590,7 +589,8 @@ Policy.create!(course_id: db_course.id,
     %{Class meets four times a week.  You are expected to attend every class, and
 you are expected to be on time.  As is the case with the outside world, if
 you arrive after the start time of the class (at all), you will be considered
-tardy. If you are more than 15 minutes late, you will be considered
+tardy. If you are more than 10 minutes late, you will be considered
+severely tardy.  If you are more than 15 minutes late, you will be considered
 absent.
 
 On the flip side, classes will not run late.  If I do keep talking beyond the

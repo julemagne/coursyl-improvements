@@ -1,6 +1,5 @@
-<% completion_fractions = @course.completion_fractions -%>
-<% assignment_statuses = AssignmentStatus.all_statuses_ordered -%>
-<% percent_complete = percentage(completion_fractions[AssignmentStatus.complete_string]) -%>
+<% assignment_statuses = @course.assignment_statuses -%>
+<% percent_complete = percentage(assignment_statuses.first.fraction) -%>
 
 <header class="fixed-header">
   <div class="container">
@@ -33,9 +32,9 @@
           </h2>
           <small class="muted">Min: 38 - Max: 98</small>
           <div class="progress">
-            <div class="bar bar-success" style="width: 40%<% percent_complete %>;"></div>
+            <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>
           </div>
-          <small class="muted">40%<% percent_complete %> graded</small>
+          <small class="muted"><%= percent_complete %> graded</small>
         </div>
       <% end %>
     </div>
@@ -55,7 +54,7 @@
   <div class="progress progress-striped">
     <% assignment_statuses.each do |status| %>
     <div class="bar <%= status.bar_class %>"
-      style="width: <%= percentage(completion_fractions[status.name]) %>;"></div>
+      style="width: <%= percentage(status.fraction) %>;"></div>
     <% end %>
   </div>
   <ul class="inline text-center">
@@ -64,7 +63,7 @@
       <span class="label <%= status.label_class %>">
         <%= status.name %>
       </span>
-      <%= percentage(completion_fractions[status.name]) %>
+      <%= percentage(status.fraction) %>
     </li>
     <% end %>
   </ul>

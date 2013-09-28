@@ -19,15 +19,18 @@ class Course < ActiveRecord::Base
     primary_instructor ? primary_instructor.full_name : nil
   end
 
-  def completion_fractions(user=nil)
-    percentages = {}
-    AssignmentStatus.all_statuses_ordered.each do |s|
-      percentages[s.name] = 0
-    end
+  def assignment_statuses(user=nil)
+    fractions = {}
     assignments.each do |a|
-      percentages[a.status(user).name] += a.fraction_of_grade
+      s = a.status(user).name
+      fractions[s] ||= 0
+      fractions[s] += a.fraction_of_grade
     end
-    percentages
+
+    statuses = AssignmentStatus.all_statuses_ordered
+    statuses.each do |s|
+      s.fraction = fractions[s.name] || 0
+    end
   end
 
   def root_lesson

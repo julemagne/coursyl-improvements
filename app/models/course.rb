@@ -20,12 +20,12 @@ class Course < ActiveRecord::Base
   end
 
   def completion_fractions(user=nil)
-    percentages = {"Complete" => 0,
-      "In Progress" => 0,
-      "Overdue" => 0,
-      "Future" => 0}
+    percentages = {}
+    AssignmentStatus.all_statuses_ordered.each do |s|
+      percentages[s.name] = 0
+    end
     assignments.each do |a|
-      percentages[a.status(user)] += a.fraction_of_grade
+      percentages[a.status(user).name] += a.fraction_of_grade
     end
     percentages
   end

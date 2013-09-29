@@ -2,7 +2,7 @@ class Lesson < ActiveRecord::Base
   has_many :child_lessons, class_name: "Lesson", foreign_key: "parent_lesson_id"
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
 
-  # validates :name, presence: true
+  validates :name, presence: true
 
   def descendant_tree
     tree = {name: name,

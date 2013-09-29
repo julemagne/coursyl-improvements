@@ -1,0 +1,27 @@
+project:
+  name: "Project"
+  fraction_of_grade: 0.5
+  course: :intro
+  active_at: <%= Time.now - 1.year %>
+  due_at: <%= Time.now - 1.year %>
+
+homework1:
+  name: "Homework 1"
+  fraction_of_grade: 0.15
+  course: :intro
+  active_at: <%= Time.now - 1.year %>
+  due_at: <%= Time.now + 1.year %>
+
+homework2:
+  name: "Homework 2"
+  fraction_of_grade: 0.15
+  course: :intro
+  active_at: <%= Time.now - 1.year %>
+  due_at: <%= Time.now + 1.year %>
+
+test:
+  name: "Test"
+  fraction_of_grade: 0.2
+  course: :intro
+  active_at: <%= Time.now + 1.year %>
+  due_at: <%= Time.now + 1.year %>

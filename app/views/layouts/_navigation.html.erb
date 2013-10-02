@@ -1,9 +1,9 @@
 <%= link_to '<i class="icon-book"></i> Courses'.html_safe, '/', :class => 'brand' %>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
-    <li><%= link_to("User: #{current_user.first_name}", edit_user_path(current_user))  %></li>
+    <li><%= link_to("#{current_user.full_name}", edit_user_path(current_user))  %></li>
     <% if current_user.admin %>
-      <li><%= link_to('Admin', users_path)  %></li>
+      <li><%= link_to('Admin', users_path) %></li>
     <% end %>
     <li><%= link_to('Sign out', "/users/sign_out", method: :delete)  %></li>
   <% else %>

@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def admin_only!
-    redirect_to "/", flash: { error: 'Only admins can access this page.' } unless current_user.admin
+    redirect_to "/", flash: { error: 'Only administrators can access this page.' } unless current_user.admin
   end
 end

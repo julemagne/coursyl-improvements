@@ -1,0 +1,49 @@
+<div class="hero-unit">
+  <h1>Courses</h1>
+  <p>A student-centric window into your classes, assignments, lectures, and grades.</p>
+</div>
+
+
+<div class="row">
+  <div class="span4">
+    <h2>Why use Courses?</h2>
+    <p>Okay, it's true: you may not have a choice.  Other than that, it's actually not half bad!  You can:</p>
+    <ul>
+      <li>See your current grade</li>
+      <li>See your final grade if you ace everything else</li>
+      <li>See your final grade if you move to Maui now</li>
+      <li>View upcoming lessons in a cool topical tree</li>
+      <li>Submit assignments and get grades fast</li>
+      <li>Watch lectures, review slides, and catch up on what you may have missed</li>
+    </ul>
+    <p><a class="btn" href="/users/sign_up">Sign Up &raquo;</a></p>
+  </div>
+
+  <div class="span4">
+    <h2>Example Courses</h2>
+    <p>Here are some of the classes run out of the app:</p>
+    <ul>
+      <% Course.example_courses.each do |c| %>
+        <li><a href="<%= course_path(c) %>"><%= c.code_and_name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="span4">
+    <h2>Sign In</h2>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div><%= f.email_field :email, autofocus: true, placeholder: "Email Address" %></div>
+
+      <div><%= f.password_field :password, placeholder: "Password" %></div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="inline-check-box"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+      <% end -%>
+
+      <div><%= f.submit "Sign in &raquo;".html_safe, class: "btn" %></div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+

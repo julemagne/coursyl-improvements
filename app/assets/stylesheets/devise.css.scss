@@ -1,0 +1,38 @@
+.hero-unit {
+  margin-bottom: 10px;
+  color: white;
+  background: #020031;
+  background: image-url("pattern.png"), -moz-linear-gradient(45deg, #020031 0%, #6d3353 100%);
+  background: image-url("pattern.png"), -webkit-gradient(linear, left bottom, right top, color-stop(0%,#020031), color-stop(100%,#6d3353));
+  background: image-url("pattern.png"), -webkit-linear-gradient(45deg, #020031 0%,#6d3353 100%);
+  background: image-url("pattern.png"), -o-linear-gradient(45deg, #020031 0%,#6d3353 100%);
+  background: image-url("pattern.png"), -ms-linear-gradient(45deg, #020031 0%,#6d3353 100%);
+  background: image-url("pattern.png"), linear-gradient(45deg, #020031 0%,#6d3353 100%);
+}
+
+.inline-check-box {
+  margin-bottom: 8px;
+  input {
+    margin-top: 0px;
+  }
+  label {
+    display: inline;
+  }
+
+}
+
+.form-signin {
+  max-width: 300px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 250px;
+  }
+}

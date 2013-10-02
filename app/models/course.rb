@@ -9,6 +9,14 @@ class Course < ActiveRecord::Base
     class_name: "CourseInstructor"
   has_one :primary_instructor, through: :primary_course_instructor, source: :instructor
 
+  def self.example_courses
+    self.order("id DESC").last(5)
+  end
+
+  def code_and_name
+    "#{course_code}: #{name}"
+  end
+
   def instructor_names
     name_array = [primary_instructor_name]
     name_array += instructors.map{|i| i.full_name}

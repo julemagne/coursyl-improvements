@@ -45,21 +45,6 @@ ActiveRecord::Schema.define(version: 20130831022017) do
     t.datetime "updated_at"
   end
 
-  create_table "instructors", force: true do |t|
-    t.string   "title"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "office"
-    t.string   "office_hours"
-    t.string   "photo_url"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "lessons", force: true do |t|
     t.integer  "course_id"
     t.integer  "parent_lesson_id"
@@ -76,6 +61,21 @@ ActiveRecord::Schema.define(version: 20130831022017) do
     t.integer  "course_id"
     t.string   "name"
     t.integer  "order_number"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "title"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "office"
+    t.string   "office_hours"
+    t.string   "photo_url"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

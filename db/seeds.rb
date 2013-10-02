@@ -22,7 +22,7 @@ Approximately 60% of the course will be devoted to relational databases and DB
 design.  The remaining 40% will cover NoSQL options such as MongoDB and Riak.}
 )
 
-db_instructor = Instructor.create!(title: 'Mr.',
+db_instructor = User.create!(title: 'Mr.',
   first_name: 'Mason',
   middle_name: 'Fox',
   last_name: 'Matthews',

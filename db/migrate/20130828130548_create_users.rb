@@ -1,6 +1,6 @@
-class CreateInstructors < ActiveRecord::Migration
+class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :instructors do |t|
+    create_table :users do |t|
       t.string :title
       t.string :first_name
       t.string :middle_name

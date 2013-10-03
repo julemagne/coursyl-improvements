@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :course_instructors
+  has_many :course_instructors, foreign_key: "instructor_id"
   has_many :courses, through: :course_instructors
 
   validates :title, presence: true
@@ -17,6 +17,18 @@ class User < ActiveRecord::Base
 
   def middle_initial
     middle_name ? middle_name.first : nil
+  end
+
+  def is_student?
+    false
+  end
+
+  def is_instructor?
+    course_instructors.length > 0
+  end
+
+  def is_admin?
+    admin
   end
 
   private

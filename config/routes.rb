@@ -1,11 +1,12 @@
 Courses::Application.routes.draw do
   get "home/index"
-  # You can have the root of your site routed with "root"
-  root 'home#index'
 
   devise_for :users
   resources :courses
   resources :users
+
+  # You can have the root of your site routed with "root"
+  root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

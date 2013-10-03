@@ -28,16 +28,12 @@ db_instructor = User.create!(title: 'Mr.',
   last_name: 'Matthews',
   email: 'matthews@ncssm.edu',
   password: 'hellohello',
-  phone: '(919) 302-5139 (cell)',
+  phone: '(919) 302-5139',
   office: 'E&T Conference Room',
   office_hours: '3:30-4:30 on Mondays (or by appointment)',
   photo_url: nil,
   description:
-    %{Mr. Matthews started coding at thirteen, but now he spends most of his
-time working with clients, enabling developers to do their best work,
-and volunteer teaching.  He hopes to one day prove that anyone can code,
-and he believes that if you don't learn something new every day, you're
-not paying attention.
+    %{Mr. Matthews started coding at thirteen, but now he spends most of his time working with clients, enabling developers to do their best work, and volunteer teaching.  He hopes to one day prove that anyone can code, and he believes that if you don't learn something new every day, you're not paying attention.
 
 He is a firm believer in autonomy, mastery, purpose, and the Oxford comma.
 

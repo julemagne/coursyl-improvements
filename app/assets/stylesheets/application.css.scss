@@ -21,3 +21,26 @@ body {
   margin-top: 15px;
 }
 
+.field-label {
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+  width: 120px;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.field_with_errors {
+  display: inline-block;
+
+  input {
+    color: #b94a48 !important;
+    border-color: darken(#ee5f5b, 10%) !important;
+    box-shadow: 0 0 6px lighten(#ee5f5b, 20%) !important;
+  }
+}
+
+.alert ul {
+  margin-bottom: 0px;
+}
+

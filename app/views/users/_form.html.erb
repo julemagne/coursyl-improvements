@@ -1,8 +1,6 @@
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+    <div class="alert alert-error">
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,47 +9,68 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :middle_name %>
-    <%= f.text_field :middle_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
-  </div>
-  <div class="field">
-    <%= f.label :office %>
-    <%= f.text_field :office %>
-  </div>
-  <div class="field">
-    <%= f.label :office_hours %>
-    <%= f.text_field :office_hours %>
-  </div>
-  <div class="field">
-    <%= f.label :photo_url %>
-    <%= f.text_field :photo_url %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit class: "btn"%>
-  </div>
+  <%= f.label :title do %>
+    <span class="field-label">Title</span> <%= f.text_field :title, required: true %>
+    <span class="help-inline">e.g. "Dr."</span>
+  <% end %>
+
+  <%= f.label :first_name do %>
+    <span class="field-label">First name</span> <%= f.text_field :first_name, required: true %>
+  <% end %>
+
+  <%= f.label :middle_name do %>
+    <span class="field-label">Middle name</span> <%= f.text_field :middle_name %>
+  <% end %>
+
+  <%= f.label :last_name do %>
+    <span class="field-label">Last name</span> <%= f.text_field :last_name, required: true %>
+  <% end %>
+
+  <%= f.label :email do %>
+    <span class="field-label">Email</span>
+    <div class="input-prepend">
+      <span class="add-on">@</span>
+      <%= f.text_field :email, type: "email", required: true %>
+    </div>
+  <% end %>
+
+  <%= f.label :phone do %>
+    <span class="field-label">Phone number</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-phone"></i></span>
+      <%= f.text_field :phone %>
+    </div>
+    <span class="help-inline">e.g. "(111) 222-3333"</span>
+  <% end %>
+
+  <%= f.label :office do %>
+    <span class="field-label">Office</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-building"></i></span>
+      <%= f.text_field :office %>
+    </div>
+  <% end %>
+
+  <%= f.label :office_hours do %>
+    <span class="field-label">Office hours</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-calendar"></i></span>
+      <%= f.text_field :office_hours, class: "span4" %>
+    </div>
+  <% end %>
+
+  <%= f.label :photo_url do %>
+    <span class="field-label">Photo URL</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-picture"></i></span>
+      <%= f.text_field :photo_url, class: "span4" %>
+    </div>
+  <% end %>
+
+  <%= f.label :description do %>
+    <span class="field-label">Description</span> <%= f.text_area :description, class: "span5", rows: 5 %>
+  <% end %>
+
+  <%= f.submit class: "btn"%>
+
 <% end %>

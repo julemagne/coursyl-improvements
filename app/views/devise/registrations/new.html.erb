@@ -5,7 +5,13 @@
     <h2>Sign up</h2>
     <%= devise_error_messages! %>
 
-    <div><%= f.email_field :email, autofocus: true, placeholder: "Email Address" %></div>
+    <div><%= f.text_field :title, autofocus: true, placeholder: "Title" %></div>
+
+    <div><%= f.text_field :first_name, placeholder: "First Name" %></div>
+
+    <div><%= f.text_field :last_name, placeholder: "Last Name" %></div>
+
+    <div><%= f.email_field :email, placeholder: "Email Address" %></div>
 
     <div><%= f.password_field :password, placeholder: "Password" %></div>
 

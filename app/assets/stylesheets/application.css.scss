@@ -31,7 +31,10 @@ body {
 }
 
 .field_with_errors {
-  display: inline-block;
+  display: block;
+  .field_with_errors {
+    display: inline-block;
+  }
 
   input {
     color: #b94a48 !important;
@@ -42,5 +45,23 @@ body {
 
 .alert ul {
   margin-bottom: 0px;
+}
+
+#error_explanation {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #f2dede;
+  color: #b94a48;
+  border: 1px solid #eed3d7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  h2 {
+    margin: 0em;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1.5em;
+  }
 }
 

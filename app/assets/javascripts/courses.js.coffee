@@ -42,19 +42,17 @@ $(document).on "click", ".smooth-nav a", ->
 # --------------------------------
 # Node modal popups
 $(document).on "mouseenter", "g.node", ->
-  resetTree()
   makeModal(this)
   colorNodes(this.id)
 
 $(document).on "mouseenter", "tr.node", ->
-  resetTree()
   heldat = this.getAttribute("heldat")
   node = $("##{heldat}")
   if typeof node.get(0) != 'undefined'
     makeModal(node.get(0))
   colorNodes(heldat)
 
-$(document).on "mouseleave", "tr.node", ->
+$(document).on "mouseleave", "g.node, tr.node", ->
   resetTree()
 
 # TODO: Too computationally inefficient. How do I improve this?

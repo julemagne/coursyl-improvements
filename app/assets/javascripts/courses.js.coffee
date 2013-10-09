@@ -5,28 +5,29 @@
 # --------------------------------
 # Sticky Tree
 $(window).scroll ->
-  headeroffset = 190
-  treewrapperheight = 190
-  scrolltop = $(this).scrollTop()
-  topposition = $("#lesson-tree-anchor").offset().top
-  bottomposition = $("#lesson-bottom-anchor").offset().top
   tree = $("#lesson-tree")
+  if tree.length > 0
+    headeroffset = 190
+    treewrapperheight = 190
+    scrolltop = $(this).scrollTop()
+    topposition = $("#lesson-tree-anchor").offset().top
+    bottomposition = $("#lesson-bottom-anchor").offset().top
 
-  if (scrolltop > topposition - headeroffset) and (scrolltop < bottomposition - (headeroffset+treewrapperheight))
-    tree.css
-      position: "fixed"
-      top: "#{headeroffset}px"
+    if (scrolltop > topposition - headeroffset) and (scrolltop < bottomposition - (headeroffset+treewrapperheight))
+      tree.css
+        position: "fixed"
+        top: "#{headeroffset}px"
 
-  else
-    if tree.css('position') is "fixed"
-      if (scrolltop <= topposition - headeroffset)
-        tree.css
-          position: "relative"
-          top: ""
-      else
-        tree.css
-          position: "relative"
-          top: "#{bottomposition-topposition-treewrapperheight}px"
+    else
+      if tree.css('position') is "fixed"
+        if (scrolltop <= topposition - headeroffset)
+          tree.css
+            position: "relative"
+            top: ""
+        else
+          tree.css
+            position: "relative"
+            top: "#{bottomposition-topposition-treewrapperheight}px"
 
 
 # --------------------------------
@@ -41,17 +42,19 @@ $(document).on "click", "a", ->
 # --------------------------------
 # Node modal popups
 $(document).on "mouseenter", "g.node", ->
+  resetTree()
   makeModal(this)
   colorNodes(this.id)
 
 $(document).on "mouseenter", "tr.node", ->
+  resetTree()
   heldat = this.getAttribute("heldat")
   node = $("##{heldat}")
   if typeof node.get(0) != 'undefined'
     makeModal(node.get(0))
   colorNodes(heldat)
 
-$(document).on "mouseleave", "g.node, tr.node", ->
+$(document).on "mouseleave", "tr.node", ->
   resetTree()
 
 # TODO: Too computationally inefficient. How do I improve this?
@@ -86,9 +89,10 @@ makeModal = (node) ->
     left: treeleft + nodex + treepadding - 2
 
 resetTree = ->
-  $('.node-modal').remove()
-  $('.node-pointer').remove()
-  colorNodesToPresent()
+  if $('.node-modal').length > 0
+    $('.node-modal').remove()
+    $('.node-pointer').remove()
+    colorNodesToPresent()
 
 colorNodes = (heldat) ->
   circles = $('circle.node-dot, circle.node-dot-empty')

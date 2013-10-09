@@ -7,7 +7,7 @@
     <span class="field-label">Email</span>
     <div class="input-prepend">
       <span class="add-on">@</span>
-      <%= f.text_field :email, required: true, :autofocus => true %>
+      <%= f.email_field :email, required: true, autofocus: true %>
     </div>
     <span class="help-inline">e.g. "Dr."</span>
   <% end %>
@@ -16,7 +16,7 @@
     <span class="field-label">Password</span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-key"></i></span>
-      <%= f.password_field :password, :autocomplete => "off" %>
+      <%= f.password_field :password, autocomplete: "off" %>
     </div>
     <span class="help-inline">(leave blank to make no changes)</span>
   <% end %>
@@ -25,7 +25,7 @@
     <span class="field-label">Confirm</span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-key"></i></span>
-      <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
   <% end %>
 
@@ -33,7 +33,7 @@
     <span class="field-label">Current Password</span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-key muted"></i></span>
-      <%= f.password_field :current_password, :autocomplete => "off" %>
+      <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
     <span class="help-inline">(needed to confirm your changes)</span>
   <% end %>

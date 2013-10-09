@@ -32,7 +32,7 @@ $(window).scroll ->
 
 # --------------------------------
 # Smooth scrolling
-$(document).on "click", "a", ->
+$(document).on "click", ".smooth-nav a", ->
   $("html, body").animate
     scrollTop: $($.attr(this, "href")).offset().top
   , 700

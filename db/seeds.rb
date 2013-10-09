@@ -27,11 +27,12 @@ db_instructor = User.create!(title: 'Mr.',
   middle_name: 'Fox',
   last_name: 'Matthews',
   email: 'matthews@ncssm.edu',
-  password: 'hellohello',
+  password: 'password',
   phone: '(919) 302-5139',
   office: 'E&T Conference Room',
   office_hours: '3:30-4:30 on Mondays (or by appointment)',
   photo_url: nil,
+  admin: true,
   description:
     %{Mr. Matthews started coding at thirteen, but now he spends most of his time working with clients, enabling developers to do their best work, and volunteer teaching.  He hopes to one day prove that anyone can code, and he believes that if you don't learn something new every day, you're not paying attention.
 
@@ -535,25 +536,28 @@ Policy.create!(course_id: db_course.id,
   name: 'Goals and Objectives',
   order_number: -2,
   description:
-    %{Overall Goal:
+    %{Course Objectives:
 
-* To train students in database design and equip them with a series of tools which they
-can use in future endeavors to save time, retain what they discover, and think more
-critically about problems which they encounter in everyday life.
+* Learn the fundamentals of database design.
+* Understand the differences between relational, document, key-value, columnar, and graph databases.
+* Appreciate the deep theoretical underpinnings of modern databases.
+* Learn about current implementations of database types and their acceptance levels in industry.
+* Communicate with others about real-world modeling using standard language.
+* Appreciate the role that databases play in all levels of technology.
+* Equip students with a series of tools which they can use in future endeavors to:
+ * save time
+ * retain knowledge or information that they discover/invent, and
+ * think more critically about problems which they encounter in everyday life.
 
 Upon successful completion of this course, you will be able to:
 
-* Design a data structure to model real-world objects and information
-* Describe the differences between relational, document, key-value, columnar, and
-graph databases
-* Select the appropriate database paradigm for various real-world situations
-* Build SQL statements to create, modify, and read from relational databases
-* Configure databases responsibly through transactions and indexing
-* Control relational databases through the Ruby on Rails framework
-* Balance theoretical and practical tradeoffs such as consisitency, availability, and
-partition tolerance
-* Understand a few advanced techniques for allowing databases to scale to millions
-of users
+* Design a data structure to model real-world objects and information (CS Goal 1.d.)
+* Select the appropriate database paradigm for various real-world situations (CS Goal 1.f.)
+* Build SQL statements to create, modify, and read from relational databases (CS Goal 1.e.)
+* Configure databases responsibly through transactions and indexing (CS Goal 1.d.)
+* Work together to control relational databases through the Ruby on Rails framework (CS Goal 3)
+* Balance theoretical and practical trade-offs such as consistency, availability, and partition tolerance (CS Goal 1.e.)
+* Apply a few advanced techniques for allowing databases to scale to millions of users (CS Goal 1.f.)
 }
 )
 

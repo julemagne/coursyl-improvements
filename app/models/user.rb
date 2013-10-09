@@ -3,14 +3,18 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
   has_many :course_instructors, foreign_key: "instructor_id"
-  has_many :courses, through: :course_instructors
+  has_many :courses_taught, through: :course_instructors, source: :course
+  has_many :assignments_given, through: :courses_taught, source: :assignments
+
+  has_many :course_students, foreign_key: "student_id"
+  has_many :courses_taken, through: :course_students, source: :course
+  has_many :assignments_taken, through: :courses_taken, source: :assignments
 
   validates :title, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true
-
 
   def full_name
     "#{title} #{first_name} #{padded_middle_initial}#{last_name}"

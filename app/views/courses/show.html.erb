@@ -6,7 +6,7 @@
     <div class="row">
       <div class="span9">
         <h2>
-          <%= @course.course_code %>: <%= @course.name %>
+          <%= @course.code_and_name %>
         </h2>
         <p class="lead">
           <%= @course.primary_instructor_name %>
@@ -25,7 +25,7 @@
           </div>
         </nav>
       </div>
-      <% if @enrollment %>
+      <% if @course_student %>
         <div class="span2 text-center">
           <h2>
             A <small>(96)</small>
@@ -81,8 +81,8 @@
       <td><%= a.due_at.strftime("%m/%d") %></td>
       <td><%= a.due_at.strftime("%l:%M %p") %></td>
       <td><%= a.name %></td>
-      <td><span class="label <%= a.status(@user).label_class %>">
-        <%= a.status(@user).name %>
+      <td><span class="label <%= a.status(current_user).label_class %>">
+        <%= a.status(current_user).name %>
       </span></td>
       <td><%= percentage(a.fraction_of_grade) %></td>
       <td class="muted">

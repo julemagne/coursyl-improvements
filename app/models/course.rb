@@ -9,6 +9,13 @@ class Course < ActiveRecord::Base
     class_name: "CourseInstructor"
   has_one :primary_instructor, through: :primary_course_instructor, source: :instructor
 
+  validates :name, presence: true
+  validates :course_code, presence: true
+  validates :started_on, presence: true
+  validates :ended_on, presence: true
+
+  scope :current, -> { where("started_on <= ? AND ended_on >= ?", Date.today, Date.today) }
+
   def self.example_courses
     self.order("id DESC").last(5)
   end

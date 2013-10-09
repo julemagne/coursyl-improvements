@@ -1,2 +1,67 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h2>My Assignments</h2>
+
+<% if (assignments_taught = current_user.assignments_given.recent_and_soon).length > 0 %>
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th>Course</th>
+      <th>Active</th>
+      <th>Due</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    <% assignments_taught.each do |a| %>
+    <tr>
+      <td><%= a.course_code_and_name %></td>
+      <td><%= a.active_at.strftime("%m/%d") %></td>
+      <td><%= a.due_at.strftime("%m/%d") %></td>
+      <td><%= a.name %></td>
+      <td><span class="label <%= a.status(current_user).label_class %>">
+        <%= a.status(current_user).name %>
+      </span></td>
+      <td class="muted">
+        <i class="icon-pencil"></i>
+        <i class="icon-bar-chart"></i>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+<% if (assignments_taken = current_user.assignments_taken.active).length > 0 %>
+  <table class="table table-hover table-condensed">
+    <tr>
+      <th>Course</th>
+      <th>Due</th>
+      <th>Time</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>% of Grade</th>
+      <th></th>
+    </tr>
+    <% assignments_taken.each do |a| %>
+    <tr>
+      <td><%= a.course_code_and_name %></td>
+      <td><%= a.due_at.strftime("%m/%d") %></td>
+      <td><%= a.due_at.strftime("%m/%d") %></td>
+      <td><%= a.due_at.strftime("%l:%M %p") %></td>
+      <td><%= a.name %></td>
+      <td><span class="label <%= a.status(current_user).label_class %>">
+        <%= a.status(current_user).name %>
+      </span></td>
+      <td><%= percentage(a.fraction_of_grade) %></td>
+      <td class="muted">
+        <i class="icon-pencil"></i>
+        <i class="icon-bar-chart"></i>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h2>My Courses</h2>
+
+<% current_user.courses_taught.each do |c| %>
+  <%= c.code_and_name %>
+<% end %>

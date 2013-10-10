@@ -8,9 +8,10 @@
 
 db_course = Course.create!(name: 'Databases',
   course_code: 'CS310',
+  color: '#BECADF',
   period: 'F Block, M T W F',
-  started_on: "2013-11-05",
-  ended_on: "2014-02-13",
+  started_on: '2013-11-05',
+  ended_on: '2014-02-13',
   description:
     %{Even if you don't realize it, databases are everywhere, and they come in
 many flavors.  They're not just in the obvious places like Facebook and Twitter;

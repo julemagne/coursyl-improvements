@@ -3,6 +3,7 @@ class CreateCourses < ActiveRecord::Migration
     create_table :courses do |t|
       t.string :name
       t.string :course_code
+      t.string :color
       t.string :period
       t.text :description
       t.date :started_on

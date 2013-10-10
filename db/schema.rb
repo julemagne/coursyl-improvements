@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20131009175651) do
   create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "course_code"
+    t.string   "color"
     t.string   "period"
     t.text     "description"
     t.date     "started_on"

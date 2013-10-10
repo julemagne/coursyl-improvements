@@ -17,4 +17,8 @@ class Assignment < ActiveRecord::Base
     course.code_and_name
   end
 
+  def course_color
+    course.color
+  end
+
 end

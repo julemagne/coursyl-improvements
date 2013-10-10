@@ -1,3 +1,10 @@
+<h2>My Courses</h2>
+
+<% current_user.courses_taught.each do |c| %>
+  <%= c.code_and_name %>
+<% end %>
+
+
 <h2>My Assignments</h2>
 
 <% if (assignments_taught = current_user.assignments_given.recent_and_soon).length > 0 %>
@@ -12,7 +19,7 @@
     </tr>
     <% assignments_taught.each do |a| %>
     <tr>
-      <td><%= a.course_code_and_name %></td>
+      <td style="color: <%= a.course_color %>;"><%= a.course_code_and_name %></td>
       <td><%= a.active_at.strftime("%m/%d") %></td>
       <td><%= a.due_at.strftime("%m/%d") %></td>
       <td><%= a.name %></td>
@@ -58,10 +65,4 @@
     </tr>
     <% end %>
   </table>
-<% end %>
-
-<h2>My Courses</h2>
-
-<% current_user.courses_taught.each do |c| %>
-  <%= c.code_and_name %>
 <% end %>

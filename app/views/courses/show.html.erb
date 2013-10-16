@@ -1,56 +1,17 @@
 <% assignment_statuses = @course.assignment_statuses -%>
-<% percent_complete = percentage(assignment_statuses.first.fraction) -%>
 
-<header class="fixed-header">
-  <div class="container">
-    <div class="row">
-      <div class="span9">
-        <h2>
-          <%= @course.code_and_name %>
-        </h2>
-        <p class="lead">
-          <%= @course.primary_instructor_name %>
-        </p>
-        <nav class="navbar smooth-nav">
-          <div class="navbar-inner">
-            <ul class="nav">
-              <li><%= link_to "Description", '#anchor-description' %></li>
-              <li class="divider-vertical"></li>
-              <li><%= link_to "Assignments", '#anchor-assignments' %></li>
-              <li class="divider-vertical"></li>
-              <li><%= link_to "Lessons", '#anchor-lessons' %></li>
-              <li class="divider-vertical"></li>
-              <li><%= link_to "Policies", '#anchor-policies' %></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-      <% if @course_student %>
-        <div class="span2 text-center">
-          <h2>
-            A <small>(96)</small>
-          </h2>
-          <small class="muted">Min: 38 - Max: 98</small>
-          <div class="progress">
-            <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>
-          </div>
-          <small class="muted"><%= percent_complete %> graded</small>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</header>
+<%= render partial: "summary_box", locals: {course: @course, :header => true}%>
 
 <section id="first-section">
   <a id="anchor-description" class="anchor-course"></a>
-  <h3>Course Description</h3>
+  <h3><i class="icon-lightbulb"></i> Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>
   <%= markdown(@course.description) %>
 </section>
 
 <section>
   <a id="anchor-assignments" class="anchor-course"></a>
-  <h3>Assignments</h3>
+  <h3><i class="icon-pencil"></i> Assignments</h3>
   <div class="progress progress-striped">
     <% assignment_statuses.each do |status| %>
     <div class="bar <%= status.bar_class %>"
@@ -96,7 +57,7 @@
 
 <section>
   <a id="anchor-lessons" class="anchor-course"></a>
-  <h3>Lessons</h3>
+  <h3><i class="icon-time"></i> Lessons</h3>
   <div id="lesson-tree-anchor"></div>
   <div id="lesson-tree-wrapper">
     <div id="lesson-tree" class="well"></div>
@@ -132,7 +93,7 @@
 
 <section>
   <a id="anchor-policies" class="anchor-course"></a>
-  <h3>Course Details and Policies</h3>
+  <h3><i class="icon-comments-alt"></i> Course Details and Policies</h3>
   <dl class="dl-horizontal">
     <% @course.policies.each do |p| %>
     <dt><%= p.name %></dt>

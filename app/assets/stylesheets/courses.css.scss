@@ -2,29 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.fixed-header {
-  position: fixed;
-  top: 40px;
-  height: 150px;
-  background: #BECADF;
-  background-image: -webkit-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
-  background-image: -moz-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
-  background-image: -ms-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
-  background-image: -o-linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
-  background-image: linear-gradient(45deg, #BECADF 0%,#FFFFFF 100%);
+.course-summary {
   border-radius: 5px;
   margin: 0px;
   padding: 0px;
-  z-index: 10;
-  .span9 {
-    padding: 20px;
-  }
-  .span2 {
-    padding: 30px;
-  }
-  h2 {
+  h2, h3 {
     margin: 0px;
-    color: #000000;
   }
   .lead {
     color: #666666;
@@ -32,6 +15,29 @@
   }
   .progress {
     margin: 0px;
+  }
+}
+
+.course-summary-fixed {
+  position: fixed;
+  top: 40px;
+  height: 150px;
+  z-index: 10;
+  .span9 {
+    padding: 20px;
+  }
+  .span2 {
+    padding: 30px;
+  }
+}
+
+.course-summary-small {
+  .span9 {
+    padding: 5px;
+    padding-left: 10px;
+  }
+  .span2 {
+    padding: 5px;
   }
 }
 
@@ -97,4 +103,12 @@ div.node-pointer {
   border-right: 12px solid transparent;
   z-index: 21;
   opacity: 0.85;
+}
+
+.progress-overlay {
+  float: left;
+  text-align: center;
+  width: 100%;
+  margin-top: -20px;
+  color: #666666;
 }

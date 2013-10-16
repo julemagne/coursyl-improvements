@@ -55,4 +55,11 @@ class Course < ActiveRecord::Base
   def lesson_tree
     root_lesson.descendant_tree if root_lesson
   end
+
+  def fraction_elapsed
+    start_time = lessons.first.held_at
+    end_time = assignments.last.due_at
+
+    [[(Time.now-start_time)/(end_time-start_time), 0].max, 1].min
+  end
 end

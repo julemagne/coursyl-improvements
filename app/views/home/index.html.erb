@@ -1,17 +1,31 @@
-<h2>My Courses</h2>
+<% something_showing = false %>
 
-<% current_user.courses_taught.each do |c| %>
-  <%= c.code_and_name %>
+<% if (courses_taught = current_user.courses_taught).length > 0 %>
+  <% something_showing = true %>
+  <h2><i class="icon-group"></i> My Teaching</h2>
+  <% courses_taught.each do |c| %>
+    <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+  <% end %>
 <% end %>
 
 
-<h2>My Assignments</h2>
+<% if (courses_taken = current_user.courses_taken).length > 0 %>
+  <% something_showing = true %>
+  <h2><i class="icon-lightbulb"></i> My Current Classes</h2>
+  <% courses_taken.each do |c| %>
+    <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+  <% end %>
+<% end %>
+
+<div class="spacer"></div>
 
 <% if (assignments_taught = current_user.assignments_given.recent_and_soon).length > 0 %>
+  <% something_showing = true %>
+  <h2><i class="icon-pencil"></i> Things I've Assigned</h2>
   <table class="table table-hover table-condensed">
     <tr>
       <th>Course</th>
-      <th>Active</th>
+      <th>Start</th>
       <th>Due</th>
       <th>Name</th>
       <th>Status</th>
@@ -37,6 +51,8 @@
 
 
 <% if (assignments_taken = current_user.assignments_taken.active).length > 0 %>
+  <% something_showing = true %>
+  <p class="lead"><i class="icon-pencil"></i> Things to Do</p>
   <table class="table table-hover table-condensed">
     <tr>
       <th>Course</th>
@@ -65,4 +81,19 @@
     </tr>
     <% end %>
   </table>
+<% end %>
+
+<% unless something_showing %>
+
+  <div class="spacer"></div>
+
+  <p class="lead"><i class="icon-warning-sign"></i> You have no courses.  Please contact an instructor to be added.</p>
+
+  <p>In the meantime, take a look at some of the courses underway:</p>
+
+  <ul>
+    <% Course.example_courses.each do |c| %>
+      <li><a href="<%= course_path(c) %>"><%= c.code_and_name %></a></li>
+    <% end %>
+  </ul>
 <% end %>

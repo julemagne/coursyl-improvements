@@ -402,14 +402,20 @@ Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
   name: 'Project Turn-in and Discussion',
   held_at: '2014-01-31 1:35PM',
-  description: "Projects will be due, and we'll look back at the class so far."
+  description: "Projects will be due, and we'll demo them to the class and discuss."
 )
 
 #Week: Scalability/Case Studies (3 days, M-W)
+Lesson.create!(course_id: db_course.id,
+  parent_lesson: nil,
+  name: 'Project Discussion',
+  held_at: '2014-02-03 2:20PM',
+  description: "We'll continue the demos and discussion of class projects."
+)
 lessons[:scale1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Scalability: TBD",
-  held_at: '2014-02-03 2:20PM',
+  held_at: '2014-02-04 3:25PM',
   lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
   lead_in_question: nil,
   description:
@@ -418,7 +424,7 @@ lessons[:scale1] = Lesson.create!(course_id: db_course.id,
 lessons[:scale2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale1],
   name: "Scalability: TBD",
-  held_at: '2014-02-04 3:25PM',
+  held_at: '2014-02-05 2:30PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
@@ -427,47 +433,34 @@ lessons[:scale2] = Lesson.create!(course_id: db_course.id,
 lessons[:scale3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale2],
   name: "Scalability: TBD",
-  held_at: '2014-02-05 2:30PM',
+  held_at: '2014-02-07 1:35PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
-)
-Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: "Final Exam Prep",
-  held_at: '2014-02-07 1:35PM',
-  description: "Review of course material in preparation for final exam."
 )
 
 
 Assignment.create!(course_id: db_course.id,
   name: 'Daily Questions',
   active_at: '2013-11-05 4:15PM',
-  due_at: '2014-02-07 2:25PM',
+  due_at: '2014-02-07 1:35PM',
   students_can_submit: false,
   fraction_of_grade: 0.1
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Class Project',
   active_at: '2013-12-06 12:00AM',
-  due_at: '2014-02-07 2:25PM',
+  due_at: '2014-01-31 1:35PM',
   students_can_submit: false,
-  fraction_of_grade: 0.2
+  fraction_of_grade: 0.3
 )
 Assignment.create!(course_id: db_course.id,
   name: '"Midterm" Exam',
   active_at: '2013-12-11 2:30PM',
   due_at: '2013-12-11 3:20PM',
   students_can_submit: false,
-  fraction_of_grade: 0.15
-)
-Assignment.create!(course_id: db_course.id,
-  name: 'Final Exam',
-  active_at: '2014-02-13 1:30PM',
-  due_at: '2014-02-13 3:30PM',
-  students_can_submit: false,
-  fraction_of_grade: 0.15
+  fraction_of_grade: 0.2
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 1: Database Design',

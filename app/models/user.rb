@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def enrolled?(course)
+    courses_taken.include?(course)
+  end
+
+  def teaching?(course)
+    courses_taught.include?(course)
+  end
+
   private
 
   def padded_middle_initial

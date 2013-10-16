@@ -1,0 +1,68 @@
+<style>
+#course-<%= course.id %> {
+  background: <%= course.color %>;
+  background-image: -webkit-linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
+  background-image: -moz-linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
+  background-image: -ms-linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
+  background-image: -o-linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
+  background-image: linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
+}
+</style>
+
+<div class="container course-summary <%= header ? 'course-summary-fixed': 'course-summary-small' %>" id="course-<%= course.id %>">
+  <div class="row">
+    <div class="span9">
+      <h<%= 3-(header ? 1 : 0) %>>
+        <%= course.code_and_name %>
+      </h<%= 3-(header ? 1 : 0) %>>
+      <p class="lead muted">
+        <%= course.primary_instructor_name %>
+      </p>
+      <% if header %>
+        <nav class="navbar smooth-nav">
+          <div class="navbar-inner">
+            <ul class="nav">
+              <li><%= link_to "Description", '#anchor-description' %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Assignments", '#anchor-assignments' %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Lessons", '#anchor-lessons' %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "Policies", '#anchor-policies' %></li>
+            </ul>
+          </div>
+        </nav>
+      <% end %>
+    </div>
+    <% if current_user && current_user.enrolled?(course) %>
+      <% percent_complete = percentage(course.assignment_statuses.first.fraction) -%>
+      <div class="span2 text-center">
+        <h<%= 3-(header ? 1 : 0) %>>
+          A <small>(96)</small>
+        </h<%= 3-(header ? 1 : 0) %>>
+        <% if header %>
+          <small class="muted">Possible Grades: 38-98</small>
+        <% end %>
+        <div class="progress">
+          <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>
+        </div>
+        <small class="progress-overlay"><%= percent_complete %> graded</small>
+      </div>
+    <% elsif current_user && current_user.teaching?(course) %>
+      <% percent_elapsed = percentage(course.fraction_elapsed) %>
+      <% percent_complete = percentage(course.assignment_statuses.first.fraction) -%>
+      <div class="span2 text-center">
+        <br />
+        <div class="progress">
+          <div class="bar bar-warning" style="width: <%= percent_elapsed %>;"></div>
+        </div>
+        <small class="progress-overlay"><%= percent_elapsed %> of time passed</small>
+
+        <div class="progress">
+          <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>
+        </div>
+        <small class="progress-overlay"><%= percent_complete %> graded</small>
+      </div>
+    <% end %>
+  </div>
+</div>

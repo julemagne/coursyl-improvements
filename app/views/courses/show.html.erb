@@ -80,10 +80,14 @@
       <td><%= l.held_at.strftime("%m/%d") %></td>
       <td><%= l.held_at.strftime("%l:%M %p") %></td>
       <td><%= l.name %></td>
-      <td class="muted">
-        <i class="icon-eye-open"></i>
-        <i class="icon-edit"></i>
-        <i class="icon-facetime-video"></i>
+      <td>
+        <% if l.lead_in_reading? && l.past_or_next? %>
+          <a href="<%= l.lead_in_reading %>" target="blank"><i class="icon-link"></i></a>
+        <% else %>
+          <i class="icon-link muted"></i>
+        <% end %>
+        <i class="icon-paste <%= l.can_be_answered?(current_user) && l.past_or_next? ? '' : 'muted' %>"></i>
+        <i class="icon-cloud-download <%= l.in_future? ? 'muted' : '' %>"></i>
       </td>
     </tr>
     <% end %>

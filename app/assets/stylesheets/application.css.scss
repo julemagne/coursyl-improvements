@@ -12,12 +12,18 @@
  *= require_tree .
  */
 
-
 body {
   padding-top: 60px;
 
   h1, h2, h3, h4 {
     font-weight: normal;
+  }
+}
+
+a {
+  color: inherit;
+  :hover {
+    text-decoration: none;
   }
 }
 

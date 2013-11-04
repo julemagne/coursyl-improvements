@@ -73,8 +73,9 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:data],
   name: "Real-World Problems",
   held_at: '2013-11-06 2:30PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://www.kickstarter.com/discover/categories/open%20software/successful?ref=more#p1',
+  lead_in_question: '1) Which three of the projects on this page seem to be the most data-heavy?  ' +
+    '2) Give two examples of problems or tasks in your life that would benefit from software.',
   description:
     %{What do you do in life that generates or uses a lot of data?  Stories
       of real-world problems, apps, and systems (including Facebook statistics).
@@ -86,8 +87,8 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Design",
   held_at: '2013-11-08 1:35PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
+  lead_in_question: 'What do you think this article gets wrong?  Anything strike you as being off?',
   description:
     %{The [Address Book] Problem. Modeling the real world as tabular data.}
 )
@@ -354,20 +355,20 @@ lessons[:col1] = Lesson.create!(course_id: db_course.id,
 lessons[:col2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:col1],
   name: "Columnar/Graph DBs: TBD",
-  held_at: '2014-01-21 3:25PM',
+  held_at: '2014-01-21 2:50PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TBD}
+    %{[Longer Class]}
 )
 lessons[:col3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:col2],
   name: "Columnar/Graph DBs: TBD",
-  held_at: '2014-01-22 2:30PM',
+  held_at: '2014-01-23 1:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{TBD}
+    %{[Longer Class]}
 )
 
 #Week: DBMS-Specific SQL (3 days, M-W)
@@ -416,8 +417,8 @@ lessons[:scale1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Scalability: TBD",
   held_at: '2014-02-04 3:25PM',
-  lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
-  lead_in_question: nil,
+  lead_in_reading: 'http://expandedramblings.com/index.php/by-the-numbers-17-amazing-facebook-stats/',
+  lead_in_question: 'Which statistic is most surprising?',
   description:
     %{TBD}
 )
@@ -425,7 +426,7 @@ lessons[:scale2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale1],
   name: "Scalability: TBD",
   held_at: '2014-02-05 2:30PM',
-  lead_in_reading: nil,
+  lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
   lead_in_question: nil,
   description:
     %{TBD}

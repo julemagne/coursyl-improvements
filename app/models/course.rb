@@ -52,6 +52,10 @@ class Course < ActiveRecord::Base
     lessons.first
   end
 
+  def next_lesson
+    lessons.where(['held_at > ?', Time.now]).order('held_at ASC').first
+  end
+
   def lesson_tree
     root_lesson.descendant_tree if root_lesson
   end

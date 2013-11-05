@@ -82,12 +82,13 @@
       <td><%= l.name %></td>
       <td>
         <% if l.lead_in_reading? && l.past_or_next? %>
-          <a href="<%= l.lead_in_reading %>" target="blank"><i class="icon-link"></i></a>
+          <a href="<%= l.lead_in_reading %>" target="blank"><i class="icon-link" alt="Pre-class Reading"></i></a>
         <% else %>
-          <i class="icon-link muted"></i>
+          <i class="icon-link muted" alt="Pre-class Reading"></i>
         <% end %>
-        <i class="icon-paste <%= l.can_be_answered?(current_user) && l.past_or_next? ? '' : 'muted' %>"></i>
-        <i class="icon-cloud-download <%= l.in_future? ? 'muted' : '' %>"></i>
+        <i class="icon-paste <%= l.can_be_answered?(current_user) && l.past_or_next? ? '' : 'muted' %>" alt="Daily Question"></i>
+        <i class="icon-comment-alt <%= l.in_past? ? '' : 'muted' %>" alt="Lesson Feedback"></i>
+        <i class="icon-cloud-download <%= l.in_future? ? 'muted' : '' %>" alt="Lesson Downloads"></i>
       </td>
     </tr>
     <% end %>

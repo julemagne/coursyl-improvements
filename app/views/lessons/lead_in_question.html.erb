@@ -1,0 +1,7 @@
+<h2><%= @lesson.course.course_code %> Daily Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
+
+<p>Daily Reading: <%= link_to @lesson.lead_in_reading, @lesson.lead_in_reading %></p>
+
+<%= markdown(@lesson.lead_in_question || "<span class='muted'>No question(s) for this lesson.</span>") %>
+
+<%= link_to "<< Back to Course", course_path(@lesson.course)%>

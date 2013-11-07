@@ -39,4 +39,9 @@ class Lesson < ActiveRecord::Base
   def can_be_answered?(user)
     user && lead_in_question? && Time.now < held_at.time - 1.hour && next_lesson? && user.enrolled?(course)
   end
+
+  def course_color
+    course.color
+  end
+
 end

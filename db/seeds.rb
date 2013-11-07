@@ -74,12 +74,12 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   name: "Real-World Problems",
   held_at: '2013-11-06 1:50PM',
   lead_in_reading: 'http://www.kickstarter.com/discover/categories/open%20software/successful?ref=more#p1',
-  lead_in_question: '1) Which three of the projects on this page seem to be the most data-heavy?  ' +
-    '2) Give two examples of problems or tasks in your life that would benefit from software.',
+  lead_in_question: %{1. Which three of the projects on this page seem to be the most data-heavy?
+2. Give two examples of problems or tasks in your life that would benefit from software.},
   description:
-    %{What do you do in life that generates or uses a lot of data?  Stories
-      of real-world problems, apps, and systems (including Facebook statistics).
-      Initial project discussions and planning.}
+    %{What do you do in life that generates or uses a lot of data?},
+  outline:
+    %{Stories of real-world problems, apps, and systems (including Facebook statistics).  Initial project discussions and planning.}
 )
 
 #Week: DB Design/Relational (4 days, F-W)
@@ -87,10 +87,84 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Design",
   held_at: '2013-11-08 12:55PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://danielazwan.files.wordpress.com/2013/10/sorry-meme-generator-oops-i-m-sorry-72129c.gif',
+  lead_in_question: 'Did you do anything fun with you extra 50 minutes?',
   description:
-    %{Modeling the real world as tabular data.}
+    %{Modeling the real world as tabular data.},
+  outline:
+    %{Data-heavy apps on Kickstarter:
+
+- Massive Log Data Aggregation, Processing and Visualization
+- LIBRARY FOR ALL: a digital library for the developing world
+- Wildlife Rehabilitation MD: A Medical Database for Wildlife
+- Open Source bike registry
+- Trekkable, rating hotels for accessi12:55bility.
+- JS Git : A javascript offline git management system
+- WildHelp
+- Ghost
+- Nimbus
+- AppsAmuck
+- Learn Java Programming
+- Clubhouse
+
+Defend your Kickstarter choice!
+
+The point: It's amazing that you all picked different ones.  You're all right that databases are really behind everything (although I can't tell you which one has the most.).
+
+Back to it.  Here's the quote for the class:
+
+"Databases are organized to model relevant aspects of reality in a way that supports the processes requiring their data."
+
+Look back at the example we did in Excel.  Discuss:
+
+- Tables
+- Columns (fields)
+- Rows
+- Values
+- Domains
+
+Mason creates example single-table database of students and their grades across classes, considering: Students, class name, class code, grade, instructor name
+
+Analyze Trekkable, considering: Hotels, addresses, Accessibility Areas (ramps, bathrooms, doorways), Ratings.
+
+- First, each pair creates a Google spreadsheet and shares with me.
+- 5 minutes, one table.
+
+Why are these suboptimal?
+
+1 Update anomalies.  What if the instructor changes?
+1 Insertion/deletion anomalies.  What if a student is added with no classes or removed from all classes?
+1 Make the data model more informative to users.  Is this clear to read?
+1 Space?  Sure, space.
+
+Mason splits classes and instructors into another table.
+
+Try the same thing for Trekkable:
+
+- 10 minutes in pairs, TWO tables.
+- What limitations are still there?
+- Talk about primary keys?
+
+Look back at original example, talk about many-to-many?
+
+Closing of class: things in your life that you said would benefit from databases:
+
+- schedules
+- homework(s)
+- Online Thesauruses
+- Organization of files on computer
+- An app that allows me to input when I have assignments or other tasks to do and shows it all on a calendar
+- An app that contained all of the known holidays and allows the user to input other important days that are not holidays
+
+Fill students in on Dr. Warshaw's answer to Kickstarter.  Kickstarter's perspective:
+
+- "*Parents and teachers can launch projects in collaboration with children under 18 only if the adult registers for the Kickstarter and payments accounts and is in charge of running the project itself."
+
+Future:
+- Review things to watch out for in database design.
+- Minimize redesign when extending the data structure.
+- GREY AREA: Don't build a data structure for one type of querying.
+}
 )
 lessons[:design2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design1],
@@ -441,7 +515,7 @@ lessons[:scale3] = Lesson.create!(course_id: db_course.id,
     %{TBD}
 )
 
-
+assignments = {}
 Assignment.create!(course_id: db_course.id,
   name: 'Daily Questions',
   active_at: '2013-11-05 4:15PM',
@@ -463,13 +537,38 @@ Assignment.create!(course_id: db_course.id,
   students_can_submit: false,
   fraction_of_grade: 0.2
 )
-Assignment.create!(course_id: db_course.id,
+
+assignments[1] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 1: Database Design',
   active_at: '2013-11-08 2:25PM',
   due_at: '2013-11-15 12:55PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
+AssignmentQuestion.create!(assignment_id: assignments[1].id,
+  order_number: 1,
+  points: 20,
+  question:
+    %{Give an example of a table which conforms to 2NF, but which is still subject to update anomalies.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[1].id,
+  order_number: 2,
+  points: 20,
+  question:
+    %{Give a specific example of a situation when database normalization is at odds with our directive to build databases which "support the processes requiring their data."}
+)
+AssignmentQuestion.create!(assignment_id: assignments[1].id,
+  order_number: 4,
+  points: 40,
+  question:
+    %{Design two versions of a data structure for tracking all due dates for all assignments for all students across the school.
+
+- The first version should be totally denormalized (i.e. not even conform to 1NF).  Break every rule.
+- The second version should be "normalized" (i.e. conform to 3NF).  Use numerical primary keys.
+
+Use appropriate naming conventions and explictly define all fields, including their domains.}
+)
+
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 2: Basic SQL',
   active_at: '2013-11-15 2:25PM',

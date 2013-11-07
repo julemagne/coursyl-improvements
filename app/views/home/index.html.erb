@@ -34,8 +34,8 @@
     <% assignments_taught.each do |a| %>
     <tr>
       <td style="color: <%= a.course_color %>;"><%= a.course_code_and_name %></td>
-      <td><%= a.active_at.strftime("%m/%d") %></td>
-      <td><%= a.due_at.strftime("%m/%d") %></td>
+      <td><%= date_abbreviation(a.active_at) %></td>
+      <td><%= date_abbreviation(a.due_at) %></td>
       <td><%= a.name %></td>
       <td><span class="label <%= a.status(current_user).label_class %>">
         <%= a.status(current_user).name %>
@@ -66,9 +66,8 @@
     <% assignments_taken.each do |a| %>
     <tr>
       <td><%= a.course_code_and_name %></td>
-      <td><%= a.due_at.strftime("%m/%d") %></td>
-      <td><%= a.due_at.strftime("%m/%d") %></td>
-      <td><%= a.due_at.strftime("%l:%M %p") %></td>
+      <td><%= date_abbreviation(a.due_at) %></td>
+      <td><%= time_abbreviation(a.due_at) %></td>
       <td><%= a.name %></td>
       <td><span class="label <%= a.status(current_user).label_class %>">
         <%= a.status(current_user).name %>
@@ -91,7 +90,7 @@
 
   <ul>
     <% Course.example_courses.each do |c| %>
-      <li><a href="<%= course_path(c) %>"><%= c.code_and_name %></a></li>
+      <li><%= link_to c.code_and_name, course_path(c) %></li>
     <% end %>
   </ul>
 <% end %>

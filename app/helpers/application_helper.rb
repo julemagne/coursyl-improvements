@@ -13,4 +13,12 @@ module ApplicationHelper
     weekday = date.strftime("%A")
     day_hash[weekday] || weekday.first
   end
+
+  def date_abbreviation(datetime)
+    datetime.strftime("%m/%d")
+  end
+
+  def time_abbreviation(datetime)
+    datetime.strftime("%l:%M %p")
+  end
 end

@@ -5,9 +5,10 @@ class CreateLessons < ActiveRecord::Migration
       t.integer :parent_lesson_id
       t.string :name
       t.datetime :held_at
+      t.text :description
+      t.text :outline
       t.text :lead_in_reading
       t.text :lead_in_question
-      t.text :description
 
       t.timestamps
     end

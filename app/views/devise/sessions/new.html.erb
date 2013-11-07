@@ -25,7 +25,7 @@
     <p>Here are some of the classes that use Courses:</p>
     <ul>
       <% Course.example_courses.each do |c| %>
-        <li><a href="<%= course_path(c) %>"><%= c.code_and_name %></a></li>
+        <li><%= link_to c.code_and_name, course_path(c) %></li>
       <% end %>
     </ul>
   </div>

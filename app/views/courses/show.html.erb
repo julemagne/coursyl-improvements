@@ -39,8 +39,8 @@
     </tr>
     <% @course.assignments.each do |a| %>
     <tr>
-      <td><%= a.due_at.strftime("%m/%d") %></td>
-      <td><%= a.due_at.strftime("%l:%M %p") %></td>
+      <td><%= date_abbreviation(a.due_at) %></td>
+      <td><%= time_abbreviation(a.due_at) %></td>
       <td><%= a.name %></td>
       <td><span class="label <%= a.status(current_user).label_class %>">
         <%= a.status(current_user).name %>
@@ -77,27 +77,34 @@
     <% @course.lessons.each do |l| %>
     <tr heldat="<%= l.held_at_integer %>" class="node">
       <td><strong><%= weekday_abbreviation(l.held_at) %></strong></td>
-      <td><%= l.held_at.strftime("%m/%d") %></td>
-      <td><%= l.held_at.strftime("%l:%M %p") %></td>
+      <td><%= date_abbreviation(l.held_at) %></td>
+      <td><%= time_abbreviation(l.held_at) %></td>
       <td><%= l.name %></td>
       <td>
         <% if l.lead_in_reading? && l.past_or_next? %>
-          <a href="<%= l.lead_in_reading %>" target="blank"><i class="icon-link" alt="Pre-class Reading"></i></a>
+          <%= link_to '<i class="icon-link" alt="Pre-class Reading"></i>'.html_safe, l.lead_in_reading, target: 'blank' %>
         <% else %>
           <i class="icon-link muted" alt="Pre-class Reading"></i>
         <% end %>
 
-
-        <% if l.lead_in_question? && l.past_or_next? %>
-          <a href=""><i class="icon-paste" alt="Daily Questions"></i></a>
+        <% if (l.lead_in_question? || l.lead_in_reading?) && l.past_or_next? %>
+          <%= link_to '<i class="icon-pencil" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
         <% else %>
-          <i class="icon-paste muted" alt="Pre-class Reading"></i>
+          <i class="icon-pencil muted" alt="Pre-class Reading"></i>
+        <% end %>
+
+        <% if current_user && current_user.is_admin? %>
+          <% if l.past_or_next? %>
+            <%= link_to '<i class="icon-th-list" alt="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
+          <% else %>
+            <i class="icon-th-list muted" alt="Lesson Outline"></i>
+          <% end %>
         <% end %>
 
         <!-- <i class="icon-comment-alt muted" alt="Lesson Feedback"></i> -->
 
         <% if l.in_past? %>
-          <a href="" target="blank"><i class="icon-cloud-download" alt="Lesson Downloads"></i></a>
+          <%= link_to '<i class="icon-cloud-download" alt="Lesson Downloads"></i>'.html_safe, '#' %>
         <% else %>
           <i class="icon-cloud-download muted" alt="Lesson Downloads"></i>
         <% end %>

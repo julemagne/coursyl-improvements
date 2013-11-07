@@ -86,9 +86,21 @@
         <% else %>
           <i class="icon-link muted" alt="Pre-class Reading"></i>
         <% end %>
-        <i class="icon-paste <%= l.can_be_answered?(current_user) && l.past_or_next? ? '' : 'muted' %>" alt="Daily Question"></i>
-        <i class="icon-comment-alt <%= l.in_past? ? '' : 'muted' %>" alt="Lesson Feedback"></i>
-        <i class="icon-cloud-download <%= l.in_future? ? 'muted' : '' %>" alt="Lesson Downloads"></i>
+
+
+        <% if l.lead_in_question? && l.past_or_next? %>
+          <a href=""><i class="icon-paste" alt="Daily Questions"></i></a>
+        <% else %>
+          <i class="icon-paste muted" alt="Pre-class Reading"></i>
+        <% end %>
+
+        <!-- <i class="icon-comment-alt muted" alt="Lesson Feedback"></i> -->
+
+        <% if l.in_past? %>
+          <a href="" target="blank"><i class="icon-cloud-download" alt="Lesson Downloads"></i></a>
+        <% else %>
+          <i class="icon-cloud-download muted" alt="Lesson Downloads"></i>
+        <% end %>
       </td>
     </tr>
     <% end %>

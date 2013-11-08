@@ -4,6 +4,7 @@ Courses::Application.routes.draw do
   devise_for :users
   resources :courses
   resources :users
+  resources :assignments
   resources :lessons do
     member do
       get 'lead_in_question'

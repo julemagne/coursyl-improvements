@@ -547,15 +547,25 @@ assignments[1] = Assignment.create!(course_id: db_course.id,
 )
 AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 1,
-  points: 20,
+  points: 10,
   question:
-    %{Give an example of a table which conforms to 2NF, but which is still subject to update anomalies.}
+    %{For each of the following categories, choose the correct naming convention (when using Rails and PostgreSQL):
+
+- Name of a table containing student records: Student, Students, student, students
+- Name of the primary key on this table: id, student _ id, students _ id
+- Name of the foreign key for a student referenced by a different table: id, student _ id, students _ id }
 )
 AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 2,
+  points: 10,
+  question:
+    %{Give a specific example of a real-world scenario where database normalization is at odds with our directive to build databases which "support the processes requiring their data."}
+)
+AssignmentQuestion.create!(assignment_id: assignments[1].id,
+  order_number: 3,
   points: 20,
   question:
-    %{Give a specific example of a situation when database normalization is at odds with our directive to build databases which "support the processes requiring their data."}
+    %{Give an example of a table which conforms to 2NF, but which is still subject to update anomalies.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 4,
@@ -567,6 +577,12 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
 - The second version should be "normalized" (i.e. conform to 3NF).  Use numerical primary keys.
 
 Use appropriate naming conventions and explictly define all fields, including their domains.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[1].id,
+  order_number: 5,
+  points: 20,
+  question:
+    %{Design a normalized data structure to store the nodes of a binary tree (feel free to ask Mason to clarify if you don't know what a "binary tree" is).}
 )
 
 Assignment.create!(course_id: db_course.id,

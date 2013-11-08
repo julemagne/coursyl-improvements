@@ -1,5 +1,6 @@
 class Assignment < ActiveRecord::Base
   belongs_to :course
+  has_many :assignment_questions, -> {order :order_number}
 
   validates :course_id, presence: true
   validates :name, presence: true

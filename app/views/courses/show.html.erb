@@ -46,9 +46,13 @@
         <%= a.status(current_user).name %>
       </span></td>
       <td><%= percentage(a.fraction_of_grade) %></td>
-      <td class="muted">
-        <i class="icon-pencil"></i>
-        <i class="icon-bar-chart"></i>
+      <td>
+        <% if a.status(current_user).name != "Future" %>
+          <%= link_to '<i class="icon-pencil" alt="Take Assignment"></i>'.html_safe, assignment_path(a) %>
+        <% else %>
+          <i class="icon-pencil muted" alt="Take Assignment"></i>
+        <% end %>
+        <i class="icon-bar-chart muted"></i>
       </td>
     </tr>
     <% end %>

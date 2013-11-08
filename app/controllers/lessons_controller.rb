@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :authenticate_user!, except: :show
-  before_action :admin_only!, only: [:index, :create, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :lead_in_question]
+  before_action :admin_only!, only: [:index, :create, :update, :destroy, :outline]
   before_action :set_lesson, only: [:show, :edit, :update, :destroy, :lead_in_question, :outline]
 
   def lead_in_question

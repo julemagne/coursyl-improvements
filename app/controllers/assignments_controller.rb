@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
+  before_action :admin_only!, only: [:index, :create, :update, :destroy]
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
 
   # GET /assignments

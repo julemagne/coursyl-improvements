@@ -64,10 +64,13 @@ lessons[:data] = Lesson.create!(course_id: db_course.id,
   parent_lesson: nil,
   name: "Data",
   held_at: '2013-11-05 3:25PM',
+  video_url: 'http://www.youtube.com/watch?v=lHog5f7J2mw',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{What is data?  Binary, Text, XML, JSON, Tabular, and Graph.}
+    %{What is data?},
+  outline:
+    %{Binary, Text, XML, JSON, Tabular, and Graph.}
 )
 lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:data],
@@ -77,7 +80,7 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   lead_in_question: %{1. Which three of the projects on this page seem to be the most data-heavy?
 2. Give two examples of problems or tasks in your life that would benefit from software.},
   description:
-    %{What do you do in life that generates or uses a lot of data?},
+    %{What do you do or know of in life that generates or uses a lot of data?},
   outline:
     %{Stories of real-world problems, apps, and systems (including Facebook statistics).  Initial project discussions and planning.}
 )
@@ -87,6 +90,7 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Design",
   held_at: '2013-11-08 12:55PM',
+  video_url: 'http://www.youtube.com/watch?v=NClkuBwnXDo',
   lead_in_reading: 'http://danielazwan.files.wordpress.com/2013/10/sorry-meme-generator-oops-i-m-sorry-72129c.gif',
   lead_in_question: 'Did you do anything fun with your extra 50 minutes?',
   description:

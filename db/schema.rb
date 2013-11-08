@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20131107202126) do
     t.text     "outline"
     t.text     "lead_in_reading"
     t.text     "lead_in_question"
+    t.text     "video_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

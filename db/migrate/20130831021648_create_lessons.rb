@@ -9,6 +9,7 @@ class CreateLessons < ActiveRecord::Migration
       t.text :outline
       t.text :lead_in_reading
       t.text :lead_in_question
+      t.text :video_url
 
       t.timestamps
     end

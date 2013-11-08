@@ -105,12 +105,10 @@
           <% end %>
         <% end %>
 
-        <!-- <i class="icon-comment-alt muted" alt="Lesson Feedback"></i> -->
-
-        <% if l.in_past? %>
-          <%= link_to '<i class="icon-cloud-download" alt="Lesson Downloads"></i>'.html_safe, '#' %>
+        <% if l.video_url? %>
+          <%= link_to '<i class="icon-film" alt="Lesson Downloads"></i>'.html_safe, l.video_url, target: 'blank' %>
         <% else %>
-          <i class="icon-cloud-download muted" alt="Lesson Downloads"></i>
+          <i class="icon-film muted" alt="Lesson Downloads"></i>
         <% end %>
       </td>
     </tr>

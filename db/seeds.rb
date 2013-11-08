@@ -88,7 +88,7 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   name: "Design",
   held_at: '2013-11-08 12:55PM',
   lead_in_reading: 'http://danielazwan.files.wordpress.com/2013/10/sorry-meme-generator-oops-i-m-sorry-72129c.gif',
-  lead_in_question: 'Did you do anything fun with you extra 50 minutes?',
+  lead_in_question: 'Did you do anything fun with your extra 50 minutes?',
   description:
     %{Modeling the real world as tabular data.},
   outline:
@@ -171,7 +171,10 @@ lessons[:design2] = Lesson.create!(course_id: db_course.id,
   name: "Design: Normal Forms I",
   held_at: '2013-11-11 2:20PM',
   lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
-  lead_in_question: 'What do you think this article gets wrong?  Anything strike you as being off?',
+  lead_in_question:
+    %{1. Did anything in the article not make sense?
+1. What do you think this article gets wrong?  Anything strike you as being off?
+1. Please install MySQL Workbench on your computer from this link: http://dev.mysql.com/downloads/tools/workbench/},
   description:
     %{Showing Excel who's boss.}
 )

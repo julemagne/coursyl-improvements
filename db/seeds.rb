@@ -136,10 +136,10 @@ Analyze Trekkable, considering: Hotels, addresses, Accessibility Areas (ramps, b
 
 Why are these suboptimal?
 
-1 Update anomalies.  What if the instructor changes?
-1 Insertion/deletion anomalies.  What if a student is added with no classes or removed from all classes?
-1 Make the data model more informative to users.  Is this clear to read?
-1 Space?  Sure, space.
+1. Update anomalies.  What if the instructor changes?
+1. Insertion/deletion anomalies.  What if a student is added with no classes or removed from all classes?
+1. Make the data model more informative to users.  Is this clear to read?
+1. Space?  Sure, space.
 
 Mason splits classes and instructors into another table.
 
@@ -150,6 +150,65 @@ Try the same thing for Trekkable:
 - Talk about primary keys?
 
 Look back at original example, talk about many-to-many?
+}
+)
+lessons[:design2] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design1],
+  name: "Design: Normal Forms I",
+  held_at: '2013-11-11 2:20PM',
+  lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
+  lead_in_question:
+    %{1. Did anything in the article not make sense?
+1. What do you think this article gets wrong?  Anything strike you as being off?
+1. Please install MySQL Workbench on your computer from this link: http://dev.mysql.com/downloads/tools/workbench/},
+  description:
+    %{Showing Excel who's boss.},
+  outline:
+    %{Look back at the 0NF spreadsheet.
+
+- Go through definitions again.
+  + Table
+  + Record
+  + Field
+  + Value
+  + Domain
+- Ask what was wrong with this one.
+- Show ALT spreadsheet and ask what was wrong with this
+
+Review things to do when building a data structure:
+
+- Avoid update anomalies
+- Avoid insert and delete anomalies
+- Save space
+- Make the data model more informative to users
+- Minimize redesign when extending capabilities
+- GREY AREA: Don't build a data structure for only one type of querying
+
+Introduce spectrum of Normal Forms. 1, 2, 3, BCNF, 4, 5, 6
+
+We're going through these one at a time, but you don't start developinga design at 1, then 2, etc.  You typically design at ~3 to start.
+
+ALT is already in 1NF, but we'll move on from that because it limits future extensibility.
+
+Show 1NF.  Show 1NF Clean.  Launch into definitions:
+
+- Super Key (or "key"): a set of fields that will allow you to look up any record uniquely.
+- Examples of a Super Key?  (All fields is one example)
+- Candidate Key: a Super Key for which no subset of fields is also a Super Key.
+- What is a Candidate Key on 1NF Clean?
+- Non-prime field: a field which is not a part of any candidate key.  Which on this table?
+
+2NF: No non-prime field is dependent on only a subset of a candidate key.  Show 2NF.
+
+Ask for an example of a table with two DIFFERENT candidate keys.
+
+Show 2NF Alt.  Still 2NF?  Subject to update anomalies?
+
+3NF: Transitive property.  Tag line: "[Every] non-key [attribute] must provide a fact about the key, the whole key, and nothing but the key." A common variation supplements this definition with the oath: "so help me Codd"
+
+Show MySQL Workbench examples.  Say "THIS is a data structure.  Been using the phrase a lot, but it's a definition of tables, columns, and domains.  This is what you want to build right, and this is what will be hardest to change later."
+
+Types of joins?
 
 Closing of class: things in your life that you said would benefit from databases:
 
@@ -163,24 +222,7 @@ Closing of class: things in your life that you said would benefit from databases
 Fill students in on Dr. Warshaw's answer to Kickstarter.  Kickstarter's perspective:
 
 - "*Parents and teachers can launch projects in collaboration with children under 18 only if the adult registers for the Kickstarter and payments accounts and is in charge of running the project itself."
-
-Future:
-- Review things to watch out for in database design.
-- Minimize redesign when extending the data structure.
-- GREY AREA: Don't build a data structure for one type of querying.
 }
-)
-lessons[:design2] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:design1],
-  name: "Design: Normal Forms I",
-  held_at: '2013-11-11 2:20PM',
-  lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
-  lead_in_question:
-    %{1. Did anything in the article not make sense?
-1. What do you think this article gets wrong?  Anything strike you as being off?
-1. Please install MySQL Workbench on your computer from this link: http://dev.mysql.com/downloads/tools/workbench/},
-  description:
-    %{Showing Excel who's boss.}
 )
 lessons[:design3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design2],

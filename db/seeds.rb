@@ -156,6 +156,7 @@ lessons[:design2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design1],
   name: "Design: Normal Forms I",
   held_at: '2013-11-11 2:20PM',
+  video_url: 'http://www.youtube.com/watch?v=69FWiPBZBmU',
   lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
   lead_in_question:
     %{1. Did anything in the article not make sense?
@@ -229,24 +230,24 @@ lessons[:design3] = Lesson.create!(course_id: db_course.id,
   name: "Design: Normal Forms II",
   held_at: '2013-11-12 3:25PM',
   lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_question: "Give an example of a table with two overlapping candidate keys.  Describe all fields and their domains, then indicate which two sets of fields are candidate keys.",
   description:
     %{Very possibly taking it too far.}
 )
 lessons[:relational1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
-  name: "Relational Databases",
+  name: "Getting Mathy: Relational Algebra",
   held_at: '2013-11-13 1:50PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://buzzard.ups.edu/courses/2012spring/projects/wenholz-relational-algebra-ups-434-2012.pdf',
+  lead_in_question: 'Read as much of this article as you can, but at least through section 2.2.  What is...?',
   description:
-    %{Relational Algebra, Tables, Columns, Rows, Domains/Data Types, Keys.}
+    %{Relational Algebra, Relations, Attributes, Tuples, Domains.}
 )
 
 #Week: PostgreSQL/SQL (4 days, F-W)
 lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:relational1],
-  name: "PostgreSQL",
+  name: "Getting Practical: PostgreSQL",
   held_at: '2013-11-15 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,

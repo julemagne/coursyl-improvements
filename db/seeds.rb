@@ -232,21 +232,31 @@ lessons[:design3] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: "Give an example of a table with two overlapping candidate keys.  Describe all fields and their domains, then indicate which two sets of fields are candidate keys.",
   description:
-    %{Very possibly taking it too far.}
+    %{Very possibly taking it too far.},
+  outline:
+    %{Give everyone access to Day 5 spreadsheet.  Ask them to work in pairs and make this table 3NF.
+
+Review results.
+
+Review responses to daily question.
+
+Define BNF, 4NF, 5NF... as far as I can get in the day.}
 )
-lessons[:relational1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:real_world],
-  name: "Getting Mathy: Relational Algebra",
+lessons[:design3ish] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:design3],
+  name: "Design: Data Structure Diagrams",
   held_at: '2013-11-13 1:50PM',
-  lead_in_reading: 'http://buzzard.ups.edu/courses/2012spring/projects/wenholz-relational-algebra-ups-434-2012.pdf',
-  lead_in_question: 'Read as much of this article as you can, but at least through section 2.2.  What is...?',
+  lead_in_reading: nil,
+  lead_in_question: nil,
   description:
-    %{Relational Algebra, Relations, Attributes, Tuples, Domains.}
+    %{Relational Algebra, Relations, Attributes, Tuples, Domains.},
+  outline:
+    %{Wish I could have had them read through section 2.2 of this: http://buzzard.ups.edu/courses/2012spring/projects/wenholz-relational-algebra-ups-434-2012.pdf}
 )
 
 #Week: PostgreSQL/SQL (4 days, F-W)
 lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational1],
+  parent_lesson: lessons[:real_world],
   name: "Getting Practical: PostgreSQL",
   held_at: '2013-11-15 12:55PM',
   lead_in_reading: nil,
@@ -255,7 +265,7 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
     %{Finally, we touch our computers.}
 )
 lessons[:sql1] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:relational1],
+  parent_lesson: lessons[:real_world],
   name: "SQL",
   held_at: '2013-11-18 2:20PM',
   lead_in_reading: nil,
@@ -297,7 +307,7 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
       GROUP BY, HAVING}
 )
 lessons[:design4] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:design3],
+  parent_lesson: lessons[:design3ish],
   name: "Design: Hierarchies",
   held_at: '2013-12-02 2:20PM',
   lead_in_reading: nil,

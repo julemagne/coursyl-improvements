@@ -246,18 +246,18 @@ lessons[:design3ish] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design3],
   name: "Design: Data Structure Diagrams",
   held_at: '2013-11-13 1:50PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: "http://net.tutsplus.com/tutorials/databases/visual-database-creation-with-mysql-workbench/",
+  lead_in_question: 'Read down through the "Go Visual" section.  What is an EER Diagram, and why is it useful?',
   description:
     %{Relational Algebra, Relations, Attributes, Tuples, Domains.},
   outline:
     %{Wish I could have had them read through section 2.2 of this: http://buzzard.ups.edu/courses/2012spring/projects/wenholz-relational-algebra-ups-434-2012.pdf}
 )
 
-#Week: PostgreSQL/SQL (4 days, F-W)
+#Week: MySQL/SQL (4 days, F-W)
 lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
-  name: "Getting Practical: PostgreSQL",
+  name: "Getting Practical: MySQL",
   held_at: '2013-11-15 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -338,7 +338,7 @@ lessons[:breather] = Lesson.create!(course_id: db_course.id,
 #Week: Indexing/Transactions (3 days, F-T)
 lessons[:postgres2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres1],
-  name: "PostgreSQL: Transactions",
+  name: "MySQL: Transactions",
   held_at: '2013-12-06 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -347,7 +347,7 @@ lessons[:postgres2] = Lesson.create!(course_id: db_course.id,
 )
 lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres2],
-  name: "PostgreSQL: Indexing I",
+  name: "MySQL: Indexing I",
   held_at: '2013-12-09 2:20PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -357,7 +357,7 @@ lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
 )
 lessons[:postgres4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres3],
-  name: "PostgreSQL: Indexing II",
+  name: "MySQL: Indexing II",
   held_at: '2013-12-10 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
@@ -609,7 +609,7 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 1,
   points: 10,
   question:
-    %{For each of the following categories, choose the correct naming convention (when using Rails and PostgreSQL):
+    %{For each of the following categories, choose the correct naming convention (when using Rails and MySQL):
 
 - Name of a table containing student records: Student, Students, student, students
 - Name of the primary key on this table: id, student _ id, students _ id
@@ -617,7 +617,7 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
 )
 AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 2,
-  points: 10,
+  points: 20,
   question:
     %{Give a specific example of a real-world scenario where database normalization is at odds with our directive to build databases which "support the processes requiring their data."}
 )
@@ -629,7 +629,7 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
 )
 AssignmentQuestion.create!(assignment_id: assignments[1].id,
   order_number: 4,
-  points: 40,
+  points: 50,
   question:
     %{Design two versions of a data structure for tracking all due dates for all assignments for all students across the school.
 

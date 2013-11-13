@@ -229,6 +229,7 @@ lessons[:design3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design2],
   name: "Design: Normal Forms II",
   held_at: '2013-11-12 3:25PM',
+  video_url: 'http://youtu.be/8wn9YOvvFMw',
   lead_in_reading: nil,
   lead_in_question: "Give an example of a table with two overlapping candidate keys.  Describe all fields and their domains, then indicate which two sets of fields are candidate keys.",
   description:
@@ -246,6 +247,7 @@ lessons[:design3ish] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design3],
   name: "Design: Data Structure Diagrams",
   held_at: '2013-11-13 1:50PM',
+  video_url: 'http://youtu.be/mlg58yqELyQ',
   lead_in_reading: "http://net.tutsplus.com/tutorials/databases/visual-database-creation-with-mysql-workbench/",
   lead_in_question: 'Read down through the "Go Visual" section.  What is an EER Diagram, and why is it useful?',
   description:
@@ -259,8 +261,8 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Getting Practical: MySQL",
   held_at: '2013-11-15 12:55PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://courses.masonfmatthews.com/assignments/4',
+  lead_in_question: 'Do assignment 1!',
   description:
     %{Finally, we touch our computers.}
 )
@@ -268,7 +270,7 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "SQL",
   held_at: '2013-11-18 2:20PM',
-  lead_in_reading: nil,
+  lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
   lead_in_question: nil,
   description:
     %{How you would write a language to store, edit, and delete tabular data?

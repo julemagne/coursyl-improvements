@@ -264,14 +264,30 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: 'http://courses.masonfmatthews.com/assignments/4',
   lead_in_question: 'Do assignment 1!',
   description:
-    %{Finally, we touch our computers.}
+    %{Finally, we touch our computers.},
+  outline:
+    %{Ask if there are any questions on the homework?  Show the example.
+
+Potentially catch up on project ideas?
+
+Show the diagram of web application infrastructure: http://docs.oracle.com/cd/E38689_01/pt853pbr0/eng/pt/tsvt/img/ia2cf27cn-7b64.png
+
+Explain that I gave up on the VM idea, as the infrastructure to run the VM was as complicated as the db itself.
+
+Ask, if they want to create a language to interact with these "database" things, what would it look like?  List activities that you'd need to do.}
 )
 lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "SQL",
   held_at: '2013-11-18 2:20PM',
   lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
-  lead_in_question: nil,
+  lead_in_question:
+    %{Install MySQL on your machine.  I would suggest using these links, but feel free to use other methods if you would like:
+
+- Mac: http://www.macminivault.com/mysql-mavericks/
+- Windows or Linux: http://dev.mysql.com/downloads/mysql/#downloads
+
+The question: Did you have any problems doing this installation?},
   description:
     %{How you would write a language to store, edit, and delete tabular data?
       CREATE, INSERT, DELETE.}
@@ -284,7 +300,9 @@ lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   lead_in_question: nil,
   description:
     %{Now that we can put data in a database, how do we get it out? SELECT,
-      FROM, WHERE}
+      FROM, WHERE},
+  outline:
+    %{End of class: talk through assignment 2.}
 )
 lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql2],
@@ -647,13 +665,46 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
     %{Design a normalized data structure to store the nodes of a binary tree (feel free to ask Mason to clarify if you don't know what a "binary tree" is).}
 )
 
-Assignment.create!(course_id: db_course.id,
+
+assignments[2] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 2: Basic SQL',
   active_at: '2013-11-15 2:25PM',
   due_at: '2013-11-22 12:55PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
+AssignmentQuestion.create!(assignment_id: assignments[2].id,
+  order_number: 1,
+  points: 20,
+  question:
+    %{Create a 3NF data structure for keeping track of TODO}
+)
+AssignmentQuestion.create!(assignment_id: assignments[2].id,
+  order_number: 2,
+  points: 20,
+  question:
+    %{Write SQL CREATE statements to generate the 3NF version of the data structure at <a href='https://docs.google.com/spreadsheet/ccc?key=0AteOLFPOMuwPdE5jaTVUbUdyX2JqMGVVd1JqekxDQnc&usp=sharing' target='blank'>this link</a>.  Then write SQL queries to add one record to each of the tables.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[2].id,
+  order_number: 3,
+  points: 20,
+  question:
+    %{Write an SQL query to change all the values of "TODO" in the TODO column of this table to "TODO" unless the TODO column is "TODO."}
+)
+AssignmentQuestion.create!(assignment_id: assignments[2].id,
+  order_number: 4,
+  points: 60,
+  question:
+    %{Write SQL queries to return the following results from the data structure shown below:
+
+TODO: image here.
+
+- Query 1
+- Query 2
+- Query 3}
+)
+
+
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 3: Intermediate SQL',
   active_at: '2013-11-22 2:25PM',

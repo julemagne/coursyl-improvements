@@ -261,6 +261,7 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Getting Practical: MySQL",
   held_at: '2013-11-15 12:55PM',
+  video_url: 'http://youtu.be/ifaXJhi2gR8',
   lead_in_reading: 'http://courses.masonfmatthews.com/assignments/4',
   lead_in_question: 'Do assignment 1!',
   description:
@@ -280,6 +281,7 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "SQL",
   held_at: '2013-11-18 2:20PM',
+  video_url: 'http://www.youtube.com/watch?v=ifaXJhi2gR8',
   lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
   lead_in_question:
     %{Install MySQL on your machine.  I would suggest using these links, but feel free to use other methods if you would like:
@@ -290,14 +292,20 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
 The question: Did you have any problems doing this installation?},
   description:
     %{How you would write a language to store, edit, and delete tabular data?
-      CREATE, INSERT, DELETE.}
+      CREATE, INSERT, UPDATE, DELETE.}
 )
 lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql1],
   name: "SQL: Querying for Data",
   held_at: '2013-11-19 3:25PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://dev.mysql.com/doc/refman/5.0/en/data-type-overview.html',
+  lead_in_question:
+    %{Read sections 11.1.1-11.1.3 of the daily reading.
+
+Email me the SQL statements needed to create two tables: one for companies and one for employees.
+The table of companies should include (at least) name, address, number of years in business, and mission statement.
+The table of employees should include (at least) first name, last name, and date of hire.
+There should also be a foreign key relating the two tables.},
   description:
     %{Now that we can put data in a database, how do we get it out? SELECT,
       FROM, WHERE},

@@ -281,7 +281,7 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "SQL",
   held_at: '2013-11-18 2:20PM',
-  video_url: 'http://www.youtube.com/watch?v=ifaXJhi2gR8',
+  video_url: 'http://www.youtube.com/watch?v=2YaLYVQEIH0',
   lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
   lead_in_question:
     %{Install MySQL on your machine.  I would suggest using these links, but feel free to use other methods if you would like:
@@ -683,33 +683,36 @@ assignments[2] = Assignment.create!(course_id: db_course.id,
 )
 AssignmentQuestion.create!(assignment_id: assignments[2].id,
   order_number: 1,
-  points: 20,
+  points: 30,
   question:
-    %{Create a 3NF data structure for keeping track of TODO}
+    %{Create a 3NF data structure for keeping track of all of the foods you eat in each day and all of the exercises
+that you do in each day.  For food, you should track how many calories are in each type of food, how much you ate, and where
+you bought it.  For exercise, keep track of how many calories you burned and what type of activity it was.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[2].id,
   order_number: 2,
-  points: 20,
+  points: 30,
   question:
-    %{Write SQL CREATE statements to generate the 3NF version of the data structure at <a href='https://docs.google.com/spreadsheet/ccc?key=0AteOLFPOMuwPdE5jaTVUbUdyX2JqMGVVd1JqekxDQnc&usp=sharing' target='blank'>this link</a>.  Then write SQL queries to add one record to each of the tables.}
+    %{Write SQL CREATE statements to generate the 3NF version of the data structure at
+<a href='https://docs.google.com/spreadsheet/ccc?key=0AteOLFPOMuwPdE5jaTVUbUdyX2JqMGVVd1JqekxDQnc&usp=sharing' target='blank'>this link</a>.
+Then write SQL queries to add just one record to each of the tables.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[2].id,
   order_number: 3,
-  points: 20,
+  points: 30,
   question:
-    %{Write an SQL query to change all the values of "TODO" in the TODO column of this table to "TODO" unless the TODO column is "TODO."}
+    %{Refer to the data structure in Question 2.  Write an SQL query to change all the values of 100 in the "efficacy" column of the "test_results"
+table to 99 unless the bug tested was a Mosquito.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[2].id,
   order_number: 4,
-  points: 60,
+  points: 30,
   question:
-    %{Write SQL queries to return the following results from the data structure shown below:
+    %{Write SQL queries to return the following results from the data structure created in Question 2:
 
-TODO: image here.
-
-- Query 1
-- Query 2
-- Query 3}
+- Return all of the efficacy numbers above 50.
+- Return the id of the bug named "Moth".
+- Return all of the test results for tests performed after 3/1/2013. Include the name of the bug.}
 )
 
 

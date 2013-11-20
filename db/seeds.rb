@@ -336,7 +336,7 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   name: "SQL IV: Joins",
   held_at: '2013-11-22 12:55PM',
   lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_question: 'Complete assignment 2!',
   description:
     %{If we only needed data from one table, we'd just use Microsoft products.
 

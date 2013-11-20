@@ -279,7 +279,7 @@ Ask, if they want to create a language to interact with these "database" things,
 )
 lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
-  name: "SQL",
+  name: "SQL I: Building Structures",
   held_at: '2013-11-18 2:20PM',
   video_url: 'http://www.youtube.com/watch?v=2YaLYVQEIH0',
   lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
@@ -291,12 +291,13 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
 
 The question: Did you have any problems during this installation?},
   description:
-    %{How you would write a language to store, edit, and delete tabular data?
-      CREATE, INSERT, UPDATE, DELETE.}
+    %{System setup.  How you would write a language to store, edit, and delete tabular data?
+
+CREATE, DROP, USE, SHOW, DESCRIBE, INSERT.}
 )
 lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql1],
-  name: "SQL: Querying for Data",
+  name: "SQL II: Manipulating Data",
   held_at: '2013-11-19 3:25PM',
   video_url: 'http://youtu.be/Wawg2gXMBAQ',
   lead_in_reading: 'http://dev.mysql.com/doc/refman/5.0/en/data-type-overview.html',
@@ -308,14 +309,13 @@ The table of companies should include (at least) name, address, number of years 
 The table of employees should include (at least) first name, last name, and date of hire.
 There should also be a foreign key relating the two tables.},
   description:
-    %{Now that we can put data in a database, how do we get it out? SELECT,
-      FROM, WHERE},
-  outline:
-    %{End of class: talk through assignment 2.}
+    %{Let's get some data up in those tables.
+
+INSERT, UPDATE, DELETE, WHERE.}
 )
 lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql2],
-  name: "SQL: Merging Data",
+  name: "SQL III: Querying for Data",
   held_at: '2013-11-20 1:50PM',
   lead_in_reading: 'http://www.mysqltutorial.org/mysql-select-statement-query-data.aspx',
   lead_in_question: %{Improve on the CREATE TABLE statements that you wrote yesterday.  Make sure to include
@@ -325,25 +325,38 @@ have hired an employee with the last name of "Smith."
 Send me all three SQL commands.  Don't worry if this is hard; we haven't talked about it in class yet, so I'm seeing
 if you can put together something new.  As always, you get credit for solid attempts.'},
   description:
-    %{Sure, we can pull from one table, but how do we recreate [something
-      complex from more than one table]? JOINS}
+    %{Databases aren't any good if you can only put things in them!
+
+SELECT, FROM, WHERE, AS, CROSS JOIN, INNER JOIN.}
 )
 
 #Week: Design/SQL (4 days, F-W)
 lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql3],
-  name: "SQL: Grouping Data",
+  name: "SQL IV: Joins",
   held_at: '2013-11-22 12:55PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{How do we use the tools in our toolbox to get rid of duplicates?
-      GROUP BY, HAVING}
+    %{If we only needed data from one table, we'd just use Microsoft products.
+
+JOIN, LEFT JOIN, OUTER JOIN, ORDER.}
+)
+lessons[:sql4ish] = Lesson.create!(course_id: db_course.id,
+  parent_lesson: lessons[:sql4],
+  name: "SQL V: Grouping",
+  held_at: '2013-12-02 2:20PM',
+  lead_in_reading: nil,
+  lead_in_question: nil,
+  description:
+    %{Time to think in the aggregate.
+
+DISTINCT, GROUP BY, HAVING.}
 )
 lessons[:design4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design3ish],
   name: "Design: Hierarchies",
-  held_at: '2013-12-02 2:20PM',
+  held_at: '2013-12-03 3:25PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
@@ -352,21 +365,11 @@ lessons[:design4] = Lesson.create!(course_id: db_course.id,
 lessons[:design5] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design4],
   name: "Design: Polymorphism",
-  held_at: '2013-12-03 3:25PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
-  description:
-    %{How would you design a database to keep track of [ratings on songs AND albums AND artists]?}
-)
-lessons[:breather] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: nil,
-  name: "Breathing Room",
   held_at: '2013-12-04 1:50PM',
   lead_in_reading: nil,
   lead_in_question: nil,
   description:
-    %{Catch our breath and allow for extra questions on prior topics.
-      Intermediate project discussion.}
+    %{How would you design a database to keep track of [ratings on songs AND albums AND artists]?}
 )
 
 #Week: Indexing/Transactions (3 days, F-T)
@@ -541,7 +544,7 @@ lessons[:col3] = Lesson.create!(course_id: db_course.id,
 
 #Week: DBMS-Specific SQL (3 days, M-W)
 lessons[:sql5] = Lesson.create!(course_id: db_course.id,
-  parent_lesson: lessons[:sql4],
+  parent_lesson: lessons[:sql4ish],
   name: "SQL: Regex",
   held_at: '2014-01-27 2:20PM',
   lead_in_reading: nil,

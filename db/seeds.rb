@@ -289,7 +289,7 @@ lessons[:sql1] = Lesson.create!(course_id: db_course.id,
 - Mac: http://www.macminivault.com/mysql-mavericks/
 - Windows or Linux: http://dev.mysql.com/downloads/mysql/#downloads
 
-The question: Did you have any problems doing this installation?},
+The question: Did you have any problems during this installation?},
   description:
     %{How you would write a language to store, edit, and delete tabular data?
       CREATE, INSERT, UPDATE, DELETE.}
@@ -298,6 +298,7 @@ lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql1],
   name: "SQL: Querying for Data",
   held_at: '2013-11-19 3:25PM',
+  video_url: 'http://youtu.be/Wawg2gXMBAQ',
   lead_in_reading: 'http://dev.mysql.com/doc/refman/5.0/en/data-type-overview.html',
   lead_in_question:
     %{Read sections 11.1.1-11.1.3 of the daily reading.
@@ -316,8 +317,13 @@ lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql2],
   name: "SQL: Merging Data",
   held_at: '2013-11-20 1:50PM',
-  lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_reading: 'http://www.mysqltutorial.org/mysql-select-statement-query-data.aspx',
+  lead_in_question: %{Improve on the CREATE TABLE statements that you wrote yesterday.  Make sure to include
+primary and foreign keys.  Then create a SELECT statement which will give me the names of all of the companies which
+have hired an employee with the last name of "Smith."
+
+Send me all three SQL commands.  Don't worry if this is hard; we haven't talked about it in class yet, so I'm seeing
+if you can put together something new.  As always, you get credit for solid attempts.'},
   description:
     %{Sure, we can pull from one table, but how do we recreate [something
       complex from more than one table]? JOINS}

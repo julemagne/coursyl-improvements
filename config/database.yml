@@ -1,10 +1,9 @@
 development:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql
+  encoding: utf8
   database: courses_development
-  pool: 5
-  username: masonfoxmatthews
-  password:
+  username: root
+  password: password
   host: localhost
 
 test:

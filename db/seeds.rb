@@ -317,6 +317,7 @@ lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql2],
   name: "SQL III: Querying for Data",
   held_at: '2013-11-20 1:50PM',
+  video_url: 'http://youtu.be/2I7ZxBhq2MQ',
   lead_in_reading: 'http://www.mysqltutorial.org/mysql-select-statement-query-data.aspx',
   lead_in_question: %{Improve on the CREATE TABLE statements that you wrote yesterday.  Make sure to include
 primary and foreign keys.  Then create a SELECT statement which will give me the names of all of the companies which
@@ -325,7 +326,7 @@ have hired an employee with the last name of "Smith."
 Send me all three SQL commands.  Don't worry if this is hard; we haven't talked about it in class yet, so I'm seeing
 if you can put together something new.  As always, you get credit for solid attempts.'},
   description:
-    %{Databases aren't any good if you can only put things in them!
+    %{Databases aren't any good if you can only put things in!
 
 SELECT, FROM, WHERE, AS, CROSS JOIN, INNER JOIN.}
 )
@@ -338,16 +339,30 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   lead_in_reading: nil,
   lead_in_question: 'Complete assignment 2!',
   description:
-    %{If we only needed data from one table, we'd just use Microsoft products.
+    %{If we only needed data from one table, we'd just use Microsoft products!
 
-JOIN, LEFT JOIN, OUTER JOIN, ORDER.}
+JOIN, LEFT JOIN, OUTER JOIN, ORDER.  Subselects and IN.},
+  outline:
+    %{Show Avi the SET GLOBAL command.
+
+Make sure that everyone ran the query from the pre-class e-mail.
+
+Get them to select all the names of games and their ratings.
+
+Get them to list all the consoles with all the games that they have.  All consoles should appear at least once, even if they don't have games.
+
+Introduce LEFT JOIN.
+
+I want them ordered by console name, alphabetically, then by game name, alphabetically.
+
+Talk through a Trace-like solution of a subselect and an IN.}
 )
 lessons[:sql4ish] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql4],
   name: "SQL V: Grouping",
   held_at: '2013-12-02 2:20PM',
   lead_in_reading: nil,
-  lead_in_question: nil,
+  lead_in_question: "No questions today, as I'm not allowed to give you anything due less than 24 hours after you get back from break.  You win.",
   description:
     %{Time to think in the aggregate.
 
@@ -725,13 +740,70 @@ AssignmentQuestion.create!(assignment_id: assignments[2].id,
 )
 
 
-Assignment.create!(course_id: db_course.id,
+assignments[3] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 3: Intermediate SQL',
   active_at: '2013-11-22 2:25PM',
   due_at: '2013-12-06 12:55PM',
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
+AssignmentQuestion.create!(assignment_id: assignments[3].id,
+  order_number: 1,
+  points: 30,
+  question:
+    %{Design the data structure that you believe is being used for the Snapchat database.  Think about all the things
+that the application and service do, not just a flat data structure to store photos.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[3].id,
+  order_number: 1,
+  points: 30,
+  question:
+    %{For this question, assume that you have an existing table with many records in it.  The table structure could be
+created using the following SQL command:
+
+CREATE TABLE people (id INT AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id));
+
+(a) Write a query which returns all the names which appear more than once.  This query must use a GROUP BY.
+
+(b) Rewrite the query without using GROUP BY.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[3].id,
+  order_number: 2,
+  points: 30,
+  question:
+    %{(a) Create a data structure for storing all of your grades on your assignments in all of your classes.
+Store the numerical grade which you received in the table of assignments.  Create a second table which will let
+you determine what letter grade you got on each assignment.  Keep in mind that some classes will have 10-point
+scales while others have 7-point scales.  Do NOT store 100 records per class in this second table.
+
+(b) Write a query to return all numerical grades paired with the corresponding letter grades for all assignments.}
+)
+AssignmentQuestion.create!(assignment_id: assignments[3].id,
+  order_number: 3,
+  points: 30,
+  question:
+    %{Assume that you have a table with the following structure:
+
+CREATE TABLE discovered_genes (id INT AUTO_INCREMENT, number INT, name VARCHAR(255), PRIMARY KEY (id));
+
+The "id" field is an incrementing field with no gaps.  However, the "number" field was copied in from an old (sloppy)
+database, and it has gaps.  In other words, its records look something like this:
+
+- 1
+- 2
+- 4
+- 5
+- 8
+
+Write a query to return all of the numbers that are MISSING from the number field.  In the case above, your query should
+return 3, 6, and 7.
+
+If this is too difficult, you'll receive most of the points if you can create a query which returns the FIRST missing
+number rather than all of them.
+}
+)
+
+
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 4: Key-Value Databases (Riak)',
   active_at: '2013-12-13 2:25PM',

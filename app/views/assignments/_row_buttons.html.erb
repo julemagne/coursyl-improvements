@@ -1,0 +1,6 @@
+<% if assignment.status(current_user).name != "Future" %>
+  <%= link_to '<i class="icon-pencil" alt="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
+<% else %>
+  <i class="icon-pencil muted" alt="Take Assignment"></i>
+<% end %>
+<i class="icon-bar-chart muted"></i>

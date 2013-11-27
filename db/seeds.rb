@@ -336,6 +336,7 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql3],
   name: "SQL IV: Joins",
   held_at: '2013-11-22 12:55PM',
+  video_url: 'http://youtu.be/EsjvEGIh7-A',
   lead_in_reading: nil,
   lead_in_question: 'Complete assignment 2!',
   description:
@@ -755,7 +756,7 @@ AssignmentQuestion.create!(assignment_id: assignments[3].id,
 that the application and service do, not just a flat data structure to store photos.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[3].id,
-  order_number: 1,
+  order_number: 2,
   points: 30,
   question:
     %{For this question, assume that you have an existing table with many records in it.  The table structure could be
@@ -768,7 +769,7 @@ CREATE TABLE people (id INT AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))
 (b) Rewrite the query without using GROUP BY.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[3].id,
-  order_number: 2,
+  order_number: 3,
   points: 30,
   question:
     %{(a) Create a data structure for storing all of your grades on your assignments in all of your classes.
@@ -779,7 +780,7 @@ scales while others have 7-point scales.  Do NOT store 100 records per class in 
 (b) Write a query to return all numerical grades paired with the corresponding letter grades for all assignments.}
 )
 AssignmentQuestion.create!(assignment_id: assignments[3].id,
-  order_number: 3,
+  order_number: 4,
   points: 30,
   question:
     %{Assume that you have a table with the following structure:

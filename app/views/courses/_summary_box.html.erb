@@ -8,7 +8,6 @@
   background-image: linear-gradient(45deg, <%= course.color %> 0%,#FFFFFF 100%);
 }
 </style>
-
 <div class="container course-summary <%= header ? 'course-summary-fixed': 'course-summary-small' %>" id="course-<%= course.id %>">
   <div class="row">
     <div class="span9">
@@ -52,11 +51,10 @@
       <% percent_elapsed = percentage(course.fraction_elapsed) %>
       <% percent_complete = percentage(course.assignment_statuses.first.fraction) -%>
       <div class="span2 text-center">
-        <br />
         <div class="progress">
           <div class="bar bar-warning" style="width: <%= percent_elapsed %>;"></div>
         </div>
-        <small class="progress-overlay"><%= percent_elapsed %> of time passed</small>
+        <small class="progress-overlay"><%= percent_elapsed %> of time</small>
 
         <div class="progress">
           <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>

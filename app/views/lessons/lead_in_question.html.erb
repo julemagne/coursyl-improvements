@@ -1,7 +1,17 @@
-<h2><%= @lesson.course.course_code %> Daily Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
+<h2><%= @lesson.course.course_code %> Daily Readings and Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
 
-<p>Daily Reading: <%= link_to @lesson.lead_in_reading, @lesson.lead_in_reading %></p>
+<p class="lead">Readings for this Lesson</p>
+<% if [@lesson.lead_in_reading].compact.each do |r| %>
+  <p><%= link_to r, r %></p>
+<% end.empty? %>
+  <p class='muted'>No readings for this lesson.</p>
+<% end %>
 
-<%= markdown(@lesson.lead_in_question || "<span class='muted'>No question(s) for this lesson.</span>") %>
+</br>
+
+<p class="lead">Questions for this Lesson</p>
+<%= markdown(@lesson.lead_in_question || "<p class='muted'>No questions for this lesson.</p>") %>
+
+</br>
 
 <%= link_to "<< Back to Course", course_path(@lesson.course)%>

@@ -1,6 +1,6 @@
 <% assignment_statuses = @course.assignment_statuses -%>
 
-<%= render partial: "summary_box", locals: {course: @course, :header => true}%>
+<%= render partial: "summary_box", locals: {course: @course, :header => true} %>
 
 <section id="first-section">
   <a id="anchor-description" class="anchor-course"></a>
@@ -47,12 +47,7 @@
       </span></td>
       <td><%= percentage(a.fraction_of_grade) %></td>
       <td>
-        <% if a.status(current_user).name != "Future" %>
-          <%= link_to '<i class="icon-pencil" alt="Take Assignment"></i>'.html_safe, assignment_path(a) %>
-        <% else %>
-          <i class="icon-pencil muted" alt="Take Assignment"></i>
-        <% end %>
-        <i class="icon-bar-chart muted"></i>
+        <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
       </td>
     </tr>
     <% end %>
@@ -69,6 +64,7 @@
   <script>
     var tree = new TreeGenerator(<%= @course.lesson_tree.to_json.html_safe %>);
     tree.buildTree("#lesson-tree");
+    TreeHandler.colorNodesToPresent();
   </script>
   <table class="table table-hover table-condensed">
     <tr>
@@ -85,13 +81,8 @@
       <td><%= time_abbreviation(l.held_at) %></td>
       <td><%= l.name %></td>
       <td>
-        <% if l.lead_in_reading? && l.past_or_next? %>
-          <%= link_to '<i class="icon-link" alt="Pre-class Reading"></i>'.html_safe, l.lead_in_reading, target: 'blank' %>
-        <% else %>
-          <i class="icon-link muted" alt="Pre-class Reading"></i>
-        <% end %>
 
-        <% if (l.lead_in_question? || l.lead_in_reading?) && l.past_or_next? %>
+        <% if l.past_or_next? %>
           <%= link_to '<i class="icon-pencil" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
         <% else %>
           <i class="icon-pencil muted" alt="Pre-class Reading"></i>

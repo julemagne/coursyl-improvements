@@ -4,7 +4,9 @@
   <% something_showing = true %>
   <h2><i class="icon-group"></i> My Teaching</h2>
   <% courses_taught.each do |c| %>
-    <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+    <a href="<%= course_path(c) %>">
+      <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+    </a>
   <% end %>
 <% end %>
 
@@ -13,7 +15,9 @@
   <% something_showing = true %>
   <h2><i class="icon-lightbulb"></i> My Current Classes</h2>
   <% courses_taken.each do |c| %>
-    <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+    <a href="<%= course_path(c) %>">
+      <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
+    </a>
   <% end %>
 <% end %>
 
@@ -40,9 +44,8 @@
       <td><span class="label <%= a.status(current_user).label_class %>">
         <%= a.status(current_user).name %>
       </span></td>
-      <td class="muted">
-        <i class="icon-pencil"></i>
-        <i class="icon-bar-chart"></i>
+      <td>
+        <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
       </td>
     </tr>
     <% end %>
@@ -73,9 +76,8 @@
         <%= a.status(current_user).name %>
       </span></td>
       <td><%= percentage(a.fraction_of_grade) %></td>
-      <td class="muted">
-        <i class="icon-pencil"></i>
-        <i class="icon-bar-chart"></i>
+      <td>
+        <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
       </td>
     </tr>
     <% end %>

@@ -15,7 +15,9 @@
   }
   .progress {
     margin: 0px;
+    margin-top: 12px;
   }
+
 }
 
 .course-summary-fixed {
@@ -27,7 +29,7 @@
     padding: 20px;
   }
   .span2 {
-    padding: 30px;
+    padding-top: 30px;
   }
 }
 
@@ -73,6 +75,11 @@ circle.node-dot {
 circle.node-dot-empty {
   fill: #EEEEEE;
   stroke: grey;
+  stroke-width: 1px;
+}
+circle.node-dot-completed {
+  fill: #66C662;
+  stroke: #50BE4B;
   stroke-width: 1px;
 }
 

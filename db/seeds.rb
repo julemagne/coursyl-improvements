@@ -791,7 +791,7 @@ assignments[3] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 3: Intermediate SQL',
   active_at: '2013-11-22 2:25PM',
   due_at: '2013-12-06 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 AssignmentQuestion.create!(assignment: assignments[3],
@@ -942,8 +942,9 @@ Policy.create!(course_id: db_course.id,
   order_number: 1,
   description:
     %{Class meets four times a week.  You are expected to attend every class, and
-you are expected to be on time.  As is the case with the outside world, if
-you arrive after the start time of the class (at all), you will be considered
+you are expected to be on time.  In the outside world, arriving late at all is a bad thing.
+However, since you only have 5 minutes between classes (and a big campus), if
+you arrive 5 minutes late to class, you will be considered
 tardy. If you are more than 10 minutes late, you will be considered
 severely tardy.  If you are more than 15 minutes late, you will be considered
 absent.

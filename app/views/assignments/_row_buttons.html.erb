@@ -1,4 +1,4 @@
-<% if assignment.status(current_user).name != "Future" %>
+<% if assignment.students_can_submit && assignment.status(current_user).name != "Future" %>
   <%= link_to '<i class="icon-edit" alt="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
 <% else %>
   <i class="icon-edit muted" alt="Take Assignment"></i>

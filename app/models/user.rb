@@ -82,6 +82,11 @@ class User < ActiveRecord::Base
     overdue_assignments + assignments_taken.active
   end
 
+  def grade_on_assignment(assignment)
+    ag = assignment_grades.where(["assignment_id = ?", assignment.id]).first
+    ag.final_grade if ag
+  end
+
   private
 
   def padded_middle_initial

@@ -9,7 +9,7 @@
   <%= markdown(@course.description) %>
 </section>
 
-<% if current_user.teaching?(@course) %>
+<% if current_user && current_user.teaching?(@course) %>
   <% last_assignment = @course.last_assignment %>
   <% next_assignment = @course.next_assignment %>
   <section>
@@ -61,7 +61,10 @@
       <th>Time</th>
       <th>Name</th>
       <th>Status</th>
-      <th>% of Grade</th>
+      <% if current_user && current_user.enrolled?(@course) %>
+        <th>My Grade</th>
+      <% end %>
+      <th>% of Course</th>
       <th></th>
     </tr>
     <% @course.assignments.each do |a| %>
@@ -72,6 +75,9 @@
         <td><span class="label <%= a.status(current_user).label_class %>">
           <%= a.status(current_user).name %>
         </span></td>
+        <% if current_user && current_user.enrolled?(@course) %>
+          <td><%= int_if_possible(current_user.grade_on_assignment(a)) %></td>
+        <% end %>
         <td><%= percentage(a.fraction_of_grade) %></td>
         <td>
           <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
@@ -115,18 +121,19 @@
           <i class="icon-edit muted" alt="Pre-class Reading"></i>
         <% end %>
 
+        <% if l.video_url? %>
+          <%= link_to '<i class="icon-film" alt="Lesson Downloads"></i>'.html_safe, l.video_url, target: 'blank' %>
+        <% else %>
+          <i class="icon-film muted" alt="Lesson Downloads"></i>
+        <% end %>
+
         <% if current_user && current_user.teaching?(@course) %>
           <% if l.past_or_next? %>
             <%= link_to '<i class="icon-th-list" alt="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
           <% else %>
             <i class="icon-th-list muted" alt="Lesson Outline"></i>
           <% end %>
-        <% end %>
-
-        <% if l.video_url? %>
-          <%= link_to '<i class="icon-film" alt="Lesson Downloads"></i>'.html_safe, l.video_url, target: 'blank' %>
-        <% else %>
-          <i class="icon-film muted" alt="Lesson Downloads"></i>
+          Edit button
         <% end %>
       </td>
     </tr>

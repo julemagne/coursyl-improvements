@@ -2,9 +2,16 @@
 
 <p class="muted">Due: <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %></p>
 
-<% @assignment.assignment_questions.each do |q| %>
-  <p class="lead">Question <%= q.order_number %> (<%= q.points %> points):</p>
-  <%= markdown(q.question) %>
+<%= form_tag turn_in_assignment_path(@assignment) do %>
+
+  <% @assignment.assignment_questions.each do |q| %>
+    <p class="lead">Question <%= q.order_number %> (<%= q.points %> points):</p>
+    <%= markdown(q.question) %>
+    <%= text_area_tag("questions[#{q.id}]", nil, rows: 8, class: "input-xxlarge") %>
+  <% end %>
+
+  <p><%= submit_tag "Submit Your Answers", class: "btn" %></p>
+
 <% end %>
 
 <%= link_to "<< Back to Course", course_path(@assignment.course) %>

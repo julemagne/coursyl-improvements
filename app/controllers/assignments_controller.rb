@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :admin_only!, only: [:index, :create, :update, :destroy]
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy]
+  before_action :set_assignment, only: [:show, :edit, :update, :destroy, :turn_in]
 
   # GET /assignments
   # GET /assignments.json
@@ -61,6 +61,16 @@ class AssignmentsController < ApplicationController
       format.html { redirect_to assignments_url }
       format.json { head :no_content }
     end
+  end
+
+  # POST
+  def turn_in
+    if @assignment.turn_in(params[:questions], current_user)
+      flash[:success] = "You have successfully turned in #{@assignment.name}."
+    else
+      flash[:error] = "You are not allowed to turn in #{@assignment.name}."
+    end
+    redirect_to @assignment
   end
 
   private

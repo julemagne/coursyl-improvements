@@ -23,4 +23,21 @@ class Assignment < ActiveRecord::Base
     course.color
   end
 
+  def turn_in(answers, user)
+    if user && user.enrolled?(course) && status(user).overdue_or_in_progress?
+      course_student = CourseStudent.where(student: user, course_id: @assignment.course).first
+      assignment_grade = AssignmentGrade.where(assignment: @assignment,
+        course_student: course_student,
+        submitted_at: Time.now).first_or_create!
+
+      answers.each do |k,v|
+        AssignmentQuestionGrade.create!(assignment_question_id: k.to_i,
+          assignment_grade: assignment_grade,
+          answer: v)
+      end
+
+      assignment_grade
+    end
+  end
+
 end

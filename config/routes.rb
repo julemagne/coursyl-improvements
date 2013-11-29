@@ -4,7 +4,11 @@ Courses::Application.routes.draw do
   devise_for :users
   resources :courses
   resources :users
-  resources :assignments
+  resources :assignments do
+    member do
+      post 'turn_in'
+    end
+  end
   resources :lessons do
     member do
       get 'lead_in_question'

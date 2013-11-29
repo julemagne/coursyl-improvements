@@ -56,4 +56,8 @@ class AssignmentStatus
       FUTURE => ""}
     emphases[@name]
   end
+
+  def overdue_or_in_progress?
+    @name == OVERDUE || @name == IN_PROGRESS
+  end
 end

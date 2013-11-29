@@ -3,6 +3,8 @@ class CourseStudent < ActiveRecord::Base
   belongs_to :student, class_name: "User"
   has_many :assignment_grades
 
+  delegate :full_name, to: :student
+
   def fraction_graded
     assignment_grades.graded.sum {|ag| ag.fraction_of_grade}
   end

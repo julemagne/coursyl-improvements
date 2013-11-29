@@ -51,6 +51,14 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def last_assignment
+    assignments.where(["due_at <= ?", Time.now]).last
+  end
+
+  def next_assignment
+    assignments.where(["due_at > ?", Time.now]).first
+  end
+
   def root_lesson
     lessons.first
   end

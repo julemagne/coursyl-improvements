@@ -9,6 +9,33 @@
   <%= markdown(@course.description) %>
 </section>
 
+<% if current_user.teaching?(@course) %>
+  <% last_assignment = @course.last_assignment %>
+  <% next_assignment = @course.next_assignment %>
+  <section>
+    <a id="anchor-students" class="anchor-course"></a>
+    <h3><i class="icon-group"></i> Students</h3>
+    <table class="table table-hover table-condensed">
+      <tr>
+        <th>Name</th>
+        <th>Last Assignment</th>
+        <th>Next Assignment</th>
+        <th>Overall Grade</th>
+      </tr>
+      <% @course.course_students.each do |s| %>
+      <% last_status = last_assignment.status(s.student) %>
+      <% next_status = next_assignment.status(s.student) %>
+        <tr>
+          <td><%= s.full_name %></td>
+          <td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td>
+          <td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td>
+          <td><%= s.grade %></td>
+        </tr>
+      <% end %>
+    </table>
+  </section>
+<% end %>
+
 <section>
   <a id="anchor-assignments" class="anchor-course"></a>
   <h3><i class="icon-pencil"></i> Assignments</h3>
@@ -38,18 +65,18 @@
       <th></th>
     </tr>
     <% @course.assignments.each do |a| %>
-    <tr>
-      <td><%= date_abbreviation(a.due_at) %></td>
-      <td><%= time_abbreviation(a.due_at) %></td>
-      <td><%= a.name %></td>
-      <td><span class="label <%= a.status(current_user).label_class %>">
-        <%= a.status(current_user).name %>
-      </span></td>
-      <td><%= percentage(a.fraction_of_grade) %></td>
-      <td>
-        <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
-      </td>
-    </tr>
+      <tr>
+        <td><%= date_abbreviation(a.due_at) %></td>
+        <td><%= time_abbreviation(a.due_at) %></td>
+        <td><%= a.name %></td>
+        <td><span class="label <%= a.status(current_user).label_class %>">
+          <%= a.status(current_user).name %>
+        </span></td>
+        <td><%= percentage(a.fraction_of_grade) %></td>
+        <td>
+          <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
+        </td>
+      </tr>
     <% end %>
   </table>
 </section>
@@ -88,7 +115,7 @@
           <i class="icon-edit muted" alt="Pre-class Reading"></i>
         <% end %>
 
-        <% if current_user && current_user.is_admin? %>
+        <% if current_user && current_user.teaching?(@course) %>
           <% if l.past_or_next? %>
             <%= link_to '<i class="icon-th-list" alt="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
           <% else %>

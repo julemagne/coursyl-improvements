@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
     course_students.where(course_id: course.id).first.fraction_graded
   end
 
+  def completed_assignment?(assignment)
+    assignment_grades.where(["assignment_id = ? AND submitted_at IS NOT NULL", assignment.id]).exists?
+  end
+
+  def overdue_assignment?(assignment)
+    overdue_assignments.include?(assignment)
+  end
+
   def overdue_assignments
     assignments_taken.select {|a| a.due_at < Time.now &&
       assignment_grades.where(["assignment_id = ? AND submitted_at IS NOT NULL", a.id]).blank? }
@@ -72,10 +80,6 @@ class User < ActiveRecord::Base
 
   def overdue_or_active_assignments
     overdue_assignments + assignments_taken.active
-  end
-
-  def missed_assignment(assignment)
-    overdue_assignments.include?(assignment)
   end
 
   private

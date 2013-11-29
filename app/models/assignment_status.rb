@@ -24,8 +24,10 @@ class AssignmentStatus
       if options[:assignment].active_at > Time.now
         @name = FUTURE
       elsif options[:assignment].due_at > Time.now
-        @name = IN_PROGRESS
-      elsif options[:user] && options[:user].missed_assignment(options[:assignment])
+        unless options[:user] && options[:user].completed_assignment?(options[:assignment])
+          @name = IN_PROGRESS
+        end
+      elsif options[:user] && options[:user].overdue_assignment?(options[:assignment])
         @name = OVERDUE
       end
     end

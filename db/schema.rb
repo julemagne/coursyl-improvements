@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107202126) do
+ActiveRecord::Schema.define(version: 20131129175143) do
+
+  create_table "assignment_grades", force: true do |t|
+    t.integer  "assignment_id"
+    t.integer  "course_student_id"
+    t.float    "final_grade"
+    t.datetime "submitted_at"
+    t.datetime "graded_at"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignment_question_grades", force: true do |t|
+    t.integer  "assignment_question_id"
+    t.integer  "assignment_grade_id"
+    t.float    "grade"
+    t.text     "answer"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assignment_questions", force: true do |t|
     t.integer  "assignment_id"
@@ -27,6 +48,7 @@ ActiveRecord::Schema.define(version: 20131107202126) do
     t.integer  "course_id"
     t.datetime "active_at"
     t.datetime "due_at"
+    t.boolean  "grades_released"
     t.boolean  "students_can_submit"
     t.float    "fraction_of_grade"
     t.datetime "created_at"
@@ -44,9 +66,7 @@ ActiveRecord::Schema.define(version: 20131107202126) do
   create_table "course_students", force: true do |t|
     t.integer  "student_id"
     t.integer  "course_id"
-    t.float    "grade"
-    t.text     "comments"
-    t.boolean  "approved"
+    t.float    "final_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +83,14 @@ ActiveRecord::Schema.define(version: 20131107202126) do
     t.datetime "updated_at"
   end
 
+  create_table "grade_thresholds", force: true do |t|
+    t.integer  "course_id"
+    t.float    "grade"
+    t.string   "letter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "lessons", force: true do |t|
     t.integer  "course_id"
     t.integer  "parent_lesson_id"
@@ -70,7 +98,6 @@ ActiveRecord::Schema.define(version: 20131107202126) do
     t.datetime "held_at"
     t.text     "description"
     t.text     "outline"
-    t.text     "lead_in_reading"
     t.text     "lead_in_question"
     t.text     "video_url"
     t.datetime "created_at"
@@ -82,6 +109,15 @@ ActiveRecord::Schema.define(version: 20131107202126) do
     t.string   "name"
     t.integer  "order_number"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "readings", force: true do |t|
+    t.integer  "lesson_id"
+    t.string   "caption"
+    t.string   "url"
+    t.integer  "order_number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

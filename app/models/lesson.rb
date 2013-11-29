@@ -1,5 +1,6 @@
 class Lesson < ActiveRecord::Base
   belongs_to :course
+  has_many :readings
   has_many :child_lessons, class_name: "Lesson", foreign_key: "parent_lesson_id"
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
 
@@ -34,10 +35,6 @@ class Lesson < ActiveRecord::Base
 
   def past_or_next?
     in_past? || next_lesson?
-  end
-
-  def can_be_answered?(user)
-    user && lead_in_question? && Time.now < held_at.time - 1.hour && next_lesson? && user.enrolled?(course)
   end
 
   def course_color

@@ -12,12 +12,13 @@ class User < ActiveRecord::Base
   has_many :courses_taken, through: :course_students, source: :course
   has_many :assignments_taken, through: :courses_taken, source: :assignments
 
-  validates :title, presence: true
+  has_many :assignment_grades, through: :course_students
+
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   def full_name
-    "#{title} #{first_name} #{padded_middle_initial}#{last_name}"
+    "#{title + " " if title}#{first_name} #{padded_middle_initial}#{last_name}"
   end
 
   def middle_initial
@@ -42,6 +43,39 @@ class User < ActiveRecord::Base
 
   def teaching?(course)
     courses_taught.include?(course)
+  end
+
+  def grade(course)
+    course_students.where(course_id: course.id).first.grade
+  end
+
+  def letter_grade(course)
+    course_students.where(course_id: course.id).first.letter_grade
+  end
+
+  def min_grade(course)
+    course_students.where(course_id: course.id).first.min_grade
+  end
+
+  def max_grade(course)
+    course_students.where(course_id: course.id).first.max_grade
+  end
+
+  def fraction_graded(course)
+    course_students.where(course_id: course.id).first.fraction_graded
+  end
+
+  def overdue_assignments
+    assignments_taken.select {|a| a.due_at < Time.now &&
+      assignment_grades.where(["assignment_id = ? AND submitted_at IS NOT NULL", a.id]).blank? }
+  end
+
+  def overdue_or_active_assignments
+    overdue_assignments + assignments_taken.active
+  end
+
+  def missed_assignment(assignment)
+    overdue_assignments.include?(assignment)
   end
 
   private

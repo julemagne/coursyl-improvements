@@ -2,8 +2,11 @@ class Course < ActiveRecord::Base
   has_many :assignments, -> {order :due_at}
   has_many :lessons, -> {order :held_at}
   has_many :policies, -> {order :order_number}
+  has_many :course_students
+  has_many :students, through: :course_students
   has_many :course_instructors
   has_many :instructors, through: :course_instructors
+  has_many :grade_thresholds, -> {order "grade DESC"}
 
   has_one :primary_course_instructor, -> {where primary: true},
     class_name: "CourseInstructor"
@@ -65,5 +68,9 @@ class Course < ActiveRecord::Base
     end_time = assignments.last.due_at
 
     [[(Time.now-start_time)/(end_time-start_time), 0].max, 1].min
+  end
+
+  def letter_for_grade(grade)
+    grade_thresholds.where(["grade <= ?", grade]).first.letter
   end
 end

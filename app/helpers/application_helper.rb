@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def percentage(number)
-    number_to_percentage(number*100, precision: 0)
+    number_to_percentage(number*100, strip_insignificant_zeros: true)
   end
 
   def weekday_abbreviation(date)
@@ -20,5 +20,9 @@ module ApplicationHelper
 
   def time_abbreviation(datetime)
     datetime.strftime("%l:%M %p")
+  end
+
+  def int_if_possible(number)
+    number.to_i == number ? number.to_i : number
   end
 end

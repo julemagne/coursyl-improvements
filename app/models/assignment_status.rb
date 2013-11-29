@@ -8,7 +8,7 @@ class AssignmentStatus
   FUTURE = "Future"
 
   def self.all_statuses_ordered
-    [new(name: COMPLETE), new(name: IN_PROGRESS), new(name: OVERDUE), new(name: FUTURE)]
+    [new(name: COMPLETE), new(name: OVERDUE), new(name: IN_PROGRESS), new(name: FUTURE)]
   end
 
   def self.complete_string
@@ -25,6 +25,8 @@ class AssignmentStatus
         @name = FUTURE
       elsif options[:assignment].due_at > Time.now
         @name = IN_PROGRESS
+      elsif options[:user] && options[:user].missed_assignment(options[:assignment])
+        @name = OVERDUE
       end
     end
   end

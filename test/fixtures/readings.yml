@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lesson_id: 1
+  caption: MyString
+  link: MyString
+  order_number: 
+
+two:
+  lesson_id: 1
+  caption: MyString
+  link: MyString
+  order_number: 

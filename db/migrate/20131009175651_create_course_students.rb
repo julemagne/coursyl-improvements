@@ -3,9 +3,7 @@ class CreateCourseStudents < ActiveRecord::Migration
     create_table :course_students do |t|
       t.integer :student_id
       t.integer :course_id
-      t.float :grade
-      t.text :comments
-      t.boolean :approved
+      t.float :final_grade
 
       t.timestamps
     end

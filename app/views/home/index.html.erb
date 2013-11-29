@@ -53,9 +53,9 @@
 <% end %>
 
 
-<% if (assignments_taken = current_user.assignments_taken.active).length > 0 %>
+<% if (assignments_to_complete = current_user.overdue_or_active_assignments).length > 0 %>
   <% something_showing = true %>
-  <p class="lead"><i class="icon-pencil"></i> Things to Do</p>
+  <h2><i class="icon-pencil"></i> Assignments to Complete</h2>
   <table class="table table-hover table-condensed">
     <tr>
       <th>Course</th>
@@ -66,7 +66,7 @@
       <th>% of Grade</th>
       <th></th>
     </tr>
-    <% assignments_taken.each do |a| %>
+    <% assignments_to_complete.each do |a| %>
     <tr>
       <td><%= a.course_code_and_name %></td>
       <td><%= date_abbreviation(a.due_at) %></td>

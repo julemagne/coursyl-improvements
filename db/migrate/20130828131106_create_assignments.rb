@@ -5,6 +5,7 @@ class CreateAssignments < ActiveRecord::Migration
       t.integer :course_id
       t.datetime :active_at
       t.datetime :due_at
+      t.boolean :grades_released
       t.boolean :students_can_submit
       t.float :fraction_of_grade
 

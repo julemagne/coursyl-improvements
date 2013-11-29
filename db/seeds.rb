@@ -25,6 +25,23 @@ Approximately 60% of the course will be devoted to relational databases and DB
 design.  The remaining 40% will cover NoSQL options such as MongoDB and Riak.}
 )
 
+GradeThreshold.create!(course: db_course,
+  grade: 90,
+  letter: "A"
+)
+GradeThreshold.create!(course: db_course,
+  grade: 80,
+  letter: "B"
+)
+GradeThreshold.create!(course: db_course,
+  grade: 70,
+  letter: "C"
+)
+GradeThreshold.create!(course: db_course,
+  grade: 0,
+  letter: "D"
+)
+
 db_instructor = User.create!(title: 'Mr.',
   first_name: 'Mason',
   middle_name: 'Fox',
@@ -56,7 +73,6 @@ CourseInstructor.create!(course_id: db_course.id,
   primary: true
 )
 
-
 lessons = Hash.new
 
 #Week: Intro (2 days, T-W)
@@ -65,7 +81,6 @@ lessons[:data] = Lesson.create!(course_id: db_course.id,
   name: "Data",
   held_at: '2013-11-05 3:25PM',
   video_url: 'http://www.youtube.com/watch?v=lHog5f7J2mw',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{What is data?},
@@ -76,7 +91,6 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:data],
   name: "Real-World Problems",
   held_at: '2013-11-06 1:50PM',
-  lead_in_reading: 'http://www.kickstarter.com/discover/categories/open%20software/successful?ref=more#p1',
   lead_in_question: %{1. Which three of the projects on this page seem to be the most data-heavy?
 2. Give two examples of problems or tasks in your life that would benefit from software.},
   description:
@@ -84,6 +98,10 @@ lessons[:real_world] = Lesson.create!(course_id: db_course.id,
   outline:
     %{Stories of real-world problems, apps, and systems (including Facebook statistics).  Initial project discussions and planning.}
 )
+Reading.create!(lesson: lessons[:real_world],
+  caption: nil,
+  url: 'http://www.kickstarter.com/discover/categories/open%20software/successful?ref=more#p1',
+  order_number: 1)
 
 #Week: DB Design/Relational (4 days, F-W)
 lessons[:design1] = Lesson.create!(course_id: db_course.id,
@@ -91,7 +109,6 @@ lessons[:design1] = Lesson.create!(course_id: db_course.id,
   name: "Design",
   held_at: '2013-11-08 12:55PM',
   video_url: 'http://www.youtube.com/watch?v=NClkuBwnXDo',
-  lead_in_reading: 'http://danielazwan.files.wordpress.com/2013/10/sorry-meme-generator-oops-i-m-sorry-72129c.gif',
   lead_in_question: 'Did you do anything fun with your extra 50 minutes?',
   description:
     %{Modeling the real world as tabular data.},
@@ -152,12 +169,16 @@ Try the same thing for Trekkable:
 Look back at original example, talk about many-to-many?
 }
 )
+Reading.create!(lesson: lessons[:design1],
+  caption: 'My apology',
+  url: 'http://danielazwan.files.wordpress.com/2013/10/sorry-meme-generator-oops-i-m-sorry-72129c.gif',
+  order_number: 1)
+
 lessons[:design2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design1],
   name: "Design: Normal Forms I",
   held_at: '2013-11-11 2:20PM',
   video_url: 'http://www.youtube.com/watch?v=69FWiPBZBmU',
-  lead_in_reading: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
   lead_in_question:
     %{1. Did anything in the article not make sense?
 1. What do you think this article gets wrong?  Anything strike you as being off?
@@ -225,12 +246,16 @@ Fill students in on Dr. Warshaw's answer to Kickstarter.  Kickstarter's perspect
 - "*Parents and teachers can launch projects in collaboration with children under 18 only if the adult registers for the Kickstarter and payments accounts and is in charge of running the project itself."
 }
 )
+Reading.create!(lesson: lessons[:design2],
+  caption: nil,
+  url: 'http://www.onextrapixel.com/2011/03/17/the-basics-of-good-database-design-in-web-development/',
+  order_number: 1)
+
 lessons[:design3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design2],
   name: "Design: Normal Forms II",
   held_at: '2013-11-12 3:25PM',
   video_url: 'http://youtu.be/8wn9YOvvFMw',
-  lead_in_reading: nil,
   lead_in_question: "Give an example of a table with two overlapping candidate keys.  Describe all fields and their domains, then indicate which two sets of fields are candidate keys.",
   description:
     %{Very possibly taking it too far.},
@@ -248,13 +273,16 @@ lessons[:design3ish] = Lesson.create!(course_id: db_course.id,
   name: "Design: Data Structure Diagrams",
   held_at: '2013-11-13 1:50PM',
   video_url: 'http://youtu.be/mlg58yqELyQ',
-  lead_in_reading: "http://net.tutsplus.com/tutorials/databases/visual-database-creation-with-mysql-workbench/",
   lead_in_question: 'Read down through the "Go Visual" section.  What is an EER Diagram, and why is it useful?',
   description:
     %{Relational Algebra, Relations, Attributes, Tuples, Domains.},
   outline:
     %{Wish I could have had them read through section 2.2 of this: http://buzzard.ups.edu/courses/2012spring/projects/wenholz-relational-algebra-ups-434-2012.pdf}
 )
+Reading.create!(lesson: lessons[:design3ish],
+  caption: nil,
+  url: "http://net.tutsplus.com/tutorials/databases/visual-database-creation-with-mysql-workbench/",
+  order_number: 1)
 
 #Week: MySQL/SQL (4 days, F-W)
 lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
@@ -262,7 +290,6 @@ lessons[:postgres1] = Lesson.create!(course_id: db_course.id,
   name: "Getting Practical: MySQL",
   held_at: '2013-11-15 12:55PM',
   video_url: 'http://youtu.be/ifaXJhi2gR8',
-  lead_in_reading: 'http://courses.masonfmatthews.com/assignments/4',
   lead_in_question: 'Do assignment 1!',
   description:
     %{Finally, we touch our computers.},
@@ -277,12 +304,16 @@ Explain that I gave up on the VM idea, as the infrastructure to run the VM was a
 
 Ask, if they want to create a language to interact with these "database" things, what would it look like?  List activities that you'd need to do.}
 )
+Reading.create!(lesson: lessons[:postgres1],
+  caption: nil,
+  url: 'http://courses.masonfmatthews.com/assignments/4',
+  order_number: 1)
+
 lessons[:sql1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "SQL I: Building Structures",
   held_at: '2013-11-18 2:20PM',
   video_url: 'http://www.youtube.com/watch?v=2YaLYVQEIH0',
-  lead_in_reading: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
   lead_in_question:
     %{Install MySQL on your machine.  I would suggest using these links, but feel free to use other methods if you would like:
 
@@ -295,12 +326,16 @@ The question: Did you have any problems during this installation?},
 
 CREATE, DROP, USE, SHOW, DESCRIBE, INSERT.}
 )
+Reading.create!(lesson: lessons[:sql1],
+  caption: nil,
+  url: 'http://net.tutsplus.com/tutorials/tools-and-tips/relational-databases-for-dummies/',
+  order_number: 1)
+
 lessons[:sql2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql1],
   name: "SQL II: Manipulating Data",
   held_at: '2013-11-19 3:25PM',
   video_url: 'http://youtu.be/Wawg2gXMBAQ',
-  lead_in_reading: 'http://dev.mysql.com/doc/refman/5.0/en/data-type-overview.html',
   lead_in_question:
     %{Read sections 11.1.1-11.1.3 of the daily reading.
 
@@ -313,12 +348,16 @@ There should also be a foreign key relating the two tables.},
 
 INSERT, UPDATE, DELETE, WHERE.}
 )
+Reading.create!(lesson: lessons[:sql2],
+  caption: nil,
+  url: 'http://dev.mysql.com/doc/refman/5.0/en/data-type-overview.html',
+  order_number: 1)
+
 lessons[:sql3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql2],
   name: "SQL III: Querying for Data",
   held_at: '2013-11-20 1:50PM',
   video_url: 'http://youtu.be/2I7ZxBhq2MQ',
-  lead_in_reading: 'http://www.mysqltutorial.org/mysql-select-statement-query-data.aspx',
   lead_in_question: %{Improve on the CREATE TABLE statements that you wrote yesterday.  Make sure to include
 primary and foreign keys.  Then create a SELECT statement which will give me the names of all of the companies which
 have hired an employee with the last name of "Smith."
@@ -330,6 +369,11 @@ if you can put together something new.  As always, you get credit for solid atte
 
 SELECT, FROM, WHERE, AS, CROSS JOIN, INNER JOIN.}
 )
+Reading.create!(lesson: lessons[:sql3],
+  caption: nil,
+  url: 'http://www.mysqltutorial.org/mysql-select-statement-query-data.aspx',
+  order_number: 1)
+
 
 #Week: Design/SQL (4 days, F-W)
 lessons[:sql4] = Lesson.create!(course_id: db_course.id,
@@ -337,7 +381,6 @@ lessons[:sql4] = Lesson.create!(course_id: db_course.id,
   name: "SQL IV: Joins",
   held_at: '2013-11-22 12:55PM',
   video_url: 'http://youtu.be/EsjvEGIh7-A',
-  lead_in_reading: nil,
   lead_in_question: 'Complete assignment 2!',
   description:
     %{If we only needed data from one table, we'd just use Microsoft products!
@@ -362,8 +405,7 @@ lessons[:sql4ish] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql4],
   name: "SQL V: Grouping",
   held_at: '2013-12-02 2:20PM',
-  lead_in_reading: nil,
-  lead_in_question: "No questions today, as I'm not allowed to give you anything due less than 24 hours after you get back from break.  You win.",
+  lead_in_question: nil,
   description:
     %{Time to think in the aggregate.
 
@@ -373,7 +415,6 @@ lessons[:design4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design3ish],
   name: "Design: Hierarchies",
   held_at: '2013-12-03 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{How would you design a database to keep track of [your family tree]?}
@@ -382,7 +423,6 @@ lessons[:design5] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:design4],
   name: "Design: Polymorphism",
   held_at: '2013-12-04 1:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{How would you design a database to keep track of [ratings on songs AND albums AND artists]?}
@@ -393,7 +433,6 @@ lessons[:postgres2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres1],
   name: "MySQL: Transactions",
   held_at: '2013-12-06 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{How do you keep from losing money if your ATM is struck by lightning?}
@@ -402,7 +441,6 @@ lessons[:postgres3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres2],
   name: "MySQL: Indexing I",
   held_at: '2013-12-09 2:20PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{How can you look up a row in a reasonable time when you have
@@ -412,7 +450,6 @@ lessons[:postgres4] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres3],
   name: "MySQL: Indexing II",
   held_at: '2013-12-10 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{Must-have indexing, indexing across multiple columns.}
@@ -429,7 +466,6 @@ lessons[:nosql] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "NoSQL",
   held_at: '2013-12-13 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -438,7 +474,6 @@ lessons[:kv1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:nosql],
   name: "Key-Value DBs (Riak)",
   held_at: '2013-12-16 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -447,7 +482,6 @@ lessons[:cap] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "CAP Theorem",
   held_at: '2013-12-17 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -456,7 +490,6 @@ lessons[:kv2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:kv1],
   name: "Key-Value: Mapreduce",
   held_at: '2013-12-18 1:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -467,7 +500,6 @@ lessons[:orm1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:postgres1],
   name: "ORMs",
   held_at: '2014-01-06 2:20PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -476,7 +508,6 @@ lessons[:orm2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:orm1],
   name: "ORMs: Active Record",
   held_at: '2014-01-07 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -485,7 +516,6 @@ lessons[:orm3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:orm2],
   name: "ORMs: TBD",
   held_at: '2014-01-08 1:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -496,7 +526,6 @@ lessons[:doc1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:nosql],
   name: "Document DBs (MongoDB)",
   held_at: '2014-01-10 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -505,7 +534,6 @@ lessons[:acid] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "ACID Compliance",
   held_at: '2014-01-13 2:20PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -514,7 +542,6 @@ lessons[:doc2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:doc1],
   name: "Document DBs: TDB",
   held_at: '2014-01-14 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -523,7 +550,6 @@ lessons[:doc3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:doc2],
   name: "Document DBs: TBD",
   held_at: '2014-01-15 1:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -534,7 +560,6 @@ lessons[:col1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:nosql],
   name: "Columnar DBs (HBase)",
   held_at: '2014-01-17 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -543,7 +568,6 @@ lessons[:col2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:col1],
   name: "Columnar/Graph DBs: TBD",
   held_at: '2014-01-21 2:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{[Longer Class]}
@@ -552,7 +576,6 @@ lessons[:col3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:col2],
   name: "Columnar/Graph DBs: TBD",
   held_at: '2014-01-23 1:20PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{[Longer Class]}
@@ -563,7 +586,6 @@ lessons[:sql5] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql4ish],
   name: "SQL: Regex",
   held_at: '2014-01-27 2:20PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -572,7 +594,6 @@ lessons[:sql6] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql5],
   name: "SQL: Text Search",
   held_at: '2014-01-28 3:25PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -581,7 +602,6 @@ lessons[:sql7] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:sql6],
   name: "SQL: TBD",
   held_at: '2014-01-29 1:50PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -604,25 +624,32 @@ lessons[:scale1] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:real_world],
   name: "Scalability: TBD",
   held_at: '2014-02-04 3:45PM',
-  lead_in_reading: 'http://expandedramblings.com/index.php/by-the-numbers-17-amazing-facebook-stats/',
   lead_in_question: 'Which statistic is most surprising?',
   description:
     %{TBD}
 )
+Reading.create!(lesson: lessons[:scale1],
+  caption: nil,
+  url: 'http://expandedramblings.com/index.php/by-the-numbers-17-amazing-facebook-stats/',
+  order_number: 1)
+
 lessons[:scale2] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale1],
   name: "Scalability: TBD",
   held_at: '2014-02-05 1:50PM',
-  lead_in_reading: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
   lead_in_question: nil,
   description:
     %{TBD}
 )
+Reading.create!(lesson: lessons[:scale2],
+  caption: nil,
+  url: "https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851560_196423357203561_929747697_n.pdf",
+  order_number: 1)
+
 lessons[:scale3] = Lesson.create!(course_id: db_course.id,
   parent_lesson: lessons[:scale2],
   name: "Scalability: TBD",
   held_at: '2014-02-07 12:55PM',
-  lead_in_reading: nil,
   lead_in_question: nil,
   description:
     %{TBD}
@@ -655,10 +682,11 @@ assignments[1] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 1: Database Design',
   active_at: '2013-11-08 2:25PM',
   due_at: '2013-11-15 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
+  grades_released: true,
   fraction_of_grade: 0.05
 )
-AssignmentQuestion.create!(assignment_id: assignments[1].id,
+AssignmentQuestion.create!(assignment: assignments[1],
   order_number: 1,
   points: 10,
   question:
@@ -668,19 +696,19 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
 - Name of the primary key on this table: id, student _ id, students _ id
 - Name of the foreign key for a student referenced by a different table: id, student _ id, students _ id }
 )
-AssignmentQuestion.create!(assignment_id: assignments[1].id,
+AssignmentQuestion.create!(assignment: assignments[1],
   order_number: 2,
   points: 20,
   question:
     %{Give a specific example of a real-world scenario where database normalization is at odds with our directive to build databases which "support the processes requiring their data."}
 )
-AssignmentQuestion.create!(assignment_id: assignments[1].id,
+AssignmentQuestion.create!(assignment: assignments[1],
   order_number: 3,
   points: 20,
   question:
     %{Give an example of a table which conforms to 2NF, but which is still subject to update anomalies.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[1].id,
+AssignmentQuestion.create!(assignment: assignments[1],
   order_number: 4,
   points: 50,
   question:
@@ -691,22 +719,40 @@ AssignmentQuestion.create!(assignment_id: assignments[1].id,
 
 Use appropriate naming conventions and explictly define all fields, including their domains.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[1].id,
+AssignmentQuestion.create!(assignment: assignments[1],
   order_number: 5,
   points: 20,
   question:
     %{Design a normalized data structure to store the nodes of a binary tree (feel free to ask Mason to clarify if you don't know what a "binary tree" is).}
 )
 
+[['Axl', 85], ['Bullseye', 100], ['Elvis', 97], ['Furball', 100], ['Itchy', 60], ['Cujo', 90], ['Spot', 82]].each do |n|
+  student = User.create!(first_name: n[0],
+    middle_name: 'Q.',
+    last_name: 'Student',
+    email: n[0].downcase + '@ncssm.edu',
+    password: 'password'
+  )
+  course_student = CourseStudent.create!(student: student,
+    course: db_course)
+  AssignmentGrade.create!(assignment: assignments[1],
+    course_student: course_student,
+    final_grade: n[1],
+    submitted_at: assignments[1].due_at,
+    graded_at: Time.now
+  )
+end
+
+
 
 assignments[2] = Assignment.create!(course_id: db_course.id,
   name: 'Assignment 2: Basic SQL',
   active_at: '2013-11-15 2:25PM',
   due_at: '2013-11-22 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
-AssignmentQuestion.create!(assignment_id: assignments[2].id,
+AssignmentQuestion.create!(assignment: assignments[2],
   order_number: 1,
   points: 30,
   question:
@@ -714,7 +760,7 @@ AssignmentQuestion.create!(assignment_id: assignments[2].id,
 that you do in each day.  For food, you should track how many calories are in each type of food, how much you ate, and where
 you bought it.  For exercise, keep track of how many calories you burned and what type of activity it was.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[2].id,
+AssignmentQuestion.create!(assignment: assignments[2],
   order_number: 2,
   points: 30,
   question:
@@ -722,14 +768,14 @@ AssignmentQuestion.create!(assignment_id: assignments[2].id,
 <a href='https://docs.google.com/spreadsheet/ccc?key=0AteOLFPOMuwPdE5jaTVUbUdyX2JqMGVVd1JqekxDQnc&usp=sharing' target='blank'>this link</a>.
 Then write SQL queries to add just one record to each of the tables.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[2].id,
+AssignmentQuestion.create!(assignment: assignments[2],
   order_number: 3,
   points: 30,
   question:
     %{Refer to the data structure in Question 2.  Write an SQL query to change all the values of 100 in the "efficacy" column of the "test_results"
 table to 99 unless the bug tested was a Mosquito.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[2].id,
+AssignmentQuestion.create!(assignment: assignments[2],
   order_number: 4,
   points: 30,
   question:
@@ -748,14 +794,14 @@ assignments[3] = Assignment.create!(course_id: db_course.id,
   students_can_submit: false,
   fraction_of_grade: 0.05
 )
-AssignmentQuestion.create!(assignment_id: assignments[3].id,
+AssignmentQuestion.create!(assignment: assignments[3],
   order_number: 1,
   points: 30,
   question:
     %{Design the data structure that you believe is being used for the Snapchat database.  Think about all the things
 that the application and service do, not just a flat data structure to store photos.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[3].id,
+AssignmentQuestion.create!(assignment: assignments[3],
   order_number: 2,
   points: 30,
   question:
@@ -768,7 +814,7 @@ CREATE TABLE people (id INT AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id))
 
 (b) Rewrite the query without using GROUP BY.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[3].id,
+AssignmentQuestion.create!(assignment: assignments[3],
   order_number: 3,
   points: 30,
   question:
@@ -779,7 +825,7 @@ scales while others have 7-point scales.  Do NOT store 100 records per class in 
 
 (b) Write a query to return all numerical grades paired with the corresponding letter grades for all assignments.}
 )
-AssignmentQuestion.create!(assignment_id: assignments[3].id,
+AssignmentQuestion.create!(assignment: assignments[3],
   order_number: 4,
   points: 30,
   question:
@@ -809,35 +855,35 @@ Assignment.create!(course_id: db_course.id,
   name: 'Assignment 4: Key-Value Databases (Riak)',
   active_at: '2013-12-13 2:25PM',
   due_at: '2013-12-18 1:50PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 5: ORMs (Active Record)',
   active_at: '2014-01-06 3:10PM',
   due_at: '2014-01-10 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 6: Document Databases (MongoDB)',
   active_at: '2014-01-10 2:25PM',
   due_at: '2014-01-17 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 7: Columnar Databases (HBase)',
   active_at: '2014-01-17 2:25PM',
   due_at: '2014-01-24 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 Assignment.create!(course_id: db_course.id,
   name: 'Assignment 8: Advanced SQL',
   active_at: '2014-01-31 2:25PM',
   due_at: '2014-02-07 12:55PM',
-  students_can_submit: false,
+  students_can_submit: true,
   fraction_of_grade: 0.05
 )
 
@@ -889,16 +935,6 @@ Policy.create!(course_id: db_course.id,
 having a good reference to keep around after the class, I'd suggest the
 Pragmatic Programmer's [7 Databases in 7 Weeks](http://pragprog.com/book/rwdata/seven-databases-in-seven-weeks)
 by Eric Redmond and Jim R. Wilson}
-)
-
-Policy.create!(course_id: db_course.id,
-  name: 'Grading Scale',
-  order_number: 0,
-  description:
-    %{* A: [90-100]
-* B: [80-90)
-* C: [70-80)
-* D: Below 70}
 )
 
 Policy.create!(course_id: db_course.id,

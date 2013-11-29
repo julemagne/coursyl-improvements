@@ -40,6 +40,9 @@
   }
   .span2 {
     padding: 5px;
+    h3 {
+      margin-bottom: -10px;
+    }
   }
 }
 
@@ -79,7 +82,7 @@ circle.node-dot-empty {
 }
 circle.node-dot-completed {
   fill: #66C662;
-  stroke: #50BE4B;
+  stroke: #468847;
   stroke-width: 1px;
 }
 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  assignment_question_id: 1
+  assignment_grade_id: 1
+  grade: 1.5
+  answer: MyText
+  comments: MyText
+
+two:
+  assignment_question_id: 1
+  assignment_grade_id: 1
+  grade: 1.5
+  answer: MyText
+  comments: MyText

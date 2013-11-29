@@ -1,8 +1,8 @@
 <h2><%= @lesson.course.course_code %> Daily Readings and Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
 
 <p class="lead">Readings for this Lesson</p>
-<% if [@lesson.lead_in_reading].compact.each do |r| %>
-  <p><%= link_to r, r %></p>
+<% if @lesson.readings.each do |r| %>
+  <p><%= r.url? ? (link_to r.caption, r.url) : r.caption %></p>
 <% end.empty? %>
   <p class='muted'>No readings for this lesson.</p>
 <% end %>

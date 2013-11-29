@@ -1,4 +1,4 @@
-<% assignment_statuses = @course.assignment_statuses -%>
+<% assignment_statuses = @course.assignment_statuses(current_user) -%>
 
 <%= render partial: "summary_box", locals: {course: @course, :header => true} %>
 
@@ -83,9 +83,9 @@
       <td>
 
         <% if l.past_or_next? %>
-          <%= link_to '<i class="icon-pencil" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
+          <%= link_to '<i class="icon-edit" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
         <% else %>
-          <i class="icon-pencil muted" alt="Pre-class Reading"></i>
+          <i class="icon-edit muted" alt="Pre-class Reading"></i>
         <% end %>
 
         <% if current_user && current_user.is_admin? %>
@@ -112,6 +112,17 @@
   <a id="anchor-policies" class="anchor-course"></a>
   <h3><i class="icon-comments-alt"></i> Course Details and Policies</h3>
   <dl class="dl-horizontal">
+    <% unless @course.grade_thresholds.blank? %>
+      <dt>Grading Scale</dt>
+      <dd>The following are the possible letter grades in the course:
+        <ul>
+          <% @course.grade_thresholds.each do |t| %>
+            <li><%= t.letter %>: <%= int_if_possible(t.grade) %> and above</li>
+          <% end %>
+        </ul>
+      </dd>
+    <% end %>
+
     <% @course.policies.each do |p| %>
     <dt><%= p.name %></dt>
     <dd><%= markdown(p.description) %></dd>

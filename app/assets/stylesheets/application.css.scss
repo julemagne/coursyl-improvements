@@ -28,6 +28,14 @@ a {
   }
 }
 
+.float-right {
+  float: right;
+}
+
+td.text-right, th.text-right {
+  text-align: right !important;
+}
+
 .list-page-new-button {
   margin-top: 15px;
 }

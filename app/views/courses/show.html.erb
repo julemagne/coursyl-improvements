@@ -4,6 +4,9 @@
 
 <section id="first-section">
   <a id="anchor-description" class="anchor-course"></a>
+  <% if current_user && current_user.teaching?(@course) %>
+    <h3 class="float-right"><a class="btn">Edit Course Details</a></h3>
+  <% end %>
   <h3><i class="icon-lightbulb"></i> Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>
   <%= markdown(@course.description) %>
@@ -21,6 +24,9 @@
         <th>Last Assignment</th>
         <th>Next Assignment</th>
         <th>Overall Grade</th>
+        <td class="text-right"><% if current_user.teaching?(@course) %>
+          <a class="btn btn-mini btn-success">+ New Student</a>
+        <% end %></td>
       </tr>
       <% @course.course_students.each do |s| %>
       <% last_status = last_assignment.status(s.student) %>
@@ -29,7 +35,8 @@
           <td><%= s.full_name %></td>
           <td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td>
           <td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td>
-          <td><%= s.grade %></td>
+          <td><%= int_if_possible(s.grade) %></td>
+          <td class="text-right"></td>
         </tr>
       <% end %>
     </table>
@@ -65,7 +72,9 @@
         <th>My Grade</th>
       <% end %>
       <th>% of Course</th>
-      <th></th>
+      <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
+        <a class="btn btn-mini btn-success">+ New Assignment</a>
+      <% end %></td>
     </tr>
     <% @course.assignments.each do |a| %>
       <tr>
@@ -79,7 +88,7 @@
           <td><%= int_if_possible(current_user.grade_on_assignment(a)) %></td>
         <% end %>
         <td><%= percentage(a.fraction_of_grade) %></td>
-        <td>
+        <td class="text-right">
           <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
         </td>
       </tr>
@@ -105,7 +114,9 @@
       <th>Date</th>
       <th>Time</th>
       <th>Name</th>
-      <th></th>
+      <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
+        <a class="btn btn-mini btn-success">+ New Lesson</a>
+      <% end %></td>
     </tr>
     <% @course.lessons.each do |l| %>
     <tr heldat="<%= l.held_at_integer %>" class="node">
@@ -113,7 +124,7 @@
       <td><%= date_abbreviation(l.held_at) %></td>
       <td><%= time_abbreviation(l.held_at) %></td>
       <td><%= l.name %></td>
-      <td>
+      <td class="text-right">
 
         <% if l.past_or_next? %>
           <%= link_to '<i class="icon-edit" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
@@ -133,7 +144,7 @@
           <% else %>
             <i class="icon-th-list muted" alt="Lesson Outline"></i>
           <% end %>
-          Edit button
+          <a class="btn btn-mini">Edit</a>
         <% end %>
       </td>
     </tr>
@@ -144,7 +155,10 @@
 
 <section>
   <a id="anchor-policies" class="anchor-course"></a>
-  <h3><i class="icon-comments-alt"></i> Course Details and Policies</h3>
+  <% if current_user && current_user.teaching?(@course) %>
+    <h3 class="float-right"><a class="btn">Edit Course Polices</a></h3>
+  <% end %>
+  <h3><i class="icon-comments-alt"></i> Course Policies</h3>
   <dl class="dl-horizontal">
     <% unless @course.grade_thresholds.blank? %>
       <dt>Grading Scale</dt>

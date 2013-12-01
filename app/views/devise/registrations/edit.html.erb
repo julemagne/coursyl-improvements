@@ -9,11 +9,18 @@
       <span class="add-on">@</span>
       <%= f.email_field :email, required: true, autofocus: true %>
     </div>
-    <span class="help-inline">e.g. "Dr."</span>
+  <% end %>
+
+  <%= f.label :current_password do %>
+    <span class="field-label">Old Password</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-key muted"></i></span>
+      <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
   <% end %>
 
   <%= f.label :password do %>
-    <span class="field-label">Password</span>
+    <span class="field-label">New Password</span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-key"></i></span>
       <%= f.password_field :password, autocomplete: "off" %>
@@ -22,20 +29,12 @@
   <% end %>
 
   <%= f.label :password_confirmation do %>
-    <span class="field-label">Confirm</span>
+    <span class="field-label">New Password</span>
     <div class="input-prepend">
       <span class="add-on"><i class="icon-key"></i></span>
       <%= f.password_field :password_confirmation, autocomplete: "off" %>
     </div>
-  <% end %>
-
-  <%= f.label :current_password do %>
-    <span class="field-label">Current Password</span>
-    <div class="input-prepend">
-      <span class="add-on"><i class="icon-key muted"></i></span>
-      <%= f.password_field :current_password, autocomplete: "off" %>
-    </div>
-    <span class="help-inline">(needed to confirm your changes)</span>
+    <span class="help-inline">(confirm new password)</span>
   <% end %>
 
   <div><%= f.submit "Update", class: "btn"%></div>

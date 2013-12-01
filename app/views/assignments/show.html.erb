@@ -3,7 +3,7 @@
 <% status = @assignment.status(current_user)%>
 
 <% if grade && @assignment.grades_released %>
-  <h2 style="float:right;"><small>Your Grade:</small> <%= @assignment.letter_grade(current_user) %> <small>(<%= int_if_possible(grade.final_grade) %>)</small></h2>
+  <h2 class="float-right"><small>Your Grade:</small> <%= @assignment.letter_grade(current_user) %> <small>(<%= int_if_possible(grade.final_grade) %>)</small></h2>
 <% end %>
 
 <h2><%= @assignment.course.course_code %> <%= @assignment.name %></h2>
@@ -34,10 +34,10 @@
 
     <% if grade %>
       <dl class="dl-horizontal muted">
-        <dt>Your answer</dt><dd><%= answer || "(No Answer Given)" %></dd>
+        <dt>Your answer</dt><dd><%= simple_format(answer || "(No Answer Given)") %></dd>
         <% if @assignment.grades_released %>
           <dt>Your score</dt><dd><%= int_if_possible(grade.grade_on(q)) || "(No Score Given)" %></dd>
-          <dt>Instructor comments</dt><dd><%= grade.comments_on(q) || "(No Comments Given)" %></dd>
+          <dt>Instructor comments</dt><dd><%= markdown(grade.comments_on(q) || "(No Comments Given)") %></dd>
         <% end %>
       </dl>
     <% end %>

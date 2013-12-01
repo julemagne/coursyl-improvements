@@ -11,7 +11,7 @@ class AssignmentGrade < ActiveRecord::Base
 
   def answer_on(question)
     aqg = assignment_question_grades.where(assignment_question: question).first
-    aqg ? aqg.answer : nil
+    aqg && !aqg.answer.blank? ? aqg.answer : nil
   end
 
   def grade_on(question)
@@ -21,6 +21,6 @@ class AssignmentGrade < ActiveRecord::Base
 
   def comments_on(question)
     aqg = assignment_question_grades.where(assignment_question: question).first
-    aqg ? aqg.comments : nil
+    aqg && !aqg.comments.blank? ? aqg.comments : nil
   end
 end

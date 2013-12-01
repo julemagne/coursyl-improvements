@@ -3,4 +3,7 @@
 <% else %>
   <i class="icon-edit muted" alt="Take Assignment"></i>
 <% end %>
-<i class="icon-bar-chart muted"></i>
+<% if current_user && current_user.teaching?(assignment.course) %>
+  <i class="icon-bar-chart muted"></i>
+  <a class="btn btn-mini">Edit</a>
+<% end %>

@@ -1,16 +1,56 @@
+<% grade = @assignment.has_been_answered_by(current_user) %>
+<% can_turn_in = @assignment.can_be_turned_in_by(current_user) %>
+<% status = @assignment.status(current_user)%>
+
+<% if grade && @assignment.grades_released %>
+  <h2 style="float:right;"><small>Your Grade:</small> <%= @assignment.letter_grade(current_user) %> <small>(<%= int_if_possible(grade.final_grade) %>)</small></h2>
+<% end %>
+
 <h2><%= @assignment.course.course_code %> <%= @assignment.name %></h2>
 
-<p class="muted">Due: <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %></p>
+
+<p class="<%= status.text_class %>">
+  <span class="label <%= status.label_class %>"><%= status.name %></span>
+  Due <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %>
+</p>
+
+<% if grade %>
+  <% if grade.submitted_at.blank? %>
+    <p class="text-error">The answers below have not yet been turned in.</p>
+  <% elsif @assignment.grades_released.blank? %>
+    <p class="text-warning">Your answers have not yet been graded.  Please check back later.</p>
+  <% end %>
+<% end %>
+
+
 
 <%= form_tag turn_in_assignment_path(@assignment) do %>
 
   <% @assignment.assignment_questions.each do |q| %>
+    <% answer = (grade ? grade.answer_on(q) : nil) %>
     <p class="lead">Question <%= q.order_number %> (<%= q.points %> points):</p>
     <%= markdown(q.question) %>
-    <%= text_area_tag("questions[#{q.id}]", nil, rows: 8, class: "input-xxlarge") %>
+
+
+    <% if grade %>
+      <dl class="dl-horizontal muted">
+        <dt>Your answer</dt><dd><%= answer || "(No Answer Given)" %></dd>
+        <% if @assignment.grades_released %>
+          <dt>Your score</dt><dd><%= int_if_possible(grade.grade_on(q)) || "(No Score Given)" %></dd>
+          <dt>Instructor comments</dt><dd><%= grade.comments_on(q) || "(No Comments Given)" %></dd>
+        <% end %>
+      </dl>
+    <% end %>
+
+    <% if can_turn_in %>
+      <p><%= text_area_tag("questions[#{q.id}]", answer, rows: 8, class: "input-xxlarge") %></p>
+    <% end %>
   <% end %>
 
-  <p><%= submit_tag "Submit Your Answers", class: "btn" %></p>
+
+  <% if can_turn_in %>
+    <p><%= submit_tag "Save Draft", class: "btn" %> <%= submit_tag "Submit Final Answers", class: "btn" %></p>
+  <% end %>
 
 <% end %>
 

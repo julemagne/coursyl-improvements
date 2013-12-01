@@ -23,20 +23,39 @@ class Assignment < ActiveRecord::Base
     course.color
   end
 
-  def turn_in(answers, user)
-    if user && user.enrolled?(course) && status(user).overdue_or_in_progress?
-      course_student = CourseStudent.where(student: user, course_id: @assignment.course).first
-      assignment_grade = AssignmentGrade.where(assignment: @assignment,
-        course_student: course_student,
-        submitted_at: Time.now).first_or_create!
+  def turn_in(answers, user, final=true)
+    if can_be_turned_in_by(user)
+      course_student = CourseStudent.where(student: user, course: course).first
+      assignment_grade = AssignmentGrade.where(assignment: self,
+        course_student: course_student).first_or_create!
+
+      assignment_grade.submitted_at = Time.now if final
 
       answers.each do |k,v|
-        AssignmentQuestionGrade.create!(assignment_question_id: k.to_i,
-          assignment_grade: assignment_grade,
-          answer: v)
+        aqg = AssignmentQuestionGrade.where(assignment_question_id: k.to_i,
+          assignment_grade: assignment_grade).first_or_create!
+          aqg.answer = v
+          aqg.save!
       end
 
-      assignment_grade
+      assignment_grade.save!
+    end
+  end
+
+  def can_be_turned_in_by(user)
+    students_can_submit && user && user.enrolled?(course) && status(user).overdue_or_in_progress?
+  end
+
+  def has_been_answered_by(user)
+    if user
+      course_student = CourseStudent.where(student: user, course: course).first
+      assignment_grades.where(course_student_id: course_student.id).first
+    end
+  end
+
+  def letter_grade(user)
+    if (assignment_grade = has_been_answered_by(user))
+      course.letter_for_grade(assignment_grade.final_grade)
     end
   end
 

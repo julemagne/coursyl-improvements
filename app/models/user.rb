@@ -83,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def grade_on_assignment(assignment)
-    ag = assignment_grades.where(["assignment_id = ?", assignment.id]).first
+    ag = assignment_grades.where(assignment: assignment).first
     ag.final_grade if ag
   end
 

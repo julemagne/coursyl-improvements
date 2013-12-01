@@ -65,8 +65,13 @@ class AssignmentsController < ApplicationController
 
   # POST
   def turn_in
-    if @assignment.turn_in(params[:questions], current_user)
-      flash[:success] = "You have successfully turned in #{@assignment.name}."
+    final = (params[:commit]=="Submit Final Answers")
+    if @assignment.turn_in(params[:questions], current_user, final)
+      if final
+        flash[:notice] = "You have turned in #{@assignment.name}."
+      else
+        flash[:notice] = "You have saved a draft of #{@assignment.name}."
+      end
     else
       flash[:error] = "You are not allowed to turn in #{@assignment.name}."
     end

@@ -7,6 +7,8 @@ Courses::Application.routes.draw do
   resources :assignments do
     member do
       post 'turn_in'
+      get 'grade'
+      post 'grade'
     end
   end
   resources :lessons do

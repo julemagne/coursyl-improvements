@@ -48,8 +48,9 @@ class Assignment < ActiveRecord::Base
 
   def has_been_answered_by(user)
     if user
-      course_student = CourseStudent.where(student: user, course: course).first
-      assignment_grades.where(course_student_id: course_student.id).first
+      if (course_student = CourseStudent.where(student: user, course: course).first)
+        assignment_grades.where(course_student_id: course_student.id).first
+      end
     end
   end
 

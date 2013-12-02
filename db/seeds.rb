@@ -726,7 +726,7 @@ AssignmentQuestion.create!(assignment: assignments[1],
     %{Design a normalized data structure to store the nodes of a binary tree (feel free to ask Mason to clarify if you don't know what a "binary tree" is).}
 )
 
-[['Axl', 85], ['Bullseye', 100], ['Elvis', 97], ['Furball', 100], ['Itchy', 60], ['Cujo', 90], ['Spot', 82]].each do |n|
+[['Axl', 85], ['Bullseye', 100], ['Cujo', 97], ['Elvis', 100], ['Furball', 60], ['Itchy', 90], ['Spot', 82]].each do |n|
   student = User.create!(first_name: n[0],
     middle_name: 'Q.',
     last_name: 'Student',
@@ -808,7 +808,7 @@ AssignmentQuestion.create!(assignment: assignments[3],
     %{For this question, assume that you have an existing table with many records in it.  The table structure could be
 created using the following SQL command:
 
-CREATE TABLE people (id INT AUTO_INCREMENT, name VARCHAR(255), PRIMARY KEY (id));
+CREATE TABLE people (id INT AUTO _ INCREMENT, name VARCHAR(255), PRIMARY KEY (id));
 
 (a) Write a query which returns all the names which appear more than once.  This query must use a GROUP BY.
 

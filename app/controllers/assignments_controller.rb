@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :admin_only!, only: [:index, :create, :update, :destroy]
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy, :turn_in]
+  before_action :set_assignment, only: [:show, :edit, :update, :destroy, :turn_in, :grade]
 
   # GET /assignments
   # GET /assignments.json
@@ -76,6 +76,12 @@ class AssignmentsController < ApplicationController
       flash[:error] = "You are not allowed to turn in #{@assignment.name}."
     end
     redirect_to @assignment
+  end
+
+  def grade
+    if request.post?
+
+    end
   end
 
   private

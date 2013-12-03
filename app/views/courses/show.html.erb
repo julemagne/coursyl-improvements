@@ -144,7 +144,7 @@
           <% else %>
             <i class="icon-th-list muted" alt="Lesson Outline"></i>
           <% end %>
-          <a class="btn btn-mini">Edit</a>
+          <%= link_to 'Edit', edit_lesson_path(l), class: "btn btn-mini" %>
         <% end %>
       </td>
     </tr>

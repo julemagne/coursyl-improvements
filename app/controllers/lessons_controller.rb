@@ -12,7 +12,7 @@ class LessonsController < ApplicationController
   # GET /lessons
   # GET /lessons.json
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.all.order(:held_at)
   end
 
   # GET /lessons/1

@@ -34,6 +34,10 @@
     <span class="field-label">Maximum Grade</span> <%= f.text_field :maximum_grade, class: "input-small" %>
   <% end %>
 
+  <%= f.label :students_can_submit do %>
+    <span class="field-label">Students Submit?</span> <%= f.check_box :students_can_submit %>
+  <% end %>
+
   <h3>Questions</h3>
   <%= f.fields_for :assignment_questions do |ff| %>
     <%= ff.label :order_number do %>

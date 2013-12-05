@@ -738,8 +738,7 @@ AssignmentQuestion.create!(assignment: assignments[1],
   AssignmentGrade.create!(assignment: assignments[1],
     course_student: course_student,
     final_grade: n[1],
-    submitted_at: assignments[1].due_at,
-    graded_at: Time.now
+    submitted_at: assignments[1].due_at
   )
 end
 

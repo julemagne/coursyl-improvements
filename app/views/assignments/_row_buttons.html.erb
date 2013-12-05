@@ -8,6 +8,6 @@
     <i class="icon-bar-chart muted"></i>
   <% else %>
     <%= link_to '<i class="icon-bar-chart" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
-    <% end %>
-  <a class="btn btn-mini">Edit</a>
+  <% end %>
+  <%= link_to 'Edit', edit_assignment_path(assignment), class: "btn btn-mini" %>
 <% end %>

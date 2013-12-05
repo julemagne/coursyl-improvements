@@ -1,8 +1,6 @@
 <%= form_for(@assignment) do |f| %>
   <% if @assignment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
-
+    <div class="alert alert-error">
       <ul>
       <% @assignment.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -11,27 +9,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.number_field :course_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :active_at %><br>
-    <%= f.datetime_select :active_at %>
-  </div>
-  <div class="field">
-    <%= f.label :due_at %><br>
-    <%= f.datetime_select :due_at %>
-  </div>
-  <div class="field">
-    <%= f.label :fraction_of_grade %><br>
-    <%= f.text_field :fraction_of_grade %>
-  </div>
+  <%= f.hidden_field :course_id %>
+
+  <%= f.label :name do %>
+    <span class="field-label">Name</span> <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.label :active_at do %>
+    <span class="field-label">Open Date/Time</span> <%= f.text_field :active_at, required: true %>
+    <span class="help-inline">e.g. "2000-01-01 14:00:00"</span>
+  <% end %>
+
+  <%= f.label :due_at do %>
+    <span class="field-label">Due Date/Time</span> <%= f.text_field :due_at, required: true %>
+    <span class="help-inline">e.g. "2000-01-01 14:00:00"</span>
+  <% end %>
+
+  <%= f.label :fraction_of_grade do %>
+    <span class="field-label">Fraction of Grade</span> <%= f.text_field :fraction_of_grade, required: true, class: "input-small" %>
+    <span class="help-inline">e.g. "0.2"  (Do not type "20%")</span>
+  <% end %>
+
+  <%= f.label :maximum_grade do %>
+    <span class="field-label">Maximum Grade</span> <%= f.text_field :maximum_grade, class: "input-small" %>
+  <% end %>
+
+  <h3>Questions</h3>
+  <%= f.fields_for :assignment_questions do |ff| %>
+    <%= ff.label :order_number do %>
+      <strong class="field-label">Question Order #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+    <% end %>
+    <%= ff.label :points do %>
+      <span class="field-label"># of Points</span> <%= ff.text_field :points, class: "input-small" %>
+    <% end %>
+    <% if ff.object.persisted? %>
+      <%= ff.label :_destroy do %>
+        <span class="field-label">Delete Question?</span> <%= ff.check_box :_destroy %>
+      <% end %>
+    <% end %>
+    <%= ff.text_area :question, rows: 8, class: "input-block-level" %>
+    <br/>
+  <% end %>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn" %>
   </div>
 <% end %>

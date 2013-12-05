@@ -1,37 +1,36 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :admin_only!, only: [:index, :create, :update, :destroy]
-  before_action :set_assignment, only: [:show, :edit, :update, :destroy, :turn_in, :grade]
+  before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade]
+  before_action :set_course, only: [:new]
+  before_action :instructor_only!, except: [:show, :turn_in]
 
-  # GET /assignments
-  # GET /assignments.json
-  def index
-    @assignments = Assignment.all
-  end
-
-  # GET /assignments/1
-  # GET /assignments/1.json
+  # GET
   def show
   end
 
-  # GET /assignments/new
+  # GET
   def new
     @assignment = Assignment.new
+    @assignment.course_id = @course.id
+
+    #Build new question so that more can be added w/o JS.
+    @assignment.assignment_questions.build
   end
 
-  # GET /assignments/1/edit
+  # GET
   def edit
+    #Build new question so that more can be added w/o JS.
+    @assignment.assignment_questions.build
   end
 
-  # POST /assignments
-  # POST /assignments.json
+  # POST
   def create
     @assignment = Assignment.new(assignment_params)
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @assignment }
+        format.html { redirect_to edit_assignment_path(@assignment), notice: 'Assignment was successfully created.' }
+        format.json { render action: 'edit', status: :created, location: @assignment }
       else
         format.html { render action: 'new' }
         format.json { render json: @assignment.errors, status: :unprocessable_entity }
@@ -39,12 +38,11 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /assignments/1
-  # PATCH/PUT /assignments/1.json
+  # PATCH/PUT
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully updated.' }
+        format.html { redirect_to edit_assignment_path(@assignment), notice: 'Assignment was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -53,8 +51,7 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE /assignments/1
-  # DELETE /assignments/1.json
+  # DELETE
   def destroy
     @assignment.destroy
     respond_to do |format|
@@ -78,6 +75,7 @@ class AssignmentsController < ApplicationController
     redirect_to @assignment
   end
 
+  # GET OR POST
   def grade
     if current_user.teaching?(@assignment.course)
       if request.post?
@@ -96,13 +94,17 @@ class AssignmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_assignment
+    def set_assignment_and_course
       @assignment = Assignment.find(params[:id])
+      @course = @assignment.course
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_course
+      @course = Course.find(params[:course_id])
+    end
+
     def assignment_params
-      params.require(:assignment).permit(:course_id, :name, :active_at, :due_at, :fraction_of_grade)
+      params.require(:assignment).permit(:course_id, :name, :active_at, :due_at, :fraction_of_grade, :maximum_grade,
+          assignment_questions_attributes: [:id, :question, :points, :order_number])
     end
 end

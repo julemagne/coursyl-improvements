@@ -1,6 +1,5 @@
-<h1>Editing assignment</h1>
+<h2>Editing Assignment for <%= @assignment.course_code_and_name %></h2>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @assignment %> |
-<%= link_to 'Back', assignments_path %>
+<%= link_to "<< Back to Course", @assignment.course %>

@@ -3,7 +3,8 @@
 <% status = @assignment.status(current_user)%>
 
 <% if grade && @assignment.grades_released %>
-  <h2 class="float-right"><small>Your Grade:</small> <%= @assignment.letter_grade(current_user) %> <small>(<%= int_if_possible(grade.final_grade) %>)</small></h2>
+  <h2 class="float-right"><small>Your Grade:</small> <%= @assignment.letter_grade_for(current_user) %>
+    <small>(<%= int_if_possible(grade.grade) %>)</small></h2>
 <% end %>
 
 <h2><%= @assignment.course.course_code %> <%= @assignment.name %></h2>
@@ -26,9 +27,9 @@
 
 <%= form_tag turn_in_assignment_path(@assignment) do %>
 
-  <% @assignment.assignment_questions.each do |q| %>
+  <% @assignment.assignment_questions.each_with_index do |q, i| %>
     <% answer = (grade ? grade.answer_on(q) : nil) %>
-    <p class="lead">Question <%= q.order_number %> (<%= q.points %> points):</p>
+    <p class="lead">Question <%= i+1 %> (<%= q.points %> points):</p>
     <%= markdown(q.question) %>
 
 

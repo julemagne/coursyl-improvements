@@ -4,6 +4,10 @@
   <i class="icon-edit muted" alt="Take Assignment"></i>
 <% end %>
 <% if current_user && current_user.teaching?(assignment.course) %>
-  <i class="icon-bar-chart muted"></i>
+  <% if assignment.status(current_user).name == "Future" %>
+    <i class="icon-bar-chart muted"></i>
+  <% else %>
+    <%= link_to '<i class="icon-bar-chart" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <% end %>
   <a class="btn btn-mini">Edit</a>
 <% end %>

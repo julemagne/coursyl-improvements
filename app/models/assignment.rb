@@ -54,9 +54,9 @@ class Assignment < ActiveRecord::Base
     end
   end
 
-  def letter_grade(user)
+  def letter_grade_for(user)
     if (assignment_grade = has_been_answered_by(user))
-      course.letter_for_grade(assignment_grade.final_grade)
+      assignment_grade.letter_grade
     end
   end
 

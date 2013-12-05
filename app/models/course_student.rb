@@ -15,7 +15,7 @@ class CourseStudent < ActiveRecord::Base
     weighted_total = 0
     fraction_total = 0
     assignment_grades.graded.each do |ag|
-      weighted_total += ag.final_grade * ag.fraction_of_grade
+      weighted_total += ag.grade * ag.fraction_of_grade
       fraction_total += ag.fraction_of_grade
     end
     weighted_total/fraction_total

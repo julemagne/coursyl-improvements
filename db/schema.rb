@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129175143) do
+ActiveRecord::Schema.define(version: 20131205015713) do
 
   create_table "assignment_grades", force: true do |t|
     t.integer  "assignment_id"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20131129175143) do
     t.float    "fraction_of_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "maximum_grade"
   end
 
   create_table "course_instructors", force: true do |t|

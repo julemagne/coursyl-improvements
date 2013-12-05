@@ -37,7 +37,7 @@
       <% percent_graded = percentage(current_user.fraction_graded(course)) -%>
       <div class="span2 text-center">
         <h<%= 3-(header ? 1 : 0) %>>
-          <%= current_user.letter_grade(course) %> <small>(<%= int_if_possible(current_user.grade(course)) %>)</small>
+          <%= current_user.letter_grade(course) %> <small>(<%= number_with_precision(current_user.grade(course), precision: 1) %>)</small>
         </h<%= 3-(header ? 1 : 0) %>>
         <% if header %>
           <small class="muted">Possible Grades:

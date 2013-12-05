@@ -7,10 +7,14 @@ namespace :db do
     Rake::Task['db:seed'].invoke
   end
 
-  task :remigrate => :environment do
-    system("rake db:migrate VERSION=0")
-    Rake::Task['db:migrate'].invoke
-    Rake::Task['db:seed'].invoke
+  namespace :dev do
+    desc "Rollback to 0, migrate, and seed the dev database"
+    task :remigrate => :environment do
+      Rails.env = "development"
+      system("rake db:migrate VERSION=0")
+      Rake::Task['db:migrate'].invoke
+      Rake::Task['db:seed'].invoke
+    end
   end
 
   namespace :test do

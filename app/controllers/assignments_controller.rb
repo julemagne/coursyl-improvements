@@ -79,8 +79,19 @@ class AssignmentsController < ApplicationController
   end
 
   def grade
-    if request.post?
-
+    if current_user.teaching?(@assignment.course)
+      if request.post?
+        @assignment.maximum_grade = params[:maximum_grade]
+        @assignment.grades_released = (params[:grades_released].blank? ? false : true)
+        @assignment.save!
+        params[:grades].each do |k, v|
+          AssignmentQuestionGrade.find(k).update_attributes!(v)
+        end
+        flash[:notice] = "You have successfully saved these grades."
+      end
+    else
+      flash[:error] = "You are not allowed to grade #{@assignment.name}."
+      redirect_to @assignment.course
     end
   end
 

@@ -24,8 +24,8 @@
   <% end %>
 
   <%= f.label :held_at do %>
-    <span class="field-label">Day/Time</span> <%= f.text_field :held_at, required: true %>
-    <span class="help-inline">e.g. "2000-01-01 14:00:00"</span>
+    <span class="field-label">Day/Time</span> <%= f.text_field :held_at, required: true, value: @lesson.held_at.strftime("%Y-%m-%d %H:%M") %>
+    <span class="help-inline">e.g. "2000-01-01 14:00"</span>
   <% end %>
 
   <%= f.label :description do %>

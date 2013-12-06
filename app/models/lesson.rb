@@ -6,6 +6,10 @@ class Lesson < ActiveRecord::Base
 
   validates :name, presence: true
 
+  accepts_nested_attributes_for :readings,
+      :allow_destroy => true,
+      :reject_if     => :all_blank
+
   def descendant_tree
     tree = {name: name,
       description: description,

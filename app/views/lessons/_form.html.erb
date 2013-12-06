@@ -9,39 +9,61 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :course_id %><br>
-    <%= f.number_field :course_id %>
-  </div>
-  <div class="field">
-    <%= f.label :parent_lesson_id %><br>
-    <%= f.number_field :parent_lesson_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :held_at %><br>
-    <%= f.datetime_select :held_at %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :lead_in_question %><br>
-    <%= f.text_area :lead_in_question %>
-  </div>
-  <div class="field">
-    <%= f.label :outline %><br>
-    <%= f.text_area :outline %>
-  </div>
-  <div class="field">
-    <%= f.label :video_url %><br>
-    <%= f.text_area :video_url %>
-  </div>
+  <p>Time: <%= Time.now %></p>
+  <p>Course: <%= @course %></p>
+  <p>Lesson Course ID: <%= @lesson.course_id %></p>
+
+  <%= f.hidden_field :course_id %>
+
+  <%= f.label :name do %>
+    <span class="field-label">Lesson Name</span> <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.label :parent_lesson_id do %>
+    <span class="field-label">Parent Lesson</span> <%= f.text_field :parent_lesson_id, class: 'input-small' %>
+  <% end %>
+
+  <%= f.label :held_at do %>
+    <span class="field-label">Day/Time</span> <%= f.text_field :held_at, required: true %>
+    <span class="help-inline">e.g. "2000-01-01 14:00:00"</span>
+  <% end %>
+
+  <%= f.label :description do %>
+    <span class="field-label">Description</span> <%= f.text_area :description, class: 'input-xxlarge' %>
+  <% end %>
+
+  <%= f.label :lead_in_question do %>
+    <span class="field-label">Daily Question</span> <%= f.text_area :lead_in_question, rows: 3, class: 'input-xxlarge' %>
+  <% end %>
+
+  <%= f.label :outline do %>
+    <span class="field-label">Lesson Outline</span> <%= f.text_area :outline, rows: 5, class: 'input-xxlarge' %>
+  <% end %>
+
+  <%= f.label :video_url do %>
+    <span class="field-label">Video URL</span> <%= f.text_field :video_url, class: 'input-xxlarge' %>
+  <% end %>
+
+  <h3>Pre-Class Readings</h3>
+  <%= f.fields_for :readings do |ff| %>
+    <%= ff.label :order_number do %>
+      <strong class="field-label">Reading Order #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+    <% end %>
+    <%= ff.label :caption do %>
+      <span class="field-label">Caption</span> <%= ff.text_field :caption, class: 'input-xxlarge' %>
+    <% end %>
+    <%= ff.label :url do %>
+      <span class="field-label">URL</span> <%= ff.text_field :url, class: 'input-xxlarge' %>
+    <% end %>
+    <% if ff.object.persisted? %>
+      <%= ff.label :_destroy do %>
+        <span class="field-label">Delete Above Reading?</span> <%= ff.check_box :_destroy %>
+      <% end %>
+    <% end %>
+    <br/>
+  <% end %>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn" %>
   </div>
 <% end %>

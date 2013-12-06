@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade]
-  before_action :set_course, only: [:new]
+  before_action :set_course, only: [:new, :create]
   before_action :instructor_only!, except: [:show, :turn_in]
 
   # GET
@@ -100,12 +100,12 @@ class AssignmentsController < ApplicationController
     end
 
     def set_course
-      @course = Course.find(params[:course_id])
+      @course = Course.find(params[:course_id] || params[:assignment][:course_id])
     end
 
     def assignment_params
       params.require(:assignment).permit(:course_id, :name, :active_at, :due_at,
           :fraction_of_grade, :maximum_grade, :students_can_submit,
-          assignment_questions_attributes: [:id, :question, :points, :order_number])
+          assignment_questions_attributes: [:id, :question, :points, :order_number, :_destroy])
     end
 end

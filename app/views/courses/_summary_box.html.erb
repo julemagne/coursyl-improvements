@@ -40,7 +40,7 @@
           <%= current_user.letter_grade(course) %> <small>(<%= number_with_precision(current_user.grade(course), precision: 1) %>)</small>
         </h<%= 3-(header ? 1 : 0) %>>
         <% if header %>
-          <small class="muted">Possible Grades:
+          <small class="muted">Possible:
             <%= number_with_precision(current_user.min_grade(course), precision: 1) %> -
             <%= number_with_precision(current_user.max_grade(course), precision: 1) %>
           </small>

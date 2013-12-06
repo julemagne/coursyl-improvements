@@ -21,7 +21,7 @@
   <% end %>
 
   <%= f.label :due_at do %>
-    <span class="field-label">Due Date/Time</span> <%= f.text_field :due_at, required: true %>
+    <span class="field-label">Due Date/Time</span> <%= f.text_field :due_at, required: true, value: @assignment.strftime("%Y-%m-%d %H:%M:%S") %>
     <span class="help-inline">e.g. "2000-01-01 14:00:00"</span>
   <% end %>
 

@@ -80,5 +80,5 @@ Courses::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'courses.masonfmatthews.com' }
 
-  config.active_record.default_timezone = :utc
+  config.active_record.default_timezone = :local
 end

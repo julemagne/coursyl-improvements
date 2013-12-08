@@ -5,9 +5,11 @@
 <% end %>
 <% if current_user && current_user.teaching?(assignment.course) %>
   <% if assignment.status(current_user).name == "Future" %>
+    <i class="icon-legal muted"></i>
     <i class="icon-bar-chart muted"></i>
   <% else %>
-    <%= link_to '<i class="icon-bar-chart" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <%= link_to '<i class="icon-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <%= link_to '<i class="icon-bar-chart" title="Grade Assignment"></i>'.html_safe, view_grades_assignment_path(assignment) %>
   <% end %>
   <%= link_to 'Edit', edit_assignment_path(assignment), class: "btn btn-mini" %>
 <% end %>

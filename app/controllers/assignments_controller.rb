@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade]
+  before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade, :view_grades]
   before_action :set_course, only: [:new, :create]
   before_action :instructor_only!, except: [:show, :turn_in]
 
@@ -77,20 +77,19 @@ class AssignmentsController < ApplicationController
 
   # GET OR POST
   def grade
-    if current_user.teaching?(@assignment.course)
-      if request.post?
-        @assignment.maximum_grade = params[:maximum_grade]
-        @assignment.grades_released = (params[:grades_released].blank? ? false : true)
-        @assignment.save!
-        params[:grades].each do |k, v|
-          AssignmentQuestionGrade.find(k).update_attributes!(v)
-        end
-        flash[:notice] = "You have successfully saved these grades."
+    if request.post?
+      @assignment.maximum_grade = params[:maximum_grade]
+      @assignment.grades_released = (params[:grades_released].blank? ? false : true)
+      @assignment.save!
+      params[:grades].each do |k, v|
+        AssignmentQuestionGrade.find(k).update_attributes!(v)
       end
-    else
-      flash[:error] = "You are not allowed to grade #{@assignment.name}."
-      redirect_to @assignment.course
+      flash[:notice] = "You have successfully saved these grades."
     end
+  end
+
+  # GET
+  def view_grades
   end
 
   private

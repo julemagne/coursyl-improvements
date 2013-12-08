@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :assignments_taken, through: :courses_taken, source: :assignments
 
   has_many :assignment_grades, through: :course_students
+  has_many :assignment_question_grades, through: :assignment_grades
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -49,6 +50,16 @@ class User < ActiveRecord::Base
     course_students.where(course_id: course.id).first.grade
   end
 
+  def grade_on_assignment(assignment)
+    ag = assignment_grades.graded.where(assignment: assignment).first
+    ag.grade if ag
+  end
+
+  def grade_on_question(question)
+    agq = assignment_question_grades.where(id: question.id).first
+    agq.grade if agq
+  end
+
   def letter_grade(course)
     course_students.where(course_id: course.id).first.letter_grade
   end
@@ -80,11 +91,6 @@ class User < ActiveRecord::Base
 
   def overdue_or_active_assignments
     overdue_assignments + assignments_taken.active
-  end
-
-  def grade_on_assignment(assignment)
-    ag = assignment_grades.graded.where(assignment: assignment).first
-    ag.grade if ag
   end
 
   private

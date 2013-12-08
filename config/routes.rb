@@ -9,6 +9,7 @@ Courses::Application.routes.draw do
       post 'turn_in'
       get 'grade'
       post 'grade'
+      get 'view_grades'
     end
   end
   resources :lessons do

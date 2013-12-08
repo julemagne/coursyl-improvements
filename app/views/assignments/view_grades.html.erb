@@ -1,0 +1,29 @@
+<% status = @assignment.status(current_user)%>
+
+<h2>Grades for <%= @assignment.course.course_code %> <%= @assignment.name %></h2>
+
+<p class="<%= status.text_class %>">
+  <span class="label <%= status.label_class %>"><%= status.name %></span>
+  Due <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %>
+</p>
+
+<table class="table table-hover table-condensed">
+  <tr>
+    <th></th>
+    <% @assignment.assignment_questions.each_with_index do |q, i| %>
+      <th>Q<%= i+1 %></th>
+    <% end %>
+    <th>Total</th>
+  </tr>
+  <% @course.students.each do |s| %>
+    <tr>
+      <td><%= s.full_name %></td>
+      <% @assignment.assignment_questions.each do |q| %>
+        <td><%= s.grade_on_question(q) %></td>
+      <% end %>
+      <td><%= s.grade_on_assignment(@assignment) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "<< Back to Course", @assignment.course %>

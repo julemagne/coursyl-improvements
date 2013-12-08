@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   end
 
   def grade_on_question(assignment_question)
-    assignment_grade = question.assignment.has_been_answered_by(user)
+    assignment_grade = assignment_question.assignment.has_been_answered_by(user)
     aqg = AssignmentQuestionGrade.where(assignment_grade: assignment_grade, assignment_question: assignment_question)
     agq.grade if agq
   end

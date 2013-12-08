@@ -20,10 +20,12 @@
     <tr>
       <td><%= s.full_name %></td>
       <td><%= s.email %></td>
+      <% total = 0 %>
       <% @assignment.assignment_questions.each do |q| %>
-        <td><%= s.grade_on_question(q) %></td>
+        <td><%= current = s.current_grade_on_question(q) %></td>
+        <% total += current.to_f %>
       <% end %>
-      <td><%= s.grade_on_assignment(@assignment) %></td>
+      <td><%= total %></td>
     </tr>
   <% end %>
 </table>

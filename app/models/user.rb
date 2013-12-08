@@ -55,10 +55,15 @@ class User < ActiveRecord::Base
     ag.grade if ag
   end
 
-  def grade_on_question(assignment_question)
-    assignment_grade = assignment_question.assignment.has_been_answered_by(self)
-    aqg = AssignmentQuestionGrade.where(assignment_grade: assignment_grade, assignment_question: assignment_question)
-    agq.grade if agq
+  #I went the WRONG WAY on this method to have a good case study to analyze soon.
+  def current_grade_on_question(assignment_question)
+    course_student = CourseStudent.where(student_id: id, course_id: assignment_question.assignment.course_id).first
+    assignment_grade = AssignmentGrade.where(assignment_id: assignment_question.assignment_id,
+      course_student_id: course_student.id).first
+    return nil if assignment_grade.blank?
+    assignment_question_grade = AssignmentQuestionGrade.where(assignment_grade_id: assignment_grade.id,
+      assignment_question_id: assignment_question.id).first
+    assignment_question_grade.grade if assignment_question_grade
   end
 
   def letter_grade(course)

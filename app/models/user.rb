@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   end
 
   def grade_on_question(question)
-    agq = assignment_question_grades.where(id: question.id).first
+    agq = assignment_question_grades.where("assignment_questions.id" => question.id).first
     agq.grade if agq
   end
 

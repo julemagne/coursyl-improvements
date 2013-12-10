@@ -35,7 +35,7 @@
           <td><%= s.full_name %></td>
           <td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td>
           <td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td>
-          <td><%= int_if_possible(s.grade) %></td>
+          <td><%= number_with_precision(s.grade, precision: 1) %></td>
           <td class="text-right"></td>
         </tr>
       <% end %>

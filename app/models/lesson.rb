@@ -1,7 +1,7 @@
 class Lesson < ActiveRecord::Base
   belongs_to :course
   has_many :readings
-  has_many :child_lessons, class_name: "Lesson", foreign_key: "parent_lesson_id"
+  has_many :child_lessons, -> {order :held_at}, class_name: "Lesson", foreign_key: "parent_lesson_id"
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
 
   validates :name, presence: true

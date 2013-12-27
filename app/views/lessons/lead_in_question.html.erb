@@ -1,4 +1,6 @@
-<h2><%= @lesson.course.course_code %> Daily Readings and Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
+<p><%= link_to "<< Back to #{@lesson.course_code_and_name}", @lesson.course %></p>
+
+<h2>Daily Readings and Questions for <%= date_abbreviation(@lesson.held_at) %></h2>
 
 <p class="lead">Readings for this Lesson</p>
 <% if @lesson.readings.each do |r| %>
@@ -11,7 +13,3 @@
 
 <p class="lead">Questions for this Lesson</p>
 <%= markdown(@lesson.lead_in_question || "<p class='muted'>No questions for this lesson.</p>") %>
-
-</br>
-
-<%= link_to "<< Back to Course", course_path(@lesson.course)%>

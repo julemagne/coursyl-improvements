@@ -45,4 +45,8 @@ class Lesson < ActiveRecord::Base
     course.color
   end
 
+  def course_code_and_name
+    course.code_and_name
+  end
+
 end

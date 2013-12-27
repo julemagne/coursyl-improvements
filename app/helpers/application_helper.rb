@@ -25,4 +25,8 @@ module ApplicationHelper
   def int_if_possible(number)
     number.to_i == number ? number.to_i : number
   end
+
+  def db_datetime_string(date)
+    date.blank? ? "" : date.strftime("%Y-%m-%d %H:%M")
+  end
 end

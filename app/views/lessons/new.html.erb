@@ -1,5 +1,5 @@
-<h2>New Lesson</h2>
+<p><%= link_to "<< Back to #{@course.code_and_name}", @course %></p>
+
+<h2>New Lesson for <%= @course.code_and_name %></h2>
 
 <%= render 'form' %>
-
-<%= link_to "<< Back to Course", @course %>

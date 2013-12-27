@@ -1,5 +1,5 @@
-<h2>Editing Lesson</h2>
+<p><%= link_to "<< Back to #{@lesson.course_code_and_name}", @lesson.course %></p>
+
+<h2><%= date_abbreviation(@lesson.held_at) %> - <%= @lesson.name %></h2>
 
 <%= render 'form' %>
-
-<%= link_to "<< Back to Course", @lesson.course %>

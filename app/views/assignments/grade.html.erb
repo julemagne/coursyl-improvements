@@ -1,6 +1,8 @@
 <% status = @assignment.status(current_user)%>
 
-<h2><%= @assignment.course.course_code %> <%= @assignment.name %></h2>
+<p><%= link_to "<< Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
+
+<h2>Grade <%= @assignment.name %></h2>
 
 <p class="<%= status.text_class %>">
   <span class="label <%= status.label_class %>"><%= status.name %></span>
@@ -53,5 +55,3 @@
   <p><%= submit_tag "Save Scores and Comments", class: "btn" %></p>
 
 <% end %>
-
-<%= link_to "<< Back to Course", course_path(@assignment.course) %>

@@ -2,12 +2,14 @@
 <% can_turn_in = @assignment.can_be_turned_in_by(current_user) %>
 <% status = @assignment.status(current_user)%>
 
+<p><%= link_to "<< Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
+
 <% if grade && @assignment.grades_released %>
   <h2 class="float-right"><small>Your Grade:</small> <%= @assignment.letter_grade_for(current_user) %>
     <small>(<%= int_if_possible(grade.grade) %>)</small></h2>
 <% end %>
 
-<h2><%= @assignment.course.course_code %> <%= @assignment.name %></h2>
+<h2><%= @assignment.name %></h2>
 
 
 <p class="<%= status.text_class %>">
@@ -54,5 +56,3 @@
   <% end %>
 
 <% end %>
-
-<%= link_to "<< Back to Course", @assignment.course %>

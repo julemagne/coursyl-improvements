@@ -21,20 +21,20 @@
     <table class="table table-hover table-condensed">
       <tr>
         <th>Name</th>
-        <th>Last Assignment</th>
-        <th>Next Assignment</th>
+        <% if last_assignment %><th>Last Assignment</th><% end %>
+        <% if next_assignment %><th>Next Assignment</th><% end %>
         <th>Overall Grade</th>
         <td class="text-right"><% if current_user.teaching?(@course) %>
           <a class="btn btn-mini btn-success">+ New Student</a>
         <% end %></td>
       </tr>
       <% @course.course_students.each do |s| %>
-      <% last_status = last_assignment.status(s.student) %>
-      <% next_status = next_assignment.status(s.student) %>
+      <% last_status = last_assignment.status(s.student) if last_assignment %>
+      <% next_status = next_assignment.status(s.student) if next_assignment %>
         <tr>
           <td><%= s.full_name %></td>
-          <td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td>
-          <td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td>
+          <% if last_assignment %><td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td><% end %>
+          <% if next_assignment %><td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td><% end %>
           <td><%= number_with_precision(s.grade, precision: 1) %></td>
           <td class="text-right"></td>
         </tr>

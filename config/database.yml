@@ -7,12 +7,11 @@ development:
   host: localhost
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: courses_test
-  pool: 5
-  username: masonfoxmatthews
-  password:
+  adapter: mysql
+  encoding: utf8
+  database: courses_development
+  username: root
+  password: password
   host: localhost
 
 production:

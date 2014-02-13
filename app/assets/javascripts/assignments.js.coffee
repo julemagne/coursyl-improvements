@@ -1,4 +1,5 @@
 window.QuestionManager =
+
   initialize: ->
     @hideBlankQuestion()
     @bindDeleteEvent()

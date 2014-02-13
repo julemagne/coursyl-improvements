@@ -2,7 +2,7 @@
 <% can_turn_in = @assignment.can_be_turned_in_by(current_user) %>
 <% status = @assignment.status(current_user)%>
 
-<p><%= link_to "<< Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
+<p><%= link_to back_arrow + "Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
 
 <% if grade && @assignment.grades_released %>
   <h2 class="float-right"><small>Your Grade:</small> <%= @assignment.letter_grade_for(current_user) %>

@@ -6,7 +6,7 @@ window.QuestionManager =
     @bindNewEvent()
 
   hideBlankQuestion: ->
-    @blankQuestion().hide()
+    @blankQuestion().hide().collapse("hide")
 
   bindDeleteEvent: ->
     $(document).on "click", ".delete-question", (e) =>
@@ -18,7 +18,9 @@ window.QuestionManager =
   bindFlushEvent: ->
     $(document).on "click", ".flush-question", (e) =>
       $question = $(e.currentTarget).closest('.question')
-      $question.remove()
+      $question.on "hidden", (e) =>
+        e.currentTarget.remove()
+      $question.collapse("hide")
       false
 
   bindNewEvent: ->
@@ -26,7 +28,7 @@ window.QuestionManager =
       $blankQuestion = @blankQuestion()
       $newQuestion = @changeIndex($blankQuestion.clone(), @findAndIncrementIndex())
       $newQuestion.appendTo(".questions")
-      $blankQuestion.show()
+      $blankQuestion.show().collapse("show")
       false
 
   blankQuestion: ->

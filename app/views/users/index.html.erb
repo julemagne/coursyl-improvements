@@ -3,7 +3,7 @@
     <h2>All Users</h2>
   </div>
   <div class="span6 vertical-middle">
-    <div class="pull-right"><%= link_to '+ New User', new_user_path, class: "btn btn-success list-page-new-button" %></div>
+    <div class="pull-right"><%= link_to '<i class="icon-plus"> New User</i>'.html_safe, new_user_path, class: "btn btn-success list-page-new-button" %></div>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
         <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.is_instructor? %></td>
         <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.is_admin? %></td>
         <td><%= link_to 'Edit', edit_user_path(user), class: "btn btn-mini" %>
-            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %></td>
+            <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

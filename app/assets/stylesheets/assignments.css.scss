@@ -1,0 +1,26 @@
+// Place all the styles related to the Courses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.question {
+  border-width: 1px 0px;
+  border-color: lightgrey;
+  border-style: solid;
+  margin-bottom: -1px;
+  .row {
+    padding-top: 10px;
+  }
+}
+
+.small-field-label {
+  width: 45px;
+  display: inline-block;
+}
+
+.new-question {
+  margin-top: 10px;
+}
+
+.actions {
+  margin: 30px 0px;
+}

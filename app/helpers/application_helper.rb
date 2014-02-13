@@ -29,4 +29,8 @@ module ApplicationHelper
   def db_datetime_string(date)
     date.blank? ? "" : date.strftime("%Y-%m-%d %H:%M")
   end
+
+  def back_arrow
+    "<i class='icon-chevron-left'></i><i class='icon-chevron-left'></i> ".html_safe
+  end
 end

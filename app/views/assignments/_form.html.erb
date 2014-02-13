@@ -42,27 +42,35 @@
   <% i = 0 %>
   <div class="questions">
     <%= f.fields_for :assignment_questions do |ff| %>
-      <div class="question">
-        <%= ff.label :order_number do %>
-          <strong class="field-label">Question Order #</strong> <%= ff.text_field :order_number, class: "input-small" %>
-        <% end %>
-        <%= ff.label :points do %>
-          <span class="field-label"># of Points</span> <%= ff.text_field :points, class: "input-small" %>
-        <% end %>
-        <% if ff.object.persisted? %>
-          <%= link_to 'Delete', nil, class: "btn btn-danger delete-question" %>
-          <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
-        <% else %>
-          <%= link_to 'Delete', nil, class: "btn btn-danger flush-question" %>
-        <% end %>
-        <%= ff.text_area :question, rows: 8, class: "input-block-level" %>
+      <div class="question container">
+        <div class="row">
+          <div class="span2">
+            <%= ff.label :order_number do %>
+              <strong class="small-field-label">Q #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+            <% end %>
+            <%= ff.label :points do %>
+              <span class="small-field-label">Points</span> <%= ff.text_field :points, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span8">
+            <%= ff.text_area :question, rows: 6, class: "input-block-level" %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-question" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-question" %>
+            <% end %>
+          </div>
+        </div>
       </div>
       <% i += 1 %>
     <% end %>
   </div>
-  <%= link_to 'New Question', nil, class: "btn btn-success new-question", "data-index" => i %>
+  <%= link_to '<i class="icon-plus"> Add Question</i>'.html_safe, nil, class: "btn btn-success new-question", "data-index" => i %>
 
   <div class="actions">
-    <%= f.submit class: "btn" %>
+    <%= f.submit "Save Assignment and Questions", class: "btn" %>
   </div>
 <% end %>

@@ -28,9 +28,9 @@
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
         <td><%= user.school_name %></td>
-        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.is_student? %></td>
-        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.is_instructor? %></td>
-        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.is_admin? %></td>
+        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.student? %></td>
+        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.instructor? %></td>
+        <td><%= '<i class="icon-check-sign text-info"></i>'.html_safe if user.admin? %></td>
         <td class="text-right"><%= link_to 'Edit', edit_user_path(user), class: "btn btn-mini" %>
             <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %></td>
       </tr>

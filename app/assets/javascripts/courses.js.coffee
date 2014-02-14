@@ -2,37 +2,38 @@ window.ScrollManager =
 
   bindSmoothNav: ->
     $(document).on "click", ".smooth-nav a", (e) =>
-      $("html, body").animate
+      $("html").animate
         scrollTop: $($.attr(e.currentTarget, "href")).offset().top
       , 700
       false
 
   bindStickyTree: ->
-    $(window).scroll ->
+    $(window).scroll =>
       tree = $("#lesson-tree")
       if tree.length > 0
-        headeroffset = 190
-        treewrapperheight = 190
-        scrolltop = $(this).scrollTop()
-        topposition = $("#lesson-tree-anchor").offset().top
-        bottomposition = $("#lesson-bottom-anchor").offset().top
+        headerOffset = 190
+        treeWrapperHeight = 190
+        scrollTop = $('html').scrollTop()
+        topPosition = $("#lesson-tree-anchor").offset().top
+        bottomPosition = $("#lesson-bottom-anchor").offset().top
 
-        if (scrolltop > topposition - headeroffset) and (scrolltop < bottomposition - (headeroffset+treewrapperheight))
+        if (scrollTop > topPosition - headerOffset) and (scrollTop < bottomPosition - (headerOffset+treeWrapperHeight))
           tree.css
             position: "fixed"
-            top: "#{headeroffset}px"
+            top: "#{headerOffset}px"
 
         else
           if tree.css('position') is "fixed"
-            if (scrolltop <= topposition - headeroffset)
+            if (scrollTop <= topPosition - headerOffset)
               tree.css
                 position: "relative"
                 top: ""
             else
               tree.css
                 position: "relative"
-                top: "#{bottomposition-topposition-treewrapperheight}px"
+                top: "#{bottomPosition-topPosition-treeWrapperHeight}px"
 
 $ ->
   ScrollManager.bindSmoothNav() if $('.smooth-nav a').length > 0
   ScrollManager.bindStickyTree() if $('#lesson-tree').length > 0
+  $('body').css("padding-top", "200px") if $('.course-summary-fixed').length > 0

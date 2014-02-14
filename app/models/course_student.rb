@@ -3,6 +3,10 @@ class CourseStudent < ActiveRecord::Base
   belongs_to :student, class_name: "User"
   has_many :assignment_grades
 
+  validates :course_id, presence: true
+  validates :student_id, presence: true
+  validates :student_id, uniqueness: {scope: :course_id}
+
   delegate :full_name, :first_name, :last_name, to: :student
 
   def fraction_graded

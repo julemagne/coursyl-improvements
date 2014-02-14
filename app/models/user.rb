@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
 
   scope :want_to_be_instructors, -> { where(wants_to_be_instructor: true) }
+  scope :instructors_for_school_id, ->(school_id) { where(school_id: school_id, instructor: true) }
 
   default_scope order('last_name, first_name')
 
@@ -36,16 +37,8 @@ class User < ActiveRecord::Base
     middle_name ? middle_name.first : nil
   end
 
-  def is_student?
+  def student?
     number_of_courses_taken > 0
-  end
-
-  def is_instructor?
-    instructor
-  end
-
-  def is_admin?
-    admin
   end
 
   def enrolled?(course)

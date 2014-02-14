@@ -2,7 +2,7 @@
   <% if @course.errors.any? %>
     <div class="alert alert-error">
       <ul>
-      <% @lesson.errors.full_messages.each do |msg| %>
+      <% @course.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,12 +15,12 @@
   <% end %>
 
   <%= f.label :course_code do %>
-    <span class="field-label">Course Code</span> <%= f.text_field :name, class: 'input-small' %>
+    <span class="field-label">Course Code</span> <%= f.text_field :course_code, class: 'input-small' %>
     <span class="help-inline">e.g. "CS310"</span>
   <% end %>
 
   <%= f.label :name do %>
-    <span class="field-label">Course Name</span> <%= f.text_field :course_code, required: true %>
+    <span class="field-label">Course Name</span> <%= f.text_field :name, required: true %>
   <% end %>
 
   <%= f.label :period do %>
@@ -35,6 +35,39 @@
   <%= f.label :description do %>
     <span class="field-label">Description</span> <%= f.text_area :description, required: true, class: 'input-xxlarge', rows: 10 %>
   <% end %>
+
+  <h3>Instructors</h3>
+  <% i = 0 %>
+  <div class="associations">
+    <%= f.fields_for :course_instructors do |ff| %>
+      <div class="association container">
+        <div class="row">
+          <div class="span2">
+            <%= ff.label :primary do %>
+              <span class="medium-field-label">Primary?</span> <%= ff.check_box :primary %>
+            <% end %>
+          </div>
+          <div class="span8">
+            <%= ff.select :instructor_id,
+                User.instructors_for_school_id(current_user.school_id).collect {|s| [ s.full_name, s.id ] },
+                {include_blank: true},
+                class: "input-large" %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+  <%= link_to '<i class="icon-plus"></i> Add Instructor'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
+
 
   <div class="actions">
     <%= f.submit class: "btn" %>

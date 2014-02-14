@@ -19,7 +19,6 @@ class AssignmentsController < ApplicationController
 
   # GET
   def edit
-    #Build new question so that more can be added w/o JS.
     @assignment.assignment_questions.build
   end
 
@@ -31,6 +30,7 @@ class AssignmentsController < ApplicationController
       if @assignment.save
         format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully created.'} }
       else
+        @assignment.assignment_questions.build
         format.html { render action: 'new' }
       end
     end
@@ -42,6 +42,7 @@ class AssignmentsController < ApplicationController
       if @assignment.update(assignment_params)
         format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully updated.'} }
       else
+        @assignment.assignment_questions.build
         format.html { render action: 'edit' }
       end
     end

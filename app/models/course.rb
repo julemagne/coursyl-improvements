@@ -4,7 +4,7 @@ class Course < ActiveRecord::Base
   has_many :policies, -> {order :order_number}, dependent: :destroy
   has_many :course_students, dependent: :restrict
   has_many :students, through: :course_students
-  has_many :course_instructors, dependent: :destroy
+  has_many :course_instructors, dependent: :destroy, inverse_of: :course
   has_many :instructors, through: :course_instructors
   has_many :grade_thresholds, -> {order "grade DESC"}
 
@@ -16,6 +16,10 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true
   validates :course_code, presence: true
+
+  accepts_nested_attributes_for :course_instructors,
+      allow_destroy: true,
+      reject_if: proc { |attributes| attributes['instructor_id'].blank? }
 
   def self.example_courses
     self.order("id DESC").last(5)
@@ -70,8 +74,10 @@ class Course < ActiveRecord::Base
   end
 
   def fraction_elapsed
-    start_time = lessons.first.held_at
-    end_time = assignments.last.due_at
+    return 0 if lessons.blank? && assignments.blank?
+
+    start_time = (lessons.present? ? lessons.first.held_at : assignments.first.active_at)
+    end_time = (assignments.present? ? assignments.last.due_at : lessons.last.held_at)
 
     [[(Time.now-start_time)/(end_time-start_time), 0].max, 1].min
   end

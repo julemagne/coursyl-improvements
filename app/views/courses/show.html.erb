@@ -5,7 +5,7 @@
 <section id="first-section">
   <a id="anchor-description" class="anchor-course"></a>
   <% if current_user && current_user.teaching?(@course) %>
-    <h3 class="float-right"><a class="btn">Edit Course Details</a></h3>
+    <h3 class="float-right"><%= link_to 'Edit Course Details', edit_course_path(@course), class: "btn" %></h3>
   <% end %>
   <h3><i class="icon-lightbulb"></i> Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>

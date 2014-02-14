@@ -7,7 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   def instructor_only!
-    redirect_to "/", flash: { error: 'Only instructors can access this page.' } unless current_user.teaching?(@course)
+    unless current_user.admin? ||
+           (@course && current_user.teaching?(@course)) ||
+           (@course.blank? && current_user.instructor?)
+      redirect_to "/", flash: { error: 'Only instructors can access this page.' }
+    end
   end
 
 

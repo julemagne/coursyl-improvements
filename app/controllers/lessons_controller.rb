@@ -15,13 +15,11 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new
     @lesson.course_id = @course.id
 
-    #Build new reading so that more can be added w/o JS.
     @lesson.readings.build
   end
 
   # GET
   def edit
-    #Build new reading so that more can be added w/o JS.
     @lesson.readings.build
   end
 
@@ -33,6 +31,7 @@ class LessonsController < ApplicationController
       if @lesson.save
         format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully created.'} }
       else
+        @lesson.readings.build
         format.html { render action: 'new' }
       end
     end
@@ -44,6 +43,7 @@ class LessonsController < ApplicationController
       if @lesson.update(lesson_params)
         format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully updated.'} }
       else
+        @lesson.readings.build
         format.html { render action: 'edit' }
       end
     end

@@ -5,6 +5,7 @@ class Lesson < ActiveRecord::Base
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
 
   validates :name, presence: true
+  validates :held_at, presence: true
 
   accepts_nested_attributes_for :readings,
       :allow_destroy => true,

@@ -41,23 +41,35 @@
   <% end %>
 
   <h3>Pre-Class Readings</h3>
-  <%= f.fields_for :readings do |ff| %>
-    <%= ff.label :order_number do %>
-      <strong class="field-label">Reading Order #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+
+  <% i = 0 %>
+  <div class="associations">
+    <%= f.fields_for :readings do |ff| %>
+      <div class="association container">
+        <div class="row">
+          <div class="span2">
+            <%= ff.label :order_number do %>
+              <strong class="small-field-label">Order</strong> <%= ff.text_field :order_number, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span8">
+            <%= ff.text_field :caption, class: "input-xxlarge", placeholder: "Caption/Text" %>
+            <%= ff.text_field :url, class: "input-xxlarge", placeholder: "URL (must start with http)" %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
     <% end %>
-    <%= ff.label :caption do %>
-      <span class="field-label">Caption</span> <%= ff.text_field :caption, class: 'input-xxlarge' %>
-    <% end %>
-    <%= ff.label :url do %>
-      <span class="field-label">URL</span> <%= ff.text_field :url, class: 'input-xxlarge' %>
-    <% end %>
-    <% if ff.object.persisted? %>
-      <%= ff.label :_destroy do %>
-        <span class="field-label">Delete Above Reading?</span> <%= ff.check_box :_destroy %>
-      <% end %>
-    <% end %>
-    <br/>
-  <% end %>
+  </div>
+  <%= link_to '<i class="icon-plus"></i> Add Reading'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
 
   <div class="actions">
     <%= f.submit class: "btn" %>

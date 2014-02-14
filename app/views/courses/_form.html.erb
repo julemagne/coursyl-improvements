@@ -9,8 +9,13 @@
     </div>
   <% end %>
 
+  <%= f.label :term_id do %>
+    <span class="field-label">Term</span>
+    <%= f.select :term_id, Term.for_school_id(current_user.school_id).collect {|s| [ s.name, s.id ] }, required: true %>
+  <% end %>
+
   <%= f.label :course_code do %>
-    <span class="field-label">Course Code</span> <%= f.text_field :name, required: true, class: 'input-small' %>
+    <span class="field-label">Course Code</span> <%= f.text_field :name, class: 'input-small' %>
     <span class="help-inline">e.g. "CS310"</span>
   <% end %>
 
@@ -19,12 +24,12 @@
   <% end %>
 
   <%= f.label :period do %>
-    <span class="field-label">Period</span> <%= f.text_field :period, required: true %>
+    <span class="field-label">Meeting Times</span> <%= f.text_field :period, required: true %>
   <% end %>
 
   <%= f.label :color do %>
     <span class="field-label">Color</span> <%= f.text_field :color, required: true, class: 'input-small' %>
-    <span class="help-inline">e.g. "#FF0000" (Use this picker to find a color)</span>
+    <span class="help-inline">e.g. "#FF0000" (<a target="blank" href="http://www.w3schools.com/tags/ref_colorpicker.asp">Color Picker</a>)</span>
   <% end %>
 
   <%= f.label :description do %>

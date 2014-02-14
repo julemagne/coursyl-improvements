@@ -40,9 +40,9 @@
 
   <h3>Questions</h3>
   <% i = 0 %>
-  <div class="questions">
+  <div class="associations">
     <%= f.fields_for :assignment_questions do |ff| %>
-      <div class="question container">
+      <div class="association container">
         <div class="row">
           <div class="span2">
             <%= ff.label :order_number do %>
@@ -57,10 +57,10 @@
           </div>
           <div class="span1">
             <% if ff.object.persisted? %>
-              <%= link_to 'Delete', nil, class: "btn btn-danger delete-question" %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
               <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
             <% else %>
-              <%= link_to 'Delete', nil, class: "btn btn-danger flush-question" %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
             <% end %>
           </div>
         </div>
@@ -68,7 +68,7 @@
       <% i += 1 %>
     <% end %>
   </div>
-  <%= link_to '<i class="icon-plus"></i> Add Question'.html_safe, nil, class: "btn btn-success new-question", "data-index" => i %>
+  <%= link_to '<i class="icon-plus"></i> Add Question'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
 
   <div class="actions">
     <%= f.submit "Save Assignment and Questions", class: "btn" %>

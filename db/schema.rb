@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213205057) do
+ActiveRecord::Schema.define(version: 20140214090257) do
 
   create_table "assignment_grades", force: true do |t|
     t.integer  "assignment_id"
@@ -78,8 +78,6 @@ ActiveRecord::Schema.define(version: 20140213205057) do
     t.string   "color"
     t.string   "period"
     t.text     "description"
-    t.date     "started_on"
-    t.date     "ended_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

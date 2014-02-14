@@ -14,10 +14,9 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true
   validates :course_code, presence: true
-  validates :started_on, presence: true
-  validates :ended_on, presence: true
 
-  scope :current, -> { where("started_on <= ? AND ended_on >= ?", Date.today, Date.today) }
+  #TODO: Refactor to use terms?
+  #scope :current, -> { where("started_on <= ? AND ended_on >= ?", Date.today, Date.today) }
 
   def self.example_courses
     self.order("id DESC").last(5)

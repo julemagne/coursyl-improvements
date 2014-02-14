@@ -5,6 +5,8 @@
       <tr>
         <th>Name</th>
         <th>E-mail</th>
+        <th>Phone</th>
+        <th>School</th>
         <th># Courses Taken</th>
         <th>Acct Created</th>
         <th></th>
@@ -13,6 +15,8 @@
         <tr>
           <td><%= u.full_name %></td>
           <td><%= u.email %></td>
+          <td><%= u.phone %></td>
+          <td><%= u.school_name %></td>
           <td><%= u.number_of_courses_taken %></td>
           <td><%= u.created_at.to_date %></td>
           <td class="text-right">

@@ -30,10 +30,8 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       if @assignment.save
         format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully created.'} }
-        format.json { render action: 'edit', status: :created, location: @assignment }
       else
         format.html { render action: 'new' }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +41,8 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       if @assignment.update(assignment_params)
         format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully updated.'} }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @assignment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +52,6 @@ class AssignmentsController < ApplicationController
     @assignment.destroy
     respond_to do |format|
       format.html { redirect_to assignments_url }
-      format.json { head :no_content }
     end
   end
 

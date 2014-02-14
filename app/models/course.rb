@@ -1,10 +1,10 @@
 class Course < ActiveRecord::Base
-  has_many :assignments, -> {order :due_at}
-  has_many :lessons, -> {order :held_at}
-  has_many :policies, -> {order :order_number}
-  has_many :course_students
+  has_many :assignments, -> {order :due_at}, dependent: :destroy
+  has_many :lessons, -> {order :held_at}, dependent: :destroy
+  has_many :policies, -> {order :order_number}, dependent: :destroy
+  has_many :course_students, dependent: :restrict
   has_many :students, through: :course_students
-  has_many :course_instructors
+  has_many :course_instructors, dependent: :destroy
   has_many :instructors, through: :course_instructors
   has_many :grade_thresholds, -> {order "grade DESC"}
 
@@ -12,11 +12,10 @@ class Course < ActiveRecord::Base
     class_name: "CourseInstructor"
   has_one :primary_instructor, through: :primary_course_instructor, source: :instructor
 
+  belongs_to :term
+
   validates :name, presence: true
   validates :course_code, presence: true
-
-  #TODO: Refactor to use terms?
-  #scope :current, -> { where("started_on <= ? AND ended_on >= ?", Date.today, Date.today) }
 
   def self.example_courses
     self.order("id DESC").last(5)

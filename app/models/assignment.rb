@@ -1,7 +1,7 @@
 class Assignment < ActiveRecord::Base
   belongs_to :course
   has_many :assignment_questions, -> {order :order_number}
-  has_many :assignment_grades
+  has_many :assignment_grades, dependent: :restrict
 
   validates :course_id, presence: true
   validates :name, presence: true

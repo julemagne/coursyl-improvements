@@ -1,0 +1,18 @@
+<%= form_for(@school) do |f| %>
+  <% if @school.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @school.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name do %>
+    <span class="field-label">Name</span> <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.submit class: "btn" %>
+
+<% end %>

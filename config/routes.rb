@@ -3,6 +3,8 @@ Courses::Application.routes.draw do
 
   devise_for :users
   resources :courses
+  resources :schools
+  resources :terms
   resources :users do
     member do
       post 'approve_as_instructor'

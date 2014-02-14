@@ -1,17 +1,11 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :show
+  before_action :authenticate_user!
   before_action :admin_only!, only: [:index, :destroy, :approve_as_instructor, :reject_as_instructor]
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :approve_as_instructor, :reject_as_instructor]
+  before_action :set_user, only: [:edit, :update, :destroy, :approve_as_instructor, :reject_as_instructor]
 
   # GET /users
-  # GET /users.json
   def index
     @users = User.all
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
   end
 
   # GET /users/new
@@ -24,42 +18,34 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to edit_user_path(@user), flash: {success: 'User was successfully created.'} }
-        format.json { render action: 'edit', status: :created, location: @user }
+        format.html { redirect_to users_url, flash: {success: 'User was successfully created.'} }
       else
         format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to edit_user_path(@user), flash: {success: 'User was successfully updated.'} }
-        format.json { head :no_content }
+        format.html { redirect_to users_url, flash: {success: 'User was successfully updated.'} }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }
-      format.json { head :no_content }
     end
   end
 
@@ -84,6 +70,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin, :wants_to_be_instructor, :instructor)
+      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin, :wants_to_be_instructor, :instructor, :school_id)
     end
 end

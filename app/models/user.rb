@@ -4,24 +4,32 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :course_instructors, foreign_key: "instructor_id"
+  has_many :course_instructors, foreign_key: "instructor_id", dependent: :restrict
   has_many :courses_taught, through: :course_instructors, source: :course
   has_many :assignments_given, through: :courses_taught, source: :assignments
 
-  has_many :course_students, foreign_key: "student_id"
+  has_many :course_students, foreign_key: "student_id", dependent: :restrict
   has_many :courses_taken, through: :course_students, source: :course
   has_many :assignments_taken, through: :courses_taken, source: :assignments
 
-  has_many :assignment_grades, through: :course_students
+  has_many :assignment_grades, through: :course_students, dependent: :restrict
   has_many :assignment_question_grades, through: :assignment_grades
+
+  belongs_to :school
 
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   scope :want_to_be_instructors, -> { where(wants_to_be_instructor: true) }
 
+  default_scope order('last_name, first_name')
+
   def full_name
     "#{title + " " if title}#{first_name} #{padded_middle_initial}#{last_name}"
+  end
+
+  def school_name
+    school ? school.name : "None"
   end
 
   def middle_initial
@@ -29,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def is_student?
-    false
+    number_of_courses_taken > 0
   end
 
   def is_instructor?

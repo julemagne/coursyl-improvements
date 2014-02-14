@@ -32,10 +32,8 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully created.'} }
-        format.json { render action: 'edit', status: :created, location: @lesson }
       else
         format.html { render action: 'new' }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,10 +43,8 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.update(lesson_params)
         format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully updated.'} }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,7 +54,6 @@ class LessonsController < ApplicationController
     @lesson.destroy
     respond_to do |format|
       format.html { redirect_to lessons_url }
-      format.json { head :no_content }
     end
   end
 

@@ -1,0 +1,33 @@
+<%= form_for(@term) do |f| %>
+  <% if @term.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @term.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name do %>
+    <span class="field-label">Name</span> <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.label :starts_on do %>
+    <span class="field-label">Starts On</span> <%= f.text_field :starts_on, required: true, value: @term.starts_on %>
+    <span class="help-inline">e.g. "2000-01-01"</span>
+  <% end %>
+
+  <%= f.label :ends_on do %>
+    <span class="field-label">Starts On</span> <%= f.text_field :ends_on, required: true, value: @term.ends_on %>
+    <span class="help-inline">e.g. "2000-01-01"</span>
+  <% end %>
+
+  <%= f.label :school_id do %>
+    <span class="field-label">School</span>
+    <%= f.select :school_id, School.all.collect {|s| [ s.name, s.id ] } %>
+  <% end %>
+
+  <%= f.submit class: "btn" %>
+
+<% end %>

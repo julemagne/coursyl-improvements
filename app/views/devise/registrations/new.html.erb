@@ -5,7 +5,10 @@
     <h2>Sign up</h2>
     <%= devise_error_messages! %>
 
-    <div><%= f.text_field :title, required: true, autofocus: true, placeholder: "Title" %></div>
+    <div>
+      <%= f.text_field :title, required: true, class: "input-small", autofocus: true, placeholder: "Title" %>
+      <span class="help-inline">e.g. "Dr."</span>
+    </div>
 
     <div><%= f.text_field :first_name, required: true, placeholder: "First Name" %></div>
 
@@ -14,6 +17,11 @@
     <div class="input-prepend">
       <span class="add-on">@</span>
       <%= f.email_field :email, required: true, placeholder: "Email Address" %>
+    </div>
+
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-phone"></i></span>
+      <%= f.text_field :phone, required: true, placeholder: "Phone Number" %>
     </div>
 
     <div class="input-prepend">
@@ -29,6 +37,11 @@
     <div class="lead">I am:</div>
     <div><label class="radio"><%= f.radio_button :wants_to_be_instructor, "false", checked: true %> a Student</label></div>
     <div><label class="radio"><%= f.radio_button :wants_to_be_instructor, "true" %> an Instructor</label></div>
+    <br/>
+
+    <div class="lead">My school is:</div>
+    <div><%= f.select :school_id, School.all.collect {|s| [ s.name, s.id ] }, {include_blank: 'Not Listed'} %></div>
+    <br/>
 
     <div><%= f.submit "Sign up", class: "btn" %></div>
   <% end %>

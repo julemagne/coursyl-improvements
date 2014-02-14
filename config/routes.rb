@@ -3,7 +3,12 @@ Courses::Application.routes.draw do
 
   devise_for :users
   resources :courses
-  resources :users
+  resources :users do
+    member do
+      post 'approve_as_instructor'
+      post 'reject_as_instructor'
+    end
+  end
   resources :assignments do
     member do
       post 'turn_in'

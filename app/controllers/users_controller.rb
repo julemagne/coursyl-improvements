@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :admin_only!, only: [:index]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only!, only: [:index, :destroy, :approve_as_instructor, :reject_as_instructor]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :approve_as_instructor, :reject_as_instructor]
 
   # GET /users
   # GET /users.json
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully created.' }
+        format.html { redirect_to edit_user_path(@user), flash: {success: 'User was successfully created.'} }
         format.json { render action: 'edit', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to edit_user_path(@user), flash: {success: 'User was successfully updated.'} }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -63,6 +63,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def approve_as_instructor
+    @user.wants_to_be_instructor = false
+    @user.instructor = true
+    @user.save!
+    redirect_to home_index_path, flash: {success: "#{@user.full_name} has been approved as an instructor."}
+  end
+
+  def reject_as_instructor
+    @user.wants_to_be_instructor = false
+    @user.save!
+    redirect_to home_index_path, flash: {notice: "#{@user.full_name} has been rejected as an instructor."}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -71,6 +84,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin)
+      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin, :wants_to_be_instructor, :instructor)
     end
 end

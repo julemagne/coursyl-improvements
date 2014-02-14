@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to edit_assignment_path(@assignment), notice: 'Assignment was successfully created.' }
+        format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully created.'} }
         format.json { render action: 'edit', status: :created, location: @assignment }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to edit_assignment_path(@assignment), notice: 'Assignment was successfully updated.' }
+        format.html { redirect_to edit_assignment_path(@assignment), flash: {success: 'Assignment was successfully updated.'} }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -65,7 +65,7 @@ class AssignmentsController < ApplicationController
     final = (params[:commit]=="Submit Final Answers")
     if @assignment.turn_in(params[:questions], current_user, final)
       if final
-        flash[:notice] = "You have turned in #{@assignment.name}."
+        flash[:success] = "You have turned in #{@assignment.name}."
       else
         flash[:notice] = "You have saved a draft of #{@assignment.name}."
       end

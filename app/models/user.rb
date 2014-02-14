@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  scope :want_to_be_instructors, -> { where(wants_to_be_instructor: true) }
+
   def full_name
     "#{title + " " if title}#{first_name} #{padded_middle_initial}#{last_name}"
   end
@@ -31,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def is_instructor?
-    course_instructors.length > 0
+    instructor
   end
 
   def is_admin?
@@ -99,9 +101,13 @@ class User < ActiveRecord::Base
     overdue_assignments + assignments_taken.active
   end
 
+  def number_of_courses_taken
+    course_students.count
+  end
+
   private
 
   def padded_middle_initial
-    middle_initial ? "#{middle_initial}. " : ""
+    middle_initial.blank? ? "" : "#{middle_initial}. "
   end
 end

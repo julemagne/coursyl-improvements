@@ -9,7 +9,6 @@ class Assignment < ActiveRecord::Base
   validates :due_at, presence: true
 
   scope :active, -> { where("active_at <= ? AND due_at >= ?", Time.now, Time.now) }
-  scope :recent_and_soon, -> { where("active_at <= ? AND due_at >= ?", Time.now+1.month, Time.now-2.week) }
 
   accepts_nested_attributes_for :assignment_questions,
       :allow_destroy => true,

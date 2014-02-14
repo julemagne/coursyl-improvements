@@ -23,6 +23,10 @@
             <ul class="nav">
               <li><%= link_to "Description", '#anchor-description' %></li>
               <li class="divider-vertical"></li>
+              <% if current_user && current_user.teaching?(@course) %>
+                <li><%= link_to "Students", '#anchor-students' %></li>
+                <li class="divider-vertical"></li>
+              <% end %>
               <li><%= link_to "Assignments", '#anchor-assignments' %></li>
               <li class="divider-vertical"></li>
               <li><%= link_to "Lessons", '#anchor-lessons' %></li>

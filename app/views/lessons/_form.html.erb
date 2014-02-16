@@ -41,7 +41,7 @@
   <% end %>
 
   <h3>Pre-Class Readings</h3>
-
+  <p class="lead">If you would like to tell students what to read without linking to something, leave the URL field blank.</a></p>
   <% i = 0 %>
   <div class="associations">
     <%= f.fields_for :readings do |ff| %>
@@ -54,7 +54,7 @@
           </div>
           <div class="span8">
             <%= ff.text_field :caption, class: "input-xxlarge", placeholder: "Caption/Text" %>
-            <%= ff.text_field :url, class: "input-xxlarge", placeholder: "URL (must start with http)" %>
+            <%= ff.text_field :url, class: "input-xxlarge", placeholder: "URL (must start with http(s))" %>
           </div>
           <div class="span1">
             <% if ff.object.persisted? %>

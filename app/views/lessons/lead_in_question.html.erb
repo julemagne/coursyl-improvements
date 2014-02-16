@@ -4,7 +4,7 @@
 
 <p class="lead">Readings for this Lesson</p>
 <% if @lesson.readings.each do |r| %>
-  <p><%= r.url? ? (link_to r.caption, r.url) : r.caption %></p>
+  <p><%= r.url? ? (link_to r.caption, r.url, target: "blank") : r.caption %></p>
 <% end.empty? %>
   <p class='muted'>No readings for this lesson.</p>
 <% end %>

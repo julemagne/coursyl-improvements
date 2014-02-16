@@ -21,6 +21,14 @@ class Course < ActiveRecord::Base
       allow_destroy: true,
       reject_if: proc { |attributes| attributes['instructor_id'].blank? }
 
+  accepts_nested_attributes_for :policies,
+      allow_destroy: true,
+      reject_if: :all_blank
+
+  accepts_nested_attributes_for :grade_thresholds,
+      allow_destroy: true,
+      reject_if: :all_blank
+
   def self.example_courses
     self.order("id DESC").last(5)
   end

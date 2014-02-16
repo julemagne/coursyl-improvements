@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
-  before_action :instructor_only!, only: [:new, :create, :edit, :update]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds]
+  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds]
   before_action :admin_only!, only: [:destroy]
 
   # GET /courses/new
@@ -54,6 +54,32 @@ class CoursesController < ApplicationController
     end
   end
 
+  #GET/POST
+  def policies
+    @course.policies.build
+    if request.post?
+      if @course.update(course_params)
+        redirect_to @course, flash: {success: 'Course policies were successfully updated.'}
+      else
+        @course.policies.build
+        render action: 'policies'
+      end
+    end
+  end
+
+  #GET/POST
+  def grade_thresholds
+    @course.grade_thresholds.build
+    if request.post?
+      if @course.update(course_params)
+        redirect_to @course, flash: {success: 'Course grade_thresholds were successfully updated.'}
+      else
+        @course.grade_thresholds.build
+        render action: 'grade_thresholds'
+      end
+    end
+  end
+
   private
 
     def set_course
@@ -63,7 +89,9 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:term_id, :course_code, :name, :period,
           :color, :description,
-          course_instructors_attributes: [:id, :primary, :instructor_id, :_destroy])
+          course_instructors_attributes: [:id, :primary, :instructor_id, :_destroy],
+          policies_attributes: [:id, :name, :order_number, :description, :_destroy],
+          grade_thresholds_attributes: [:id, :grade, :letter, :_destroy])
     end
 
 end

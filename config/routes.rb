@@ -2,7 +2,14 @@ Courses::Application.routes.draw do
   get "home/index"
 
   devise_for :users
-  resources :courses
+  resources :courses do
+    member do
+      get 'policies'
+      post 'policies'
+      get 'grade_thresholds'
+      post 'grade_thresholds'
+    end
+  end
   resources :schools
   resources :terms
   resources :users do

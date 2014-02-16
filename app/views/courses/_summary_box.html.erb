@@ -62,8 +62,8 @@
           <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
           <div class="bar bar-danger" style="width: <%= percent_ungraded %>;"></div>
         </div>
-        <small <%= percent_graded == '0%' ? '' : 'class=text-success'%>><%= percent_graded %> graded</small><br/>
-        <small <%= percent_ungraded == '0%' ? '' : 'class=text-error'%>><%= percent_ungraded %> waiting to be graded</small>
+        <small class="muted"><%= percent_graded %> graded</small><br/>
+        <small class="<%= percent_ungraded == '0%' ? 'muted' : 'text-error' %>"><%= percent_ungraded %> waiting to be graded</small>
       </div>
     <% end %>
   </div>

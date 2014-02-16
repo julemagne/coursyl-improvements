@@ -1,0 +1,53 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.code_and_name %></h2>
+
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>Grading Scale</h3>
+
+  <p class="lead">Descriptive stuff goes here.</p>
+  <% i = 0 %>
+  <div class="associations">
+    <%= f.fields_for :grade_thresholds do |ff| %>
+      <div class="association container">
+        <div class="row">
+          <div class="span3">
+            <%= ff.label :letter do %>
+              <strong class="large-field-label">Letter</strong> <%= ff.text_field :letter, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span3">
+            <%= ff.label :grade do %>
+              <span class="large-field-label">Min Grade</span> <%= ff.text_field :grade, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+  <%= link_to '<i class="icon-plus"></i> Add Grade Threshold'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
+
+
+  <div class="actions">
+    <%= f.submit class: "btn" %>
+  </div>
+<% end %>

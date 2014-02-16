@@ -204,7 +204,10 @@
 <section>
   <a id="anchor-policies" class="anchor-course"></a>
   <% if current_user && current_user.teaching?(@course) %>
-    <h3 class="float-right"><a class="btn">Edit Course Polices</a></h3>
+    <h3 class="float-right">
+      <%= link_to 'Edit Grading Scale', grade_thresholds_course_path(@course), class: "btn" %>
+      <%= link_to 'Edit Course Policies', policies_course_path(@course), class: "btn" %>
+    </h3>
   <% end %>
   <h3><i class="icon-comments-alt"></i> Course Policies</h3>
   <% if @course.policies.present? %>

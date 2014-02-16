@@ -1,0 +1,52 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.code_and_name %></h2>
+
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>Course Policies</h3>
+
+  <p class="lead">Descriptive stuff goes here.</p>
+  <% i = 0 %>
+  <div class="associations">
+    <%= f.fields_for :policies do |ff| %>
+      <div class="association container">
+        <div class="row">
+          <div class="span2">
+            <%= ff.label :order_number do %>
+              <strong class="small-field-label">Q #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span8">
+            <%= ff.text_field :name, placeholder: "Policy Name" %>
+            <%= ff.text_area :description, rows: 6, class: "input-block-level" %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+  <%= link_to '<i class="icon-plus"></i> Add Policy'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
+
+
+  <div class="actions">
+    <%= f.submit class: "btn" %>
+  </div>
+<% end %>

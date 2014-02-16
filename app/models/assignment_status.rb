@@ -3,12 +3,13 @@ class AssignmentStatus
   attr_accessor :fraction
 
   COMPLETE = "Complete"
-  IN_PROGRESS = "In Progress"
   OVERDUE = "Overdue"
+  UNGRADED = "To Be Graded"
+  IN_PROGRESS = "In Progress"
   FUTURE = "Future"
 
-  def self.all_statuses_ordered
-    [new(name: COMPLETE), new(name: OVERDUE), new(name: IN_PROGRESS), new(name: FUTURE)]
+  def self.all_statuses_ordered(instructor, student)
+    [new(name: COMPLETE), (new(name: OVERDUE) if student), (new(name: UNGRADED) if instructor), new(name: IN_PROGRESS), new(name: FUTURE)].compact
   end
 
   def self.complete_string
@@ -29,6 +30,8 @@ class AssignmentStatus
         end
       elsif options[:user] && options[:user].overdue_assignment?(options[:assignment])
         @name = OVERDUE
+      elsif options[:user] && options[:user].ungraded_assignment?(options[:assignment])
+        @name = UNGRADED
       end
     end
   end
@@ -37,6 +40,7 @@ class AssignmentStatus
     emphases = {COMPLETE => "label-success",
       IN_PROGRESS => "label-warning",
       OVERDUE => "label-important",
+      UNGRADED => "label-important",
       FUTURE => "label-info"}
     emphases[@name]
   end
@@ -45,6 +49,7 @@ class AssignmentStatus
     emphases = {COMPLETE => "text-success",
       IN_PROGRESS => "text-warning",
       OVERDUE => "text-error",
+      UNGRADED => "text-error",
       FUTURE => "text-info"}
     emphases[@name]
   end
@@ -53,6 +58,7 @@ class AssignmentStatus
     emphases = {COMPLETE => "bar-success",
       IN_PROGRESS => "bar-warning",
       OVERDUE => "bar-danger",
+      UNGRADED => "bar-danger",
       FUTURE => ""}
     emphases[@name]
   end

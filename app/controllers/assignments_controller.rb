@@ -77,10 +77,14 @@ class AssignmentsController < ApplicationController
       @assignment.maximum_grade = params[:maximum_grade]
       @assignment.grades_released = (params[:grades_released].blank? ? false : true)
       @assignment.save!
-      params[:grades].each do |k, v|
-        AssignmentQuestionGrade.find(k).update_attributes!(v)
+      if params[:grades].blank?
+        flash[:notice] = "You have saved changes to this assignment, but no grades were recorded."
+      else
+        params[:grades].each do |k, v|
+          AssignmentQuestionGrade.find(k).update_attributes!(v)
+        end
+        flash[:success] = "You have successfully saved these grades."
       end
-      flash[:notice] = "You have successfully saved these grades."
     end
   end
 

@@ -47,7 +47,7 @@ class Course < ActiveRecord::Base
       fractions[s] += a.fraction_of_grade
     end
 
-    statuses = AssignmentStatus.all_statuses_ordered
+    statuses = AssignmentStatus.all_statuses_ordered(user && user.teaching?(self), user && user.enrolled?(self))
     statuses.each do |s|
       s.fraction = fractions[s.name] || 0
     end

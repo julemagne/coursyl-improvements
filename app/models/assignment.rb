@@ -34,11 +34,13 @@ class Assignment < ActiveRecord::Base
 
       assignment_grade.submitted_at = Time.now if final
 
-      answers.each do |k,v|
-        aqg = AssignmentQuestionGrade.where(assignment_question_id: k.to_i,
-          assignment_grade: assignment_grade).first_or_create!
-          aqg.answer = v
-          aqg.save!
+      unless answers.blank?
+        answers.each do |k,v|
+          aqg = AssignmentQuestionGrade.where(assignment_question_id: k.to_i,
+            assignment_grade: assignment_grade).first_or_create!
+            aqg.answer = v
+            aqg.save!
+        end
       end
 
       assignment_grade.save!

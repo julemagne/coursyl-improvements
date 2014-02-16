@@ -98,6 +98,14 @@ class User < ActiveRecord::Base
       assignment_grades.where(["assignment_id = ? AND submitted_at IS NOT NULL", a.id]).blank? }
   end
 
+  def ungraded_assignment?(assignment)
+    ungraded_assignments.include?(assignment)
+  end
+
+  def ungraded_assignments
+    assignments_given.select {|a| a.due_at < Time.now && !a.grades_released }
+  end
+
   def overdue_or_active_assignments
     overdue_assignments + assignments_taken.active
   end

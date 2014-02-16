@@ -55,18 +55,15 @@
         <small class="progress-overlay"><%= percent_graded %> graded</small>
       </div>
     <% elsif current_user && current_user.teaching?(course) %>
-      <% percent_elapsed = percentage(course.fraction_elapsed) %>
-      <% percent_complete = percentage(course.assignment_statuses.first.fraction) -%>
+      <% percent_graded = percentage(course.assignment_statuses(current_user).first.fraction) -%>
+      <% percent_ungraded = percentage(course.assignment_statuses(current_user).second.fraction) -%>
       <div class="span2 text-center">
-        <div class="progress">
-          <div class="bar bar-warning" style="width: <%= percent_elapsed %>;"></div>
+        <div class="progress progress-striped">
+          <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
+          <div class="bar bar-danger" style="width: <%= percent_ungraded %>;"></div>
         </div>
-        <small class="progress-overlay"><%= percent_elapsed %> of time</small>
-
-        <div class="progress">
-          <div class="bar bar-success" style="width: <%= percent_complete %>;"></div>
-        </div>
-        <small class="progress-overlay"><%= percent_complete %> graded</small>
+        <small <%= percent_graded == '0%' ? '' : 'class=text-success'%>><%= percent_graded %> graded</small><br/>
+        <small <%= percent_ungraded == '0%' ? '' : 'class=text-error'%>><%= percent_ungraded %> waiting to be graded</small>
       </div>
     <% end %>
   </div>

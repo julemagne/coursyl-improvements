@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
   has_many :assignments, -> {order :due_at}, dependent: :destroy
   has_many :lessons, -> {order :held_at}, dependent: :destroy
   has_many :policies, -> {order :order_number}, dependent: :destroy
-  has_many :course_students, dependent: :restrict
+  has_many :course_students, dependent: :restrict_with_error
   has_many :students, through: :course_students
   has_many :course_instructors, dependent: :destroy, inverse_of: :course
   has_many :instructors, through: :course_instructors

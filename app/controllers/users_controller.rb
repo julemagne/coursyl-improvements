@@ -13,10 +13,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # GET /users/1/edit
-  def edit
-  end
-
   # POST /users
   def create
     @user = User.new(user_params)
@@ -28,6 +24,34 @@ class UsersController < ApplicationController
         format.html { render action: 'new' }
       end
     end
+  end
+
+  # GET /users/new_student
+  def new_student
+    @user = User.new
+    @user.email = params[:email]
+    @course = Course.find(params[:course_id])
+  end
+
+  # POST /users/create_student
+  def create_student
+    @user = User.new(user_params)
+    params[:email] = @user.email
+
+    @course = Course.find(params[:course_id])
+    @user.course_students.build(course: @course, student: @user, approved: true)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @course, flash: {success: 'Student was successfully created and added to this course.'} }
+      else
+        format.html { render action: 'new_student' }
+      end
+    end
+  end
+
+  # GET /users/1/edit
+  def edit
   end
 
   # PATCH/PUT /users/1
@@ -68,6 +92,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin, :wants_to_be_instructor, :instructor, :school_id)
+      params.require(:user).permit(:email, :title, :first_name, :middle_name, :last_name, :phone, :office, :office_hours, :photo_url, :description, :admin, :wants_to_be_instructor, :instructor, :school_id, :password, :password_confirmation)
     end
 end

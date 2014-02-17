@@ -8,6 +8,7 @@ Courses::Application.routes.draw do
       post 'policies'
       get 'grade_thresholds'
       post 'grade_thresholds'
+      post 'enroll'
     end
   end
   resources :schools
@@ -16,6 +17,8 @@ Courses::Application.routes.draw do
     member do
       post 'approve_as_instructor'
       post 'reject_as_instructor'
+      get 'new_student'
+      post 'create_student'
     end
   end
   resources :assignments do

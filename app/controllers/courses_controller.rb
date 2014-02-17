@@ -80,6 +80,24 @@ class CoursesController < ApplicationController
     end
   end
 
+  #POST
+  def enroll
+    course = Course.find(params[:course_id])
+    student = User.find_by_email(params[:email])
+    if student
+      if student.enrolled? course
+        redirect_to course, flash: {error: "Student is already enrolled in this class"}
+      else
+        course.course_students.build(student: student, approved: true)
+        course.save!
+        redirect_to course, flash: {success: "Student has been successfully added"}
+      end
+    else
+      #TODO redirect to new student creation page.
+      redirect_to new_student_user_url(course_id: params[:course_id], email: params[:email]), notice: "E-mail address not found.  Please create a new student."
+    end
+  end
+
   private
 
     def set_course

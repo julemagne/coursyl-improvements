@@ -1,0 +1,80 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2>New Student for <%= @course.code_and_name %></h2>
+
+<%= form_for(@user, url: create_student_user_path) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= hidden_field_tag :course_id, @course.id %>
+
+  <%= f.label :first_name do %>
+    <span class="field-label">First name</span> <%= f.text_field :first_name, required: true %>
+  <% end %>
+
+  <%= f.label :middle_name do %>
+    <span class="field-label">Middle name</span> <%= f.text_field :middle_name %>
+  <% end %>
+
+  <%= f.label :last_name do %>
+    <span class="field-label">Last name</span> <%= f.text_field :last_name, required: true %>
+  <% end %>
+
+  <%= f.label :password do %>
+    <span class="field-label">Password</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-key"></i></span>
+      <%= f.password_field :password, required: true, autocomplete: "off" %>
+    </div>
+  <% end %>
+
+  <%= f.label :password_confirmation do %>
+    <span class="field-label">Confirm</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-key"></i></span>
+      <%= f.password_field :password_confirmation, required: true, autocomplete: "off" %>
+    </div>
+  <% end %>
+
+  <%= f.label :email do %>
+    <span class="field-label">Email</span>
+    <div class="input-prepend">
+      <span class="add-on">@</span>
+      <%= f.text_field :email, type: "email", required: true %>
+    </div>
+  <% end %>
+
+  <%= f.label :phone do %>
+    <span class="field-label">Phone number</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-phone"></i></span>
+      <%= f.text_field :phone %>
+    </div>
+    <span class="help-inline">e.g. "(111) 222-3333"</span>
+  <% end %>
+
+  <%= f.label :photo_url do %>
+    <span class="field-label">Photo URL</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-picture"></i></span>
+      <%= f.text_field :photo_url, class: "span4" %>
+    </div>
+  <% end %>
+
+  <%= f.label :school_id do %>
+    <span class="field-label">School</span>
+    <%= f.select :school_id, School.all.collect {|s| [ s.name, s.id ] }, {include_blank: 'Not Listed'} %>
+  <% end %>
+
+  <%= f.submit class: "btn" %>
+
+<% end %>
+
+

@@ -3,11 +3,11 @@ class CourseStudent < ActiveRecord::Base
   belongs_to :student, class_name: "User"
   has_many :assignment_grades
 
-  validates :course_id, presence: true
-  validates :student_id, presence: true
-  validates :student_id, uniqueness: {scope: :course_id}
+  validates :course, presence: true
+  validates :student, presence: true
+  validates :student, uniqueness: {scope: :course_id}
 
-  delegate :full_name, :first_name, :last_name, to: :student
+  delegate :full_name, :first_name, :last_name, :email, to: :student
 
   def fraction_graded
     assignment_grades.graded.sum {|ag| ag.fraction_of_grade}
@@ -22,7 +22,7 @@ class CourseStudent < ActiveRecord::Base
       weighted_total += ag.grade * ag.fraction_of_grade
       fraction_total += ag.fraction_of_grade
     end
-    weighted_total/fraction_total
+    fraction_total > 0 ? weighted_total/fraction_total : 100
   end
 
   def grade

@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   # POST /users/create_student
   def create_student
     @user = User.new(user_params)
+    @user.school = current_user.school
     params[:email] = @user.email
 
     @course = Course.find(params[:course_id])

@@ -59,7 +59,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to (current_user.admin ? users_url : home_index_path), flash: {success: 'User was successfully updated.'} }
+        format.html { redirect_to (current_user.admin ? users_url : home_index_path), flash: {success: 'User record was successfully updated.'} }
       else
         format.html { render action: 'edit' }
       end

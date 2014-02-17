@@ -1,7 +1,7 @@
 class AssignmentGrade < ActiveRecord::Base
   belongs_to :assignment
   belongs_to :course_student
-  has_many :assignment_question_grades, dependent: :restrict_with_error
+  has_many :assignment_question_grades, dependent: :destroy
 
   scope :graded, -> { joins(:assignment).where("assignments.grades_released IS TRUE") }
 

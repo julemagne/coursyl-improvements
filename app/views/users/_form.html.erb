@@ -71,10 +71,11 @@
     <span class="field-label">Description</span> <%= f.text_area :description, class: "span5", rows: 5 %>
   <% end %>
 
-
-  <%= f.label :school_id do %>
-    <span class="field-label">School</span>
-    <%= f.select :school_id, School.all.collect {|s| [ s.name, s.id ] }, {include_blank: 'Not Listed'} %>
+  <% if current_user.admin %>
+    <%= f.label :school_id do %>
+      <span class="field-label">School</span>
+      <%= f.select :school_id, School.all.collect {|s| [ s.name, s.id ] }, {include_blank: 'Not Listed'} %>
+    <% end %>
   <% end %>
 
   <%= f.submit class: "btn" %>

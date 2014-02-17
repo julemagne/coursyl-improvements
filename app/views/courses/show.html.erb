@@ -241,7 +241,7 @@
     </h3>
   <% end %>
   <h3><i class="icon-comments-alt"></i> Course Policies</h3>
-  <% if @course.policies.present? %>
+  <% if @course.policies.present? || @course.grade_thresholds.present? %>
     <dl class="dl-horizontal">
       <% unless @course.grade_thresholds.blank? %>
         <dt>Grading Scale</dt>
@@ -254,9 +254,11 @@
         </dd>
       <% end %>
 
-      <% @course.policies.each do |p| %>
-      <dt><%= p.name %></dt>
-      <dd><%= markdown(p.description) %></dd>
+      <% unless @course.grade_thresholds.blank? %>
+        <% @course.policies.each do |p| %>
+          <dt><%= p.name %></dt>
+          <dd><%= markdown(p.description) %></dd>
+        <% end %>
       <% end %>
     </dl>
   <% else %>

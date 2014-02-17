@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  meeting_id: 1
+  lesson_id: 1
+  order_number: 1
+
+two:
+  meeting_id: 1
+  lesson_id: 1
+  order_number: 1

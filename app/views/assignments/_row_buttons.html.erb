@@ -1,15 +1,15 @@
 <% if assignment.students_can_submit && assignment.status(current_user).name != "Future" %>
-  <%= link_to '<i class="icon-edit" alt="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
+  <%= link_to '<i class="fa fa-edit" alt="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
 <% else %>
-  <i class="icon-edit muted" alt="Take Assignment"></i>
+  <i class="fa fa-edit muted" alt="Take Assignment"></i>
 <% end %>
 <% if current_user && current_user.teaching?(assignment.course) %>
   <% if assignment.status(current_user).name == "Future" %>
-    <i class="icon-legal muted"></i>
-    <i class="icon-bar-chart muted"></i>
+    <i class="fa fa-legal muted"></i>
+    <i class="fa fa-bar-chart muted"></i>
   <% else %>
-    <%= link_to '<i class="icon-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
-    <%= link_to '<i class="icon-bar-chart" title="Grade Assignment"></i>'.html_safe, view_grades_assignment_path(assignment) %>
+    <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <%= link_to '<i class="fa fa-bar-chart" title="Grade Assignment"></i>'.html_safe, view_grades_assignment_path(assignment) %>
   <% end %>
   <%= link_to 'Edit', edit_assignment_path(assignment), class: "btn btn-mini" %>
 <% end %>

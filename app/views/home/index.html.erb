@@ -1,5 +1,5 @@
 <% if current_user.admin %>
-  <h2><i class="icon-thumbs-up"></i> Instructor Requests</h2>
+  <h2><i class="fa fa-thumbs-up"></i> Instructor Requests</h2>
   <% if (requesting_users = User.want_to_be_instructors).length > 0 %>
     <table class="table table-hover table-condensed">
       <tr>
@@ -35,7 +35,7 @@
 
 
 <% if current_user.wants_to_be_instructor && !current_user.instructor %>
-  <h2><i class="icon-group"></i> Your Instructor Request</h2>
+  <h2><i class="fa fa-group"></i> Your Instructor Request</h2>
   <p class="lead">Your request is being reviewed.  Please check back later.</p>
 
   <div class="spacer"></div>
@@ -43,7 +43,7 @@
 
 
 <% if current_user.instructor %>
-  <h2><i class="icon-group"></i> Courses I'm Teaching</h2>
+  <h2><i class="fa fa-group"></i> Courses I'm Teaching</h2>
   <% if (courses_taught = current_user.courses_taught).length > 0 %>
     <% courses_taught.each do |c| %>
       <a href="<%= course_path(c) %>">
@@ -53,13 +53,13 @@
   <% else %>
     <p class="lead">Create a course below or ask the instructor of an existing course to add you as a co-instructor.</p>
   <% end %>
-  <h3><%= link_to '<i class="icon-plus"></i> Create New Course'.html_safe, new_course_path, class: "btn btn-success" %></h3>
+  <h3><%= link_to '<i class="fa fa-plus"></i> Create New Course'.html_safe, new_course_path, class: "btn btn-success" %></h3>
 
   <div class="spacer"></div>
 <% end %>
 
 
-<h2><i class="icon-lightbulb"></i> Courses I'm Taking</h2>
+<h2><i class="fa fa-lightbulb-o"></i> Courses I'm Taking</h2>
 <% if (courses_taken = current_user.courses_taken).length > 0 %>
   <% courses_taken.each do |c| %>
     <a href="<%= course_path(c) %>">
@@ -79,7 +79,7 @@
 
 
 <% if (assignments_to_complete = current_user.overdue_or_active_assignments).length > 0 %>
-  <h2><i class="icon-pencil"></i> My Assignments</h2>
+  <h2><i class="fa fa-pencil"></i> My Assignments</h2>
   <table class="table table-hover table-condensed">
     <tr>
       <th>Course</th>

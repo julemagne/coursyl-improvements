@@ -1,10 +1,10 @@
-<%= link_to '<i class="icon-book"></i> Courses'.html_safe + (Rails.env.development? ? " - DEVELOPMENT" : ""), '/', :class => 'brand' %>
+<%= link_to '<i class="fa fa-book"></i> Courses'.html_safe + (Rails.env.development? ? " - DEVELOPMENT" : ""), '/', :class => 'brand' %>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <% if current_user.admin %>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="icon-gears"></i>
+          <i class="fa fa-cogs"></i>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu">
@@ -16,23 +16,23 @@
     <% end %>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <i class="icon-user"></i> <%= current_user.full_name %>
+        <i class="fa fa-user"></i> <%= current_user.full_name %>
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
         <li>
           <%= link_to(edit_user_path(current_user)) do %>
-            <i class="icon-dashboard"></i> My Profile
+            <i class="fa fa-dashboard"></i> My Profile
           <% end %>
         </li>
         <li>
           <%= link_to(edit_user_registration_path(current_user)) do  %>
-            <i class="icon-key"></i> Change Password
+            <i class="fa fa-key"></i> Change Password
           <% end %>
         </li>
         <li>
           <%= link_to(destroy_user_session_path, method: :delete) do %>
-            <i class="icon-off"></i> Sign Out
+            <i class="fa fa-power-off"></i> Sign Out
           <% end %>
         </li>
       </ul>

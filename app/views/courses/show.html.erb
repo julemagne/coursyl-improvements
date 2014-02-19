@@ -10,7 +10,7 @@
   <% if current_user && current_user.teaching?(@course) %>
     <h3 class="float-right"><%= link_to 'Edit Course Details', edit_course_path(@course), class: "btn" %></h3>
   <% end %>
-  <h3><i class="icon-lightbulb"></i> Course Description</h3>
+  <h3><i class="fa fa-lightbulb-o"></i> Course Description</h3>
   <p class="muted">Meeting Times: <%= @course.period %></p>
   <%= markdown(@course.description) %>
 </section>
@@ -26,7 +26,7 @@
     <% if @course.students.blank? %>
       <h3 class="float-right">
         <a href="#student-modal" class="btn btn-success" data-toggle="modal">
-          <i class="icon-plus"></i> Add Student
+          <i class="fa fa-plus"></i> Add Student
         </a>
       </h3>
     <% end %>
@@ -49,7 +49,7 @@
         </div>
       <% end %>
     </div>
-    <h3><i class="icon-group"></i> Students</h3>
+    <h3><i class="fa fa-group"></i> Students</h3>
     <% if @course.students.present? %>
       <table class="table table-hover table-condensed">
         <tr>
@@ -60,7 +60,7 @@
           <th>Overall Grade</th>
           <td class="text-right">
             <a href="#student-modal" class="btn btn-mini btn-success" data-toggle="modal">
-              <i class="icon-plus"></i> Add Student
+              <i class="fa fa-plus"></i> Add Student
             </a>
           </td>
         </tr>
@@ -74,9 +74,9 @@
             <% if next_assignment %><td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td><% end %>
             <td><%= number_with_precision(s.grade, precision: 1) %></td>
             <td class="text-right">
-              <i class="icon-random muted" title="Change E-mail Address"></i>
-              <i class="icon-key muted" title="Change Password"></i>
-              <i class="icon-remove-circle muted" title="Remove Student from Course"></i>
+              <i class="fa fa-random muted" title="Change E-mail Address"></i>
+              <i class="fa fa-key muted" title="Change Password"></i>
+              <i class="fa fa-remove-circle muted" title="Remove Student from Course"></i>
             </td>
           </tr>
         <% end %>
@@ -94,12 +94,12 @@
   <a id="anchor-assignments" class="anchor-course"></a>
   <% if current_user && current_user.teaching?(@course) && @course.assignments.blank? %>
     <h3 class="float-right">
-      <%= link_to '<i class="icon-plus"></i> New Assignment</a>'.html_safe,
+      <%= link_to '<i class="fa fa-plus"></i> New Assignment</a>'.html_safe,
           new_assignment_path(course_id: @course.id),
           class: "btn btn-success" %>
     </h3>
   <% end %>
-  <h3><i class="icon-pencil"></i> Assignments</h3>
+  <h3><i class="fa fa-pencil"></i> Assignments</h3>
   <% if @course.assignments.present? %>
     <div class="progress progress-striped">
       <% assignment_statuses.each do |status| %>
@@ -128,7 +128,7 @@
         <% end %>
         <th>% of Course</th>
         <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
-          <%= link_to '<i class="icon-plus"></i> New Assignment</a>'.html_safe,
+          <%= link_to '<i class="fa fa-plus"></i> New Assignment</a>'.html_safe,
               new_assignment_path(course_id: @course.id),
               class: "btn btn-mini btn-success" %>
         <% end %></td>
@@ -163,13 +163,13 @@
   <a id="anchor-lessons" class="anchor-course"></a>
   <% if current_user && current_user.teaching?(@course) && @course.lessons.blank? %>
     <h3 class="float-right">
-      <%= link_to '<i class="icon-plus"></i> New Lesson</a>'.html_safe,
+      <%= link_to '<i class="fa fa-plus"></i> New Lesson</a>'.html_safe,
           new_lesson_path(course_id: @course.id),
           class: "btn btn-success" %>
     </h3>
   <% end %>
-  <h3><i class="icon-time"></i> Lessons</h3>
-  <% if @course.lessons.present? %>
+  <h3><i class="fa fa-time"></i> Lessons</h3>
+  <% if @course.meetings.present? %>
     <div id="lesson-tree-anchor"></div>
     <div id="lesson-tree-wrapper">
       <div id="lesson-tree" class="well"></div>
@@ -186,41 +186,42 @@
         <th>Time</th>
         <th>Name</th>
         <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
-          <%= link_to '<i class="icon-plus"></i> New Lesson</a>'.html_safe,
+          <%= link_to '<i class="fa fa-plus"></i> New Lesson</a>'.html_safe,
               new_lesson_path(course_id: @course.id),
               class: "btn btn-mini btn-success" %>
         <% end %></td>
       </tr>
-      <% @course.lessons.each do |l| %>
-      <tr heldat="<%= l.held_at_integer %>" class="node">
-        <td><strong><%= weekday_abbreviation(l.held_at) %></strong></td>
-        <td><%= date_abbreviation(l.held_at) %></td>
-        <td><%= time_abbreviation(l.held_at) %></td>
-        <td><%= l.name %></td>
-        <td class="text-right">
+      <% @course.meetings.each do |m| %>
+        <% l = m.lessons.first %>
+        <tr heldat="<%= l.held_at_integer %>" class="node">
+          <td><strong><%= weekday_abbreviation(m.held_at) %></strong></td>
+          <td><%= date_abbreviation(m.held_at) %></td>
+          <td><%= time_abbreviation(m.held_at) %></td>
+          <td><%= m.lesson_names %></td>
+          <td class="text-right">
 
-          <% if l.past_or_next? %>
-            <%= link_to '<i class="icon-edit" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
-          <% else %>
-            <i class="icon-edit muted" alt="Pre-class Reading"></i>
-          <% end %>
-
-          <% if l.video_url? %>
-            <%= link_to '<i class="icon-film" alt="Lesson Downloads"></i>'.html_safe, l.video_url, target: 'blank' %>
-          <% else %>
-            <i class="icon-film muted" alt="Lesson Downloads"></i>
-          <% end %>
-
-          <% if current_user && current_user.teaching?(@course) %>
-            <% if l.past_or_next? %>
-              <%= link_to '<i class="icon-th-list" alt="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
+            <% if m.past_or_next? %>
+              <%= link_to '<i class="fa fa-edit" alt="Daily Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
             <% else %>
-              <i class="icon-th-list muted" alt="Lesson Outline"></i>
+              <i class="fa fa-edit muted" alt="Pre-class Reading"></i>
             <% end %>
-            <%= link_to 'Edit', edit_lesson_path(l), class: "btn btn-mini" %>
-          <% end %>
-        </td>
-      </tr>
+
+            <% if l.video_url? %>
+              <%= link_to '<i class="fa fa-film" alt="Lesson Downloads"></i>'.html_safe, l.video_url, target: 'blank' %>
+            <% else %>
+              <i class="fa fa-film muted" alt="Lesson Downloads"></i>
+            <% end %>
+
+            <% if current_user && current_user.teaching?(@course) %>
+              <% if m.past_or_next? %>
+                <%= link_to '<i class="fa fa-th-list" alt="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
+              <% else %>
+                <i class="fa fa-th-list muted" alt="Lesson Outline"></i>
+              <% end %>
+              <%= link_to 'Edit', edit_lesson_path(l), class: "btn btn-mini" %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
     </table>
     <div id="lesson-bottom-anchor"></div>
@@ -240,7 +241,7 @@
       <%= link_to 'Edit Course Policies', policies_course_path(@course), class: "btn" %>
     </h3>
   <% end %>
-  <h3><i class="icon-comments-alt"></i> Course Policies</h3>
+  <h3><i class="fa fa-comments-alt"></i> Course Policies</h3>
   <% if @course.policies.present? || @course.grade_thresholds.present? %>
     <dl class="dl-horizontal">
       <% unless @course.grade_thresholds.blank? %>

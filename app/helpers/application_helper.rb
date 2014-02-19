@@ -31,6 +31,6 @@ module ApplicationHelper
   end
 
   def back_arrow
-    "<i class='icon-chevron-left'></i><i class='icon-chevron-left'></i> ".html_safe
+    "<i class='fa fa-chevron-left'></i><i class='fa fa-chevron-left'></i> ".html_safe
   end
 end

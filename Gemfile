@@ -31,6 +31,8 @@ gem 'redcarpet'
 
 gem 'd3-rails'
 
+gem 'font-awesome-rails'
+
 gem 'devise'
 
 group :doc do

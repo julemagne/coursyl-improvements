@@ -14,9 +14,9 @@
       <th>Email</th>
       <th>Phone</th>
       <th>School</th>
-      <th>Student?</th>
-      <th>Instructor?</th>
-      <th>Admin?</th>
+      <th class="text-center">Student?</th>
+      <th class="text-center">Instructor?</th>
+      <th class="text-center">Admin?</th>
       <th></th>
     </tr>
   </thead>
@@ -28,9 +28,9 @@
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
         <td><%= user.school_name %></td>
-        <td><%= '<i class="fa fa-check-sign text-info"></i>'.html_safe if user.student? %></td>
-        <td><%= '<i class="fa fa-check-sign text-info"></i>'.html_safe if user.instructor? %></td>
-        <td><%= '<i class="fa fa-check-sign text-info"></i>'.html_safe if user.admin? %></td>
+        <td class="text-center"><%= '<i class="fa fa-check-square text-info"></i>'.html_safe if user.student? %></td>
+        <td class="text-center"><%= '<i class="fa fa-check-square text-info"></i>'.html_safe if user.instructor? %></td>
+        <td class="text-center"><%= '<i class="fa fa-check-square text-info"></i>'.html_safe if user.admin? %></td>
         <td class="text-right"><%= link_to 'Edit', edit_user_path(user), class: "btn btn-mini" %>
             <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %></td>
       </tr>

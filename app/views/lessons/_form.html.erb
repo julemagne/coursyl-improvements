@@ -9,19 +9,13 @@
     </div>
   <% end %>
 
+  <p class="lead"><span class="muted">Parent Lesson:</span> <%= @lesson.parent_name %></p>
+  <br/>
+  <%= f.hidden_field :parent_lesson_id %>
   <%= f.hidden_field :course_id %>
 
   <%= f.label :name do %>
     <span class="field-label">Lesson Name</span> <%= f.text_field :name, required: true %>
-  <% end %>
-
-  <%= f.label :parent_lesson_id do %>
-    <span class="field-label">Parent Lesson</span> <%= f.text_field :parent_lesson_id, class: 'input-small' %>
-  <% end %>
-
-  <%= f.label :held_at do %>
-    <span class="field-label">Day/Time</span> <%= f.text_field :held_at, required: true, value: db_datetime_string(@lesson.held_at) %>
-    <span class="help-inline">e.g. "2000-01-01 14:00"</span>
   <% end %>
 
   <%= f.label :description do %>
@@ -37,11 +31,11 @@
   <% end %>
 
   <%= f.label :video_url do %>
-    <span class="field-label">Video URL</span> <%= f.text_field :video_url, class: 'input-xxlarge' %>
+    <span class="field-label">Video/Slide URL</span> <%= f.text_field :video_url, class: 'input-xxlarge' %>
   <% end %>
 
   <h3>Pre-Class Readings</h3>
-  <p class="lead">If you would like to tell students what to read without linking to something, leave the URL field blank.</a></p>
+  <p class="lead">If you would like to tell students what to read without linking to a website, leave the URL field blank.</a></p>
   <% i = 0 %>
   <div class="associations">
     <%= f.fields_for :readings do |ff| %>

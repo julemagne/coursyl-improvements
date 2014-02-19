@@ -20,6 +20,7 @@ body {
     color: black;
     font-weight: normal;
   }
+  padding-bottom: 40px;
 }
 
 a {
@@ -39,6 +40,10 @@ a {
 
 .float-right {
   float: right;
+}
+
+td.text-center, th.text-center {
+  text-align: center !important;
 }
 
 td.text-right, th.text-right {

@@ -7,11 +7,12 @@ class Lesson < ActiveRecord::Base
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
 
   validates :name, presence: true
-  validates :held_at, presence: true
 
   accepts_nested_attributes_for :readings,
       :allow_destroy => true,
       :reject_if     => :all_blank
+
+  scope :roots, -> { where("parent_lesson_id IS NULL") }
 
   def descendant_tree
     tree = {name: name,
@@ -24,14 +25,8 @@ class Lesson < ActiveRecord::Base
     tree
   end
 
-  def first_meeting_time
-    if meetings.present?
-      meetings.first.held_at
-    end
-  end
-
   def held_at_integer
-    first_meeting_time.to_i
+    meetings.first.held_at_integer
   end
 
   def course_color
@@ -40,6 +35,10 @@ class Lesson < ActiveRecord::Base
 
   def course_code_and_name
     course.code_and_name
+  end
+
+  def parent_name
+    parent_lesson.name
   end
 
 end

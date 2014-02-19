@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :lead_in_question]
   before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy, :lead_in_question, :outline]
-  before_action :set_course, only: [:new, :create]
+  before_action :set_course, only: [:new, :create, :index]
   before_action :instructor_only!, except: [:show, :lead_in_question]
 
   def lead_in_question
@@ -11,9 +11,16 @@ class LessonsController < ApplicationController
   end
 
   # GET
+  def index
+    @root_lessons = @course.lessons.roots
+    @meetings = @course.meetings
+  end
+
+  # GET
   def new
     @lesson = Lesson.new
     @lesson.course_id = @course.id
+    @lesson.parent_lesson = Lesson.find(params[:parent_lesson_id])
 
     @lesson.readings.build
   end
@@ -29,7 +36,7 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       if @lesson.save
-        format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully created.'} }
+        format.html { redirect_to lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully created.'} }
       else
         @lesson.readings.build
         format.html { render action: 'new' }
@@ -68,7 +75,7 @@ class LessonsController < ApplicationController
     end
 
     def lesson_params
-      params.require(:lesson).permit(:course_id, :parent_lesson_id, :name, :held_at,
+      params.require(:lesson).permit(:course_id, :parent_lesson_id, :name,
           :description, :outline, :video_url, :lead_in_question,
           readings_attributes: [:id, :caption, :url, :order_number, :_destroy])
     end

@@ -1,5 +1,5 @@
 <p><%= link_to back_arrow + "Back to #{@lesson.course_code_and_name}", @lesson.course %></p>
 
-<h2><%= @lesson.held_at ? date_abbreviation(@lesson.held_at) : "No Date" %> - <%= @lesson.name %></h2>
+<h2><%= @lesson.course_code_and_name %> - <%= @lesson.name %></h2>
 
 <%= render 'form' %>

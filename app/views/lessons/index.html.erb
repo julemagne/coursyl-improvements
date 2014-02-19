@@ -1,0 +1,47 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.course_code %> Scheduler</h2>
+
+<p class="lead">After creating lessons and meeting times, add a lesson to a meeting time by
+  dragging it to the left and dropping it on the appropriate meeting.</p>
+
+<div class="row">
+  <div class="span6">
+    <h3>Meeting Times</h3>
+    <% @meetings.each do |m| %>
+      <div class="meeting-time">
+        <i class="fa fa-clock-o"></i>
+        <%= weekday_abbreviation(m.held_at) %>
+        <%= date_abbreviation(m.held_at) %>
+      </div>
+    <% end %>
+    <div id="new-meeting-modal" class="modal hide fade">
+      <%= form_tag meetings_path, method: :post do %>
+        <div class="modal-header">
+          <h3>Add a Meeting Time to <%= @course.course_code %></h3>
+        </div>
+        <div class="modal-body">
+          <%= hidden_field_tag :course_id, @course.id %>
+          <span class="field-label"><%= label_tag :held_at, "Date/Time" %></span>
+          <%= text_field_tag :held_at, nil, required: true %>
+          <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+        </div>
+        <div class="modal-footer">
+          <a class="btn" data-dismiss="modal">Close</a>
+          <%= submit_tag "Add Meeting Time", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+    <a href="#new-meeting-modal" class="meeting-time" data-toggle="modal">
+      <i class="fa fa-plus"></i> Add Meeting Time
+    </a>
+  </div>
+
+  <div class="span6">
+    <h3>Lessons</h3>
+    <% @root_lessons.each do |l| %>
+      <%= render partial: "lesson_tree_node", locals: {lesson: l, depth: 0} %>
+    <% end%>
+    <div style="color: <%= level_color(0) %>;"><i class="fa fa-plus"></i> Add Root Lesson</div>
+  </div>
+</div>

@@ -1,13 +1,14 @@
 <div class="hero-unit">
-  <h1>Courses</h1>
-  <p>A student-centric window into your classes, assignments, lectures, and grades.</p>
+  <h1>Coursyl</h1>
+  <p>A syllabus-based window into your courses, assignments, lectures, and grades.</p>
 </div>
 
 
 <div class="row">
   <div class="span4">
-    <h2>Why use Courses?</h2>
-    <p>Okay, it's true: you may not have a choice.  Other than that, you might also use Courses because you'll be able to:</p>
+    <h2>Why use Coursyl?</h2>
+    <p>Okay, it's true: your instructors or supervisors may not give you a choice.  Other than that,
+      <strong>if you're a student</strong> you might use Coursyl because you can:</p>
     <ul>
       <li>See your current grade</li>
       <li>See your final grade if you ace everything else</li>
@@ -16,18 +17,23 @@
       <li>View upcoming lessons in a cool topical tree</li>
       <li>Watch lectures, review slides, and catch up on what you may have missed</li>
     </ul>
-    <p>(although we've got to work through FERPA before we can enable those first four)</p>
-    <p><a class="btn" href="/users/sign_up">Sign Up</a></p>
+    <p><strong>If you're an instructor</strong> you might use Coursyl because you can:</p>
+    <ul>
+      <li>Create beautiful, sharable syllabi</li>
+      <li>Grade anonymously</li>
+      <li>Quickly adapt schedules for extra time on a lesson, delays due to snow, or a different group of students next semester</li>
+    </ul>
   </div>
 
   <div class="span4">
-    <h2>Example Classes</h2>
-    <p>Here are some of the classes that use Courses:</p>
+    <h2>Example Courses</h2>
+    <p>Here are some of the courses that use Coursyl:</p>
     <ul>
       <% Course.example_courses.each do |c| %>
         <li><%= link_to c.code_and_name, course_path(c) %></li>
       <% end %>
     </ul>
+    <p><a class="btn" href="/users/sign_up">Sign Up to Get Started</a></p>
   </div>
 
   <div class="span4">

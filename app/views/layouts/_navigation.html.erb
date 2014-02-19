@@ -1,4 +1,4 @@
-<%= link_to '<i class="fa fa-book"></i> Courses'.html_safe + (Rails.env.development? ? " - DEVELOPMENT" : ""), '/', :class => 'brand' %>
+<%= link_to '<i class="fa fa-book"></i> Coursyl'.html_safe + (Rails.env.development? ? " - DEVELOPMENT" : ""), '/', :class => 'brand' %>
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <% if current_user.admin %>

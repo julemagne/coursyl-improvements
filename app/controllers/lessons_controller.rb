@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :lead_in_question]
   before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy, :lead_in_question, :outline]
-  before_action :set_course, only: [:new, :create, :index]
+  before_action :set_course, only: [:new, :create, :schedule, :index]
   before_action :instructor_only!, except: [:show, :lead_in_question]
 
   def lead_in_question
@@ -13,7 +13,18 @@ class LessonsController < ApplicationController
   # GET
   def index
     @root_lessons = @course.lessons.roots
-    @meetings = @course.meetings
+  end
+
+  # GET
+  def schedule
+    if @course.meetings.blank?
+      redirect_to meetings_path(course_id: @course.id)
+    elsif @course.lessons.blank?
+      redirect_to lessons_path(course_id: @course.id)
+    else
+      @root_lessons = @course.lessons.roots
+      @meetings = @course.meetings
+    end
   end
 
   # GET
@@ -48,7 +59,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to edit_lesson_path(@lesson), flash: {success: 'Lesson was successfully updated.'} }
+        format.html { redirect_to lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully updated.'} }
       else
         @lesson.readings.build
         format.html { render action: 'edit' }
@@ -60,7 +71,7 @@ class LessonsController < ApplicationController
   def destroy
     @lesson.destroy
     respond_to do |format|
-      format.html { redirect_to lessons_url }
+      format.html { redirect_to lessons_path(course_id: @course.id), notice: 'Lesson was successfully deleted.' }
     end
   end
 

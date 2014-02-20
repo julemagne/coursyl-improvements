@@ -1,6 +1,6 @@
 class Meeting < ActiveRecord::Base
   belongs_to :course
-  has_many :meeting_lessons, -> {order :order_number}
+  has_many :meeting_lessons, -> {order :order_number}, dependent: :destroy
   has_many :lessons, through: :meeting_lessons
 
   validates :held_at, presence: true

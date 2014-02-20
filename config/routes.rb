@@ -34,6 +34,9 @@ Courses::Application.routes.draw do
       get 'lead_in_question'
       get 'outline'
     end
+    collection do
+      get 'schedule'
+    end
   end
   resources :meetings
 

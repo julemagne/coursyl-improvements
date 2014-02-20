@@ -1,0 +1,17 @@
+<div id="new-meeting-modal" class="modal hide fade">
+  <%= form_tag meetings_path, method: :post do %>
+    <div class="modal-header">
+      <h3>Add a Meeting Time to <%= @course.course_code %></h3>
+    </div>
+    <div class="modal-body">
+      <%= hidden_field_tag :course_id, @course.id %>
+      <span class="field-label"><%= label_tag :held_at, "Date/Time" %></span>
+      <%= text_field_tag :held_at, nil, required: true %>
+      <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" data-dismiss="modal">Close</a>
+      <%= submit_tag "Add Meeting Time", class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,19 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.course_code %> Scheduling</h2>
+
+<p class="lead">Use the <i class="text-info fa fa-arrow-circle-left"></i> icons to apply lessons to specific meeting times.
+  Use the <i class="text-info fa fa-times-circle"></i> icons to remove lessons from specific meeting times.</p>
+
+<div class="row">
+  <div class="span6">
+    <h3>Meeting Times</h3>
+    <%= render partial: "/meetings/meeting_list", locals: {editable: false} %>
+    <%= link_to 'Edit Meeting Times', meetings_path(course_id: @course.id), class: "btn" %>
+  </div>
+  <div class="span6">
+    <h3>Lessons</h3>
+    <%= render partial: "lesson_tree", locals: {editable: false} %>
+    <%= link_to 'Edit Lessons', lessons_path(course_id: @course.id), class: "btn" %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div id="edit-meeting-<%= meeting.id %>-modal" class="modal hide fade">
+  <%= form_for meeting do |f| %>
+    <div class="modal-header">
+      <h3>Edit Meeting</h3>
+    </div>
+    <div class="modal-body">
+      <span class="field-label">Date/Time</span>
+      <%= f.text_field :held_at, required: true %>
+      <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+    </div>
+    <div class="modal-footer">
+      <a class="btn" data-dismiss="modal">Close</a>
+      <%= submit_tag "Save Meeting Time", class: "btn" %>
+    </div>
+  <% end %>
+</div>

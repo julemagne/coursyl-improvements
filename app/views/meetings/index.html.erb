@@ -1,0 +1,11 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.course_code %> Meeting Times</h2>
+
+<p class="lead">
+  Before you can proceed with lesson planning, you must set up the times at which your course will meet.
+</p>
+
+<%= render partial: "meeting_list", locals: {editable: true} %>
+
+<%= link_to 'Continue with Scheduling', schedule_lessons_path(course_id: @course.id), class: "btn" %>

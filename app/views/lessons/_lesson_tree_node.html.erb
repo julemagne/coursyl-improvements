@@ -1,13 +1,33 @@
 <div class="lesson-tree-node">
-  <i class="fa fa-compass" style="color: <%= level_color(depth) %>;"></i>
-  <span class="label <%= (lesson.meeting_lessons.blank? ? "label-muted" : "label-info") %>"><%= lesson.name %></span>
+  <% if editable %>
+    <i class="fa fa-compass text-info" style="opacity: <%= level_opacity(depth) %>;"></i>
+    <strong class="text-info">
+      <%= lesson.name %>
+    </strong>
+    <%= link_to '<i class="fa fa-pencil text-info"></i>'.html_safe, edit_lesson_path(lesson) %>
+    <%= link_to '<i class="fa fa-times text-error"></i>'.html_safe, lesson, method: :delete,
+      data: { confirm: "THINK CAREFULLY: This will delete all readings, questions, AND child lessons of this lesson. Are you still sure?" } %>
+  <% else %>
+    <a href="#schedule-lesson-<%= lesson.id %>-modal" data-toggle="modal">
+      <i class="fa fa-arrow-circle-left text-info" style="opacity: <%= level_opacity(depth) %>;"></i></a>
+    <span class="label <%= (lesson.meeting_lessons.blank? ? "muted" : "label-info") %>">
+      <%= lesson.name %>
+    </span>
+    <%= render partial: '/lessons/modal_schedule_lesson', locals: {lesson: lesson} %>
+  <% end %>
 </div>
 
 <div class="lesson-tree-level">
   <% lesson.child_lessons.each do |l| %>
-    <%= render partial: "lesson_tree_node", locals: {lesson: l, depth: depth+1} %>
+    <%= render partial: "lesson_tree_node", locals: {lesson: l, depth: depth+1, editable: editable} %>
   <% end %>
-  <div>
-    <%= link_to '<i class="fa fa-plus"></i> Add Lesson'.html_safe, new_lesson_path(course_id: @course.id, parent_lesson_id: lesson.id), style: "color: #{level_color(depth+1)};" %>
-  </div>
+  <% if editable %>
+    <div class="lesson-tree-node">
+      <div class="" style="opacity: <%= level_opacity(depth+1) %>;">
+        <%= link_to '<i class="fa fa-plus"></i> Add Lesson'.html_safe,
+          new_lesson_path(course_id: @course.id, parent_lesson_id: lesson.id),
+          class: "text-info" %>
+      </div>
+    </div>
+  <% end %>
 </div>

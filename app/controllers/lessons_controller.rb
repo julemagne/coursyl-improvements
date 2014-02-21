@@ -25,7 +25,7 @@ class LessonsController < ApplicationController
   def new
     @lesson = Lesson.new
     @lesson.course_id = @course.id
-    @lesson.parent_lesson = Lesson.find(params[:parent_lesson_id])
+    @lesson.parent_lesson = Lesson.find(params[:parent_lesson_id]) if params[:parent_lesson_id]
 
     @lesson.readings.build
   end
@@ -53,7 +53,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully updated.'} }
+        format.html { redirect_to schedule_lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully updated.'} }
       else
         @lesson.readings.build
         format.html { render action: 'edit' }

@@ -3,6 +3,10 @@
     <%= render partial: "lesson_tree_node", locals: {lesson: l, depth: 0, editable: editable} %>
   <% end%>
   <% if editable %>
-    <div class="text-info" style="opacity: <%= level_opacity(0) %>;"><i class="fa fa-plus"></i> Add Root Lesson</div>
+    <div class="text-info" style="opacity: <%= level_opacity(0) %>;">
+      <%= link_to '<i class="fa fa-plus"></i> Add Root Lesson'.html_safe,
+        new_lesson_path(course_id: @course.id, parent_lesson_id: nil),
+        class: "text-info" %>
+    </div>
   <% end %>
 </div>

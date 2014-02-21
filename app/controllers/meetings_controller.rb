@@ -1,8 +1,17 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_meeting, only: [:update, :destroy]
+  before_action :authenticate_user!, except: [:lead_in_question, :media]
+  before_action :set_meeting, only: [:update, :destroy, :lead_in_question, :outline, :media]
   before_action :set_course
-  before_action :instructor_only!
+  before_action :instructor_only!, except: [:lead_in_question, :media]
+
+  def lead_in_question
+  end
+
+  def outline
+  end
+
+  def media
+  end
 
   # GET
   def index

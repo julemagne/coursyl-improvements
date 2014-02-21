@@ -1,14 +1,8 @@
 class LessonsController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :lead_in_question]
-  before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy, :lead_in_question, :outline]
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy]
   before_action :set_course, only: [:new, :create, :schedule, :index]
-  before_action :instructor_only!, except: [:show, :lead_in_question]
-
-  def lead_in_question
-  end
-
-  def outline
-  end
+  before_action :instructor_only!, except: [:show]
 
   # GET
   def index
@@ -87,7 +81,7 @@ class LessonsController < ApplicationController
 
     def lesson_params
       params.require(:lesson).permit(:course_id, :parent_lesson_id, :name,
-          :description, :outline, :video_url, :lead_in_question,
-          readings_attributes: [:id, :caption, :url, :order_number, :_destroy])
+          :description, :outline, :lead_in_question,
+          readings_attributes: [:id, :caption, :url, :order_number, :before_lesson, :_destroy])
     end
 end

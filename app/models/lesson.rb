@@ -8,9 +8,11 @@ class Lesson < ActiveRecord::Base
 
   validates :name, presence: true
 
+  delegate :code_and_name, to: :course, prefix: true
+
   accepts_nested_attributes_for :readings,
       :allow_destroy => true,
-      :reject_if     => :all_blank
+      :reject_if     => proc { |attributes| attributes['caption'].blank? }
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
 
@@ -21,6 +23,7 @@ class Lesson < ActiveRecord::Base
     end
     children = children.compact.sort_by{|c| c[:heldat]}
 
+    # Set my datetime to my earliest child's if I don't have a datetime of my own.
     heldat = held_at_integer || (children.present? && (children.first)[:heldat])
 
     if heldat && heldat > 0
@@ -39,12 +42,8 @@ class Lesson < ActiveRecord::Base
     course.color
   end
 
-  def course_code_and_name
-    course.code_and_name
-  end
-
   def parent_name
-    parent_lesson.name
+    parent_lesson ? parent_lesson.name : "N/A"
   end
 
 end

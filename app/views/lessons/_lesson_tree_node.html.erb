@@ -13,6 +13,7 @@
     <span class="label <%= (lesson.meeting_lessons.blank? ? "muted" : "label-info") %>">
       <%= lesson.name %>
     </span>
+    <%= link_to '<i class="fa fa-pencil text-info"></i>'.html_safe, edit_lesson_path(lesson) %>
     <%= render partial: '/lessons/modal_schedule_lesson', locals: {lesson: lesson} %>
   <% end %>
 </div>

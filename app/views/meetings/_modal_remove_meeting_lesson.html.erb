@@ -3,16 +3,11 @@
     <h3><%= date_abbreviation(meeting_lesson.held_at) %> - <%= meeting_lesson.lesson_name %></h3>
   </div>
   <div class="modal-body">
-    <p><%= link_to 'Remove Lesson', meeting_lesson, method: :delete,
-          data: { confirm: "Are you sure you'd like to remove this lesson from this meeting time?",
-                  dismiss: "modal" },
-          class: 'btn btn-danger' %></p>
+    <p><%= link_to 'Remove Lesson', meeting_lesson,
+          method: :delete, class: 'btn btn-danger' %></p>
 
     <p><%= link_to 'Remove Lesson and Shift Later Lessons Up', destroy_and_shift_meeting_lesson_path(meeting_lesson),
-          method: :delete,
-          data: { confirm: "Are you sure you'd like to remove this lesson from this meeting time?",
-                  dismiss: "modal"},
-          class: 'btn btn-danger' %></p>
+          method: :delete, class: 'btn btn-danger' %></p>
 
     <p><a class="btn" data-dismiss="modal">Cancel</a></p>
   </div>

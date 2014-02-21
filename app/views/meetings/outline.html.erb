@@ -1,0 +1,9 @@
+<p><%= link_to back_arrow + "Back to #{@meeting.course_code_and_name}", @meeting.course %></p>
+
+<h2>Outlines for <%= date_humanized(@meeting.held_at) %></h2>
+
+<% @meeting.lessons.each do |l| %>
+  <p class="lead"><%= l.name %></p>
+  <%= markdown(l.outline || "<span class='muted'>No outline for this lesson.</span>") %>
+  <br/>
+<% end %>

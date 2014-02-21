@@ -9,6 +9,8 @@ class MeetingLesson < ActiveRecord::Base
   delegate :name, to: :lesson, prefix: true
   delegate :held_at, to: :meeting
 
+  default_scope { order('order_number') }
+
   def course
     lesson.course
   end

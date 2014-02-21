@@ -7,6 +7,8 @@ class Meeting < ActiveRecord::Base
 
   validates :held_at, presence: true
 
+  delegate :code_and_name, to: :course, prefix: true
+
   def in_past?
     held_at < Time.now
   end

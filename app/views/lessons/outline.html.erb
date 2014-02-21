@@ -1,5 +1,0 @@
-<p><%= link_to back_arrow + "Back to #{@lesson.course_code_and_name}", @lesson.course %></p>
-
-<h2>Outline for <%= date_abbreviation(@lesson.held_at) %> - <%= @lesson.name %></h2>
-
-<%= markdown(@lesson.outline || "<span class='muted'>No outline for this lesson.</span>") %>

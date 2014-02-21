@@ -130,7 +130,7 @@
           <% end %>
           <td><%= percentage(a.fraction_of_grade) %></td>
           <td class="text-right">
-            <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
+            <%= render partial: "/assignments/row_buttons", locals: {assignment: a} %>
           </td>
         </tr>
       <% end %>
@@ -172,33 +172,13 @@
         <% end %></td>
       </tr>
       <% @course.meetings.each do |m| %>
-        <% l = m.lessons.first %>
         <tr heldat="<%= m.held_at_integer %>" class="node">
           <td><strong><%= weekday_abbreviation(m.held_at) %></strong></td>
           <td><%= date_abbreviation(m.held_at) %></td>
           <td><%= time_abbreviation(m.held_at) %></td>
           <td><%= m.lesson_names %></td>
           <td class="text-right">
-
-            <% if m.past_or_next? %>
-              <%= link_to '<i class="fa fa-edit" title="Pre-class Readings and Questions"></i>'.html_safe, lead_in_question_lesson_path(l) %>
-            <% else %>
-              <i class="fa fa-edit muted" title="Pre-class Readings and Questions"></i>
-            <% end %>
-
-            <% if l && l.video_url? %>
-              <%= link_to '<i class="fa fa-film" title="Lesson Video/Slides"></i>'.html_safe, l.video_url, target: 'blank' %>
-            <% else %>
-              <i class="fa fa-film muted" title="Lesson Video/Slides"></i>
-            <% end %>
-
-            <% if current_user && current_user.teaching?(@course) %>
-              <% if m.past_or_next? %>
-                <%= link_to '<i class="fa fa-th-list" title="Lesson Outline"></i>'.html_safe, outline_lesson_path(l) %>
-              <% else %>
-                <i class="fa fa-th-list muted" title="Lesson Outline"></i>
-              <% end %>
-            <% end %>
+            <%= render partial: "/meetings/row_buttons", locals: {meeting: m} %>
           </td>
         </tr>
       <% end %>

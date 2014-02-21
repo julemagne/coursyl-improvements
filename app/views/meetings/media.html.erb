@@ -1,0 +1,37 @@
+<p><%= link_to back_arrow + "Back to #{@meeting.course_code_and_name}", @meeting.course %></p>
+
+<h2>Media for <%= date_humanized(@meeting.held_at) %></h2>
+
+<% if @meeting.video_url %>
+  <p class="lead">Class Video</p>
+
+  <div class="media">
+    <div class="pull-left">
+      <i class="media-object fa fa-film"></i>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">Class Video</h4>
+      <a href="<%= @meeting.video_url %>" target="blank"><%= @meeting.video_url %></a>
+    </div>
+  </div>
+
+  <br/>
+<% end %>
+
+<% @meeting.lessons.each do |l| %>
+  <p class="lead"><%= l.name %></p>
+
+  <% l.readings.post.each do |r| %>
+    <div class="media">
+      <div class="pull-left">
+        <i class="media-object fa fa-cloud-download"></i>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading"><%= r.caption %></h4>
+        <a href="<%= r.url %>" target="blank"><%= r.url %></a>
+      </div>
+    </div>
+  <% end %>
+
+  <br/>
+<% end %>

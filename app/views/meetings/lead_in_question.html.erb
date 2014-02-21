@@ -1,0 +1,28 @@
+<p><%= link_to back_arrow + "Back to #{@meeting.course_code_and_name}", @meeting.course %></p>
+
+<h2>Daily Readings and Questions for <%= date_humanized(@meeting.held_at) %></h2>
+
+<% @meeting.lessons.each do |l| %>
+  <p class="lead"><%= l.name %></p>
+
+  <p>Pre-class Readings:</p>
+  <ul>
+    <% if l.readings.pre.each do |r| %>
+      <li><%= r.url? ? (link_to r.caption, r.url, target: "blank") : r.caption %></li>
+    <% end.empty? %>
+      <li class='muted'>No readings for this lesson.</li>
+    <% end %>
+  </ul>
+
+  <p>Pre-class Questions:</p>
+  <ul>
+    <% if l.lead_in_question.present? %>
+      <li><%= markdown(l.lead_in_question) %></li>
+    <% else %>
+      <li class='muted'>No questions for this lesson.</li>
+    <% end %>
+  </ul>
+
+  <br/>
+<% end %>
+

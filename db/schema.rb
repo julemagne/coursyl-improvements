@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217212657) do
+ActiveRecord::Schema.define(version: 20140221122242) do
 
   create_table "assignment_grades", force: true do |t|
     t.integer  "assignment_id"
@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 20140217212657) do
     t.text     "description"
     t.text     "outline"
     t.text     "lead_in_question"
-    t.text     "video_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -114,6 +113,7 @@ ActiveRecord::Schema.define(version: 20140217212657) do
   create_table "meetings", force: true do |t|
     t.integer  "course_id"
     t.datetime "held_at"
+    t.text     "video_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 20140217212657) do
     t.integer  "order_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "before_lesson", default: true
   end
 
   create_table "schools", force: true do |t|

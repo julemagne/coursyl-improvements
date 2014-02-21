@@ -30,15 +30,17 @@ Courses::Application.routes.draw do
     end
   end
   resources :lessons do
-    member do
-      get 'lead_in_question'
-      get 'outline'
-    end
     collection do
       get 'schedule'
     end
   end
-  resources :meetings
+  resources :meetings do
+    member do
+      get 'lead_in_question'
+      get 'outline'
+      get 'media'
+    end
+  end
   resources :meeting_lessons do
     member do
       delete 'destroy_and_shift'

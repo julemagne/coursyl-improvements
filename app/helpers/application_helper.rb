@@ -18,6 +18,10 @@ module ApplicationHelper
     datetime.strftime("%m/%d")
   end
 
+  def date_humanized(datetime)
+    datetime.to_date.to_formatted_s(:long_ordinal)
+  end
+
   def time_abbreviation(datetime)
     datetime.strftime("%l:%M %p")
   end

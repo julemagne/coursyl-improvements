@@ -3,6 +3,8 @@ class Meeting < ActiveRecord::Base
   has_many :meeting_lessons, -> {order :order_number}, dependent: :destroy
   has_many :lessons, through: :meeting_lessons
 
+  default_scope { order('held_at') }
+
   validates :held_at, presence: true
 
   def in_past?

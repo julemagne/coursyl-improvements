@@ -39,6 +39,11 @@ Courses::Application.routes.draw do
     end
   end
   resources :meetings
+  resources :meeting_lessons do
+    member do
+      delete 'destroy_and_shift'
+    end
+  end
 
   # You can have the root of your site routed with "root"
   root 'home#index'

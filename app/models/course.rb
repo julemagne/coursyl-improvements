@@ -94,4 +94,8 @@ class Course < ActiveRecord::Base
   def letter_for_grade(grade)
     grade_thresholds.where(["grade <= ?", grade]).first.letter
   end
+
+  def meetings_after(meeting)
+    meetings.where('held_at > ?', meeting.held_at)
+  end
 end

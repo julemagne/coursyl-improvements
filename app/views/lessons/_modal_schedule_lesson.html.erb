@@ -1,13 +1,19 @@
 <div id="schedule-lesson-<%= lesson.id %>-modal" class="modal hide fade">
-  <div class="modal-header">
-    <h3>Schedule Lesson</h3>
-  </div>
-  <div class="modal-body">
-    <p class="lead"><%= lesson.name %></p>
-    <a class="btn btn-danger" data-dismiss="modal">Remove and Leave Later Lessons Alone</a>
-    <br/>
-    <a class="btn btn-danger" data-dismiss="modal">Remove and Shift Later Lessons Up</a>
-    <br/>
-    <a class="btn" data-dismiss="modal">Cancel</a>
-  </div>
+  <%= form_tag meeting_lessons_path, method: :post do %>
+    <div class="modal-header">
+      <h3><%= lesson.name %></h3>
+    </div>
+    <div class="modal-body">
+      <%= hidden_field_tag :lesson_id, lesson.id %>
+
+      <span class="field-label">Date/Time</span>
+      <%= select_tag :meeting_id, options_from_collection_for_select(Meeting.where(course_id: @course.id), 'id', 'held_at') %>
+
+      <p><%= submit_tag "Schedule Lesson", class: "btn btn-success" %></p>
+
+      <p><%= submit_tag "Schedule Lesson and Shift Later Lessons Down", class: "btn btn-success" %></p>
+
+      <p><a class="btn" data-dismiss="modal">Cancel</a></p>
+    </div>
+  <% end %>
 </div>

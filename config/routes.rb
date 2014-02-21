@@ -40,6 +40,9 @@ Courses::Application.routes.draw do
       get 'outline'
       get 'media'
     end
+    collection do
+      post 'create_many'
+    end
   end
   resources :meeting_lessons do
     member do

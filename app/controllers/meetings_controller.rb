@@ -31,6 +31,23 @@ class MeetingsController < ApplicationController
     end
   end
 
+
+  # POST
+  def create_many
+    start_date   = params[:start_date].to_date
+    end_date     = params[:end_date].to_date
+    days_of_week = params[:day].map {|k, v| v.to_i}
+
+    respond_to do |format|
+      if @course.create_series_of_meetings(start_date, end_date, params[:time_of_day], days_of_week)
+        format.html { redirect_to meetings_path(course_id: @course.id), flash: {success: 'Meetings were successfully created.'} }
+      else
+        format.html { redirect_to meetings_path(course_id: @course.id), flash: {error: 'Meetings failed to save.  Try again.'} }
+      end
+    end
+  end
+
+
   # PATCH/PUT
   def update
     respond_to do |format|

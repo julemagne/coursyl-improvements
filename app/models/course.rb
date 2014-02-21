@@ -98,4 +98,17 @@ class Course < ActiveRecord::Base
   def meetings_after(meeting)
     meetings.where('held_at > ?', meeting.held_at)
   end
+
+
+
+  def create_series_of_meetings(start_date, end_date, time_of_day, days_of_week)
+    new_meetings = []
+    Meeting.transaction do
+      dates = (start_date..end_date).to_a.select {|k| days_of_week.include?(k.wday)}
+      dates.each do |d|
+        new_meetings << Meeting.create!(held_at: (d.to_s + " " + time_of_day).to_datetime, course_id: id)
+      end
+    end
+    new_meetings
+  end
 end

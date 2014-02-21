@@ -1,0 +1,37 @@
+.meeting-list, .lesson-tree {
+  margin: 20px 0px 30px 0px;
+}
+
+.meeting-time {
+  margin-bottom: 4px;
+  .meeting-time-day {
+    display: inline-block;
+    width: 40px;
+    font-weight: bold;
+    color: #81649E;
+  }
+  .meeting-time-date {
+    display: inline-block;
+    width: 50px;
+  }
+  .meeting-time-time {
+    display: inline-block;
+    width: 80px;
+  }
+  .meeting-time-icons {
+    display: inline-block;
+    width: 40px;
+  }
+}
+
+.days-of-week {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+
+  input[type='checkbox'] {
+    margin-left: 20px;
+  }
+}

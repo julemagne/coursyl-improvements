@@ -1,17 +1,49 @@
 <div id="new-meeting-modal" class="modal hide fade">
+
+  <div class="modal-header">
+    <h3>Add Meeting Times to <%= @course.course_code %></h3>
+  </div>
+
   <%= form_tag meetings_path, method: :post do %>
-    <div class="modal-header">
-      <h3>Add a Meeting Time to <%= @course.course_code %></h3>
-    </div>
     <div class="modal-body">
+      <p>To add one meeting time, enter the date and time here.</p>
       <%= hidden_field_tag :course_id, @course.id %>
       <span class="field-label"><%= label_tag :held_at, "Date/Time" %></span>
       <%= text_field_tag :held_at, nil, required: true %>
       <span class="help-inline">e.g. "2000-01-01 14:00"</span>
     </div>
     <div class="modal-footer">
+      <%= submit_tag "Add One Meeting Time", class: "btn btn-success" %>
+    </div>
+  <% end %>
+
+  <%= form_tag create_many_meetings_path, method: :post do %>
+    <div class="modal-body">
+      <p>To add the same meeting times every week, check the days of the week,
+        enter a start date, an end date, and the time of day.</p>
+      <%= hidden_field_tag :course_id, @course.id %>
+      <div class="days-of-week">
+        <%= check_box_tag "day[1]", "1" %> M
+        <%= check_box_tag "day[2]", "2" %> T
+        <%= check_box_tag "day[3]", "3" %> W
+        <%= check_box_tag "day[4]", "4" %> Th
+        <%= check_box_tag "day[5]", "5" %> F
+        <%= check_box_tag "day[6]", "6" %> S
+        <%= check_box_tag "day[0]", "0" %> Su
+      </div>
+      <span class="field-label"><%= label_tag :held_at, "Start Date" %></span>
+      <%= text_field_tag :start_date, nil, required: true %>
+      <span class="help-inline">e.g. "2000-01-01"</span>
+      <span class="field-label"><%= label_tag :held_at, "End Date" %></span>
+      <%= text_field_tag :end_date, nil, required: true %>
+      <span class="help-inline">e.g. "2000-05-01"</span>
+      <span class="field-label"><%= label_tag :held_at, "Time of Day" %></span>
+      <%= text_field_tag :time_of_day, nil, required: true, class: "input-small" %>
+      <span class="help-inline">e.g. "14:00"</span>
+    </div>
+    <div class="modal-footer">
       <a class="btn" data-dismiss="modal">Close</a>
-      <%= submit_tag "Add Meeting Time", class: "btn btn-success" %>
+      <%= submit_tag "Add Repeating Meeting Times", class: "btn btn-success" %>
     </div>
   <% end %>
 </div>

@@ -71,11 +71,11 @@ class Course < ActiveRecord::Base
   end
 
   def root_lesson
-    lessons.first
+    lessons.roots.first
   end
 
-  def next_lesson
-    lessons.where(['held_at > ?', Time.now]).order('held_at ASC').first
+  def next_meeting
+    meetings.where(['held_at > ?', Time.now]).first
   end
 
   def lesson_tree

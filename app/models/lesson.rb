@@ -15,18 +15,24 @@ class Lesson < ActiveRecord::Base
   scope :roots, -> { where("parent_lesson_id IS NULL") }
 
   def descendant_tree
-    tree = {name: name,
-      description: description,
-      heldat: held_at_integer,
-      contents: []}
+    children = []
     child_lessons.each do |l|
-      tree[:contents] << l.descendant_tree
+      children << l.descendant_tree
     end
-    tree
+    children = children.compact.sort_by{|c| c[:heldat]}
+
+    heldat = held_at_integer || (children.present? && (children.first)[:heldat])
+
+    if heldat && heldat > 0
+      return {name: name,
+        description: description,
+        heldat: heldat,
+        contents: children}
+    end
   end
 
   def held_at_integer
-    meetings.blank? ? 0 : meetings.first.held_at_integer
+    meetings.first.held_at_integer if meetings.present?
   end
 
   def course_color

@@ -11,8 +11,8 @@ class Meeting < ActiveRecord::Base
     held_at < Time.now
   end
 
-  def next_lesson?
-    self == course.next_lesson
+  def next_meeting?
+    self == course.next_meeting
   end
 
   def in_future?
@@ -20,7 +20,7 @@ class Meeting < ActiveRecord::Base
   end
 
   def past_or_next?
-    in_past? || next_lesson?
+    in_past? || next_meeting?
   end
 
   def lesson_names

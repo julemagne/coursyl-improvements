@@ -2,7 +2,7 @@ window.ScrollManager =
 
   bindSmoothNav: ->
     $(document).on "click", ".smooth-nav a", (e) =>
-      $("html").animate
+      $("body").animate
         scrollTop: $($.attr(e.currentTarget, "href")).offset().top
       , 700
       false
@@ -13,7 +13,7 @@ window.ScrollManager =
       if tree.length > 0
         headerOffset = 190
         treeWrapperHeight = 190
-        scrollTop = $('html').scrollTop()
+        scrollTop = $('body').scrollTop()
         topPosition = $("#lesson-tree-anchor").offset().top
         bottomPosition = $("#lesson-bottom-anchor").offset().top
 

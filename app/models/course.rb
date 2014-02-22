@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   has_many :assignments, -> {order :due_at}, dependent: :destroy
   has_many :meetings, -> {order :held_at}
+  has_many :meeting_lessons, through: :meetings
   has_many :lessons, dependent: :destroy
   has_many :policies, -> {order :order_number}, dependent: :destroy
   has_many :course_students, dependent: :restrict_with_error

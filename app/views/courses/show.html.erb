@@ -151,7 +151,8 @@
     </h3>
   <% end %>
   <h3><i class="fa fa-time"></i> Lessons</h3>
-  <% if @course.meetings.present? %>
+
+  <% if @course.meeting_lessons.present? %>
     <div id="lesson-tree-anchor"></div>
     <div id="lesson-tree-wrapper">
       <div id="lesson-tree" class="well"></div>
@@ -161,6 +162,9 @@
       tree.buildTree("#lesson-tree");
       TreeHandler.colorNodesToPresent();
     </script>
+  <% end %>
+
+  <% if @course.meetings.present? %>
     <table class="table table-hover table-condensed">
       <tr>
         <th>Day</th>

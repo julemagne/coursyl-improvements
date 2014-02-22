@@ -24,7 +24,8 @@ class Lesson < ActiveRecord::Base
     children = children.compact.sort_by{|c| c[:heldat]}
 
     # Set my datetime to my earliest child's if I don't have a datetime of my own.
-    heldat = held_at_integer || (children.present? && (children.first)[:heldat])
+    # The -1 prevents the parent's modal from showing up when the child's modal should.
+    heldat = held_at_integer || (children.present? && (children.first)[:heldat] - 1)
 
     if heldat && heldat > 0
       return {name: name,

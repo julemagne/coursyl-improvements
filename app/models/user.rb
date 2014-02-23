@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     courses_taught.include?(course)
   end
 
+  def participating?(course)
+    enrolled?(course) || teaching?(course)
+  end
+
   def grade(course)
     course_students.where(course_id: course.id).first.grade
   end

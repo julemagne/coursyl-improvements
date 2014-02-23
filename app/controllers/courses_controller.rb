@@ -13,6 +13,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1
   def show
+    unless @course.public || (current_user && current_user.participating?(@course))
+      redirect_to home_index_path, flash: {error: 'You do not have permission to view this course.'}
+    end
   end
 
   # POST /courses

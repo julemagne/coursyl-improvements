@@ -32,7 +32,7 @@ class Course < ActiveRecord::Base
       reject_if: :all_blank
 
   def self.example_courses
-    self.order("id DESC").last(5)
+    self.where(public: true).order("id DESC").first(5)
   end
 
   def code_and_name

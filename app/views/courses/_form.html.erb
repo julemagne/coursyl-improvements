@@ -36,6 +36,10 @@
     <span class="field-label">Description</span> <%= f.text_area :description, required: true, class: 'input-xxlarge', rows: 10 %>
   <% end %>
 
+  <%= f.label :public do %>
+    <span class="field-label">Public Listing?</span> <%= f.check_box :public %>
+  <% end %>
+
   <h3>Instructors</h3>
   <% i = 0 %>
   <div class="associations">

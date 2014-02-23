@@ -1,5 +1,5 @@
-class AddPublicToCourses < ActiveRecord::Migration
+class AddReadingBeforeLesson < ActiveRecord::Migration
   def change
-    add_column :courses, :public, :boolean
+    add_column :readings, :before_lesson, :boolean, default: true
   end
 end

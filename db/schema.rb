@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221122242) do
+ActiveRecord::Schema.define(version: 20140223201342) do
 
   create_table "assignment_grades", force: true do |t|
     t.integer  "assignment_id"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140221122242) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term_id"
+    t.boolean  "public"
   end
 
   create_table "grade_thresholds", force: true do |t|

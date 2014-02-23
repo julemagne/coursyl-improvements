@@ -107,7 +107,10 @@ class Course < ActiveRecord::Base
     Meeting.transaction do
       dates = (start_date..end_date).to_a.select {|k| days_of_week.include?(k.wday)}
       dates.each do |d|
-        new_meetings << Meeting.create!(held_at: (d.to_s + " " + time_of_day).to_datetime, course_id: id)
+        new_meetings << Meeting.create!(course_id: id,
+          held_at: Time.zone.local(d.year, d.month, d.day,
+            time_of_day.split(":")[0].to_i, time_of_day.split(":")[1].to_i)
+          )
       end
     end
     new_meetings

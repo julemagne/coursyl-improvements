@@ -6,6 +6,7 @@ class Meeting < ActiveRecord::Base
   default_scope { order('held_at') }
 
   validates :held_at, presence: true
+  validates :video_url, format: {with: /\Ahttps?:\/\//, message: "must start with http:// or https://"}, allow_blank: true
 
   delegate :code_and_name, to: :course, prefix: true
 

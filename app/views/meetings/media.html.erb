@@ -18,10 +18,18 @@
   <br/>
 <% end %>
 
+
+<% if @meeting.lessons.blank? %>
+  <p class="muted">No lessons scheduled during this meeting.</p>
+<% end %>
+
 <% @meeting.lessons.each do |l| %>
   <p class="lead"><%= l.name %></p>
 
-  <% l.readings.post.each do |r| %>
+  <% if l.readings.blank? %>
+    <p class="muted">No media for this lesson.</p>
+  <% end %>
+  <% l.readings.each do |r| %>
     <div class="media">
       <div class="pull-left">
         <i class="media-object fa fa-cloud-download"></i>

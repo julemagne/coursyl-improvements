@@ -2,6 +2,11 @@
 
 <h2>Daily Readings and Questions for <%= date_humanized(@meeting.held_at) %></h2>
 
+
+<% if @meeting.lessons.blank? %>
+  <p class="muted">No lessons scheduled during this meeting.</p>
+<% end %>
+
 <% @meeting.lessons.each do |l| %>
   <p class="lead"><%= l.name %></p>
 

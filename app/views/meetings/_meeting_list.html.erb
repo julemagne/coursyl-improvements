@@ -5,8 +5,8 @@
         <i class="fa fa-clock-o"></i>
         <%= weekday_abbreviation(m.held_at) %>
       </span>
-      <span class="meeting-time-date muted"><%= date_abbreviation(m.held_at) %></span>
       <% if editable %>
+        <span class="meeting-time-long-date muted"><%= date_humanized(m.held_at) %></span>
         <span class="meeting-time-time muted"><%= time_abbreviation(m.held_at) %></span>
         <span class="meeting-time-icons">
           <a href="#edit-meeting-<%= m.id %>-modal" data-toggle="modal"><i class="fa fa-pencil"></i></a>
@@ -15,6 +15,7 @@
         </span>
         <%= render partial: '/meetings/modal_edit_meeting', locals: {meeting: m} %>
       <% else %>
+        <span class="meeting-time-date muted"><%= date_abbreviation(m.held_at) %></span>
         <% if m.lessons.blank? %>
         <span class="muted">No Lessons</span>
         <% else%>

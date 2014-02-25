@@ -12,7 +12,7 @@ class Lesson < ActiveRecord::Base
 
   accepts_nested_attributes_for :readings,
       :allow_destroy => true,
-      :reject_if     => proc { |attributes| attributes['caption'].blank? }
+      :reject_if     => proc { |attributes| attributes['caption'].blank? && attributes['url'].blank? }
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
 

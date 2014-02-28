@@ -5,7 +5,7 @@ class Course < ActiveRecord::Base
   has_many :lessons, dependent: :destroy
   has_many :policies, -> {order :order_number}, dependent: :destroy
   has_many :course_students, dependent: :restrict_with_error
-  has_many :students, through: :course_students
+  has_many :students, -> {order "last_name, first_name"}, through: :course_students
   has_many :course_instructors, dependent: :destroy, inverse_of: :course
   has_many :instructors, through: :course_instructors
   has_many :grade_thresholds, -> {order "grade DESC"}
@@ -18,6 +18,9 @@ class Course < ActiveRecord::Base
 
   validates :name, presence: true
   validates :course_code, presence: true
+
+  delegate :starts_on, to: :term, prefix: true
+  delegate :ends_on, to: :term, prefix: true
 
   accepts_nested_attributes_for :course_instructors,
       allow_destroy: true,

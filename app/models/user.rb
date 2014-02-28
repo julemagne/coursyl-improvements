@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :course_instructors, foreign_key: "instructor_id", dependent: :restrict_with_error
   has_many :courses_taught, through: :course_instructors, source: :course
+  has_many :course_enrollments, through: :courses_taught, source: :course_students
   has_many :assignments_given, through: :courses_taught, source: :assignments
 
   has_many :course_students, foreign_key: "student_id", dependent: :restrict_with_error
@@ -56,7 +57,11 @@ class User < ActiveRecord::Base
   end
 
   def grade(course)
-    course_students.where(course_id: course.id).first.grade
+    course_student_for(course).grade
+  end
+
+  def course_student_for(course)
+    course_students.where(course_id: course.id).first
   end
 
   def grade_on_assignment(assignment)
@@ -118,6 +123,17 @@ class User < ActiveRecord::Base
 
   def number_of_courses_taken
     course_students.count
+  end
+
+  def number_of_requests
+    number = 0
+    if admin?
+      number += User.want_to_be_instructors.length
+    end
+    if instructor?
+      number += course_enrollments.unapproved.length
+    end
+    number
   end
 
   private

@@ -10,7 +10,7 @@
       <%= hidden_field_tag :course_id, @course.id %>
       <span class="field-label"><%= label_tag :held_at, "Date/Time" %></span>
       <%= text_field_tag :held_at, nil, required: true %>
-      <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+      <span class="help-inline">e.g. "<%= @course.term_starts_on %> 14:00"</span>
     </div>
     <div class="modal-footer">
       <%= submit_tag "Add One Meeting Time", class: "btn btn-success" %>
@@ -32,13 +32,13 @@
         <%= check_box_tag "day[0]", "0" %> Su
       </div>
       <span class="field-label"><%= label_tag :held_at, "Start Date" %></span>
-      <%= text_field_tag :start_date, nil, required: true %>
-      <span class="help-inline">e.g. "2000-01-01"</span>
+      <%= text_field_tag :start_date, @course.term_starts_on, required: true %>
+      <span class="help-inline">e.g. "<%= @course.term_starts_on %>"</span>
       <span class="field-label"><%= label_tag :held_at, "End Date" %></span>
-      <%= text_field_tag :end_date, nil, required: true %>
-      <span class="help-inline">e.g. "2000-05-01"</span>
+      <%= text_field_tag :end_date, @course.term_ends_on, required: true %>
+      <span class="help-inline">e.g. "<%= @course.term_ends_on %>"</span>
       <span class="field-label"><%= label_tag :held_at, "Time of Day" %></span>
-      <%= text_field_tag :time_of_day, nil, required: true, class: "input-small" %>
+      <%= text_field_tag :time_of_day, "14:00", required: true, class: "input-small" %>
       <span class="help-inline">e.g. "14:00"</span>
     </div>
     <div class="modal-footer">

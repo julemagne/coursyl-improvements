@@ -17,12 +17,12 @@
 
   <%= f.label :active_at do %>
     <span class="field-label">Open Date/Time</span> <%= f.text_field :active_at, required: true, value: db_datetime_string(@assignment.active_at) %>
-    <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+    <span class="help-inline">e.g. "<%= Date.today %> 14:00"</span>
   <% end %>
 
   <%= f.label :due_at do %>
     <span class="field-label">Due Date/Time</span> <%= f.text_field :due_at, required: true, value: db_datetime_string(@assignment.due_at) %>
-    <span class="help-inline">e.g. "2000-01-01 14:00"</span>
+    <span class="help-inline">e.g. "<%= Date.today %> 14:00"</span>
   <% end %>
 
   <%= f.label :fraction_of_grade do %>

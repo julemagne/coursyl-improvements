@@ -48,19 +48,21 @@
             </a>
           </td>
         </tr>
-        <% @course.course_students.each do |s| %>
-        <% last_status = last_assignment.status(s.student) if last_assignment %>
-        <% next_status = next_assignment.status(s.student) if next_assignment %>
+        <% @course.students.each do |student| %>
+          <% last_status = last_assignment.status(student) if last_assignment %>
+          <% next_status = next_assignment.status(student) if next_assignment %>
+          <% cs = student.course_student_for(@course)%>
           <tr>
-            <td><%= s.full_name %></td>
-            <td><%= s.email %></td>
+            <td><%= student.full_name %></td>
+            <td><%= student.email %></td>
             <% if last_assignment %><td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td><% end %>
             <% if next_assignment %><td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td><% end %>
-            <td><%= number_with_precision(s.grade, precision: 1) %></td>
+            <td><%= number_with_precision(cs.grade, precision: 1) %></td>
             <td class="text-right">
               <i class="fa fa-random muted" title="Change E-mail Address"></i>
               <i class="fa fa-key muted" title="Change Password"></i>
-              <i class="fa fa-times-circle-o muted" title="Remove Student from Course"></i>
+              <%= link_to '<i class="fa fa-times-circle-o text-warning" title="Remove Student from Course"></i>'.html_safe, cs, method: :delete,
+                data: { confirm: "Are you sure that you would like to remove #{student.full_name} from the course?" } %>
             </td>
           </tr>
         <% end %>

@@ -39,10 +39,6 @@ class Lesson < ActiveRecord::Base
     meetings.first.held_at_integer if meetings.present?
   end
 
-  def course_color
-    course.color
-  end
-
   def parent_name
     parent_lesson ? parent_lesson.name : "N/A"
   end

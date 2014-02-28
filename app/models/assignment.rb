@@ -10,20 +10,14 @@ class Assignment < ActiveRecord::Base
 
   scope :active, -> { where("active_at <= ? AND due_at >= ?", Time.now, Time.now) }
 
+  delegate :code_and_name, :color, to: :course, prefix: true
+
   accepts_nested_attributes_for :assignment_questions,
       :allow_destroy => true,
       :reject_if     => :all_blank
 
   def status(user = nil)
     AssignmentStatus.new(assignment: self, user: user)
-  end
-
-  def course_code_and_name
-    course.code_and_name
-  end
-
-  def course_color
-    course.color
   end
 
   def turn_in(answers, user, final=true)

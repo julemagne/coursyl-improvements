@@ -1,5 +1,6 @@
 Courses::Application.routes.draw do
   get "home/index"
+  get "home/requests"
 
   devise_for :users
   resources :courses do
@@ -9,6 +10,12 @@ Courses::Application.routes.draw do
       get 'grade_thresholds'
       post 'grade_thresholds'
       post 'enroll'
+      post 'register'
+    end
+  end
+  resources :course_students do
+    member do
+      post 'approve'
     end
   end
   resources :schools

@@ -1,0 +1,62 @@
+<% if current_user.admin? %>
+  <h2><i class="fa fa-thumbs-up"></i> Instructor Requests</h2>
+  <% if (requesting_users = User.want_to_be_instructors).length > 0 %>
+    <table class="table table-hover table-condensed">
+      <tr>
+        <th>Name</th>
+        <th>E-mail</th>
+        <th>Phone</th>
+        <th>School</th>
+        <th># Courses Taken</th>
+        <th>Acct Created</th>
+        <th></th>
+      </tr>
+      <% requesting_users.each do |u| %>
+        <tr>
+          <td><%= u.full_name %></td>
+          <td><%= u.email %></td>
+          <td><%= u.phone %></td>
+          <td><%= u.school_name %></td>
+          <td><%= u.number_of_courses_taken %></td>
+          <td><%= u.created_at.to_date %></td>
+          <td class="text-right">
+            <%= link_to 'Approve', approve_as_instructor_user_path(u), method: :post, class: "btn btn-mini btn-success" %>
+            <%= link_to 'Reject', reject_as_instructor_user_path(u), method: :post, class: "btn btn-mini btn-warning" %>
+            <%= link_to 'Delete User Entirely', u, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="lead">There are no outstanding instructor requests.</p>
+  <% end %>
+  <div class="spacer"></div>
+<% end %>
+
+<% if current_user.instructor? %>
+  <h2><i class="fa fa-thumbs-o-up"></i> Recently Enrolled Students</h2>
+  <% if (recent_enrollments = current_user.course_enrollments.unapproved).length > 0 %>
+    <table class="table table-hover table-condensed">
+      <tr>
+        <th>Course</th>
+        <th>Student Name</th>
+        <th>E-mail</th>
+        <th></th>
+      </tr>
+      <% recent_enrollments.each do |cs| %>
+        <tr>
+          <td style="color: <%= cs.course_color %>;"><%= cs.course_code_and_name %></td>
+          <td><%= cs.full_name %></td>
+          <td><%= cs.email %></td>
+          <td class="text-right">
+            <%= link_to 'Accept as-is', approve_course_student_path(cs), method: :post, class: "btn btn-mini btn-success" %>
+            <%= link_to 'Remove from Class', cs, method: :delete, class: "btn btn-mini btn-warning" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="lead">There are no recently enrolled students to review.</p>
+  <% end %>
+  <div class="spacer"></div>
+<% end %>

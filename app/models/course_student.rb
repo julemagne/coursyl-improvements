@@ -1,12 +1,16 @@
 class CourseStudent < ActiveRecord::Base
   belongs_to :course
   belongs_to :student, class_name: "User"
-  has_many :assignment_grades
+  has_many :assignment_grades, dependent: :restrict_with_error
 
   validates :course, presence: true
   validates :student, presence: true
   validates :student, uniqueness: {scope: :course_id}
 
+  scope :approved, -> { where(approved: true) }
+  scope :unapproved, -> { where(approved: false) }
+
+  delegate :code_and_name, :color, to: :course, prefix: true
   delegate :full_name, :first_name, :last_name, :email, to: :student
 
   def fraction_graded

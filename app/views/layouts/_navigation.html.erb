@@ -1,6 +1,13 @@
 <%= link_to '<i class="fa fa-book"></i> Coursyl'.html_safe + (Rails.env.development? ? " - DEVELOPMENT" : ""), '/', :class => 'brand' %>
 <ul class="nav pull-right">
-  <% if user_signed_in? %>
+  <% if current_user %>
+    <% number_of_requests = current_user.number_of_requests %>
+    <% if number_of_requests > 0 %>
+      <li>
+        <%= link_to("<span class='badge badge-important'><i class='fa fa-inbox'></i>&nbsp; #{number_of_requests}</span>".html_safe,
+            home_requests_path) %>
+      </li>
+    <% end %>
     <% if current_user.admin %>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">

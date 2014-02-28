@@ -4,7 +4,7 @@
       <h3>Add a Student to <%= @course.course_code %></h3>
     </div>
     <div class="modal-body">
-      <%= hidden_field_tag :course_id, @course.id %>
+      <%= hidden_field_tag :id, @course.id %>
       <span class="field-label"><%= label_tag :email, "Email" %></span>
       <div class="input-prepend">
         <span class="add-on">@</span>

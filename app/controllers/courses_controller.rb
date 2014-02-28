@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds]
-  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register]
+  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll]
   before_action :admin_only!, only: [:destroy]
 
   # GET /courses/new
@@ -85,19 +85,30 @@ class CoursesController < ApplicationController
 
   #POST
   def enroll
-    course = Course.find(params[:course_id])
     student = User.find_by_email(params[:email])
     if student
-      if student.enrolled? course
-        redirect_to course, flash: {error: "Student is already enrolled in this class"}
+      if student.enrolled? @course
+        redirect_to @course, flash: {error: "Student is already enrolled in this class."}
       else
-        course.course_students.build(student: student, approved: true)
-        course.save!
-        redirect_to course, flash: {success: "Student has been successfully added"}
+        @course.course_students.build(student: student, approved: true)
+        @course.save!
+        redirect_to @course, flash: {success: "Student has been successfully added."}
       end
     else
-      #TODO redirect to new student creation page.
-      redirect_to new_student_user_url(course_id: params[:course_id], email: params[:email]), notice: "E-mail address not found.  Please create a new student."
+      redirect_to new_student_user_url(course_id: @course.id, email: params[:email]),
+        notice: "E-mail address not found.  Please create a new student."
+    end
+  end
+
+  #POST
+  def register
+    student = User.find(params[:student_id])
+    if student.enrolled? @course
+      redirect_to @course, flash: {error: "You are already enrolled in this class."}
+    else
+      @course.course_students.build(student: student, approved: false)
+      @course.save!
+      redirect_to @course, flash: {success: "You have been enrolled in this class, and the instructor has been notified."}
     end
   end
 

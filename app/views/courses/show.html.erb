@@ -184,6 +184,7 @@
           <td class="text-right">
             <%= render partial: "/meetings/row_buttons", locals: {meeting: m} %>
           </td>
+          <%= render partial: "/meetings/modal_edit_meeting_or_lessons", locals: {meeting: m} %>
         </tr>
       <% end %>
     </table>

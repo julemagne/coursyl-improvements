@@ -17,7 +17,11 @@ class CourseStudentsController < ApplicationController
   end
 
   def approve
-
+    if @course_student.update_attribute(:approved, true)
+      redirect_to home_requests_path, notice: 'Student approved.'
+    else
+      redirect_to home_requests_path, flash: { error: 'Approval failed.' }
+    end
   end
 
   private

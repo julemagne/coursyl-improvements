@@ -1,0 +1,14 @@
+<div id="edit-meeting-<%= meeting.id %>-modal" class="modal hide fade">
+  <div class="modal-header">
+    <h3>Edit Meeting Time or Lessons</h3>
+  </div>
+  <div class="modal-body">
+    <p><%= link_to "Edit Time (and Video)", edit_meeting_path(meeting), class: "btn" %></p>
+    <% meeting.lessons.each do |l| %>
+      <p><%= link_to "Edit Lesson: #{l.name}", edit_lesson_path(l), class: "btn" %></p>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <a class="btn" data-dismiss="modal">Close</a>
+  </div>
+</div>

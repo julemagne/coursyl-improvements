@@ -77,6 +77,6 @@ class MeetingsController < ApplicationController
     end
 
     def meeting_params
-      params.require(:meeting).permit(:course_id, :held_at)
+      params.require(:meeting).permit(:course_id, :held_at, :video_url)
     end
 end

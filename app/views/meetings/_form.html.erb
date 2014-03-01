@@ -1,0 +1,27 @@
+<%= form_for(@meeting) do |f| %>
+  <% if @meeting.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @meeting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :course_id %>
+
+  <%= f.label :held_at do %>
+    <span class="field-label">Meeting Time</span> <%= f.text_field :held_at, required: true %>
+    <span class="help-inline">e.g. "<%= Date.today %> 14:00"</span>
+  <% end %>
+
+  <%= f.label :video_url do %>
+    <span class="field-label">Video URL</span> <%= f.text_field :video_url, class: 'input-xxlarge',
+       placeholder: "(must start with http or https)" %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit class: "btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+<p><%= link_to back_arrow + "Back to #{@meeting.course_code_and_name}", @meeting.course %></p>
+
+<h2><%= @meeting.course_code_and_name %> - <%= date_humanized(@meeting.held_at) %></h2>
+
+<%= render 'form' %>

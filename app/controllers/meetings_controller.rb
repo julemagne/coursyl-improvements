@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
   before_action :authenticate_user!, except: [:lead_in_question, :media]
-  before_action :set_meeting, only: [:update, :destroy, :lead_in_question, :outline, :media]
+  before_action :set_meeting, only: [:edit, :update, :destroy, :lead_in_question, :outline, :media]
   before_action :set_course
   before_action :instructor_only!, except: [:lead_in_question, :media]
 
@@ -16,6 +16,11 @@ class MeetingsController < ApplicationController
   # GET
   def index
     @meetings = @course.meetings
+  end
+
+
+  # GET
+  def edit
   end
 
   # POST
@@ -54,7 +59,7 @@ class MeetingsController < ApplicationController
       if @meeting.update(meeting_params)
         format.html { redirect_to meetings_path(course_id: @course.id), flash: {success: 'Meeting was successfully updated.'} }
       else
-        format.html { redirect_to meetings_path(course_id: @course.id), flash: {error: 'Meeting failed to save.  Try again.'} }
+        format.html { render action: 'edit' }
       end
     end
   end

@@ -1,11 +1,17 @@
 <div id="edit-meeting-<%= meeting.id %>-modal" class="modal hide fade">
   <div class="modal-header">
-    <h3>Edit Meeting Time or Lessons</h3>
+    <h3>Edit Meeting or Edit Lessons?</h3>
   </div>
   <div class="modal-body">
-    <p><%= link_to "Edit Time (and Video)", edit_meeting_path(meeting), class: "btn" %></p>
-    <% meeting.lessons.each do |l| %>
-      <p><%= link_to "Edit Lesson: #{l.name}", edit_lesson_path(l), class: "btn" %></p>
+    <p class="lead">Meeting Time (and Video URL)</p>
+    <p><%= link_to "<i class='fa fa-clock-o'></i> Edit Meeting".html_safe, edit_meeting_path(meeting), class: "btn" %></p>
+    <p class="lead">Lesson(s)</p>
+    <% if meeting.lessons.present? %>
+      <% meeting.lessons.each do |l| %>
+        <p><%= link_to "<i class='fa fa-compass'></i> Edit ".html_safe + l.name, edit_lesson_path(l), class: "btn" %></p>
+      <% end %>
+    <% else %>
+      <p class="muted">No lessons assigned to this meeting time.</p>
     <% end %>
   </div>
   <div class="modal-footer">

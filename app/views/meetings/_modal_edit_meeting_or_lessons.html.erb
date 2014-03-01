@@ -4,11 +4,11 @@
   </div>
   <div class="modal-body">
     <p class="lead">Meeting Time (and Video URL)</p>
-    <p><%= link_to "<i class='fa fa-clock-o'></i> Edit Meeting".html_safe, edit_meeting_path(meeting), class: "btn" %></p>
+    <p><%= link_to "<i class='fa fa-clock-o'></i> Edit Meeting".html_safe, edit_meeting_path(meeting, redirect: course_path(@course)), class: "btn" %></p>
     <p class="lead">Lesson(s)</p>
     <% if meeting.lessons.present? %>
       <% meeting.lessons.each do |l| %>
-        <p><%= link_to "<i class='fa fa-compass'></i> Edit ".html_safe + l.name, edit_lesson_path(l), class: "btn" %></p>
+        <p><%= link_to "<i class='fa fa-compass'></i> Edit ".html_safe + l.name, edit_lesson_path(l, redirect: course_path(@course)), class: "btn" %></p>
       <% end %>
     <% else %>
       <p class="muted">No lessons assigned to this meeting time.</p>

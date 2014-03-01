@@ -53,7 +53,7 @@ class LessonsController < ApplicationController
   def update
     respond_to do |format|
       if @lesson.update(lesson_params)
-        format.html { redirect_to schedule_lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully updated.'} }
+        format.html { redirect_to params[:redirect] || lessons_path(course_id: @course.id), flash: {success: 'Lesson was successfully updated.'} }
       else
         @lesson.readings.build
         format.html { render action: 'edit' }

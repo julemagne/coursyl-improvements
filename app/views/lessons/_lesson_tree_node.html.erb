@@ -4,7 +4,7 @@
     <strong class="text-info">
       <%= lesson.name %>
     </strong>
-    <%= link_to '<i class="fa fa-pencil text-info"></i>'.html_safe, edit_lesson_path(lesson) %>
+    <%= link_to '<i class="fa fa-pencil text-info"></i>'.html_safe, edit_lesson_path(lesson, redirect: lessons_path(course_id: lesson.course_id)) %>
     <%= link_to '<i class="fa fa-times text-error"></i>'.html_safe, lesson, method: :delete,
       data: { confirm: "THINK CAREFULLY: This will delete all readings, questions, AND child lessons of this lesson. Are you still sure?" } %>
   <% else %>
@@ -13,7 +13,6 @@
     <span class="label <%= (lesson.meeting_lessons.blank? ? "muted" : "label-info") %>">
       <%= lesson.name %>
     </span>
-    <%= link_to '<i class="fa fa-pencil text-info"></i>'.html_safe, edit_lesson_path(lesson) %>
     <%= render partial: '/lessons/modal_schedule_lesson', locals: {lesson: lesson} %>
   <% end %>
 </div>

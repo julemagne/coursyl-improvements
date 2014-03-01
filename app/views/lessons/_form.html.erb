@@ -9,6 +9,8 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+
   <p class="lead"><span class="muted">Parent Lesson:</span> <%= @lesson.parent_name %></p>
   <br/>
   <%= f.hidden_field :parent_lesson_id %>

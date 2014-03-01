@@ -57,7 +57,7 @@ class MeetingsController < ApplicationController
   def update
     respond_to do |format|
       if @meeting.update(meeting_params)
-        format.html { redirect_to meetings_path(course_id: @course.id), flash: {success: 'Meeting was successfully updated.'} }
+        format.html { redirect_to params[:redirect] || meetings_path(course_id: @course.id), flash: {success: 'Meeting was successfully updated.'} }
       else
         format.html { render action: 'edit' }
       end

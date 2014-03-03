@@ -27,14 +27,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new_student
+  # GET
   def new_student
     @user = User.new
     @user.email = params[:email]
     @course = Course.find(params[:course_id])
   end
 
-  # POST /users/create_student
+  # POST
   def create_student
     @user = User.new(user_params)
     @user.school = current_user.school
@@ -49,15 +49,6 @@ class UsersController < ApplicationController
       else
         format.html { render action: 'new_student' }
       end
-    end
-  end
-
-  # GET/PATCH /users/change_password
-  def change_password
-    if request.patch? && @user.update(user_params)
-      redirect_to home_index_path, flash: {success: "Password for #{@user.full_name} has been changed."}
-    else
-      render action: 'change_password'
     end
   end
 

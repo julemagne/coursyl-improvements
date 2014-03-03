@@ -3,6 +3,7 @@ Courses::Application.routes.draw do
   get "home/requests"
 
   devise_for :users
+
   resources :courses do
     member do
       get 'policies'
@@ -15,7 +16,11 @@ Courses::Application.routes.draw do
   end
   resources :course_students do
     member do
-      post 'approve'
+      patch 'approve'
+      get 'change_email'
+      patch 'change_email'
+      get 'change_password'
+      patch 'change_password'
     end
   end
   resources :schools
@@ -26,8 +31,6 @@ Courses::Application.routes.draw do
       post 'reject_as_instructor'
       get 'new_student'
       post 'create_student'
-      get 'change_password'
-      patch 'change_password'
     end
   end
   resources :assignments do

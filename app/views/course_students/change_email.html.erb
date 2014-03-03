@@ -1,0 +1,30 @@
+<h2>Change Email Address for <%= @student.full_name %></h2>
+
+<%= form_for(@student, url: change_email_course_student_path) do |f| %>
+  <% if @student.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="lead">If you change this e-mail address to an address that is already taken in Coursyl, the
+    enrollment (and assignments and grades) will be moved to that existing user account.</p>
+
+  <p class="lead">If the e-mail address is new, the existing user account will get the new address.</p>
+  <br />
+
+  <%= f.label :email do %>
+    <span class="field-label">New E-mail</span>
+    <div class="input-prepend">
+      <span class="add-on">@</span>
+      <%= f.text_field :email, autocomplete: "off" %>
+    </div>
+    <span class="help-inline">(formerly <%= @student.email %>)</span>
+  <% end %>
+
+  <div><%= f.submit "Change Email Address", class: "btn" %></div>
+<% end %>

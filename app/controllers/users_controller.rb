@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :admin_only!, only: [:index, :destroy, :approve_as_instructor, :reject_as_instructor]
-  before_action :set_user, only: [:edit, :update, :destroy, :approve_as_instructor, :reject_as_instructor]
+  before_action :instructor_only!, only: [:change_password]
+  before_action :set_user, only: [:edit, :update, :destroy, :approve_as_instructor, :reject_as_instructor, :change_password]
 
   # GET /users
   def index
@@ -48,6 +49,15 @@ class UsersController < ApplicationController
       else
         format.html { render action: 'new_student' }
       end
+    end
+  end
+
+  # GET/PATCH /users/change_password
+  def change_password
+    if request.patch? && @user.update(user_params)
+      redirect_to home_index_path, flash: {success: "Password for #{@user.full_name} has been changed."}
+    else
+      render action: 'change_password'
     end
   end
 

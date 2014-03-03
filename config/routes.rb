@@ -26,6 +26,8 @@ Courses::Application.routes.draw do
       post 'reject_as_instructor'
       get 'new_student'
       post 'create_student'
+      get 'change_password'
+      patch 'change_password'
     end
   end
   resources :assignments do

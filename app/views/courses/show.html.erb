@@ -60,7 +60,7 @@
             <td><%= number_with_precision(cs.grade, precision: 1) %></td>
             <td class="text-right">
               <i class="fa fa-random muted" title="Change E-mail Address"></i>
-              <i class="fa fa-key muted" title="Change Password"></i>
+              <%= link_to '<i class="fa fa-key" title="Change Student Password"></i>'.html_safe, change_password_user_path(student) %>
               <%= link_to '<i class="fa fa-times-circle-o" title="Remove Student from Course"></i>'.html_safe, cs, method: :delete,
                 data: { confirm: "Are you sure that you would like to remove #{student.full_name} from the course?" } %>
             </td>

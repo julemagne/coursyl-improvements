@@ -88,6 +88,12 @@ td.text-right, th.text-right {
   }
 }
 
+.input-prepend {
+  .field_with_errors {
+    display: inline-block;
+  }
+}
+
 .alert ul {
   margin-bottom: 0px;
 }

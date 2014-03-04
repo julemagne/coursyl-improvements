@@ -18,4 +18,6 @@
   <% end %>
 <% end %>
 
-<a href="#edit-meeting-<%= meeting.id %>-modal" class="btn btn-mini" data-toggle="modal">Edit</a>
+<% if current_user && current_user.teaching?(@course) %>
+  <a href="#edit-meeting-<%= meeting.id %>-modal" class="btn btn-mini" data-toggle="modal">Edit</a>
+<% end %>

@@ -185,7 +185,9 @@
           <td class="text-right">
             <%= render partial: "/meetings/row_buttons", locals: {meeting: m} %>
           </td>
-          <%= render partial: "/meetings/modal_edit_meeting_or_lessons", locals: {meeting: m} %>
+          <% if current_user && current_user.teaching?(@course) %>
+            <%= render partial: "/meetings/modal_edit_meeting_or_lessons", locals: {meeting: m} %>
+          <% end %>
         </tr>
       <% end %>
     </table>

@@ -9,24 +9,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # POST /users
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to users_url, flash: {success: 'User was successfully created.'} }
-      else
-        format.html { render action: 'new' }
-      end
-    end
-  end
-
   # GET
   def new_student
     @user = User.new

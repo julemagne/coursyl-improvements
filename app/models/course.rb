@@ -53,16 +53,16 @@ class Course < ActiveRecord::Base
   end
 
   def assignment_statuses(user=nil)
-    fractions = {}
+    percents = {}
     assignments.each do |a|
       s = a.status(user).name
-      fractions[s] ||= 0
-      fractions[s] += a.fraction_of_grade
+      percents[s] ||= 0
+      percents[s] += a.percent_of_grade
     end
 
     statuses = AssignmentStatus.all_statuses_ordered(user && user.teaching?(self), user && user.enrolled?(self))
     statuses.each do |s|
-      s.fraction = fractions[s.name] || 0
+      s.percent = percents[s.name] || 0
     end
   end
 
@@ -86,15 +86,6 @@ class Course < ActiveRecord::Base
     root_lesson.descendant_tree if root_lesson
   end
 
-  def fraction_elapsed
-    return 0 if lessons.blank? && assignments.blank?
-
-    start_time = (lessons.present? ? lessons.first.held_at : assignments.first.active_at)
-    end_time = (assignments.present? ? assignments.last.due_at : lessons.last.held_at)
-
-    [[(Time.now-start_time)/(end_time-start_time), 0].max, 1].min
-  end
-
   def letter_for_grade(grade)
     grade_thresholds.where(["grade <= ?", grade]).first.letter
   end
@@ -102,8 +93,6 @@ class Course < ActiveRecord::Base
   def meetings_after(meeting)
     meetings.where('held_at > ?', meeting.held_at)
   end
-
-
 
   def create_series_of_meetings(start_date, end_date, time_of_day, days_of_week)
     new_meetings = []

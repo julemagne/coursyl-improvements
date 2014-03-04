@@ -7,8 +7,8 @@ class AssignmentGrade < ActiveRecord::Base
 
   delegate :course, to: :assignment
 
-  def fraction_of_grade
-    assignment.fraction_of_grade
+  def percent_of_grade
+    assignment.percent_of_grade
   end
 
   def answer_on(question)

@@ -1,6 +1,6 @@
 class AssignmentStatus
   attr_accessor :name
-  attr_accessor :fraction
+  attr_accessor :percent
 
   COMPLETE = "Complete"
   OVERDUE = "Overdue"
@@ -17,7 +17,7 @@ class AssignmentStatus
   end
 
   def initialize(options)
-    @fraction = 0
+    @percent = 0
     if options[:name]
       @name = options[:name]
     else

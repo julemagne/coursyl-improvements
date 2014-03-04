@@ -55,7 +55,7 @@
         <td><span class="label <%= a.status(current_user).label_class %>">
           <%= a.status(current_user).name %>
         </span></td>
-        <td><%= percentage(a.fraction_of_grade) %></td>
+        <td><%= percentage(a.percent_of_grade) %></td>
         <td>
           <%= render partial: "assignments/row_buttons", locals: {assignment: a} %>
         </td>

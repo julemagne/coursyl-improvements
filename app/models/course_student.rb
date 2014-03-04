@@ -13,28 +13,28 @@ class CourseStudent < ActiveRecord::Base
   delegate :code_and_name, :color, to: :course, prefix: true
   delegate :full_name, :first_name, :last_name, :email, to: :student
 
-  def fraction_graded
-    assignment_grades.graded.sum {|ag| ag.fraction_of_grade}
+  def percent_graded
+    assignment_grades.graded.sum {|ag| ag.percent_of_grade}
   end
 
   def current_grade
-    #This method does not simply call fraction_graded to get the total, as that
+    #This method does not simply call percent_graded to get the total, as that
     #  would require performing the loop twice.
     weighted_total = 0
-    fraction_total = 0
+    percent_total = 0
     assignment_grades.graded.each do |ag|
-      weighted_total += ag.grade * ag.fraction_of_grade
-      fraction_total += ag.fraction_of_grade
+      weighted_total += ag.grade * ag.percent_of_grade
+      percent_total += ag.percent_of_grade
     end
-    fraction_total > 0 ? weighted_total/fraction_total : 100
+    percent_total > 0 ? weighted_total/percent_total : 100
   end
 
   def grade
     final_grade || current_grade
   end
 
-  def fraction_graded
-    assignment_grades.graded.sum {|ag| ag.fraction_of_grade}
+  def percent_graded
+    assignment_grades.graded.sum {|ag| ag.percent_of_grade}
   end
 
   def letter_grade
@@ -42,10 +42,10 @@ class CourseStudent < ActiveRecord::Base
   end
 
   def max_grade
-    100 - (100-current_grade)*fraction_graded
+    (100-percent_graded) + min_grade
   end
 
   def min_grade
-    current_grade*fraction_graded
+    current_grade*percent_graded/100
   end
 end

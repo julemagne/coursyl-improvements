@@ -7,6 +7,7 @@ class Assignment < ActiveRecord::Base
   validates :name, presence: true
   validates :active_at, presence: true
   validates :due_at, presence: true
+  validates :percent_of_grade, presence: true
 
   validate :active_before_due?
 

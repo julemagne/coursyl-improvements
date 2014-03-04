@@ -104,7 +104,7 @@ class AssignmentsController < ApplicationController
 
     def assignment_params
       params.require(:assignment).permit(:course_id, :name, :active_at, :due_at,
-          :fraction_of_grade, :maximum_grade, :students_can_submit,
+          :percent_of_grade, :maximum_grade, :students_can_submit,
           assignment_questions_attributes: [:id, :question, :points, :order_number, :_destroy])
     end
 end

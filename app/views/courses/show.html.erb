@@ -91,7 +91,7 @@
     <div class="progress progress-striped">
       <% assignment_statuses.each do |status| %>
       <div class="bar <%= status.bar_class %>"
-        style="width: <%= percentage(status.fraction) %>;"></div>
+        style="width: <%= percentage(status.percent) %>;"></div>
       <% end %>
     </div>
     <ul class="inline text-center">
@@ -100,7 +100,7 @@
         <span class="label <%= status.label_class %>">
           <%= status.name %>
         </span>
-        <%= percentage(status.fraction) %>
+        <%= percentage(status.percent) %>
       </li>
       <% end %>
     </ul>
@@ -131,7 +131,7 @@
           <% if current_user && current_user.enrolled?(@course) %>
             <td><%= int_if_possible(current_user.grade_on_assignment(a)) %></td>
           <% end %>
-          <td><%= percentage(a.fraction_of_grade) %></td>
+          <td><%= percentage(a.percent_of_grade) %></td>
           <td class="text-right">
             <%= render partial: "/assignments/row_buttons", locals: {assignment: a} %>
           </td>

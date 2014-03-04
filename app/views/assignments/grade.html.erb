@@ -10,7 +10,7 @@
 </p>
 
 <% if @assignment.grades_released.blank? %>
-  <p class="text-warning">You have not yet released these grades.</p>
+  <p class="text-error">You have not yet released these grades.</p>
 <% else %>
   <p class="text-success">These grades have been released.</p>
 <% end %>

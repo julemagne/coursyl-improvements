@@ -25,13 +25,14 @@
     <span class="help-inline">e.g. "<%= Date.today %> 14:00"</span>
   <% end %>
 
-  <%= f.label :fraction_of_grade do %>
-    <span class="field-label">Fraction of Grade</span> <%= f.text_field :fraction_of_grade, required: true, class: "input-small" %>
-    <span class="help-inline">e.g. "0.2"  (Do not type "20%")</span>
+  <%= f.label :percent_of_grade do %>
+    <span class="field-label">% of Final Grade</span> <%= f.text_field :percent_of_grade, required: true, class: "input-small" %>
+    <span class="help-inline">%</span>
   <% end %>
 
   <%= f.label :maximum_grade do %>
-    <span class="field-label">Maximum Grade</span> <%= f.text_field :maximum_grade, class: "input-small" %>
+    <span class="field-label">Maximum Points</span> <%= f.text_field :maximum_grade, class: "input-small" %>
+    <span class="help-inline">(in case question points total more than you want to award)</span>
   <% end %>
 
   <%= f.label :students_can_submit do %>

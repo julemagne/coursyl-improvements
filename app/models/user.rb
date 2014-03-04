@@ -92,8 +92,8 @@ class User < ActiveRecord::Base
     course_students.where(course_id: course.id).first.max_grade
   end
 
-  def fraction_graded(course)
-    course_students.where(course_id: course.id).first.fraction_graded
+  def percent_graded(course)
+    course_students.where(course_id: course.id).first.percent_graded
   end
 
   def completed_assignment?(assignment)

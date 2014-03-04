@@ -1,8 +1,9 @@
-<% if assignment.students_can_submit && assignment.status(current_user).name != "Future" %>
+<% if assignment.status(current_user).name != "Future" %>
   <%= link_to '<i class="fa fa-edit" title="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
 <% else %>
   <i class="fa fa-edit muted" title="Take Assignment"></i>
 <% end %>
+
 <% if current_user && current_user.teaching?(assignment.course) %>
   <% if assignment.status(current_user).name == "Future" %>
     <i class="fa fa-legal muted"></i>

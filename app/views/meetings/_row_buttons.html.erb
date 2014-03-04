@@ -1,23 +1,23 @@
 <% if meeting.past_or_next? %>
   <%= link_to '<i class="fa fa-edit" title="Pre-class Readings and Questions"></i>'.html_safe, lead_in_question_meeting_path(meeting) %>
-  <%= link_to '<i class="fa fa-cloud-download" title="Lesson Media"></i>'.html_safe, media_meeting_path(meeting) %>
-  <% if meeting.video_url.present? %>
-    <%= link_to '<i class="fa fa-film" title="Lesson Video"></i>'.html_safe, meeting.video_url, target: 'blank' %>
-  <% else %>
-    <i class="fa fa-film muted" title="Lesson Video"></i>
-  <% end %>
-  <% if current_user && current_user.teaching?(@course) %>
-    <%= link_to '<i class="fa fa-list-ul" title="Lesson Outlines"></i>'.html_safe, outline_meeting_path(meeting) %>
-  <% end %>
 <% else %>
   <i class="fa fa-edit muted" title="Pre-class Readings and Questions"></i>
+<% end %>
+
+<% if meeting.in_past? %>
+  <%= link_to '<i class="fa fa-cloud-download" title="Lesson Media"></i>'.html_safe, media_meeting_path(meeting) %>
+<% else %>
   <i class="fa fa-cloud-download muted" title="Lesson Media"></i>
+<% end %>
+
+<% if meeting.in_past? && meeting.video_url.present? %>
+  <%= link_to '<i class="fa fa-film" title="Lesson Video"></i>'.html_safe, meeting.video_url, target: 'blank' %>
+<% else %>
   <i class="fa fa-film muted" title="Lesson Video"></i>
-  <% if current_user && current_user.teaching?(@course) %>
-    <i class="fa fa-list-ul muted" title="Lesson Outline"></i>
-  <% end %>
 <% end %>
 
 <% if current_user && current_user.teaching?(@course) %>
+  <%= link_to '<i class="fa fa-list-ul" title="Lesson Outlines"></i>'.html_safe, outline_meeting_path(meeting) %>
   <a href="#edit-meeting-<%= meeting.id %>-modal" class="btn btn-mini" data-toggle="modal">Edit</a>
+  <%= render partial: "/meetings/modal_edit_meeting_or_lessons", locals: {meeting: meeting} %>
 <% end %>

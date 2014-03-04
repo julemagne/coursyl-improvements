@@ -1,8 +1,8 @@
 <div id="edit-meeting-<%= meeting.id %>-modal" class="modal hide fade">
-  <div class="modal-header">
+  <div class="modal-header text-left">
     <h3>Edit Meeting or Edit Lessons?</h3>
   </div>
-  <div class="modal-body">
+  <div class="modal-body text-left">
     <p class="lead">Meeting Time (and Video URL)</p>
     <p><%= link_to "<i class='fa fa-clock-o'></i> Edit Meeting".html_safe, edit_meeting_path(meeting, redirect: course_path(@course)), class: "btn" %></p>
     <p class="lead">Lesson(s)</p>

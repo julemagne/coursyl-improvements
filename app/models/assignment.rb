@@ -11,7 +11,7 @@ class Assignment < ActiveRecord::Base
 
   validate :active_before_due?
 
-  scope :active, -> { where("active_at <= ? AND due_at >= ?", Time.now, Time.now) }
+  scope :active_for_students, -> { where("active_at <= ? AND due_at >= ? AND students_can_submit = ?", Time.now, Time.now, true) }
 
   delegate :code_and_name, :color, to: :course, prefix: true
 

@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def overdue_assignments
-    assignments_taken.select {|a| a.due_at < Time.now &&
+    assignments_taken.select {|a| a.due_at < Time.now && a.students_can_submit &&
       assignment_grades.where(["assignment_id = ? AND submitted_at IS NOT NULL", a.id]).blank? }
   end
 
@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
   def overdue_or_active_assignments
-    overdue_assignments + assignments_taken.active
+    overdue_assignments + assignments_taken.active_for_students
   end
 
   def number_of_courses_taken

@@ -8,6 +8,8 @@ class Assignment < ActiveRecord::Base
   validates :active_at, presence: true
   validates :due_at, presence: true
 
+  validate :active_before_due?
+
   scope :active, -> { where("active_at <= ? AND due_at >= ?", Time.now, Time.now) }
 
   delegate :code_and_name, :color, to: :course, prefix: true
@@ -15,6 +17,12 @@ class Assignment < ActiveRecord::Base
   accepts_nested_attributes_for :assignment_questions,
       :allow_destroy => true,
       :reject_if     => :all_blank
+
+  def active_before_due?
+    if active_at? && due_at? && active_at >= due_at
+      errors.add(:active_at, "must be before due date/time.")
+    end
+  end
 
   def status(user = nil)
     AssignmentStatus.new(assignment: self, user: user)

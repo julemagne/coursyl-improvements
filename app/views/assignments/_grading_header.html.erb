@@ -1,0 +1,28 @@
+<% status = @assignment.status(current_user)%>
+
+<p><%= link_to back_arrow + "Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
+
+<div class="pull-right">
+  <span class="muted">Switch Mode<span class="text-error"> (save first!)</span>:</span>
+  <div class="btn-group">
+    <% if @assignment.students_can_submit %>
+      <%= link_to "Anonymous", grade_assignment_path(@assignment), class: "btn #{mode=='Anonymous' ? 'btn-success' : '' }" %>
+      <%= link_to "Named", grade_assignment_path(@assignment, mode: "Named"), class: "btn #{mode=='Named' ? 'btn-success' : '' }" %>
+    <% end %>
+    <%= link_to "Matrix", grade_matrix_assignment_path(@assignment), class: "btn #{mode=='Matrix' ? 'btn-success' : '' }" %>
+    <%= link_to "Report", view_grades_assignment_path(@assignment), class: "btn #{mode=='Report' ? 'btn-success' : '' }" %>
+  </div>
+</div>
+
+<h2><%= @assignment.name %></h2>
+
+<p class="<%= status.text_class %>">
+  <span class="label <%= status.label_class %>"><%= status.name %></span>
+  Due <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %>.
+  <% if @assignment.grades_released.blank? %>
+    You have NOT yet released these grades.
+  <% else %>
+    These grades have been released.
+  <% end %>
+</p>
+

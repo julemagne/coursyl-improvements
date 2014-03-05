@@ -9,7 +9,11 @@
     <i class="fa fa-legal muted"></i>
     <i class="fa fa-bar-chart muted"></i>
   <% else %>
-    <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <% if assignment.students_can_submit %>
+      <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>
+    <% else %>
+      <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_matrix_assignment_path(assignment) %>
+    <% end %>
     <%= link_to '<i class="fa fa-bar-chart-o" title="View Grades"></i>'.html_safe, view_grades_assignment_path(assignment) %>
   <% end %>
   <%= link_to 'Edit', edit_assignment_path(assignment), class: "btn btn-mini" %>

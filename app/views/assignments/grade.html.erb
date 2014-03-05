@@ -1,21 +1,10 @@
-<% status = @assignment.status(current_user)%>
-
-<p><%= link_to back_arrow + "Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
-
-<h2>Grade <%= @assignment.name %></h2>
-
-<p class="<%= status.text_class %>">
-  <span class="label <%= status.label_class %>"><%= status.name %></span>
-  Due <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %>
-</p>
-
-<% if @assignment.grades_released.blank? %>
-  <p class="text-error">You have not yet released these grades.</p>
-<% else %>
-  <p class="text-success">These grades have been released.</p>
-<% end %>
+<%= render partial: "grading_header", locals: {mode: params[:mode] || "Anonymous"} %>
 
 <%= form_tag grade_assignment_path(@assignment) do %>
+
+  <% if params[:mode].present? %>
+    <%= hidden_field_tag "mode", params[:mode] %>
+  <% end %>
 
   <% @assignment.assignment_questions.each_with_index do |q, i| %>
     <p class="lead">Question <%= i+1 %> (<%= q.points %> points):</p>
@@ -24,7 +13,7 @@
     <% q.assignment_question_grades.submitted.each_with_index do |aqg, j| %>
       <div class="row">
         <div class="span6 muted divided">
-          <p><strong>Answer <%= i+1 %>-<%= j+1 %></strong></p>
+          <p><strong>Answer <%= i+1 %> - <%= params[:mode]=="Named" ? aqg.full_name : j+1 %></strong></p>
           <%= simple_format(aqg.answer) %>
         </div>
         <div class="span6 muted divided">

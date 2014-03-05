@@ -38,6 +38,8 @@ Courses::Application.routes.draw do
       post 'turn_in'
       get 'grade'
       post 'grade'
+      get 'grade_matrix'
+      post 'grade_matrix'
       get 'view_grades'
     end
   end

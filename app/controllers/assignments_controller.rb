@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade, :view_grades]
+  before_action :set_assignment_and_course, only: [:show, :edit, :update, :destroy, :turn_in, :grade, :grade_matrix, :view_grades]
   before_action :set_course, only: [:new, :create]
   before_action :instructor_only!, except: [:show, :turn_in]
 
@@ -72,19 +72,34 @@ class AssignmentsController < ApplicationController
   end
 
   # GET OR POST
-  def grade
-    if request.post?
-      @assignment.maximum_grade = params[:maximum_grade]
-      @assignment.grades_released = (params[:grades_released].blank? ? false : true)
-      @assignment.save!
-      if params[:grades].blank?
-        flash[:notice] = "You have saved changes to this assignment, but no grades were recorded."
-      else
+    def grade
+      if request.post?
+        @assignment.maximum_grade = params[:maximum_grade]
+        @assignment.grades_released = (params[:grades_released].blank? ? false : true)
+        @assignment.save!
         params[:grades].each do |k, v|
           AssignmentQuestionGrade.find(k).update_attributes!(v)
         end
-        flash[:success] = "You have successfully saved these grades."
+        flash.now[:success] = "You have successfully saved these grades."
       end
+    end
+
+  # GET OR POST
+  def grade_matrix
+    if request.post?
+      Assignment.transaction do
+        @assignment.grades_released = (params[:grades_released].blank? ? false : true)
+        @assignment.save!
+        params[:aqgs].each do |k, v|
+          AssignmentQuestionGrade.find(k).update_attributes!(v)
+        end
+        params[:course_students].each do |k, v|
+          cs = CourseStudent.find(k)
+          ag = AssignmentGrade.where(assignment_id: @assignment.id, course_student_id: cs.id).first_or_create
+          ag.update_attributes!(v)
+        end
+      end
+      flash.now[:success] = "You have successfully saved these grades."
     end
   end
 

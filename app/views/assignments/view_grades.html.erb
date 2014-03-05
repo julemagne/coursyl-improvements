@@ -1,15 +1,6 @@
-<% status = @assignment.status(current_user)%>
+<%= render partial: "grading_header", locals: {mode: "Report"} %>
 
-<p><%= link_to back_arrow + "Back to #{@assignment.course_code_and_name}", @assignment.course %></p>
-
-<h2>Grades for <%= @assignment.name %></h2>
-
-<p class="<%= status.text_class %>">
-  <span class="label <%= status.label_class %>"><%= status.name %></span>
-  Due <%= date_abbreviation(@assignment.due_at) %> at <%= time_abbreviation(@assignment.due_at) %>
-</p>
-
-<table class="table table-hover table-condensed">
+<table class="table table-striped table-condensed">
   <tr>
     <th>Name</th>
     <th>Email</th>

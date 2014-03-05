@@ -1,0 +1,45 @@
+<%= render partial: "grading_header", locals: {mode: "Matrix"} %>
+
+<%= form_tag grade_matrix_assignment_path(@assignment) do %>
+
+  <p class="muted">An N/A will appear for a question if a student has not submitted an answer.</p>
+
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <% @assignment.assignment_questions.each do |aq| %>
+          <td>Q<%= aq.order_number %></td>
+        <% end %>
+        <th>Total Override</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @course.course_students.each do |cs| %>
+        <% ag = @assignment.has_been_answered_by(cs.student) %>
+        <tr>
+          <td><%= cs.full_name %></td>
+            <% @assignment.assignment_questions.each do |aq| %>
+              <td>
+                <% if (aqg = aq.assignment_question_grade_for(ag)) %>
+                  <%= text_field_tag "aqgs[#{aqg.id}][grade]", aqg.grade, class: "input-small" %>
+                <% else %>
+                  <span class="muted">N/A</span>
+                <% end %>
+              </td>
+            <% end %>
+          <td><%= text_field_tag "course_students[#{cs.id}][final_grade]", (ag ? ag.final_grade : nil), class: "input-small" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p>
+    <span class="field-label">Release Grades?</span>
+    <%= check_box_tag "grades_released", "Yes", @assignment.grades_released %>
+  </p>
+
+  <p><%= submit_tag "Save Scores", class: "btn" %></p>
+
+<% end %>

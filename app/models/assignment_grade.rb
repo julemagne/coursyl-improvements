@@ -6,6 +6,7 @@ class AssignmentGrade < ActiveRecord::Base
   scope :graded, -> { joins(:assignment).where("assignments.grades_released IS TRUE") }
 
   delegate :course, to: :assignment
+  delegate :full_name, to: :course_student
 
   def percent_of_grade
     assignment.percent_of_grade
@@ -26,7 +27,7 @@ class AssignmentGrade < ActiveRecord::Base
     aqg && !aqg.comments.blank? ? aqg.comments : nil
   end
 
-  def current_grade
+  def summed_grade
     grade_total = 0
     assignment_question_grades.each do |aqg|
       grade_total += aqg.grade.to_f
@@ -35,7 +36,7 @@ class AssignmentGrade < ActiveRecord::Base
   end
 
   def grade
-    [(final_grade || current_grade), assignment.maximum_grade].compact.min
+    [(final_grade || summed_grade), assignment.maximum_grade].compact.min
   end
 
   def letter_grade

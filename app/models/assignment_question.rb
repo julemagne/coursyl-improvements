@@ -6,4 +6,10 @@ class AssignmentQuestion < ActiveRecord::Base
   validates :order_number, presence: true
   validates :question, presence: true
 
+  def assignment_question_grade_for(assignment_grade)
+    if assignment_grade
+      assignment_question_grades.where(assignment_grade_id: assignment_grade.id).first
+    end
+  end
+
 end

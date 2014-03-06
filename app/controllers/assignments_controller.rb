@@ -90,13 +90,17 @@ class AssignmentsController < ApplicationController
       Assignment.transaction do
         @assignment.grades_released = (params[:grades_released].blank? ? false : true)
         @assignment.save!
-        params[:aqgs].each do |k, v|
-          AssignmentQuestionGrade.find(k).update_attributes!(v)
+        if params[:aqgs].present?
+          params[:aqgs].each do |k, v|
+            AssignmentQuestionGrade.find(k).update_attributes!(v)
+          end
         end
-        params[:course_students].each do |k, v|
-          cs = CourseStudent.find(k)
-          ag = AssignmentGrade.where(assignment_id: @assignment.id, course_student_id: cs.id).first_or_create
-          ag.update_attributes!(v)
+        if params[:course_students].present?
+          params[:course_students].each do |k, v|
+            cs = CourseStudent.find(k)
+            ag = AssignmentGrade.where(assignment_id: @assignment.id, course_student_id: cs.id).first_or_create
+            ag.update_attributes!(v)
+          end
         end
       end
       flash.now[:success] = "You have successfully saved these grades."

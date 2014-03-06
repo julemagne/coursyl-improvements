@@ -17,7 +17,7 @@ class CourseStudent < ActiveRecord::Base
     assignment_grades.graded.sum {|ag| ag.percent_of_grade}
   end
 
-  def summed_grade
+  def assignment_grade
     #This method does not simply call percent_graded to get the total, as that
     #  would require performing the loop twice.
     weighted_total = 0
@@ -29,8 +29,16 @@ class CourseStudent < ActiveRecord::Base
     percent_total > 0 ? weighted_total/percent_total : 100
   end
 
+  def badge_grade
+
+  end
+
+  def calculated_grade
+
+  end
+
   def grade
-    final_grade || summed_grade
+    final_grade || assignment_grade
   end
 
   def percent_graded
@@ -46,6 +54,6 @@ class CourseStudent < ActiveRecord::Base
   end
 
   def min_grade
-    summed_grade*percent_graded/100
+    assignment_grade*percent_graded/100
   end
 end

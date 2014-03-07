@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   has_many :assignments, -> {order :due_at}, dependent: :destroy
+  has_many :achievements, dependent: :destroy
   has_many :meetings, -> {order :held_at}
   has_many :meeting_lessons, through: :meetings
   has_many :lessons, dependent: :destroy
@@ -36,6 +37,14 @@ class Course < ActiveRecord::Base
 
   def self.example_courses
     self.where(public: true).order("id DESC").first(5)
+  end
+
+  def achievement_grading?
+    grading_method == "Achievement"
+  end
+
+  def assignment_grading?
+    grading_method != "Achievement"
   end
 
   def code_and_name
@@ -87,7 +96,8 @@ class Course < ActiveRecord::Base
   end
 
   def letter_for_grade(grade)
-    grade_thresholds.where(["grade <= ?", grade]).first.letter
+    threshold = grade_thresholds.where(["grade <= ?", grade]).first
+    threshold ? threshold.letter : "N/A"
   end
 
   def meetings_after(meeting)

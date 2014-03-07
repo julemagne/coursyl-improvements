@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304121342) do
+ActiveRecord::Schema.define(version: 20140306142042) do
+
+  create_table "achievements", force: true do |t|
+    t.integer  "course_id"
+    t.string   "name"
+    t.string   "category"
+    t.text     "description"
+    t.string   "icon"
+    t.string   "icon_color"
+    t.string   "badge_color"
+    t.integer  "points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assignment_grades", force: true do |t|
     t.integer  "assignment_id"
@@ -55,6 +68,15 @@ ActiveRecord::Schema.define(version: 20140304121342) do
     t.float    "maximum_grade"
   end
 
+  create_table "awarded_achievements", force: true do |t|
+    t.integer  "achievement_id"
+    t.integer  "course_student_id"
+    t.boolean  "awarded"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "course_instructors", force: true do |t|
     t.integer  "course_id"
     t.integer  "instructor_id"
@@ -81,7 +103,8 @@ ActiveRecord::Schema.define(version: 20140304121342) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term_id"
-    t.boolean  "public",      default: true
+    t.boolean  "public",         default: true
+    t.string   "grading_method", default: "Assignment"
   end
 
   create_table "grade_thresholds", force: true do |t|

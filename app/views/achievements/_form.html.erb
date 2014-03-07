@@ -1,0 +1,51 @@
+<%= form_for(@achievement) do |f| %>
+  <% if @achievement.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @achievement.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :course_id %>
+
+  <%= f.label :name do %>
+    <span class="field-label">Name</span> <%= f.text_field :name, required: true %>
+  <% end %>
+
+  <%= f.label :category do %>
+    <span class="field-label">Category</span> <%= f.text_field :category %>
+  <% end %>
+
+  <%= f.label :points do %>
+    <span class="field-label">Points</span> <%= f.text_field :points, required: true, class: "input-small" %>
+  <% end %>
+
+  <%= f.label :icon do %>
+    <span class="field-label">Icon Code</span>
+    <%= f.text_field :icon, class: "input-small" %>
+    <span class="help-inline">e.g. "fa-star" (<a target="blank" href="http://fortawesome.github.io/Font-Awesome/icons/">Icon List</a>)</span>
+  <% end %>
+
+  <%= f.label :icon_color do %>
+    <span class="field-label">Icon Color</span>
+    <%= f.text_field :icon_color, class: "input-small" %>
+    <span class="help-inline">e.g. "#FFFFFF" (<a target="blank" href="http://www.w3schools.com/tags/ref_colorpicker.asp">Color Picker</a>)</span>
+  <% end %>
+
+  <%= f.label :badge_color do %>
+    <span class="field-label">Background Color</span>
+    <%= f.text_field :badge_color, class: "input-small" %>
+    <span class="help-inline">e.g. "#000000" (<a target="blank" href="http://www.w3schools.com/tags/ref_colorpicker.asp">Color Picker</a>)</span>
+  <% end %>
+
+  <%= f.label :description do %>
+    <span class="field-label">Description</span> <%= f.text_area :description %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit class: "btn" %>
+  </div>
+<% end %>

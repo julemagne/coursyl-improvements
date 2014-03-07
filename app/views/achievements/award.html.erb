@@ -1,0 +1,34 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2>Award Achievements for <%= @course.code_and_name %></h2>
+
+<%= form_tag award_achievements_path(course_id: @course.id) do %>
+
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th></th>
+        <% @course.course_students.each do |cs| %>
+          <th><%= cs.full_name %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @course.achievements.each do |a| %>
+        <tr>
+          <td><%= a.name %></td>
+          <% @course.course_students.each do |cs| %>
+            <% aa = cs.awarded_achievement_for(a) %>
+            <td>
+              <%= check_box_tag "aas[#{a.id}][#{cs.id}]", (aa ? aa.awarded : nil) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p><%= submit_tag "Save Achievements", class: "btn" %></p>
+
+<% end %>

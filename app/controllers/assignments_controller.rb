@@ -48,14 +48,6 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # DELETE
-  def destroy
-    @assignment.destroy
-    respond_to do |format|
-      format.html { redirect_to assignments_url }
-    end
-  end
-
   # POST
   def turn_in
     final = (params[:commit]=="Submit Final Answers")
@@ -72,17 +64,17 @@ class AssignmentsController < ApplicationController
   end
 
   # GET OR POST
-    def grade
-      if request.post?
-        @assignment.maximum_grade = params[:maximum_grade]
-        @assignment.grades_released = (params[:grades_released].blank? ? false : true)
-        @assignment.save!
-        params[:grades].each do |k, v|
-          AssignmentQuestionGrade.find(k).update_attributes!(v)
-        end
-        flash.now[:success] = "You have successfully saved these grades."
+  def grade
+    if request.post?
+      @assignment.maximum_grade = params[:maximum_grade]
+      @assignment.grades_released = (params[:grades_released].blank? ? false : true)
+      @assignment.save!
+      params[:grades].each do |k, v|
+        AssignmentQuestionGrade.find(k).update_attributes!(v)
       end
+      flash.now[:success] = "You have successfully saved these grades."
     end
+  end
 
   # GET OR POST
   def grade_matrix

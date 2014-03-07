@@ -27,7 +27,11 @@
                 <li><%= link_to "Students", '#anchor-students' %></li>
                 <li class="divider-vertical"></li>
               <% end %>
-              <li><%= link_to "Assignments", '#anchor-assignments' %></li>
+              <% if @course.achievement_grading? %>
+                <li><%= link_to "Achievements", '#anchor-achievements' %></li>
+              <% else %>
+                <li><%= link_to "Assignments", '#anchor-assignments' %></li>
+              <% end %>
               <li class="divider-vertical"></li>
               <li><%= link_to "Lessons", '#anchor-lessons' %></li>
               <li class="divider-vertical"></li>
@@ -40,29 +44,38 @@
     <div class="span2 text-center">
       <% if current_user %>
         <% if current_user.enrolled?(course) %>
-          <% percent_graded = percentage(current_user.percent_graded(course)) -%>
-          <h<%= 3-(header ? 1 : 0) %>>
-            <%= current_user.letter_grade(course) %> <small>(<%= number_with_precision(current_user.grade(course), precision: 1) %>)</small>
-          </h<%= 3-(header ? 1 : 0) %>>
-          <% if header %>
-            <small class="muted">Possible:
-              <%= number_with_precision(current_user.min_grade(course), precision: 1) %> -
-              <%= number_with_precision(current_user.max_grade(course), precision: 1) %>
-            </small>
+          <% if course.achievement_grading? %>
+            <br />
+            <h<%= 3-(header ? 1 : 0) %>>
+              <%= current_user.letter_grade(course) %> <small>(<%= number_with_precision(current_user.grade(course), precision: 0) %> pts)</small>
+            </h<%= 3-(header ? 1 : 0) %>>
+          <% else %>
+            <% percent_graded = percentage(current_user.percent_graded(course)) -%>
+            <h<%= 3-(header ? 1 : 0) %>>
+              <%= current_user.letter_grade(course) %> <small>(<%= number_with_precision(current_user.grade(course), precision: 1) %>)</small>
+            </h<%= 3-(header ? 1 : 0) %>>
+            <% if header %>
+              <small class="muted">Possible:
+                <%= number_with_precision(current_user.min_grade(course), precision: 1) %> -
+                <%= number_with_precision(current_user.max_grade(course), precision: 1) %>
+              </small>
+            <% end %>
+            <div class="progress">
+              <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
+            </div>
+            <small class="progress-overlay"><%= percent_graded %> graded</small>
           <% end %>
-          <div class="progress">
-            <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
-          </div>
-          <small class="progress-overlay"><%= percent_graded %> graded</small>
         <% elsif current_user.teaching?(course) %>
-          <% percent_graded = percentage(course.assignment_statuses(current_user).first.percent) -%>
-          <% percent_ungraded = percentage(course.assignment_statuses(current_user).second.percent) -%>
-          <div class="progress progress-striped">
-            <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
-            <div class="bar bar-danger" style="width: <%= percent_ungraded %>;"></div>
-          </div>
-          <small class="muted"><%= percent_graded %> graded</small><br/>
-          <small class="<%= percent_ungraded == '0%' ? 'muted' : 'text-error' %>"><%= percent_ungraded %> waiting to be graded</small>
+          <% if course.assignment_grading? %>
+            <% percent_graded = percentage(course.assignment_statuses(current_user).first.percent) -%>
+            <% percent_ungraded = percentage(course.assignment_statuses(current_user).second.percent) -%>
+            <div class="progress progress-striped">
+              <div class="bar bar-success" style="width: <%= percent_graded %>;"></div>
+              <div class="bar bar-danger" style="width: <%= percent_ungraded %>;"></div>
+            </div>
+            <small class="muted"><%= percent_graded %> graded</small><br/>
+            <small class="<%= percent_ungraded == '0%' ? 'muted' : 'text-error' %>"><%= percent_ungraded %> waiting to be graded</small>
+          <% end %>
         <% else %>
           <br/>
           <%= link_to "<i class='fa fa-plus'></i>".html_safe + " Enroll in #{course.course_code}",

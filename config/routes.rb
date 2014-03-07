@@ -43,6 +43,12 @@ Courses::Application.routes.draw do
       get 'view_grades'
     end
   end
+  resources :achievements do
+    collection do
+      get 'award'
+      post 'award'
+    end
+  end
   resources :lessons do
     collection do
       get 'schedule'

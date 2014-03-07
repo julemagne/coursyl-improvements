@@ -8,21 +8,21 @@
     <thead>
       <tr>
         <th></th>
-        <% @course.students.each do |student| %>
-          <th><%= student.full_name %></th>
+        <% @course.achievements.each do |a| %>
+          <td class="text-center"><span class="hint--right" data-hint="<%= a.name %>"><%= badge(a, muted: false, small: true) %></span></td>
         <% end %>
       </tr>
     </thead>
 
     <tbody>
-      <% @course.achievements.each do |a| %>
+      <% @course.students.each do |student| %>
         <tr>
-          <td><div class="text-vertical"><%= a.name %></div></td>
-          <% @course.students.each do |student| %>
+          <td><%= student.full_name %></td>
+          <% @course.achievements.each do |a| %>
             <% cs = student.course_student_for(@course)%>
             <% aa = cs.awarded_achievement_for(a) %>
-            <td>
-              <%= check_box_tag "aas[#{cs.id}][#{a.id}]", "true", (aa ? aa.awarded : nil) %>
+            <td class="text-center">
+              <%= check_box_tag "aas[#{cs.id}][#{a.id}]", "true", (aa ? aa.awarded : nil), class: "hint--right", data: { hint: a.name } %>
               <%= hidden_field_tag "shown[#{cs.id}][#{a.id}]", true %>
             </td>
           <% end %>

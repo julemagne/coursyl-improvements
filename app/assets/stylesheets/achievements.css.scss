@@ -25,6 +25,9 @@
   background: linear-gradient(225deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 80%); /* W3C */
 }
 
-.text-vertical {
-  rotate: -90deg;
+.award-small {
+  -ms-transform: scale(0.8); /* IE 9 */
+  -webkit-transform: scale(0.8); /* Chrome, Safari, Opera */
+  -moz-transform: scale(0.8); /* Chrome, Safari, Opera */
+  transform: scale(0.8);
 }

@@ -120,7 +120,7 @@ class CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:term_id, :course_code, :name, :period,
-          :color, :description, :public,
+          :color, :description, :public, :grading_method,
           course_instructors_attributes: [:id, :primary, :instructor_id, :_destroy],
           policies_attributes: [:id, :name, :order_number, :description, :_destroy],
           grade_thresholds_attributes: [:id, :grade, :letter, :_destroy])

@@ -124,7 +124,17 @@ td.text-right, th.text-right {
   padding: 10px;
   font-size: 50px;
   color: white;
+  width: 70px;
   background-color: darkgrey;
   border: 1px solid black;
+  text-align: center;
+}
+
+.radio-hint {
+  margin-left: 20px;
+}
+
+.bold {
+  font-weight: bold;
 }
 

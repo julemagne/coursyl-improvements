@@ -40,6 +40,19 @@
     <span class="field-label">Public Listing?</span> <%= f.check_box :public %>
   <% end %>
 
+  <h3>Grading Method</h3>
+  <div>
+    <label class="radio"><%= f.radio_button :grading_method, "Assignment" %> Assignments (Traditional Grading):</label>
+    <p class="muted radio-hint">Assignments will each make up a percentage of the course grade.  Assignments can have
+      questions, students can submit answers, and each answer can be graded separately.</span>
+  </div>
+  <div>
+    <label class="radio"><%= f.radio_button :grading_method, "Achievement" %> Badges (Achievement Grading):</label>
+    <p class="muted radio-hint">Students are awarded points and badges for every achievement that they complete.  Achievements are
+      assigned a number of points, and students either receive all the points for that achievement or no points.  Students
+      reach a certain grade by building their points up past pre-defined thresholds.</p>
+  </div>
+
   <h3>Instructors</h3>
   <% i = 0 %>
   <div class="associations">

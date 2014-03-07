@@ -32,7 +32,7 @@
   <% l.readings.each do |r| %>
     <div class="media">
       <div class="pull-left">
-        <i class="media-object fa fa-cloud-download"></i>
+        <i class="media-object fa <%= r.url.present? ? 'fa-cloud-download' : 'fa-book' %>"></i>
       </div>
       <div class="media-body">
         <h4 class="media-heading"><%= r.caption %></h4>

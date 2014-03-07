@@ -121,3 +121,30 @@ div.node-pointer {
   margin-top: -20px;
   color: #666666;
 }
+
+.award {
+  width: 50px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.award-certificate {
+  font-size: 50px;
+}
+
+.award-overlay {
+  font-size: 20px;
+  margin-left: -50px;
+}
+
+.award-gloss {
+  margin-left: -50px;
+  height: 50px;
+  background: -moz-linear-gradient(45deg,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 80%); /* FF3.6+ */
+  background: -webkit-gradient(linear, right top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(80%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 80%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 80%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 80%); /* IE10+ */
+  background: linear-gradient(225deg,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 80%); /* W3C */
+}

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :course_students, foreign_key: "student_id", dependent: :restrict_with_error
   has_many :courses_taken, through: :course_students, source: :course
   has_many :assignments_taken, through: :courses_taken, source: :assignments
+  has_many :awarded_achievements, through: :course_students, source: :awarded_achievements
 
   has_many :assignment_grades, through: :course_students, dependent: :restrict_with_error
   has_many :assignment_question_grades, through: :assignment_grades
@@ -42,6 +43,10 @@ class User < ActiveRecord::Base
 
   def student?
     number_of_courses_taken > 0
+  end
+
+  def awarded?(achievement)
+    awarded_achievements.awarded.include?(achievement)
   end
 
   def enrolled?(course)

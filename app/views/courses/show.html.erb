@@ -76,74 +76,128 @@
 
 
 
-
-<section>
-  <a id="anchor-assignments" class="anchor-course"></a>
-  <% if current_user && current_user.teaching?(@course) && @course.assignments.blank? %>
-    <h3 class="float-right float-right-header">
-      <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
-          new_assignment_path(course_id: @course.id),
-          class: "btn btn-success" %>
-    </h3>
-  <% end %>
-  <h3><i class="fa fa-pencil"></i> Assignments</h3>
-  <% if @course.assignments.present? %>
-    <div class="progress progress-striped">
-      <% assignment_statuses.each do |status| %>
-      <div class="bar <%= status.bar_class %>"
-        style="width: <%= percentage(status.percent) %>;"></div>
-      <% end %>
-    </div>
-    <ul class="inline text-center">
-      <% assignment_statuses.each do |status| %>
-      <li class="<%= status.text_class %>">
-        <span class="label <%= status.label_class %>">
-          <%= status.name %>
-        </span>
-        <%= percentage(status.percent) %>
-      </li>
-      <% end %>
-    </ul>
-    <table class="table table-hover table-condensed">
-      <tr>
-        <th>Due</th>
-        <th>Time</th>
-        <th>Name</th>
-        <th>Status</th>
-        <% if current_user && current_user.enrolled?(@course) %>
-          <th>My Grade</th>
+<% if @course.achievement_grading? %>
+  <section>
+    <a id="anchor-achievements" class="anchor-course"></a>
+    <% if current_user && current_user.teaching?(@course) %>
+      <h3 class="float-right float-right-header">
+        <% if @course.achievements.blank? %>
+          <%= link_to '<i class="fa fa-plus"></i> Add Achievement'.html_safe,
+              new_achievement_path(course_id: @course.id),
+              class: "btn btn-success" %>
+        <% else %>
+          <%= link_to 'Award Achievements',
+              award_achievements_path(course_id: @course.id),
+              class: "btn" %>
+        <% end%>
+      </h3>
+    <% end %>
+    <h3><i class="fa fa-certificate"></i> Achievements</h3>
+    <% if @course.achievements.present? %>
+      <table class="table table-hover table-condensed">
+        <% if current_user && current_user.teaching?(@course) %>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <td class="text-right">
+              <%= link_to '<i class="fa fa-plus"></i> New Achievement'.html_safe,
+                  new_achievement_path(course_id: @course.id),
+                  class: "btn btn-mini btn-success" %>
+            </td>
+          </tr>
         <% end %>
-        <th>% of Course</th>
-        <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
-          <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
-              new_assignment_path(course_id: @course.id),
-              class: "btn btn-mini btn-success" %>
-        <% end %></td>
-      </tr>
-      <% @course.assignments.each do |a| %>
+        <% @course.achievements.each do |a| %>
+          <% disabled = (current_user && current_user.enrolled?(@course) && !current_user.awarded?(a))%>
+          <tr>
+            <td><%= badge(a, muted: disabled)%></td>
+            <td><div class="<%= disabled ? 'muted' : 'bold' %>"><%= a.points %> pts</div></td>
+            <td><%= a.category %></td>
+            <td><strong><%= a.name %></strong><br/><span class="muted"><%= a.description %></span></td>
+
+            <% if current_user && current_user.teaching?(@course) %>
+              <td class="text-right">
+                <%= link_to 'Edit', edit_achievement_path(a), class: "btn btn-mini" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class="lead">There are no achievements for this course.</p>
+    <% end %>
+  </section>
+
+
+
+<% else %>
+  <section>
+    <a id="anchor-assignments" class="anchor-course"></a>
+    <% if current_user && current_user.teaching?(@course) && @course.assignments.blank? %>
+      <h3 class="float-right float-right-header">
+        <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
+            new_assignment_path(course_id: @course.id),
+            class: "btn btn-success" %>
+      </h3>
+    <% end %>
+    <h3><i class="fa fa-pencil"></i> Assignments</h3>
+    <% if @course.assignments.present? %>
+      <div class="progress progress-striped">
+        <% assignment_statuses.each do |status| %>
+        <div class="bar <%= status.bar_class %>"
+          style="width: <%= percentage(status.percent) %>;"></div>
+        <% end %>
+      </div>
+      <ul class="inline text-center">
+        <% assignment_statuses.each do |status| %>
+        <li class="<%= status.text_class %>">
+          <span class="label <%= status.label_class %>">
+            <%= status.name %>
+          </span>
+          <%= percentage(status.percent) %>
+        </li>
+        <% end %>
+      </ul>
+      <table class="table table-hover table-condensed">
         <tr>
-          <td><%= date_abbreviation(a.due_at) %></td>
-          <td><%= time_abbreviation(a.due_at) %></td>
-          <td><%= a.name %></td>
-          <td><span class="label <%= a.status(current_user).label_class %>">
-            <%= a.status(current_user).name %>
-          </span></td>
+          <th>Due</th>
+          <th>Time</th>
+          <th>Name</th>
+          <th>Status</th>
           <% if current_user && current_user.enrolled?(@course) %>
-            <td><%= int_if_possible(current_user.grade_on_assignment(a)) %></td>
+            <th>My Grade</th>
           <% end %>
-          <td><%= percentage(a.percent_of_grade) %></td>
-          <td class="text-right">
-            <%= render partial: "/assignments/row_buttons", locals: {assignment: a} %>
-          </td>
+          <th>% of Course</th>
+          <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
+            <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
+                new_assignment_path(course_id: @course.id),
+                class: "btn btn-mini btn-success" %>
+          <% end %></td>
         </tr>
-      <% end %>
-    </table>
-  <% else %>
-    <p class="lead">There are no assignments for this course.</p>
-  <% end %>
-</section>
-
-
+        <% @course.assignments.each do |a| %>
+          <tr>
+            <td><%= date_abbreviation(a.due_at) %></td>
+            <td><%= time_abbreviation(a.due_at) %></td>
+            <td><%= a.name %></td>
+            <td><span class="label <%= a.status(current_user).label_class %>">
+              <%= a.status(current_user).name %>
+            </span></td>
+            <% if current_user && current_user.enrolled?(@course) %>
+              <td><%= int_if_possible(current_user.grade_on_assignment(a)) %></td>
+            <% end %>
+            <td><%= percentage(a.percent_of_grade) %></td>
+            <td class="text-right">
+              <%= render partial: "/assignments/row_buttons", locals: {assignment: a} %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <p class="lead">There are no assignments for this course.</p>
+    <% end %>
+  </section>
+<% end %>
 
 
 <section>

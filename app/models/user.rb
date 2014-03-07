@@ -46,7 +46,9 @@ class User < ActiveRecord::Base
   end
 
   def awarded?(achievement)
-    awarded_achievements.awarded.include?(achievement)
+    cs = CourseStudent.where(course: achievement.course, student: self).first
+    aa = AwardedAchievement.where(course_student: cs, achievement: achievement).first
+    aa && aa.awarded
   end
 
   def enrolled?(course)

@@ -40,8 +40,17 @@ class AchievementsController < ApplicationController
 
   # GET OR POST
   def award
-    if request.post?
-      flash.now[:success] = "You have successfully awarded these achievements."
+    if request.post? && params[:shown].present?
+      Achievement.transaction do
+        params[:shown].each do |cs_id, a_hash|
+          a_hash.each do |a_id, value|
+            awarded = (params[:aas].present? && params[:aas][cs_id].present? && params[:aas][cs_id][a_id].present?)
+            aa = AwardedAchievement.where(course_student_id: cs_id, achievement_id: a_id).first_or_create!
+            aa.update_attribute(:awarded, awarded)
+          end
+        end
+        flash.now[:success] = "You have successfully awarded these achievements."
+      end
     end
   end
 

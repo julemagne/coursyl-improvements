@@ -10,7 +10,9 @@
     <p class="lead">Question <%= i+1 %> (<%= q.points %> points):</p>
     <%= markdown(q.question) %>
 
-    <% q.assignment_question_grades.submitted.each_with_index do |aqg, j| %>
+    <% answers = q.assignment_question_grades.submitted %>
+    <% answers = answers.shuffle unless params[:mode] == "Named" %>
+    <% answers.each_with_index do |aqg, j| %>
       <div class="row">
         <div class="span6 muted divided">
           <p><strong>Answer <%= i+1 %> - <%= params[:mode]=="Named" ? aqg.full_name : j+1 %></strong></p>

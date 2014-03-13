@@ -7,7 +7,7 @@
 <% if current_user && current_user.teaching?(assignment.course) %>
   <% if assignment.status(current_user).name == "Future" %>
     <i class="fa fa-legal muted"></i>
-    <i class="fa fa-bar-chart muted"></i>
+    <i class="fa fa-bar-chart-o muted"></i>
   <% else %>
     <% if assignment.students_can_submit %>
       <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_assignment_path(assignment) %>

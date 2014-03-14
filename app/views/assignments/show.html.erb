@@ -18,7 +18,7 @@
 </p>
 
 
-<% if status.name=="In Progress" && current_user && !can_turn_in %>
+<% if status.name=="In Progress" && current_user && !@assignment.students_can_submit %>
   <p class="text-warning">This assignment will be completed by the instructor, and can not be submitted directly by students.</p>
 <% end %>
 

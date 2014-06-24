@@ -1,7 +1,6 @@
 class MeetingLesson < ActiveRecord::Base
   belongs_to :meeting
   belongs_to :lesson
-  belongs_to :course
 
   validates :meeting, presence: true
   validates :lesson, presence: true

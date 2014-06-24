@@ -1,7 +1,7 @@
 Coursyl
 =======
 
-Coursyl is a Rails app originally developed to manage **cour**se **syl**labi.  Over time, it expanded to include:
+Coursyl is a Rails app originally developed to manage <b>cour</b>se <b>syl</b>labi.  Over time, it expanded to include:
 
 * Student logins
 * Assignment taking
@@ -16,8 +16,11 @@ Coursyl is a Rails app originally developed to manage **cour**se **syl**labi.  O
 
 It's true that there are hundreds of course management software packages out there, so it may not be for you.  However, it's written by teachers, used by teachers, and being iteratively developed, so it might have something that you like.  Feel free to use it!
 
-Why Become a Coursyl User (at https://coursyl.herokuapp.com)?
+Why Become a Coursyl User?
 -------
+
+(at https://coursyl.herokuapp.com)
+
 If you're a student you might use Coursyl because you can:
 
 * See your current grade

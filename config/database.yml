@@ -21,3 +21,11 @@ production:
   pool: 5
   username: masonfoxmatthews
   password:
+
+distyll:
+  adapter: mysql
+  encoding: utf8
+  database: courses_distyll
+  username: root
+  password: password
+  host: localhost

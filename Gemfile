@@ -42,6 +42,7 @@ end
 
 group :development do
   gem 'mysql'
+  gem 'distyll'
 end
 
 group :production do

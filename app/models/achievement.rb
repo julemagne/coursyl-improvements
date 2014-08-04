@@ -10,4 +10,8 @@ class Achievement < ActiveRecord::Base
 
   delegate :code_and_name, to: :course, prefix: true
 
+  def clone
+    dup
+  end
+
 end

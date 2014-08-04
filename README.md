@@ -84,6 +84,9 @@ Next Steps for Coursyl
 
 New Features:
 
+* When creating a new course, allow for copying assignments, policies, etc over from an exiting course.
+* Flipped classroom functionality.
+* Feedback for each class meeting.
 * Emailing
   * Forgot password functionality (add '=' back to Forgot Password line in _links)
 * Browser/Device compatibility
@@ -96,7 +99,6 @@ New Features:
 * Big-ish features
   * Students can submit daily questions.
   * Ordering meeting_lessons within a meeting
-  * When creating a new course, allow for copying policies, etc over from exiting courses.
   * Instructors can make assignment submissions for students
   * Report of all grades for one student
   * Allow omit questions and omit assignments to remove them from numerator and denominator.

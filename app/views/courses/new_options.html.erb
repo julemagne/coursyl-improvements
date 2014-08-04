@@ -1,0 +1,20 @@
+<p><%= link_to back_arrow + "Cancel and Return to Home", home_index_path %></p>
+
+<h2>New Course Options</h2>
+
+<div class="row">
+  <div class="span4 well">
+    <%= form_tag copy_courses_path, method: "get" do %>
+      <h4>Option 1: Copy an Existing Course</h4>
+      <div class="copy-course">
+        <%= select_tag :id, options_from_collection_for_select(Course.order(:term_id, :course_code), 'id', 'code_and_name_and_term') %>
+      </div>
+      <%= submit_tag "Copy from Existing Course", class: "btn btn-success" %>
+    <% end %>
+  </div>
+  <div class="span4 well">
+    <h4>Option 2: New Course from Scratch</h4>
+    <div class="copy-course"></div>
+    <%= link_to 'Create New Course', new_course_path, class: "btn btn-success copy-course-button" %>
+  </div>
+</div>

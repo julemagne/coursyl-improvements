@@ -68,4 +68,22 @@ class Assignment < ActiveRecord::Base
     end
   end
 
+  def clone
+    new_assignment = dup
+    new_assignment.due_at = shift_by_years(due_at)
+    new_assignment.active_at = shift_by_years(active_at)
+    new_assignment.assignment_questions = assignment_questions.map {|aq| aq.clone}
+    new_assignment
+  end
+
+  private
+
+  def shift_by_years(old_date)
+    new_date = old_date
+    while new_date < Time.now do
+      new_date += 1.year
+    end
+    new_date
+  end
+
 end

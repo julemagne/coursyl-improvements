@@ -1,0 +1,48 @@
+<p><%= link_to back_arrow + "Cancel and Return to Home", home_index_path %></p>
+
+<h2>Copy Course</h2>
+
+<%= render partial: "/courses/summary_box", locals: {course: @course, header: false} %>
+
+<div class="spacer"></div>
+<h4>New Course Details</h4>
+
+<%= form_tag do %>
+  <%= hidden_field_tag "id", @course.id %>
+
+  <%= label_tag :term_id do %>
+    <span class="field-label">Term</span>
+    <%= select_tag :term_id, options_from_collection_for_select(Term.for_school_id(current_user.school_id), 'id', 'name') %>
+  <% end %>
+
+  <h4>Check Below to Copy Additional Course Information</h4>
+  <div class="row">
+    <div class="span1"></div>
+    <div class="span2">
+      <%= label_tag "include_objects[assignments]" do %>
+        <%= check_box_tag "include_objects[assignments]", "true", true %> Assignments
+      <% end %>
+
+      <%= label_tag "include_objects[achievements]" do %>
+        <%= check_box_tag "include_objects[achievements]", "true", true %> Achievements
+      <% end %>
+
+      <%= label_tag "include_objects[grade_thresholds]" do %>
+        <%= check_box_tag "include_objects[grade_thresholds]", "true", true %> Grade Thresholds
+      <% end %>
+    </div>
+    <div class="span2">
+      <%= label_tag "include_objects[lessons]" do %>
+        <%= check_box_tag "include_objects[lessons]", "true", true %> Lessons
+      <% end %>
+
+      <%= label_tag "include_objects[policies]" do %>
+        <%= check_box_tag "include_objects[policies]", "true", true %> Policies
+      <% end %>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <%= submit_tag "Copy Course", class: "btn" %>
+<% end %>

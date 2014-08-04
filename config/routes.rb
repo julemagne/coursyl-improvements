@@ -13,6 +13,11 @@ Courses::Application.routes.draw do
       post 'enroll'
       post 'register'
     end
+    collection do
+      get 'new_options'
+      get 'copy'
+      post 'copy'
+    end
   end
   resources :course_students do
     member do

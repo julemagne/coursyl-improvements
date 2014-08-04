@@ -51,6 +51,10 @@ class Course < ActiveRecord::Base
     "#{course_code}: #{name}"
   end
 
+  def code_and_name_and_term
+    "(#{term.name}) #{code_and_name}"
+  end
+
   def instructor_names
     name_array = [primary_instructor_name]
     name_array += instructors.map{|i| i.full_name}
@@ -116,5 +120,36 @@ class Course < ActiveRecord::Base
       end
     end
     new_meetings
+  end
+
+  def copy(instructor, term, include_objects)
+    include_objects ||= Hash.new
+    new_course = self.dup
+    begin
+      Course.transaction do
+        new_course.term = term
+        new_course.save!
+        ["assignments", "achievements", "policies", "grade_thresholds"].each do |a|
+          if include_objects[a]
+            clones = send(a).map do |i|
+              c = i.clone
+              c.save!
+              c
+            end
+            new_course.send(a + "=", clones)
+          end
+        end
+        new_course.save!
+
+        if include_objects["lessons"]
+          lessons.roots.each {|l| l.copy_tree(new_course)}
+        end
+
+        CourseInstructor.create!(instructor: instructor, course: new_course, primary: true)
+      end
+    rescue
+      return false
+    end
+    new_course
   end
 end

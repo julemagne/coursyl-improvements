@@ -43,4 +43,21 @@ class Lesson < ActiveRecord::Base
     parent_lesson ? parent_lesson.name : "N/A"
   end
 
+  def clone
+    new_lesson = dup
+    new_lesson.readings = readings.map {|r| r.clone}
+    new_lesson
+  end
+
+  def copy_tree(new_course)
+    new_lesson = clone
+    new_lesson.course = new_course
+    new_lesson.save!
+    child_lessons.each do |l|
+      new_lesson.child_lessons << l.copy_tree(new_course)
+    end
+    new_lesson.save!
+    new_lesson
+  end
+
 end

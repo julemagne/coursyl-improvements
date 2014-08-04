@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register]
-  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register, :copy]
+  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll, :copy]
   before_action :admin_only!, only: [:destroy]
 
   # GET /courses/new
@@ -9,6 +9,21 @@ class CoursesController < ApplicationController
     @course = Course.new
     @course.course_instructors.build(course: @course, instructor: current_user, primary: true)
     @course.course_instructors.build
+  end
+
+  # GET /courses/new_options
+  def new_options
+  end
+
+  # GET/POST
+  def copy
+    if request.post?
+      if (new_course = @course.copy(current_user, Term.find(params[:term_id]), params[:include_objects]))
+        redirect_to new_course, flash: {success: 'Course was successfully copied.'}
+      else
+        redirect_to @course, flash: {error: 'Course could not be copied.  Please contact technical support.'}
+      end
+    end
   end
 
   # GET /courses/1

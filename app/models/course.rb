@@ -20,7 +20,9 @@ class Course < ActiveRecord::Base
   validates :name, presence: true
   validates :course_code, presence: true
 
+  # Magic number also used in old? method below.
   scope :active, -> { includes(:term).where("terms.ends_on >= ?", Time.now + 1.month) }
+
   scope :for_school_id, ->(school_id) { includes(:term)
       .where("terms.school_id = ?", school_id)
       .order("terms.ends_on DESC, course_code") }
@@ -44,6 +46,11 @@ class Course < ActiveRecord::Base
     self.where(public: true).order("id DESC").first(5)
   end
 
+  # Magic number also used in :active scope above.
+  def old?
+    term.ends_on < Time.now + 1.month
+  end
+
   def achievement_grading?
     grading_method == "Achievement"
   end
@@ -57,7 +64,7 @@ class Course < ActiveRecord::Base
   end
 
   def code_and_name_and_term
-    "(#{term.name}) #{code_and_name}"
+    "[#{term.name}] #{code_and_name}"
   end
 
   def instructor_names

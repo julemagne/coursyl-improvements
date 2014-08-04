@@ -15,7 +15,11 @@
         <%= course.code_and_name %>
       </h<%= 3-(header ? 1 : 0) %>>
       <p class="lead muted">
-        <%= course.instructor_names %>
+        <% if course.old? %>
+          <i class="fa fa-clock-o"></i> <%= course.term.name %>
+        <% else %>
+          <%= course.instructor_names %>
+        <% end %>
       </p>
       <% if header %>
         <nav class="navbar smooth-nav">

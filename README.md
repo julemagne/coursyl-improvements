@@ -84,7 +84,6 @@ Next Steps for Coursyl
 
 New Features:
 
-* When creating a new course, allow for copying assignments, policies, etc over from an exiting course.
 * Flipped classroom functionality.
 * Feedback for each class meeting.
 * Emailing

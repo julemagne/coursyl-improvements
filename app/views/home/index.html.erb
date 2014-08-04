@@ -8,11 +8,12 @@
 
 <% if current_user.instructor %>
   <h2><i class="fa fa-group"></i> Courses I'm Teaching</h2>
-  <% if (courses_taught = current_user.courses_taught).length > 0 %>
+  <% if (courses_taught = current_user.courses_taught.active).length > 0 %>
     <% courses_taught.each do |c| %>
-      <a href="<%= course_path(c) %>">
+      <a href="<%= course_path(c) %>" class="summary-link">
         <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
       </a>
+      <div class="tiny-spacer"></div>
     <% end %>
   <% else %>
     <p class="lead">Create a course below or ask the instructor of an existing course to add you as a co-instructor.</p>
@@ -29,6 +30,7 @@
     <a href="<%= course_path(c) %>">
       <%= render partial: "/courses/summary_box", locals: {course: c, header: false} %>
     </a>
+    <div class="tiny-spacer"></div>
   <% end %>
 
   <div class="spacer"></div>

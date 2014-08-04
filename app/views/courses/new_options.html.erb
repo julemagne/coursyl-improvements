@@ -7,7 +7,7 @@
     <%= form_tag copy_courses_path, method: "get" do %>
       <h4>Option 1: Copy an Existing Course</h4>
       <div class="copy-course">
-        <%= select_tag :id, options_from_collection_for_select(Course.order(:term_id, :course_code), 'id', 'code_and_name_and_term') %>
+        <%= select_tag :id, options_from_collection_for_select(Course.for_school_id(current_user.school_id), 'id', 'code_and_name_and_term') %>
       </div>
       <%= submit_tag "Copy from Existing Course", class: "btn btn-success" %>
     <% end %>

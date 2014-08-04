@@ -20,6 +20,11 @@ class Course < ActiveRecord::Base
   validates :name, presence: true
   validates :course_code, presence: true
 
+  scope :active, -> { includes(:term).where("terms.ends_on >= ?", Time.now + 1.month) }
+  scope :for_school_id, ->(school_id) { includes(:term)
+      .where("terms.school_id = ?", school_id)
+      .order("terms.ends_on DESC, course_code") }
+
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true
 

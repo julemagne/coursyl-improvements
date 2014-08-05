@@ -6,11 +6,11 @@
 <% end %>
 
 <div class="float-right">
-  <div class="small-spacer"></div>
+  <div class="spacer"></div>
   <% if params[:show_all] %>
-    <%= link_to "Hide older classes", "/", class: "btn" %>
+    <%= link_to "<i class='fa fa-undo'></i> Hide older classes".html_safe, "/" %>
   <% else %>
-    <%= link_to "Include older classes", "/?show_all=true", class: "btn" %>
+    <%= link_to "<i class='fa fa-clock-o'></i> Show older classes".html_safe, "/?show_all=true" %>
   <% end %>
   <% courses_taught = (params[:show_all] ? current_user.courses_taught : current_user.courses_taught.active) %>
 </div>

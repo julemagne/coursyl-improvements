@@ -25,7 +25,7 @@ class Course < ActiveRecord::Base
   # Magic number also used in old? method below.
   scope :active, -> { includes(:term).where("terms.ends_on >= ?", Time.now + 1.month) }
 
-  scope :for_school_id, ->(school_id) { where("terms.school_id = ?", school_id) }
+  scope :for_school_id, ->(school_id) { includes(:term).where("terms.school_id = ?", school_id) }
 
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true

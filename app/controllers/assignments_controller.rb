@@ -47,7 +47,8 @@ class AssignmentsController < ApplicationController
             @lesson.send((params[:in_class] ? "in_class_assignment" : "pre_class_assignment") + "=", @assignment)
             @lesson.save!
           end
-          format.html { redirect_to params[:redirect] || course_path(@course), flash: {success: 'Assignment was successfully created.'} }
+          format.html { redirect_to (params[:redirect].blank? ? course_path(@course) : params[:redirect]),
+            flash: {success: 'Assignment was successfully created.'} }
         else
           @assignment.assignment_questions.build
           format.html { render action: 'new' }
@@ -60,7 +61,8 @@ class AssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to params[:redirect] || course_path(@course), flash: {success: 'Assignment was successfully updated.'} }
+        format.html { redirect_to (params[:redirect].blank? ? course_path(@course) : params[:redirect]),
+          flash: {success: 'Assignment was successfully updated.'} }
       else
         @assignment.assignment_questions.build
         format.html { render action: 'edit' }

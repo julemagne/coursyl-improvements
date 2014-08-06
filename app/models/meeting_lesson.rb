@@ -10,11 +10,18 @@ class MeetingLesson < ActiveRecord::Base
 
   default_scope { order('order_number') }
 
+  after_save :update_lesson_activity_times
+  after_destroy :update_lesson_activity_times
+
+  def update_lesson_activity_times
+    lesson.update_activity_times
+  end
+
   def course
     lesson.course
   end
 
-  # These also make a mess of Demeter.
+  # shift_back and shift_forward also make a mess of Demeter.
   def shift_back
     previous_meeting = meeting
     course.meetings_after(meeting).each do |m|
@@ -25,6 +32,7 @@ class MeetingLesson < ActiveRecord::Base
       previous_meeting = m
     end
   end
+
   def shift_forward
     previous_ids = meeting.meeting_lesson_ids.reject {|i| i==id}
     course.meetings_after(meeting).each do |m|

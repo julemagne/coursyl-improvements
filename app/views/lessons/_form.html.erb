@@ -11,8 +11,6 @@
 
   <%= hidden_field_tag :redirect, params[:redirect] %>
 
-  <p class="lead"><span class="muted">Parent Lesson:</span> <%= @lesson.parent_name %></p>
-  <br/>
   <%= f.hidden_field :parent_lesson_id %>
   <%= f.hidden_field :course_id %>
 
@@ -24,8 +22,10 @@
     <span class="field-label">Description</span> <%= f.text_area :description, class: 'input-xxlarge' %>
   <% end %>
 
-  <%= f.label :lead_in_question do %>
-    <span class="field-label">Daily Question</span> <%= f.text_area :lead_in_question, rows: 3, class: 'input-xxlarge' %>
+  <% unless @course.activity_grading? %>
+    <%= f.label :lead_in_question do %>
+      <span class="field-label">Daily Question</span> <%= f.text_area :lead_in_question, rows: 3, class: 'input-xxlarge' %>
+    <% end %>
   <% end %>
 
   <%= f.label :outline do %>
@@ -33,7 +33,7 @@
   <% end %>
 
   <h3>Readings and Media</h3>
-  <p class="lead">If you would like to give students instructions without linking to a website, leave the URL field blank.</a></p>
+  <p class="lead muted">Note: If you would like to give students instructions without linking to a website, leave the URL field blank.</a></p>
   <% i = 0 %>
   <div class="associations">
     <%= f.fields_for :readings do |ff| %>
@@ -64,7 +64,7 @@
       <% i += 1 %>
     <% end %>
   </div>
-  <%= link_to '<i class="fa fa-plus"></i> Add Reading'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
+  <%= link_to '<i class="fa fa-plus"></i> Add Reading'.html_safe, nil, class: "btn btn-mini btn-success new-association", "data-index" => i %>
 
   <div class="actions">
     <%= f.submit class: "btn" %>

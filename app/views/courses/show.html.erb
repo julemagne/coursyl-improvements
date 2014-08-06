@@ -134,7 +134,8 @@
 <% else %>
   <section>
     <a id="anchor-assignments" class="anchor-course"></a>
-    <% if current_user && current_user.teaching?(@course) && @course.assignments.blank? %>
+    <% if current_user && current_user.teaching?(@course) &&
+        @course.assignments.blank? && @course.assignment_grading? %>
       <h3 class="float-right float-right-header">
         <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
             new_assignment_path(course_id: @course.id),
@@ -169,11 +170,13 @@
             <th>My Grade</th>
           <% end %>
           <th>% of Course</th>
-          <td class="text-right"><% if current_user && current_user.teaching?(@course) %>
-            <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
-                new_assignment_path(course_id: @course.id),
-                class: "btn btn-mini btn-success" %>
-          <% end %></td>
+          <td class="text-right">
+            <% if current_user && current_user.teaching?(@course) && @course.assignment_grading? %>
+              <%= link_to '<i class="fa fa-plus"></i> New Assignment'.html_safe,
+                  new_assignment_path(course_id: @course.id),
+                  class: "btn btn-mini btn-success" %>
+            <% end %>
+          </td>
         </tr>
         <% @course.assignments.each do |a| %>
           <tr>
@@ -194,7 +197,12 @@
         <% end %>
       </table>
     <% else %>
-      <p class="lead">There are no assignments for this course.</p>
+      <p class="lead">
+        There are no assignments for this course.
+        <% if @course.activity_grading? %>
+          Please add them by editing lessons.
+        <% end %>
+      </p>
     <% end %>
   </section>
 <% end %>
@@ -207,7 +215,7 @@
       <%= link_to 'Schedule Lessons', schedule_lessons_path(course_id: @course.id), class: "btn" %>
     </h3>
   <% end %>
-  <h3><i class="fa fa-clock-o"></i> Lessons</h3>
+  <h3><i class="fa fa-clock-o"></i> Meeting Times and Lessons</h3>
 
   <% if @course.meeting_lessons.present? %>
     <div id="lesson-tree-anchor"></div>
@@ -227,7 +235,7 @@
         <th>Day</th>
         <th>Date</th>
         <th>Time</th>
-        <th>Name</th>
+        <th>Lessons</th>
         <th></th>
       </tr>
       <% @course.meetings.each do |m| %>

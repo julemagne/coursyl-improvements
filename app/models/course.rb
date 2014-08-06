@@ -9,7 +9,7 @@ class Course < ActiveRecord::Base
   has_many :students, -> {order "last_name, first_name"}, through: :course_students
   has_many :course_instructors, dependent: :destroy, inverse_of: :course
   has_many :instructors, through: :course_instructors
-  has_many :grade_thresholds, -> {order "grade DESC"}
+  has_many :grade_thresholds, -> {order "grade DESC"}, dependent: :destroy
 
   has_one :primary_course_instructor, -> {where primary: true},
     class_name: "CourseInstructor"
@@ -56,7 +56,11 @@ class Course < ActiveRecord::Base
   end
 
   def assignment_grading?
-    grading_method != "Achievement"
+    grading_method == "Assignment"
+  end
+
+  def activity_grading?
+    grading_method == "Activity"
   end
 
   def code_and_name

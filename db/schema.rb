@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140306142042) do
+ActiveRecord::Schema.define(version: 20140805162842) do
 
   create_table "achievements", force: true do |t|
     t.integer  "course_id"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 20140306142042) do
     t.text     "lead_in_question"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "pre_class_assignment_id"
+    t.integer  "in_class_assignment_id"
   end
 
   create_table "meeting_lessons", force: true do |t|

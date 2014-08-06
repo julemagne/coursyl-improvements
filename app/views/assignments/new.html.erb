@@ -2,4 +2,10 @@
 
 <h2>New Assignment for <%= @course.code_and_name %></h2>
 
+<% if @course.activity_grading? %>
+  <p class="lead text-success">
+    <%= @lesson.activity_name(params[:in_class]) %>
+  </p>
+<% end %>
+
 <%= render 'form' %>

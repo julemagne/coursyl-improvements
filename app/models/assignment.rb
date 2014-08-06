@@ -9,7 +9,7 @@ class Assignment < ActiveRecord::Base
   validates :due_at, presence: true
   validates :percent_of_grade, presence: true
 
-  validate :active_before_due?
+  validate :active_no_later_than_due?
 
   scope :active_for_students, -> { where("active_at <= ? AND due_at >= ? AND students_can_submit = ?", Time.now, Time.now, true) }
 
@@ -19,9 +19,9 @@ class Assignment < ActiveRecord::Base
       :allow_destroy => true,
       :reject_if     => :all_blank
 
-  def active_before_due?
-    if active_at? && due_at? && active_at >= due_at
-      errors.add(:active_at, "must be before due date/time.")
+  def active_no_later_than_due?
+    if active_at? && due_at? && active_at > due_at
+      errors.add(:active_at, "must be no later than due at.")
     end
   end
 

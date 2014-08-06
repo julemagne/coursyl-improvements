@@ -52,6 +52,12 @@
       assigned a number of points, and students either receive all the points for that achievement or no points.  Students
       reach a certain grade by building their points up past pre-defined thresholds.</p>
   </div>
+  <div>
+    <label class="radio"><%= f.radio_button :grading_method, "Activity" %> Flipped Classroom (Activity Grading):</label>
+    <p class="muted radio-hint">Students are still awarded points for assignments, and each assignment still makes up
+      a percentage of the course grade.  However, assignments are all linked with either a class lesson or evening
+      time after a class lesson.</p>
+  </div>
 
   <h3>Instructors</h3>
   <% i = 0 %>

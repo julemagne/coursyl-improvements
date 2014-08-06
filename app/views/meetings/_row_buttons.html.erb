@@ -1,7 +1,9 @@
-<% if meeting.past_or_next? %>
-  <%= link_to '<i class="fa fa-edit" title="Pre-class Readings and Questions"></i>'.html_safe, lead_in_question_meeting_path(meeting) %>
-<% else %>
-  <i class="fa fa-edit muted" title="Pre-class Readings and Questions"></i>
+<% unless @course.activity_grading? %>
+  <% if meeting.past_or_next? %>
+    <%= link_to '<i class="fa fa-edit" title="Pre-class Readings and Questions"></i>'.html_safe, lead_in_question_meeting_path(meeting) %>
+  <% else %>
+    <i class="fa fa-edit muted" title="Pre-class Readings and Questions"></i>
+  <% end %>
 <% end %>
 
 <% if meeting.in_past? %>

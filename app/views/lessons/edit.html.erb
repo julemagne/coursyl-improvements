@@ -2,4 +2,30 @@
 
 <h2><%= @lesson.course_code_and_name %> - <%= @lesson.name %></h2>
 
+<div class="row">
+  <div class="span4 well">
+    Pre-class Activity:
+    <% if @lesson.pre_class_assignment %>
+      <span class="text-success">Already created.</span>
+      <%= link_to "Edit", edit_assignment_path(@lesson.pre_class_assignment) %>
+    <% else %>
+      <span class="text-error">Not yet created.</span>
+      <%= link_to "Create", new_assignment_path(course_id: @course, lesson_id: @lesson, in_class: false) %>
+    <% end %>
+  </div>
+  <div class="span4 well">
+    In-class Activity:
+    <% if @lesson.in_class_assignment %>
+      <span class="text-success">Already created.</span>
+      <%= link_to "Edit", edit_assignment_path(@lesson.in_class_assignment) %>
+    <% else %>
+      <span class="text-error">Not yet created.</span>
+      <%= link_to "Create", new_assignment_path(course_id: @course, lesson_id: @lesson, in_class: true) %>
+    <% end %>
+  </div>
+</div>
+
+<p class="lead"><span class="muted">Parent Lesson:</span> <%= @lesson.parent_name %></p>
+<br/>
+
 <%= render 'form' %>

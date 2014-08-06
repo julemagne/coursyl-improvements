@@ -11,7 +11,10 @@
         <p><%= link_to "<i class='fa fa-compass'></i> Edit ".html_safe + l.name, edit_lesson_path(l, redirect: course_path(@course)), class: "btn" %></p>
       <% end %>
     <% else %>
-      <p class="muted">No lessons assigned to this meeting time.</p>
+      <p class="muted">
+        No lessons scheduled for this meeting time yet.
+        <%= link_to "Schedule them.", schedule_lessons_path(course_id: @course.id) %>
+      </p>
     <% end %>
   </div>
   <div class="modal-footer">

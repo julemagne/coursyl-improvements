@@ -70,7 +70,7 @@
             <small class="progress-overlay"><%= percent_graded %> graded</small>
           <% end %>
         <% elsif current_user.teaching?(course) %>
-          <% if course.assignment_grading? %>
+          <% unless course.achievement_grading? %>
             <% percent_graded = percentage(course.assignment_statuses(current_user).first.percent) -%>
             <% percent_ungraded = percentage(course.assignment_statuses(current_user).second.percent) -%>
             <div class="progress progress-striped">

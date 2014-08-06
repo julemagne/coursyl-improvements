@@ -5,6 +5,8 @@ class Lesson < ActiveRecord::Base
   has_many :readings, dependent: :destroy
   has_many :child_lessons, -> {order :id}, class_name: "Lesson", foreign_key: "parent_lesson_id", dependent: :destroy
   belongs_to :parent_lesson, class_name: "Lesson", foreign_key: "parent_lesson_id"
+  belongs_to :pre_class_assignment, class_name: "Assignment", foreign_key: "pre_class_assignment_id"
+  belongs_to :in_class_assignment, class_name: "Assignment", foreign_key: "in_class_assignment_id"
 
   validates :name, presence: true
 
@@ -15,6 +17,41 @@ class Lesson < ActiveRecord::Base
       :reject_if     => proc { |attributes| attributes['caption'].blank? && attributes['url'].blank? }
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
+  scope :without_day_assignments, -> { where("day_assignment_id IS NULL") }
+  scope :without_night_assignments, -> { where("night_assignment_id IS NULL") }
+
+  after_save :update_activity_names
+
+  def self.linked_to_assignment(assignment)
+    found_lesson = where(pre_class_assignment_id: assignment.id).first
+    found_lesson ||= where(in_class_assignment_id: assignment.id).first
+  end
+
+  def update_activity_names
+    if name_changed?
+      if pre_class_assignment
+        pre_class_assignment.name = activity_name(false)
+        pre_class_assignment.save!
+      end
+      if in_class_assignment
+        in_class_assignment.name = activity_name(true)
+        in_class_assignment.save!
+      end
+    end
+  end
+
+  def update_activity_times
+    if pre_class_assignment
+      pre_class_assignment.active_at = activity_active_at(false)
+      pre_class_assignment.due_at    = activity_due_at(false)
+      pre_class_assignment.save!
+    end
+    if in_class_assignment
+      in_class_assignment.active_at = activity_active_at(true)
+      in_class_assignment.due_at    = activity_due_at(true)
+      in_class_assignment.save!
+    end
+  end
 
   def descendant_tree
     children = []
@@ -58,6 +95,34 @@ class Lesson < ActiveRecord::Base
     end
     new_lesson.save!
     new_lesson
+  end
+
+  def activity_name(in_class)
+    (in_class ? "In" : "Pre") + "-class Activity for " + name
+  end
+
+  def activity_active_at(in_class)
+    if meetings.blank?
+      course.term.ends_on # So that they don't all show as "In Progress"
+    elsif in_class
+      meetings.first.held_at
+    else
+      meetings.first.preceding_meeting_held_at
+    end
+  end
+
+  def activity_due_at(in_class)
+    if meetings.blank?
+      course.term.ends_on
+    elsif in_class
+      meetings.last.next_meeting_held_at
+    else
+      meetings.first.held_at
+    end
+  end
+
+  def correct_in_class_assignment?(assignment)
+    in_class_assignment == assignment
   end
 
 end

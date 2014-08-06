@@ -9,6 +9,8 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag :redirect, params[:redirect] %>
+
   <%= f.hidden_field :course_id %>
 
   <% if @lesson %>

@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
 
   # GET
   def new
-    if @course.activity_grading?
+    if params[:lesson_id]
       @lesson = Lesson.find(params[:lesson_id])
     end
 
@@ -33,7 +33,7 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(assignment_params)
 
-    if @course.activity_grading?
+    if params[:lesson_id]
       @lesson = Lesson.find(params[:lesson_id])
       @assignment.name = @lesson.activity_name(params[:in_class])
       @assignment.active_at = @lesson.activity_active_at(params[:in_class])
@@ -43,11 +43,11 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       Assignment.transaction do
         if @assignment.save
-          if @course.activity_grading?
+          if @lesson
             @lesson.send((params[:in_class] ? "in_class_assignment" : "pre_class_assignment") + "=", @assignment)
             @lesson.save!
           end
-          format.html { redirect_to course_path(@course), flash: {success: 'Assignment was successfully created.'} }
+          format.html { redirect_to params[:redirect] || course_path(@course), flash: {success: 'Assignment was successfully created.'} }
         else
           @assignment.assignment_questions.build
           format.html { render action: 'new' }
@@ -60,7 +60,7 @@ class AssignmentsController < ApplicationController
   def update
     respond_to do |format|
       if @assignment.update(assignment_params)
-        format.html { redirect_to course_path(@course), flash: {success: 'Assignment was successfully updated.'} }
+        format.html { redirect_to params[:redirect] || course_path(@course), flash: {success: 'Assignment was successfully updated.'} }
       else
         @assignment.assignment_questions.build
         format.html { render action: 'edit' }

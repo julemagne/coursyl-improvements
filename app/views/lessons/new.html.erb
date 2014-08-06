@@ -4,11 +4,13 @@
 
 <p class="lead"><span class="muted">Parent Lesson:</span> <%= @lesson.parent_name %></p>
 
-<p class="lead muted">
-  Note: Since this is a flipped class, you will have the ability to
-  create in-class and evening activities for this lesson once you
-  come back to edit it (after creating it).
-</p>
+<% if @course.activity_graded? %>
+  <p class="lead muted">
+    Note: Since this is a flipped class, you will have the ability to
+    create pre-class and in-class activities for this lesson once you
+    come back to edit it (after creating it).
+  </p>
+<% end %>
 
 <br/>
 <%= render 'form' %>

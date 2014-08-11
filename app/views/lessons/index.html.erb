@@ -6,6 +6,6 @@
   Before you can proceed with scheduling, you must set up at least one of the lessons which will be taught in your course.
 </p>
 
-<%= render partial: "lesson_tree", locals: {editable: true} %>
-
 <%= link_to 'Continue with Scheduling', schedule_lessons_path(course_id: @course.id), class: "btn" %>
+
+<%= render partial: "lesson_tree", locals: {editable: true} %>

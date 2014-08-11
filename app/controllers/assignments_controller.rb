@@ -35,16 +35,16 @@ class AssignmentsController < ApplicationController
 
     if params[:lesson_id]
       @lesson = Lesson.find(params[:lesson_id])
-      @assignment.name = @lesson.activity_name(params[:in_class])
-      @assignment.active_at = @lesson.activity_active_at(params[:in_class])
-      @assignment.due_at = @lesson.activity_due_at(params[:in_class])
+      @assignment.name = @lesson.activity_name(params[:in_class].to_bool)
+      @assignment.active_at = @lesson.activity_active_at(params[:in_class].to_bool)
+      @assignment.due_at = @lesson.activity_due_at(params[:in_class].to_bool)
     end
 
     respond_to do |format|
       Assignment.transaction do
         if @assignment.save
           if @lesson
-            @lesson.send((params[:in_class] ? "in_class_assignment" : "pre_class_assignment") + "=", @assignment)
+            @lesson.send((params[:in_class].to_bool ? "in_class_assignment" : "pre_class_assignment") + "=", @assignment)
             @lesson.save!
           end
           format.html { redirect_to (params[:redirect].blank? ? course_path(@course) : params[:redirect]),

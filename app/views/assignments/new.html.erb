@@ -4,7 +4,7 @@
 
 <% if @lesson %>
   <p class="lead text-success">
-    <%= @lesson.activity_name(params[:in_class]) %>
+    <%= @lesson.activity_name(params[:in_class].to_bool) %>
   </p>
 <% end %>
 

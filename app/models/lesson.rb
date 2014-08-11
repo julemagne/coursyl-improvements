@@ -107,7 +107,7 @@ class Lesson < ActiveRecord::Base
     elsif in_class
       meetings.first.held_at
     else
-      meetings.first.preceding_meeting_held_at
+      meetings.first.preceding_meeting_held_at + 1.minute
     end
   end
 

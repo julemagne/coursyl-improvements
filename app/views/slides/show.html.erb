@@ -1,0 +1,5 @@
+<% @meeting.lessons.each do |lesson| %>
+  <%= lesson.slide_html.html_safe %>
+<% end %>
+
+<%= "No slides found." unless @meeting.has_slides? %>

@@ -53,6 +53,7 @@ Technologies used:
 * d3-rails (d3.js)
 * hint.css
 * Devise
+* reveal.js
 
 Tools for the coding process:
 
@@ -105,6 +106,7 @@ New Features:
 
 Fixes/Improvements:
 
+* The BIG issue: Users can enter markdown and html for their assignment questions and slides (reveal.js), respectively.  This is a security hole.  At the moment, instructors are the only ones with the permission to input text in these places... but a security hole is a security hole.
 * Better Date/Datetime selectors
 * Awful redirect flash message on every logout
 * Be consistent about number_with_precision vs. int_if_possible

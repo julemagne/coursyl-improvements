@@ -1,6 +1,6 @@
 class Meeting < ActiveRecord::Base
   belongs_to :course
-  has_many :meeting_lessons, -> {order :order_number}, dependent: :destroy
+  has_many :meeting_lessons, -> {order :order_number, :lesson_id}, dependent: :destroy
   has_many :lessons, through: :meeting_lessons
 
   default_scope { order('held_at') }
@@ -27,6 +27,13 @@ class Meeting < ActiveRecord::Base
     if next_meeting
       preceding_meeting.lessons.each {|l| l.update_activity_times}
     end
+  end
+
+  def has_slides?
+    lessons.each do |l|
+      return true unless l.slide_html.blank?
+    end
+    false
   end
 
   def in_past?

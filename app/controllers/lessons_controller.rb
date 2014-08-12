@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_lesson_and_course, only: [:show, :edit, :update, :destroy, :show_slides]
   before_action :set_course, only: [:new, :create, :schedule, :index]
   before_action :instructor_only!, except: [:show]
 
@@ -82,7 +82,7 @@ class LessonsController < ApplicationController
 
     def lesson_params
       params.require(:lesson).permit(:course_id, :parent_lesson_id, :name,
-          :description, :outline, :lead_in_question,
+          :description, :outline, :lead_in_question, :slide_html,
           readings_attributes: [:id, :caption, :url, :order_number, :before_lesson, :_destroy])
     end
 end

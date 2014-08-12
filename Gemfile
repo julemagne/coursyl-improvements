@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'redcarpet'
 
 gem 'd3-rails'
-
+gem 'rails-reveal-js'
 gem 'font-awesome-rails'
 
 gem 'devise'

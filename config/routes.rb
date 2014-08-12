@@ -1,6 +1,7 @@
 Courses::Application.routes.draw do
   get "home/index"
   get "home/requests"
+  get "slides/show"
 
   devise_for :users
 

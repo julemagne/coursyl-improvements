@@ -21,7 +21,7 @@ module Courses
     # config.i18n.default_locale = :de
 
     config.assets.precompile += [
-          'reveal.css', 'reveal.css', 'reveal-theme/moon.css'
+          'slides.css', 'reveal.css', 'reveal.js', 'reveal-theme/moon.css'
         ]
   end
 end

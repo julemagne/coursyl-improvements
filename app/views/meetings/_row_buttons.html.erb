@@ -8,13 +8,13 @@
 
 <% if meeting.in_past? %>
   <%= link_to '<i class="fa fa-cloud-download" title="Lesson Media"></i>'.html_safe, media_meeting_path(meeting) %>
-  <% if meeting.has_slides? %>
-    <%= link_to '<i class="fa fa-laptop" title="Lesson Slides"></i>'.html_safe, slides_show_path(meeting_id: meeting.id), target: "blank" %>
-  <% else %>
-    <i class="fa fa-laptop muted" title="Lesson Slides"></i>
-  <% end %>
 <% else %>
   <i class="fa fa-cloud-download muted" title="Lesson Media"></i>
+<% end %>
+
+<% if meeting.has_slides? && (current_user.teaching?(@course) || meeting.in_past?) %>
+  <%= link_to '<i class="fa fa-laptop" title="Lesson Slides"></i>'.html_safe, slides_show_path(meeting_id: meeting.id), target: "blank" %>
+<% else %>
   <i class="fa fa-laptop muted" title="Lesson Slides"></i>
 <% end %>
 

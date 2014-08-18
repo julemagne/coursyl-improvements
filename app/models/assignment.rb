@@ -68,11 +68,15 @@ class Assignment < ActiveRecord::Base
     end
   end
 
-  def clone
+  def copy_with_questions(new_course)
     new_assignment = dup
+    new_assignment.course = new_course
     new_assignment.due_at = shift_by_years(due_at)
-    new_assignment.active_at = shift_by_years(active_at)
-    new_assignment.assignment_questions = assignment_questions.map {|aq| aq.clone}
+    new_assignment.active_at = [shift_by_years(active_at), new_assignment.due_at].min
+    new_assignment.save!
+
+    new_assignment.assignment_questions = assignment_questions.map {|aq| aq.dup}
+    new_assignment.save!
     new_assignment
   end
 

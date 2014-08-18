@@ -145,20 +145,18 @@ class Course < ActiveRecord::Base
       Course.transaction do
         new_course.term = term
         new_course.save!
-        ["assignments", "achievements", "policies", "grade_thresholds"].each do |a|
+        ["achievements", "policies", "grade_thresholds"].each do |a|
           if include_objects[a]
-            clones = send(a).map do |i|
-              c = i.clone
-              c.save!
-              c
-            end
-            new_course.send(a + "=", clones)
+            new_course.send(a + "=", send(a).map {|i| i.dup})
           end
         end
-        new_course.save!
 
         if include_objects["lessons"]
           lessons.roots.each {|l| l.copy_tree(new_course)}
+        end
+
+        if include_objects["assignments"]
+          assignments.each {|a| a.copy_with_questions(new_course)}
         end
 
         CourseInstructor.create!(instructor: instructor, course: new_course, primary: true)

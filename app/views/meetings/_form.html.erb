@@ -18,9 +18,11 @@
     <span class="help-inline">e.g. "<%= Date.today %> 14:00"</span>
   <% end %>
 
-  <%= f.label :video_url do %>
-    <span class="field-label">Video URL</span> <%= f.text_field :video_url, class: 'input-xxlarge',
-       placeholder: "(must start with http or https)" %>
+  <% if @course.use_meeting_video %>
+    <%= f.label :video_url do %>
+      <span class="field-label">Video URL</span> <%= f.text_field :video_url, class: 'input-xxlarge',
+         placeholder: "(must start with http or https)" %>
+    <% end %>
   <% end %>
 
   <div class="actions">

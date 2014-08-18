@@ -1,0 +1,23 @@
+<h2>Change Code for <%= @student.full_name %></h2>
+
+<%= form_for(@student, url: change_code_course_student_path) do |f| %>
+  <% if @student.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :code do %>
+    <span class="field-label">New Code</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="fa fa-barcode"></i></span>
+      <%= f.text_field :code %>
+    </div>
+  <% end %>
+
+  <div><%= f.submit "Change Code", class: "btn" %></div>
+<% end %>

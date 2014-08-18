@@ -1,4 +1,4 @@
-<% unless @course.activity_grading? %>
+<% if @course.use_daily_questions %>
   <% if meeting.past_or_next? %>
     <%= link_to '<i class="fa fa-edit" title="Pre-class Readings and Questions"></i>'.html_safe, lead_in_question_meeting_path(meeting) %>
   <% else %>
@@ -12,16 +12,20 @@
   <i class="fa fa-cloud-download muted" title="Lesson Media"></i>
 <% end %>
 
-<% if meeting.has_slides? && (current_user.teaching?(@course) || meeting.in_past?) %>
-  <%= link_to '<i class="fa fa-laptop" title="Lesson Slides"></i>'.html_safe, slides_show_path(meeting_id: meeting.id), target: "blank" %>
-<% else %>
-  <i class="fa fa-laptop muted" title="Lesson Slides"></i>
+<% if @course.use_reveal_slides %>
+  <% if meeting.has_slides? && (current_user.teaching?(@course) || meeting.in_past?) %>
+    <%= link_to '<i class="fa fa-laptop" title="Lesson Slides"></i>'.html_safe, slides_show_path(meeting_id: meeting.id), target: "blank" %>
+  <% else %>
+    <i class="fa fa-laptop muted" title="Lesson Slides"></i>
+  <% end %>
 <% end %>
 
-<% if meeting.in_past? && meeting.video_url.present? %>
-  <%= link_to '<i class="fa fa-film" title="Lesson Video"></i>'.html_safe, meeting.video_url, target: 'blank' %>
-<% else %>
-  <i class="fa fa-film muted" title="Lesson Video"></i>
+<% if @course.use_meeting_video %>
+  <% if meeting.in_past? && meeting.video_url.present? %>
+    <%= link_to '<i class="fa fa-film" title="Lesson Video"></i>'.html_safe, meeting.video_url, target: 'blank' %>
+  <% else %>
+    <i class="fa fa-film muted" title="Lesson Video"></i>
+  <% end %>
 <% end %>
 
 <% if current_user && current_user.teaching?(@course) %>

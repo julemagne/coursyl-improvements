@@ -3,12 +3,17 @@
     <h3>Edit Meeting or Edit Lessons?</h3>
   </div>
   <div class="modal-body text-left">
-    <p class="lead">Meeting Time (and Video URL)</p>
+    <p class="lead">Meeting Time
+      <% if @course.use_meeting_video %>
+        (and Video URL)
+      <% end %>
+    </p>
     <p><%= link_to "<i class='fa fa-clock-o'></i> Edit Meeting".html_safe, edit_meeting_path(meeting, redirect: course_path(@course)), class: "btn" %></p>
-    <p class="lead">Lesson(s)</p>
+
+    <p class="lead"><%= meeting.lessons.count == 1 ? "Lesson" : "Lessons" %></p>
     <% if meeting.lessons.present? %>
       <% meeting.lessons.each do |l| %>
-        <p><%= link_to "<i class='fa fa-compass'></i> Edit ".html_safe + l.name, edit_lesson_path(l, redirect: course_path(@course)), class: "btn" %></p>
+        <p><%= link_to "<i class='fa fa-compass'></i> Edit Lesson: ".html_safe + l.name, edit_lesson_path(l, redirect: course_path(@course)), class: "btn" %></p>
       <% end %>
     <% else %>
       <p class="muted">

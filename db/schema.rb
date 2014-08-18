@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812145142) do
+ActiveRecord::Schema.define(version: 20140815124342) do
 
   create_table "achievements", force: true do |t|
     t.integer  "course_id"
@@ -103,8 +103,12 @@ ActiveRecord::Schema.define(version: 20140812145142) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "term_id"
-    t.boolean  "public",         default: true
-    t.string   "grading_method", default: "Assignment"
+    t.boolean  "public",              default: true
+    t.string   "grading_method",      default: "Assignment"
+    t.boolean  "use_time_cards"
+    t.boolean  "use_daily_questions"
+    t.boolean  "use_reveal_slides"
+    t.boolean  "use_meeting_video"
   end
 
   create_table "grade_thresholds", force: true do |t|
@@ -179,6 +183,14 @@ ActiveRecord::Schema.define(version: 20140812145142) do
     t.datetime "updated_at"
   end
 
+  create_table "time_cards", force: true do |t|
+    t.integer  "course_student_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "title"
     t.string   "first_name"
@@ -205,6 +217,7 @@ ActiveRecord::Schema.define(version: 20140812145142) do
     t.boolean  "wants_to_be_instructor"
     t.boolean  "instructor"
     t.integer  "school_id"
+    t.string   "code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

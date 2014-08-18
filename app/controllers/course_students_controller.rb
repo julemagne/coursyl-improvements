@@ -42,6 +42,13 @@ class CourseStudentsController < ApplicationController
   end
 
   # GET/PATCH
+  def change_code
+    if request.patch? && @student.update_attributes(code: params[:user][:code])
+      redirect_to @course, flash: {success: "Code for #{@student.full_name} has been changed."}
+    end
+  end
+
+  # GET/PATCH
   def change_password
     if @student.admin? || @student.instructor?
       redirect_to @course, flash: {error: "You may not change the password for an instructor or an admin."}

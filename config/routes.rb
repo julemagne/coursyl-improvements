@@ -27,6 +27,8 @@ Courses::Application.routes.draw do
       patch 'change_email'
       get 'change_password'
       patch 'change_password'
+      get 'change_code'
+      patch 'change_code'
     end
   end
   resources :schools

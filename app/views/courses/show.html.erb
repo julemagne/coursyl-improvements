@@ -60,6 +60,9 @@
             <td><%= number_with_precision(cs.grade, precision: 1) %></td>
             <td class="text-right">
               <i class="fa fa-bar-chart-o muted" title="View Grades"></i>
+              <% if @course.use_time_cards %>
+                <%= link_to '<i class="fa fa-barcode" title="Change Student Code"></i>'.html_safe, change_code_course_student_path(cs) %>
+              <% end %>
               <%= link_to '<i class="fa fa-random" title="Change Student Email Address"></i>'.html_safe, change_email_course_student_path(cs) %>
               <%= link_to '<i class="fa fa-key" title="Change Student Password"></i>'.html_safe, change_password_course_student_path(cs) %>
               <%= link_to '<i class="fa fa-times-circle-o" title="Remove Student from Course"></i>'.html_safe, cs, method: :delete,
@@ -199,9 +202,6 @@
     <% else %>
       <p class="lead">
         There are no assignments for this course.
-        <% if @course.activity_grading? %>
-          Please add them by editing lessons.
-        <% end %>
       </p>
     <% end %>
   </section>

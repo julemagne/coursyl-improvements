@@ -22,7 +22,7 @@
     <span class="field-label">Description</span> <%= f.text_area :description, class: 'input-xxlarge' %>
   <% end %>
 
-  <% unless @course.activity_grading? %>
+  <% if @course.use_daily_questions %>
     <%= f.label :lead_in_question do %>
       <span class="field-label">Daily Question</span> <%= f.text_area :lead_in_question, rows: 3, class: 'input-xxlarge' %>
     <% end %>
@@ -32,8 +32,10 @@
     <span class="field-label">Lesson Outline</span> <%= f.text_area :outline, rows: 5, class: 'input-xxlarge' %>
   <% end %>
 
-  <%= f.label :slide_html do %>
-    <span class="field-label">HTML of Slides</span> <%= f.text_area :slide_html, rows: 5, class: 'input-xxlarge' %>
+  <% if @course.use_reveal_slides %>
+    <%= f.label :slide_html do %>
+      <span class="field-label">HTML of Slides</span> <%= f.text_area :slide_html, rows: 5, class: 'input-xxlarge' %>
+    <% end %>
   <% end %>
 
   <h3>Readings and Media</h3>
@@ -47,8 +49,10 @@
             <%= ff.label :order_number do %>
               <strong class="medium-field-label">Order</strong> <%= ff.text_field :order_number, class: "input-small" %>
             <% end %>
-            <%= ff.label :before_lesson do %>
-              <span class="large-field-label">Pre-Class?</span> <%= ff.check_box :before_lesson %>
+            <% if @course.use_daily_questions %>
+              <%= ff.label :before_lesson do %>
+                <span class="large-field-label">Pre-Class?</span> <%= ff.check_box :before_lesson %>
+              <% end %>
             <% end %>
           </div>
           <div class="span8">

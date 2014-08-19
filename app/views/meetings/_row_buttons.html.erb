@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<% if @course.use_course_feedback && current_user.enrolled?(@course)%>
+<% if @course.use_course_feedback && current_user && current_user.enrolled?(@course)%>
   <% if meeting.in_past? %>
     <%= link_to '<i class="fa fa-comment-o" title="Provide Feedback"></i>'.html_safe, provide_feedback_meeting_path(meeting) %>
   <% else %>

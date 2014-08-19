@@ -6,6 +6,14 @@
   <% end %>
 <% end %>
 
+<% if @course.use_course_feedback && current_user.enrolled?(@course)%>
+  <% if meeting.in_past? %>
+    <%= link_to '<i class="fa fa-comment-o" title="Provide Feedback"></i>'.html_safe, provide_feedback_meeting_path(meeting) %>
+  <% else %>
+    <i class="fa fa-comment-o muted" title="Provide Feedback"></i>
+  <% end %>
+<% end %>
+
 <% if meeting.in_past? %>
   <%= link_to '<i class="fa fa-cloud-download" title="Lesson Media"></i>'.html_safe, media_meeting_path(meeting) %>
 <% else %>

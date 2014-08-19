@@ -1,0 +1,33 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2>Provide Feedback for <%= date_humanized(@meeting.held_at) %></h2>
+
+<% if @course.feedback_questions.blank? %>
+  <p class="muted">There are no feedback questions set up for this class.  Please tell the instructor!</p>
+<% else %>
+
+  <%= form_tag do %>
+
+    <% @course.feedback_questions.each do |fq| %>
+      <p class="lead"><%= fq.question %></p>
+      <table class="lykert">
+        <tr>
+          <% 0.upto(10).each do |i| %>
+            <td>
+              <%= radio_button_tag("questions[#{fq.id}]", i, i==5) %>
+              <br/>
+              <%= i %>
+              <br/>
+              <span class="muted"> <%= i==0 ? "Worst" : "" %> <%= i==10 ? "Best" : "" %> </span>
+            </td>
+          <% end %>
+        </tr>
+      </table>
+      <div class="spacer"></div>
+    <% end %>
+
+   <p><%= submit_tag "Submit Feedback", class: "btn" %></p>
+
+  <% end %>
+
+<% end %>

@@ -1,15 +1,28 @@
 class MeetingsController < ApplicationController
   before_action :authenticate_user!, except: [:lead_in_question, :media]
-  before_action :set_meeting, only: [:edit, :update, :destroy, :lead_in_question, :outline, :media]
+  before_action :set_meeting, only: [:edit, :update, :destroy, :lead_in_question, :outline, :media, :provide_feedback]
   before_action :set_course
-  before_action :instructor_only!, except: [:lead_in_question, :media]
+  before_action :instructor_only!, except: [:lead_in_question, :media, :provide_feedback]
 
+  # GET/POST
+  def provide_feedback
+    if @meeting.feedback_exists_for_user?(current_user)
+      redirect_to @course, flash: {error: 'You have already submitted feedback for this day.'}
+    elsif request.post?
+      @meeting.provide_feedback(params[:questions], current_user)
+      redirect_to @course, flash: {success: 'Thank you for your feedback!'}
+    end
+  end
+
+  # GET
   def lead_in_question
   end
 
+  # GET
   def outline
   end
 
+  # GET
   def media
   end
 

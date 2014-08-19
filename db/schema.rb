@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815124342) do
+ActiveRecord::Schema.define(version: 20140819101642) do
 
   create_table "achievements", force: true do |t|
     t.integer  "course_id"
@@ -109,6 +109,24 @@ ActiveRecord::Schema.define(version: 20140815124342) do
     t.boolean  "use_daily_questions"
     t.boolean  "use_reveal_slides"
     t.boolean  "use_meeting_video"
+    t.boolean  "use_course_feedback"
+  end
+
+  create_table "feedback_answers", force: true do |t|
+    t.integer  "feedback_question_id"
+    t.integer  "course_student_id"
+    t.integer  "meeting_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "feedback_questions", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "order_number"
+    t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "grade_thresholds", force: true do |t|

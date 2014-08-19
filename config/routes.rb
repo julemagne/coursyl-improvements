@@ -69,6 +69,8 @@ Courses::Application.routes.draw do
       get 'lead_in_question'
       get 'outline'
       get 'media'
+      get 'provide_feedback'
+      post 'provide_feedback'
     end
     collection do
       post 'create_many'

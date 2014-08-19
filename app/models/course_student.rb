@@ -4,6 +4,7 @@ class CourseStudent < ActiveRecord::Base
   has_many :assignment_grades, dependent: :restrict_with_error
   has_many :awarded_achievements, dependent: :destroy
   has_many :time_cards, dependent: :destroy
+  has_many :feedback_answers, dependent: :destroy
 
   validates :course, presence: true
   validates :student, presence: true

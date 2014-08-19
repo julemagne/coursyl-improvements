@@ -47,9 +47,10 @@
       They will also be shown all pre-class readings when answering the question.</p>
   </div>
   <div>
-    <label class="checkbox"><%= f.check_box :use_time_cards %> Time Cards</label>
-    <p class="muted radio-hint">Each student will be given a code, which can be a barcode scan.  Instructors will be able to put the
-      class in a "check-in/check-out" mode, which will allow students to scan in or out during lab or group time.</p>
+    <label class="checkbox"><%= f.check_box :use_course_feedback %> Daily Feedback</label>
+    <p class="muted radio-hint">You will set up questions to be asked of every student for each meeting time.  They will answer
+      all questions for every class meeting time on a scale of 0 to 10.  You'll see the average results for each question for
+      each meeting time.</p>
   </div>
   <div>
     <label class="checkbox"><%= f.check_box :use_reveal_slides %> Web-based Slides</label>
@@ -60,6 +61,11 @@
     <label class="checkbox"><%= f.check_box :use_meeting_video %> In-Class Videos</label>
     <p class="muted radio-hint">You will be given the option to enter a URL of a recording for each class period.  This is most
       useful if you record your lessons with screen capture software and put the videos up on YouTube (or similar).</p>
+  </div>
+  <div>
+    <label class="checkbox"><%= f.check_box :use_time_cards %> Time Cards</label>
+    <p class="muted radio-hint">Each student will be given a code, which can be a barcode scan.  Instructors will be able to put the
+      class in a "check-in/check-out" mode, which will allow students to scan in or out during lab or group time.</p>
   </div>
 
   <h3>Grading Method</h3>

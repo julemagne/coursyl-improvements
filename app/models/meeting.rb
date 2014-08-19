@@ -2,6 +2,7 @@ class Meeting < ActiveRecord::Base
   belongs_to :course
   has_many :meeting_lessons, -> {order :order_number, :lesson_id}, dependent: :destroy
   has_many :lessons, through: :meeting_lessons
+  has_many :feedback_answers, dependent: :destroy
 
   default_scope { order('held_at') }
 
@@ -12,6 +13,21 @@ class Meeting < ActiveRecord::Base
 
   after_update :update_all_lesson_activity_times
   after_destroy :update_nearby_lesson_activity_times
+
+  def provide_feedback(scores_hash, user)
+    course_student = CourseStudent.where(student: user, course: course).first
+    scores_hash.each do |k, v|
+      feedback_answers << FeedbackAnswer.new(course_student: course_student,
+        feedback_question: FeedbackQuestion.find(k),
+        score: v)
+    end
+    save!
+  end
+
+  def feedback_exists_for_user?(user)
+    course_student = CourseStudent.where(student: user, course: course).first
+    FeedbackAnswer.where(meeting: self, course_student: course_student).present?
+  end
 
   def update_all_lesson_activity_times
     if held_at_changed?
@@ -74,5 +90,10 @@ class Meeting < ActiveRecord::Base
 
   def next_meeting_held_at
     next_meeting ? next_meeting.held_at : course.term.ends_on
+  end
+
+  def average_feedback(feedback_question)
+    scores = feedback_answers.where(feedback_question: feedback_question).map &:score
+    scores.blank? ? nil : (scores.sum / scores.count)
   end
 end

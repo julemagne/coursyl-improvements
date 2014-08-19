@@ -10,6 +10,7 @@ class Course < ActiveRecord::Base
   has_many :course_instructors, dependent: :destroy, inverse_of: :course
   has_many :instructors, through: :course_instructors
   has_many :grade_thresholds, -> {order "grade DESC"}, dependent: :destroy
+  has_many :feedback_questions, -> {order :order_number}, dependent: :destroy
 
   has_one :primary_course_instructor, -> {where primary: true},
     class_name: "CourseInstructor"

@@ -1,7 +1,9 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register, :copy, :time_cards]
-  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll, :copy, :time_cards]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register,
+                                    :copy, :time_cards, :set_feedback_questions]
+  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll, :copy,
+                                    :time_cards, :set_feedback_questions]
   before_action :admin_only!, only: [:destroy]
 
   # GET /courses/new
@@ -138,6 +140,19 @@ class CoursesController < ApplicationController
     end
   end
 
+  # GET/PATCH
+  def set_feedback_questions
+    if request.patch?
+      if @course.update(course_params)
+        redirect_to @course, flash: {success: 'Feedback questions were successfully updated.'}
+      else
+        @course.feedback_questions.build
+      end
+    else
+      @course.feedback_questions.build
+    end
+  end
+
   private
 
     def set_course
@@ -150,7 +165,8 @@ class CoursesController < ApplicationController
           :use_daily_questions, :use_time_cards, :use_reveal_slides, :use_meeting_video, :use_course_feedback,
           course_instructors_attributes: [:id, :primary, :instructor_id, :_destroy],
           policies_attributes: [:id, :name, :order_number, :description, :_destroy],
-          grade_thresholds_attributes: [:id, :grade, :letter, :_destroy])
+          grade_thresholds_attributes: [:id, :grade, :letter, :_destroy],
+          feedback_questions_attributes: [:id, :question, :order_number, :_destroy])
     end
 
 end

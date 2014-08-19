@@ -15,6 +15,8 @@ Courses::Application.routes.draw do
       post 'time_cards'
       post 'enroll'
       post 'register'
+      get 'set_feedback_questions'
+      patch 'set_feedback_questions'
     end
     collection do
       get 'new_options'

@@ -43,6 +43,10 @@ class Course < ActiveRecord::Base
       allow_destroy: true,
       reject_if: :all_blank
 
+  accepts_nested_attributes_for :feedback_questions,
+      allow_destroy: true,
+      reject_if: :all_blank
+
   def self.example_courses
     self.where(public: true).order("id DESC").first(5)
   end

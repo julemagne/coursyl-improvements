@@ -1,0 +1,51 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2>Course Feedback Questions</h2>
+
+<%= form_for @course, url: set_feedback_questions_course_path do |f| %>
+  <% if @course.errors.any? %>
+    <div class="alert alert-error">
+      <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="lead">Students will answer all of these questions once per class meeting time.  Their answers will be
+    given on a Lykert Scale from 0 to 10, where 10 is best and 0 is worst.</p>
+
+  <% i = 0 %>
+  <div class="associations">
+    <%= f.fields_for :feedback_questions do |ff| %>
+      <div class="association container">
+        <div class="row">
+          <div class="span2">
+            <%= ff.label :order_number do %>
+              <strong class="small-field-label">Q #</strong> <%= ff.text_field :order_number, class: "input-small" %>
+            <% end %>
+          </div>
+          <div class="span8">
+            <%= ff.text_area :question, rows: 6, class: "input-block-level" %>
+          </div>
+          <div class="span1">
+            <% if ff.object.persisted? %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger delete-association" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
+            <% else %>
+              <%= link_to 'Delete', nil, class: "btn btn-danger flush-association" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% i += 1 %>
+    <% end %>
+  </div>
+  <%= link_to '<i class="fa fa-plus"></i> Add Question'.html_safe, nil, class: "btn btn-mini btn-success new-association", "data-index" => i %>
+
+  <div class="actions">
+    <%= f.submit "Save Feedback Questions", class: "btn" %>
+  </div>
+
+<% end %>

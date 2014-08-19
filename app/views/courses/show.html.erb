@@ -222,6 +222,9 @@
   <a id="anchor-lessons" class="anchor-course"></a>
   <% if current_user && current_user.teaching?(@course) %>
     <h3 class="float-right float-right-header">
+      <% if @course.use_course_feedback %>
+        <%= link_to 'Set Feedback Questions', set_feedback_questions_course_path(@course), class: "btn" %>
+      <% end %>
       <%= link_to 'Schedule Lessons', schedule_lessons_path(course_id: @course.id), class: "btn" %>
     </h3>
   <% end %>

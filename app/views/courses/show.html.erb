@@ -249,7 +249,7 @@
         <th>Date</th>
         <th>Time</th>
         <th>Lessons</th>
-        <% if @course.use_course_feedback %>
+        <% if @course.use_course_feedback && current_user.teaching?(@course) %>
           <% @course.feedback_questions.each do |fq| %>
             <th>F<%= fq.order_number %> <i class="fa fa-question-circle muted" title="<%= fq.question %>"></i></th>
           <% end %>
@@ -262,7 +262,7 @@
           <td><%= date_abbreviation(m.held_at) %></td>
           <td><%= time_abbreviation(m.held_at) %></td>
           <td><%= m.lesson_names %></td>
-          <% if @course.use_course_feedback %>
+          <% if @course.use_course_feedback && current_user.teaching?(@course) %>
             <% @course.feedback_questions.each do |fq| %>
               <td><%= number_with_precision(m.average_feedback(fq), precision: 1) %></td>
             <% end %>

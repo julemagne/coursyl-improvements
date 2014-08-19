@@ -36,6 +36,7 @@ If you're an instructor you might use Coursyl because you can:
 * Grade anonymously
 * Quickly adapt schedules for extra time on a lesson, delays due to snow, or a different group of students next semester
 * Allow students to scan in and scan out to lab or group time using barcodes
+* Set up daily feedback questions to be answered by your students to track impressions over time
 
 Semi-technical Details
 -------
@@ -86,9 +87,9 @@ Next Steps for Coursyl
 
 New Features:
 
-* Feedback for each class meeting.
 * Emailing
   * Forgot password functionality (add '=' back to Forgot Password line in _links)
+  * Admin notification of new instructor signups
 * Browser/Device compatibility
   * Header bar moves on Chrome print view
   * DLs don't print appropriately from Chrome

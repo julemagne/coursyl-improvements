@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register, :copy]
-  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll, :copy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :policies, :grade_thresholds, :enroll, :register, :copy, :time_cards]
+  before_action :instructor_only!, only: [:new, :create, :edit, :update, :policies, :grade_thresholds, :enroll, :copy, :time_cards]
   before_action :admin_only!, only: [:destroy]
 
   # GET /courses/new
@@ -124,6 +124,17 @@ class CoursesController < ApplicationController
       @course.course_students.build(student: student, approved: false)
       @course.save!
       redirect_to @course, flash: {success: "You have been enrolled in this class, and the instructor has been notified."}
+    end
+  end
+
+  #GET/POST
+  def time_cards
+    if request.post?
+      if (student = User.where(code: params[:code]).first) && student.enrolled?(@course)
+        CourseStudent.where(course: @course, student: student).first.check_in_or_out
+      else
+        flash[:error] = "This code does not belong to any of the students in this course.  Please try again."
+      end
     end
   end
 

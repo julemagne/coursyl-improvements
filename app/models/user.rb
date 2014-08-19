@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, uniqueness: true
+  validates :code, uniqueness: true, allow_blank: true, allow_nil: true
   validates :photo_url, format: {with: /\Ahttps?:\/\//, message: "must start with http:// or https://"}, allow_blank: true
 
   scope :want_to_be_instructors, -> { where(wants_to_be_instructor: true) }

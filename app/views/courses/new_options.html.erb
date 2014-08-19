@@ -3,7 +3,7 @@
 <h2>New Course Options</h2>
 
 <div class="row">
-  <div class="span4 well">
+  <div class="span4 well min-height">
     <%= form_tag copy_courses_path, method: "get" do %>
       <h4>Option 1: Copy an Existing Course</h4>
       <div class="copy-course">
@@ -12,7 +12,7 @@
       <%= submit_tag "Copy from Existing Course", class: "btn btn-success" %>
     <% end %>
   </div>
-  <div class="span4 well">
+  <div class="span4 well min-height">
     <h4>Option 2: New Course from Scratch</h4>
     <div class="copy-course"></div>
     <%= link_to 'Create New Course', new_course_path, class: "btn btn-success copy-course-button" %>

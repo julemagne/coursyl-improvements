@@ -73,10 +73,19 @@ class CourseStudent < ActiveRecord::Base
   end
 
   def total_time
-    time_cards.completed.sum &:duration_in_minutes
+    time_cards.completed.sum &:duration_in_hours
   end
 
   def time_this_week
-    time_cards.completed_this_week.sum &:duration_in_minutes
+    time_cards.completed_this_week.sum &:duration_in_hours
+  end
+
+  def check_in_or_out
+    if (open_card = time_cards.open.first)
+      open_card.update_attribute(:ended_at, Time.now)
+    else
+      time_cards << TimeCard.new(started_at: Time.now)
+      save!
+    end
   end
 end

@@ -166,4 +166,10 @@ class Course < ActiveRecord::Base
     end
     new_course
   end
+
+  def open_time_cards
+    time_cards = []
+    course_students.each {|cs| time_cards += cs.time_cards.open}
+    time_cards
+  end
 end

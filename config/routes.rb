@@ -11,6 +11,8 @@ Courses::Application.routes.draw do
       post 'policies'
       get 'grade_thresholds'
       post 'grade_thresholds'
+      get 'time_cards'
+      post 'time_cards'
       post 'enroll'
       post 'register'
     end

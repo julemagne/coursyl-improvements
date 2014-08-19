@@ -1,0 +1,35 @@
+<p><%= link_to back_arrow + "Back to #{@course.code_and_name}", @course %></p>
+
+<h2><%= @course.code_and_name %> Check-In/Check-Out</h2>
+
+<div class="row">
+  <div class="span4 well min-height">
+    <h4>Checked-in Students</h4>
+    <% if (open_cards = @course.open_time_cards).blank? %>
+      <p class="muted">No students have checked in.</p>
+    <% else %>
+      <table class="table table-hover table-condensed">
+        <tr>
+          <th>Student</th>
+          <th>Time In</th>
+        </tr>
+        <% open_cards.each do |tc| %>
+          <tr>
+            <td><%= tc.course_student.full_name %></td>
+            <td><%= tc.started_at.strftime("%H:%M") %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
+  </div>
+  <div class="span4 well min-height">
+    <h4>Check Yourself In/Out</h4>
+    <%= form_tag do %>
+      <p>
+        <%= text_field_tag :code, "", autofocus: "autofocus" %>
+        <br />
+        <%= submit_tag "Check-In/Check-Out", class: "btn" %>
+      </p>
+    <% end %>
+  </div>
+</div>

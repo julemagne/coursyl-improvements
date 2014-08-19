@@ -30,7 +30,7 @@
         </a>
       </h3>
     <% elsif @course.use_time_cards %>
-      <h3 class="float-right float-right-header"><%= link_to 'Student Check-in/Check-out', edit_course_path(@course), class: "btn" %></h3>
+      <h3 class="float-right float-right-header"><%= link_to 'Student Check-in/Check-out', time_cards_course_path(@course), class: "btn" %></h3>
     <% end %>
 
     <%= render partial: 'modal_add_student' %>
@@ -44,8 +44,8 @@
           <% if last_assignment %><th>Last Assignment</th><% end %>
           <% if next_assignment %><th>Next Assignment</th><% end %>
           <% if @course.use_time_cards %>
-            <th>Time this Wk</th>
-            <th>Total Time</th>
+            <th>Hrs this Wk</th>
+            <th>Total Hrs</th>
           <% end %>
           <th>Overall Grade</th>
           <td class="text-right">
@@ -64,8 +64,8 @@
             <% if last_assignment %><td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td><% end %>
             <% if next_assignment %><td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td><% end %>
             <% if @course.use_time_cards %>
-              <td><%= cs.time_this_week %></td>
-              <td><%= cs.total_time %></td>
+              <td><%= number_with_precision(cs.time_this_week, precision: 1) %></td>
+              <td><%= number_with_precision(cs.total_time, precision: 1) %></td>
             <% end %>
             <td><%= number_with_precision(cs.grade, precision: 1) %></td>
             <td class="text-right">

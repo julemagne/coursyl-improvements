@@ -2,7 +2,7 @@
 
 <h2>Media for <%= date_humanized(@meeting.held_at) %></h2>
 
-<% if @meeting.video_url %>
+<% unless @meeting.video_url.blank? %>
   <p class="lead">Class Video</p>
 
   <div class="media">

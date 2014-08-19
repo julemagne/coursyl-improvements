@@ -34,6 +34,14 @@
     </div>
   <% end %>
 
+  <%= f.label :code do %>
+    <span class="field-label">Code</span>
+    <div class="input-prepend">
+      <span class="add-on"><i class="fa fa-barcode"></i></span>
+      <%= f.text_field :code %>
+    </div>
+  <% end %>
+
   <%= f.label :phone do %>
     <span class="field-label">Phone number</span>
     <div class="input-prepend">

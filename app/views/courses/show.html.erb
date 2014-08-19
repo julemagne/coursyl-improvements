@@ -29,6 +29,8 @@
           <i class="fa fa-plus"></i> Add Student
         </a>
       </h3>
+    <% elsif @course.use_time_cards %>
+      <h3 class="float-right float-right-header"><%= link_to 'Student Check-in/Check-out', edit_course_path(@course), class: "btn" %></h3>
     <% end %>
 
     <%= render partial: 'modal_add_student' %>
@@ -41,6 +43,10 @@
           <th>Email</th>
           <% if last_assignment %><th>Last Assignment</th><% end %>
           <% if next_assignment %><th>Next Assignment</th><% end %>
+          <% if @course.use_time_cards %>
+            <th>Time this Wk</th>
+            <th>Total Time</th>
+          <% end %>
           <th>Overall Grade</th>
           <td class="text-right">
             <a href="#student-modal" class="btn btn-mini btn-success" data-toggle="modal">
@@ -57,6 +63,10 @@
             <td><%= student.email %></td>
             <% if last_assignment %><td><span class="label <%= last_status.label_class %>"><%= last_status.name %></span></td><% end %>
             <% if next_assignment %><td><span class="label <%= next_status.label_class %>"><%= next_status.name %></span></td><% end %>
+            <% if @course.use_time_cards %>
+              <td><%= cs.time_this_week %></td>
+              <td><%= cs.total_time %></td>
+            <% end %>
             <td><%= number_with_precision(cs.grade, precision: 1) %></td>
             <td class="text-right">
               <i class="fa fa-bar-chart-o muted" title="View Grades"></i>

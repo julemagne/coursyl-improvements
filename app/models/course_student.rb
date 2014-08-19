@@ -3,6 +3,7 @@ class CourseStudent < ActiveRecord::Base
   belongs_to :student, class_name: "User"
   has_many :assignment_grades, dependent: :restrict_with_error
   has_many :awarded_achievements, dependent: :destroy
+  has_many :time_cards, dependent: :destroy
 
   validates :course, presence: true
   validates :student, presence: true
@@ -69,5 +70,13 @@ class CourseStudent < ActiveRecord::Base
 
   def min_grade
     final_grade || calculated_grade*percent_graded/100
+  end
+
+  def total_time
+    time_cards.completed.sum &:duration_in_minutes
+  end
+
+  def time_this_week
+    time_cards.completed_this_week.sum &:duration_in_minutes
   end
 end

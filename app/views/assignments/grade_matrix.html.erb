@@ -33,7 +33,7 @@
             <% end %>
           <td>
             <%= text_field_tag "course_students[#{cs.id}][final_grade]", (ag ? ag.final_grade : nil), class: "input-small" %>
-            <% if ag.submitted_at.blank?%>
+            <% if ag.blank? || ag.submitted_at.blank? %>
               <%= check_box_tag "course_students[#{cs.id}][submitted_at]", Time.now, false %> Turned In?
             <% end %>
           </td>

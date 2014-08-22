@@ -98,7 +98,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def activity_name(in_class)
-    (in_class ? "IN" : "BEFORE") + "class: " + name
+    (in_class ? "IN" : "BEFORE") + " class: " + name
   end
 
   def activity_active_at(in_class)

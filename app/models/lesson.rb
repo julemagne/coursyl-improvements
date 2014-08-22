@@ -20,23 +20,27 @@ class Lesson < ActiveRecord::Base
   scope :without_day_assignments, -> { where("day_assignment_id IS NULL") }
   scope :without_night_assignments, -> { where("night_assignment_id IS NULL") }
 
-  after_save :update_activity_names
+  after_save :update_cached_values
 
   def self.linked_to_assignment(assignment)
     found_lesson = where(pre_class_assignment_id: assignment.id).first
     found_lesson ||= where(in_class_assignment_id: assignment.id).first
   end
 
-  def update_activity_names
+  def update_cached_values
     if name_changed?
-      if pre_class_assignment
-        pre_class_assignment.name = activity_name(false)
-        pre_class_assignment.save!
-      end
-      if in_class_assignment
-        in_class_assignment.name = activity_name(true)
-        in_class_assignment.save!
-      end
+      update_activity_names
+    end
+  end
+
+  def update_activity_names
+    if pre_class_assignment
+      pre_class_assignment.name = activity_name(false)
+      pre_class_assignment.save!
+    end
+    if in_class_assignment
+      in_class_assignment.name = activity_name(true)
+      in_class_assignment.save!
     end
   end
 

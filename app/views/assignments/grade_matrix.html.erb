@@ -9,7 +9,7 @@
       <tr>
         <th>Name</th>
         <% @assignment.assignment_questions.each do |aq| %>
-          <td>Q<%= aq.order_number %></td>
+          <td>Q<%= aq.order_number %> (of <%= aq.points %>)</td>
         <% end %>
         <th>Total Override</th>
       </tr>

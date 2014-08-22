@@ -9,7 +9,9 @@
       <tr>
         <th>Name</th>
         <% @assignment.assignment_questions.each do |aq| %>
-          <td>Q<%= aq.order_number %> (of <%= aq.points %>)</td>
+          <td>
+            <strong>Q<%= aq.order_number %></strong>
+            <span class="muted">(of <%= aq.points %>)</span></td>
         <% end %>
         <th>Total Override</th>
       </tr>
@@ -29,7 +31,12 @@
                 <% end %>
               </td>
             <% end %>
-          <td><%= text_field_tag "course_students[#{cs.id}][final_grade]", (ag ? ag.final_grade : nil), class: "input-small" %></td>
+          <td>
+            <%= text_field_tag "course_students[#{cs.id}][final_grade]", (ag ? ag.final_grade : nil), class: "input-small" %>
+            <% if ag.submitted_at.blank?%>
+              <%= check_box_tag "course_students[#{cs.id}][submitted_at]", Time.now, false %> Turned In?
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

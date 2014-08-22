@@ -98,7 +98,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def activity_name(in_class)
-    (in_class ? "In" : "Pre") + "-class Activity for " + name
+    (in_class ? "IN" : "BEFORE") + "class: " + name
   end
 
   def activity_active_at(in_class)
@@ -115,7 +115,7 @@ class Lesson < ActiveRecord::Base
     if meetings.blank?
       course.term.ends_on
     elsif in_class
-      meetings.last.next_meeting_held_at
+      meetings.last.held_at + 2.hours
     else
       meetings.first.held_at
     end

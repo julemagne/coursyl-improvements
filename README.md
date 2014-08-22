@@ -87,6 +87,9 @@ Next Steps for Coursyl
 
 New Features:
 
+* Copy Course functionality
+  * Include feedback questions
+  * Include pre- and in- class assignment linkages
 * Emailing
   * Forgot password functionality (add '=' back to Forgot Password line in _links)
   * Admin notification of new instructor signups

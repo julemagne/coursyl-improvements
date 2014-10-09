@@ -53,7 +53,7 @@ class Course < ActiveRecord::Base
 
   # Magic number also used in :active scope above.
   def old?
-    term.ends_on < Time.now + 1.month
+    term.ends_on < Time.now - 1.month
   end
 
   def achievement_grading?

@@ -110,6 +110,7 @@ New Features:
 
 Fixes/Improvements:
 
+* Time zones continue to become problematic on heroku (fixes revert).  Currently, changing meeting times shifts them by 4 hours.
 * The BIG issue: Users can enter markdown and html for their assignment questions and slides (reveal.js), respectively.  This is a security hole.  At the moment, instructors are the only ones with the permission to input text in these places... but a security hole is a security hole.
 * Better Date/Datetime selectors
 * Awful redirect flash message on every logout

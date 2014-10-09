@@ -41,8 +41,8 @@
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <% if last_assignment %><th>Last Assignment</th><% end %>
-          <% if next_assignment %><th>Next Assignment</th><% end %>
+          <% if last_assignment %><th>Last Assignment <i class="fa fa-question-circle muted" title="<%= last_assignment.name %>"></i></th><% end %>
+          <% if next_assignment %><th>Next Assignment <i class="fa fa-question-circle muted" title="<%= next_assignment.name %>"></i></th><% end %>
           <% if @course.use_time_cards %>
             <th>Hrs this Wk</th>
             <th>Total Hrs</th>

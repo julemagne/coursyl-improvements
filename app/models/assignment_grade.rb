@@ -3,7 +3,7 @@ class AssignmentGrade < ActiveRecord::Base
   belongs_to :course_student
   has_many :assignment_question_grades, dependent: :destroy
 
-  scope :graded, -> { joins(:assignment).where("assignments.grades_released IS TRUE") }
+  scope :graded, -> { joins(:assignment).where("assignments.grades_released = 1") }
 
   delegate :course, to: :assignment
   delegate :full_name, to: :course_student

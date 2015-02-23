@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby "2.2.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -41,8 +41,7 @@ group :doc do
 end
 
 group :development do
-  gem 'mysql'
-  gem 'distyll'
+  gem 'sqlite3'
 end
 
 group :production do

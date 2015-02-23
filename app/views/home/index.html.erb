@@ -12,7 +12,7 @@
   <% else %>
     <%= link_to "<i class='fa fa-history'></i> Show older classes".html_safe, "/?show_all=true" %>
   <% end %>
-  <% courses_taught = (params[:show_all] ? current_user.courses_taught : current_user.courses_taught.active) %>
+  <% courses_taught = current_user.courses_taught %>
 </div>
 
 
@@ -36,7 +36,7 @@
 
 
 <h2><i class="fa fa-lightbulb-o"></i> Courses I'm Taking</h2>
-<% courses_taken = (params[:show_all] ? current_user.courses_taken : current_user.courses_taken.active) %>
+<% courses_taken = current_user.courses_taken %>
 
 <% if courses_taken.length > 0 %>
   <% courses_taken.each do |c| %>
@@ -89,5 +89,3 @@
     <% end %>
   </ul>
 <% end %>
-
-

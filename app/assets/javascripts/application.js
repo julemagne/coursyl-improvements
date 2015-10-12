@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require d3
 //= require_tree .
+
+function disableClick(){
+  ;
+}
+
+function hideRow() {
+  var rows = document.getElementsByClassName("association container");
+  var lastRow = rows[rows.length-1];
+  lastRow.style.display = "none";
+}
+
+function deleteButton(){
+  ;
+}
+
+function smoothScrolling(){
+  ;
+}

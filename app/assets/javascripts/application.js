@@ -20,13 +20,19 @@ function disableClick(){
 }
 
 function hideRow() {
+    var rows = document.getElementsByClassName("association container");
+    var lastRow = rows[rows.length-1];
+    lastRow.style.display = "none";
+}
+
+function showRow() {
   var rows = document.getElementsByClassName("association container");
   var lastRow = rows[rows.length-1];
-  lastRow.style.display = "none";
+  lastRow.style.display = "block";
 }
 
 function deleteButton(){
-  ;
+  document.getElementsByClassName=("btn");
 }
 
 function smoothScrolling(){

@@ -21,7 +21,6 @@
   <% i = 0 %>
   <div class="associations">
     <%= f.fields_for :grade_thresholds do |ff| %>
-
       <div class="association container">
         <div class="row">
           <div class="span3">
@@ -47,11 +46,11 @@
       <% i += 1 %>
     <% end %>
   </div>
-  <%= link_to '<i class="fa fa-plus"></i> Add Grade Threshold'.html_safe, nil, class: "btn btn-success new-association", "data-index" => i %>
+  <script> hideRow() </script>
+  <%= link_to '<i class="fa fa-plus"></i> Add Grade Threshold'.html_safe, "javascript:void(0)", class: "btn btn-success new-association", "data-index" => i, onclick: "showRow()" %>
 
 
   <div class="actions">
     <%= f.submit class: "btn" %>
   </div>
 <% end %>
-<script> hideRow() </script>

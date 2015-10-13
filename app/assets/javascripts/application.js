@@ -15,12 +15,17 @@
 //= require d3
 //= require_tree .
 
-function disableClick() {
-  document.getElementsByName("commit")[0].disabled = true;
-}
+// function disableClick() {
+//   document.getElementsByName("commit")[0].disabled = true;
+// }
+//
+// function superTimeout() {
+//   window.setTimeout(disableClick, 500) //Not putting a semicolon made it work WHYYYYYYY
+// }
 
-function superTimeout() {
-  window.setTimeout(disableClick, 500) //Not putting a semicolon made it work WHYYYYYYY
+function disableClick(){
+  event.target.disabled=true;
+  event.target.form.submit();//You have to have form submit bc button action happens AFTER js runs.
 }
 
 function hideRow() {
@@ -32,8 +37,8 @@ function showRow() {
 }
 
 function deleteButton() {
-  this.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
-  this.parentElement.lastElementChild.checked = true; //hidden checkbox
+  event.target.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
+  event.target.parentElement.lastElementChild.checked = true; //hidden checkbox
 }
 
 document.addEventListener("DOMContentLoaded", function() {

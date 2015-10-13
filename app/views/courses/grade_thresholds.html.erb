@@ -35,10 +35,10 @@
           </div>
           <div class="span1">
             <% if ff.object.persisted? %>
-              <%= link_to 'Delete', "javascript:void(0)", class: "btn btn-danger delete-association" %>
-              <%= ff.check_box :_destroy, class: "destroy", hidden: true, onclick: "deleteButton()" %>
+              <%= link_to 'Delete', "javascript:void(0);", class: "btn btn-danger delete-association", onclick: "deleteButton();" %>
+              <%= ff.check_box :_destroy, class: "destroy", hidden: true %>
             <% else %>
-              <%= link_to 'Delete', "javascript:void(0)", class: "btn btn-danger flush-association" %>
+              <%= link_to 'Delete', "javascript:void(0);", class: "btn btn-danger flush-association", onclick: "deleteButton();" %>
             <% end %>
           </div>
         </div>
@@ -47,10 +47,10 @@
     <% end %>
   </div>
   <script> hideRow() </script>
-  <%= link_to '<i class="fa fa-plus"></i> Add Grade Threshold'.html_safe, "javascript:void(0)", class: "btn btn-success new-association", "data-index" => i, onclick: "showRow()" %>
+  <%= link_to '<i class="fa fa-plus"></i> Add Grade Threshold'.html_safe, "javascript:void(0);", class: "btn btn-success new-association", "data-index" => i, onclick: "showRow();" %>
 
 
   <div class="actions">
-    <%= f.submit class: "btn", onclick: "superTimeout()" %>
+    <%= f.submit class: "btn", onclick: "disableClick();" %>
   </div>
 <% end %>

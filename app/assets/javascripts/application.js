@@ -24,22 +24,67 @@
 // }
 
 function disableClick(){
-  event.target.disabled=true;
-  event.target.form.submit();//You have to have form submit bc button action happens AFTER js runs.
+  $('form').submit();
+  $(event.target).prop("disabled", true);
+  //event.target.disabled=true;
+  //event.target.form.submit();//You have to have form submit bc button action happens AFTER js runs.
+}
+
+function noMoreUpdateCourseClicks() {
+  $(".commit").on("click", disableClick);
+}
+
+$(noMoreUpdateCourseClicks);
+
+//to toggle with the +Add Grade Threshold button (not used)
+function showHide(){
+  var last=$(".association.container").last();
+  if(last.css("display")=="none"){
+    last.css("display", "block");
+  }else{
+    last.css("display", "none");
+  }
 }
 
 function hideRow() {
-  document.getElementsByClassName("associations")[0].lastElementChild.style.display = 'none';
+  last = $(".association.container").last(); //this checks to see if the thing you want is on the page
+  if(last) {
+    last.hide();
+  }
+  // $(".association.container").last().hide(); //doesn't happen at page load (has a flash)
+  // $(".association.container").last().css("display", "none");
+  // document.getElementsByClassName("associations")[0].lastElementChild.style.display = 'none';
 }
+
+$(hideRow);
 
 function showRow() {
-  document.getElementsByClassName("associations")[0].lastElementChild.style.display = 'block';
+  last = $(".association.container").last().show();
+  if(last) {
+    last.show();
+  }
+  // $(".association.container").last().css("display", "none");
+  // document.getElementsByClassName("associations")[0].lastElementChild.style.display = 'block';
 }
 
-function deleteButton() {
-  event.target.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
-  event.target.parentElement.lastElementChild.checked = true; //hidden checkbox
+function clickRow(){
+  $(".new-association").on("click", showRow);// ".new-association" is the class on the button that is clicked
 }
+
+$(clickRow);
+
+function deleteButton() {
+  $(event.target).closest(".association.container").hide();
+  $(event.target).siblings().last().prop("checked", true);
+  // event.target.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
+  // event.target.parentElement.lastElementChild.checked = true; //hidden checkbox
+}
+
+function clickDelete() {
+  $(".btn-danger").on("click", deleteButton);
+}
+
+$(clickDelete);
 
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"
@@ -59,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
       var endPos = document.getElementById(/[^#]+$/.exec(this.href)[0]).getBoundingClientRect().top
       var maxScroll = root.scrollHeight - window.innerHeight
       var scrollEndValue = startPos + endPos < maxScroll ? endPos : maxScroll - startPos
-      var duration = 900
+      var duration = 800
       var scroll = function(timestamp) {
         startTime = startTime || timestamp
         var elapsed = timestamp - startTime

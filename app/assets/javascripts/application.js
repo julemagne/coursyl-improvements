@@ -32,13 +32,9 @@ function showRow() {
 }
 
 function deleteButton() {
-  document.getElementsByClassName("association container").style.display = "none";
+  this.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
+  this.parentElement.lastElementChild.checked = true; //hidden checkbox
 }
-
-
-
-
-
 
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"

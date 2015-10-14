@@ -24,14 +24,14 @@
 // }
 
 function disableClick(){
-  $('form').submit();
+  $(event.target).closest('form').submit();
   $(event.target).prop("disabled", true);
   //event.target.disabled=true;
   //event.target.form.submit();//You have to have form submit bc button action happens AFTER js runs.
 }
 
 function noMoreUpdateCourseClicks() {
-  $(".commit").on("click", disableClick);
+  $(".input[type=submit]").on("click", disableClick);
 }
 
 $(noMoreUpdateCourseClicks);

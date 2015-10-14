@@ -18,10 +18,9 @@
 
 
     <!-- Button to trigger modal -->
-    <a href="#myModal" role="button" class="fa fa-calendar" alt-text="Edit Due Dates" data-toggle="modal"></a>
-
+    <%= link_to '<i class="fa fa-calendar" title="Edit Due Dates"></i>'.html_safe, "#myModal#{assignment.id}", data: {toggle: "modal"} %>
     <!-- Modal -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="myModal<%= assignment.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
       <%= form_for assignment do |f| %>
 

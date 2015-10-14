@@ -75,7 +75,7 @@ $(clickRow);
 
 function deleteButton() {
   $(event.target).closest(".association.container").hide();
-  $(event.target).siblings().last().prop("checked", true);
+  $(event.target).siblings("input[type=checkbox]").prop("checked", true);
   // event.target.parentElement.parentElement.parentElement.style.display = "none"; //"association container"
   // event.target.parentElement.lastElementChild.checked = true; //hidden checkbox
 }

@@ -15,6 +15,46 @@
       <%= link_to '<i class="fa fa-legal" title="Grade Assignment"></i>'.html_safe, grade_matrix_assignment_path(assignment) %>
     <% end %>
     <%= link_to '<i class="fa fa-bar-chart-o" title="View Grades"></i>'.html_safe, view_grades_assignment_path(assignment) %>
+
+
+    <!-- Button to trigger modal -->
+    <a href="#myModal" role="button" class="fa fa-calendar" alt-text="Edit Due Dates" data-toggle="modal"></a>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+      <%= form_for assignment do |f| %>
+
+        <div class="modal-header">
+          <h3>Edit <%= assignment.name %></h3>
+        </div>
+
+        <div class="modal-body">
+
+          <span class="field-label">Active at</span>
+          <%= f.text_field :active_at, required: true, value: db_datetime_string(assignment.active_at) %>
+          <span class="help-inline"></span>
+
+          <p></p>
+
+          <span class="field-label">Due at</span>
+          <%= f.text_field :due_at, required: true, value: db_datetime_string(assignment.due_at) %>
+          <span class="help-inline"></span>
+
+        </div>
+
+        <div class="modal-footer">
+          <a class="btn" data-dismiss="modal">Close</a>
+          <%= submit_tag "Save assignment Time", class: "btn" %>
+        </div>
+
+      <% end %>
+
+
+    </div>
+
+
+
   <% end %>
   <%= link_to 'Edit', edit_assignment_path(assignment), class: "btn btn-mini" %>
 <% end %>
